@@ -50,14 +50,8 @@ jobs:
       - name: 构建
         run: pnpm docs:build
 
-      - name: 部署到 GitHub Pages
+      - name: 推送到 gh-pages 分支
         id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_path: .vitepress/dist
-
-      - name: 推送到 gh-pages 分支（备用）
-        if: always()
         timeout-minutes: 10
         uses: JamesIves/github-pages-deploy-action@v4
         with:
