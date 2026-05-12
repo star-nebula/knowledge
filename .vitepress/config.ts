@@ -12,6 +12,7 @@ import head from './head'
 const nolebase = presetMarkdownIt()
 
 export default defineConfig({
+  base: '/knowledge/',
   vue: {
     template: {
       transformAssetUrls: {
