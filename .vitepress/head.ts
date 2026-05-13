@@ -96,7 +96,4 @@ export default [
     name: 'msapplication-TileColor',
     content: '#603cba',
   }],
-  // Proxying Plausible through Netlify | Plausible docs
-  // https://plausible.io/docs/proxy/guides/netlify
-  ['script', { 'defer': 'true', 'data-domain': 'nolebase.ayaka.io', 'data-api': '/api/v1/page-external-data/submit', 'src': '/assets/page-external-data/js/script.js' }],
 ] satisfies HeadConfig[]
