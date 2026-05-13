@@ -6,7 +6,7 @@ import MarkdownItFootnote from 'markdown-it-footnote'
 import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { defineConfig } from 'vitepress'
 
-import { discordLink, githubRepoLink, siteDescription, siteName } from '../metadata'
+import { githubRepoLink, siteDescription, siteName } from '../metadata'
 import head from './head'
 
 const nolebase = presetMarkdownIt()
@@ -112,7 +112,6 @@ export default defineConfig({
         ],
         socialLinks: [
           { icon: 'github', link: githubRepoLink },
-          { icon: 'discord', link: discordLink },
         ],
         darkModeSwitchLabel: '切换主题',
         outline: { label: '页面大纲', level: 'deep' },
@@ -127,7 +126,7 @@ export default defineConfig({
         footer: {
           message: '用 <span style="color: #e25555;">&#9829;</span> 撰写',
           copyright:
-        '<a class="footer-cc-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> © 2022-PRESENT Nólëbase 的创作者们',
+        '© 2022-PRESENT Star Nebula',
         },
       },
     },

@@ -1,12 +1,11 @@
 {
-  "name": "nolebase",
+  "name": "star-nebula-knowledge",
   "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@10.33.2",
   "author": {
-    "name": "Nólëbase",
-    "email": "nolebase@ayaka.moe",
-    "url": "https://github.com/nolebase"
+    "name": "Star Nebula",
+    "url": "https://github.com/star-nebula"
   },
   "license": "MIT",
   "keywords": [
