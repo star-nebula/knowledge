@@ -2,6 +2,8 @@ import type { HeadConfig } from 'vitepress'
 import { creatorNames, creatorUsernames, siteDescription, siteName, targetDomain } from '../metadata'
 
 export default [
+  // Redirect root path to zh-CN locale
+  ['script', {}, `if (typeof window !== 'undefined' && (window.location.pathname === '/knowledge/' || window.location.pathname === '/knowledge') && !window.location.pathname.startsWith('/knowledge/zh-CN')) { window.location.href = '/knowledge/zh-CN/' + window.location.hash; }`],
   ['meta', {
     name: 'theme-color',
     content: '#ffffff',
