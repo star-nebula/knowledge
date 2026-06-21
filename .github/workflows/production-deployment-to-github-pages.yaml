@@ -48,6 +48,8 @@ jobs:
           cp public/source-han-sans.ttf ~/.local/share/fonts/source-han-sans.ttf
 
       - name: 构建
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
         run: pnpm docs:build
 
       - name: 推送到 gh-pages 分支

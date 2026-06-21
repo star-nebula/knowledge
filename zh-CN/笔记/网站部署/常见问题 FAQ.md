@@ -160,7 +160,7 @@ Error: The operation was canceled.
 | 现象 | 原因 | 解决方案 |
 |------|------|---------|
 | 图片显示为红叉 | 图片路径大小写不匹配（GitHub Pages 区分大小写，本地 Windows/macOS 不区分） | 检查图片文件名和引用路径的大小写是否完全一致 |
-| 链接点击后 404 | Markdown 中使用了绝对路径 `/xxx`，而不是相对路径 | 所有内部链接应使用相对路径，或使用 `{{ $withBase('/xxx') }}` 形式 |
+| 链接点击后 404 | Markdown 中使用了绝对路径 `/xxx`，而不是相对路径 | 所有内部链接应使用相对路径，或使用 `$withBase` 辅助函数处理路径 |
 | 页面布局错乱 | 本地与线上 base 路径不一致导致 | 确认 `.vitepress/config.ts` 中的 `base` 配置为 `'/knowledge/'` |
 
 ---
