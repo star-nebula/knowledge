@@ -13,6 +13,7 @@ const nolebase = presetMarkdownIt()
 
 export default defineConfig({
   base: '/knowledge/',
+  lastUpdated: true,
   vue: {
     template: {
       transformAssetUrls: {
