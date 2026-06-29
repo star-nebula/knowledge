@@ -8,7 +8,7 @@ titleTemplate: 记录回忆，知识和畅想的地方
 hero:
   name: Star Nebula
   text: 记录回忆，知识和畅想的地方
-  tagline: 个人知识库，记录学习、生活和思考
+  tagline: 记忆有界，知识无疆
   image:
     src: /logo.svg
     alt: Star Nebula
