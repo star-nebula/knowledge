@@ -1,4 +1,3 @@
-import { join } from 'node:path'
 import { presetVite } from '@nolebase/integrations/vitepress/vite'
 import UnoCSS from 'unocss/vite'
 
@@ -11,10 +10,7 @@ export default defineConfig(async () => {
     pageProperties: {
       options: {
         markdownSection: {
-          excludes: [
-            join('zh-CN', 'toc.md'),
-            join('zh-CN', 'index.md'),
-          ],
+          exclude: () => true,
         },
       },
     },

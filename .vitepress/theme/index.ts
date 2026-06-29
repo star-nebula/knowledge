@@ -7,18 +7,16 @@ import { h } from 'vue'
 import AppContainer from './components/AppContainer.vue'
 import DocFooter from './components/DocFooter.vue'
 import HomePage from './components/HomePage.vue'
-import LastUpdated from './components/LastUpdated.vue'
+import PageMeta from './components/PageMeta.vue'
 import Share from './components/Share.vue'
 
 import 'virtual:uno.css'
 import '../styles/main.css'
 import '../styles/vars.css'
 
-const nolebase = presetClient<{
-  tags: string[]
-  progress: number
-}>({
+const nolebase = presetClient({
   gitChangelog: false,
+  pageProperties: false,
   enhancedReadabilities: {
     options: {
       layoutSwitch: {
@@ -27,22 +25,6 @@ const nolebase = presetClient<{
       spotlight: {
         defaultToggle: true,
         hoverBlockColor: 'rgb(240 197 52 / 7%)',
-      },
-    },
-  },
-  pageProperties: {
-    options: {
-      properties: {
-        'zh-CN': [
-          { key: 'tags', type: 'tags', title: '标签' },
-          { key: 'progress', type: 'progress', title: '进度' },
-          { key: 'wordsCount', type: 'dynamic', title: '字数', options: { type: 'wordsCount' } },
-        ],
-        'en': [
-          { key: 'tags', type: 'tags', title: 'Tags' },
-          { key: 'progress', type: 'progress', title: 'Progress' },
-          { key: 'wordsCount', type: 'dynamic', title: 'Word count', options: { type: 'wordsCount' } },
-        ],
       },
     },
   },
@@ -56,7 +38,7 @@ const ExtendedTheme: Theme = {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       'doc-top': () => [
-        h(LastUpdated),
+        h(PageMeta),
         ...slots['doc-top'].map(slot => slot()),
       ],
       'doc-footer-before': () => [
@@ -85,7 +67,7 @@ const ExtendedTheme: Theme = {
 
     app.component('HomePage', HomePage)
     app.component('DocFooter', DocFooter)
-    app.component('LastUpdated', LastUpdated)
+    app.component('PageMeta', PageMeta)
     app.component('Share', Share)
     app.component('AppContainer', AppContainer)
   },
