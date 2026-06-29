@@ -17,6 +17,7 @@ const nolebase = presetClient<{
   tags: string[]
   progress: number
 }>({
+  gitChangelog: false,
   enhancedReadabilities: {
     options: {
       layoutSwitch: {
