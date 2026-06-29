@@ -110,6 +110,9 @@ export default defineConfig({
           { text: '编目 Catalog', link: '/zh-CN/编目 Catalog/' },
           { text: '最近更新', link: '/zh-CN/toc' },
         ],
+        lastUpdated: {
+          text: '最后更新',
+        },
         socialLinks: [
           { icon: 'github', link: githubRepoLink },
         ],
