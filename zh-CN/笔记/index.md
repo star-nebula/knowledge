@@ -6,6 +6,4 @@
 
 <NoteExplorer />
 
-## 关于
 
-本知识库使用 [VitePress](https://vitepress.dev) 构建，使用 [Obsidian](https://obsidian.md) 管理笔记。
