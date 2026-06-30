@@ -127,9 +127,7 @@ export default defineConfig({
           { folderName: 'zh-CN/编目 Catalog', separate: true },
         ], 'zh-CN'),
         footer: {
-          message: '用 <span style="color: #e25555;">&#9829;</span> 撰写',
-          copyright:
-        '© 2022-PRESENT Star Nebula',
+          message: '每一篇文章，都是时间的标本',
         },
       },
     },
