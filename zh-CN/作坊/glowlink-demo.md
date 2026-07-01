@@ -100,6 +100,6 @@ ContentAgent 在写帖子时，会编造「GlowLink 支持 TikTok 自动发布�
 ## 项目信息
 
 - **类型**：Demo / 概念验证
-- **源码**：[GitHub](https://github.com/star-nebula/social-media-agent-demo)
+- **源码**：[GitHub](https://github.com/star-nebula/job-demo/tree/main/social-media-agent-demo)
 - **开发方式**：全程 AI 编程工具（CodeBuddy）辅助，遵循 AI Engineering Loop
 - **技术栈**：Python / LangChain + LangGraph / Chroma / Streamlit / DeepSeek / MCP
