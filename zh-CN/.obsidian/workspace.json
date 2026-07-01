@@ -1,0 +1,267 @@
+{
+  "main": {
+    "id": "82dbbcee0189677f",
+    "type": "split",
+    "children": [
+      {
+        "id": "0beebf6f59e1eab9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "72951fc4f2bf4084",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e1a91f339e9da972",
+    "type": "split",
+    "children": [
+      {
+        "id": "010f2a90ebafcfbc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d161037d735277cc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "custom",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "9e7d6be5f92a19e5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "conda",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "88d9ab3e501bb0b3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "985820b3856ba99f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "3-wiki/topics/大模型与AI应用学习路径/AI范式转移：从Chat到Agent.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "AI范式转移：从Chat到Agent 的反向链接列表"
+            }
+          },
+          {
+            "id": "9c69f25cfbe7219a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "2-Areas/AI应用开发/04_机器学习/强化学习.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "强化学习 的出链列表"
+            }
+          },
+          {
+            "id": "0da33ef42e994057",
+            "type": "leaf",
+            "state": {
+              "type": "notebook-navigator",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "notebook-navigator"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 317.5
+  },
+  "right": {
+    "id": "e53e79380065f4ba",
+    "type": "split",
+    "children": [
+      {
+        "id": "a1320bca3d22fc48",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a33dff528acdf9a6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "247f1b13a06d1626",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "8a701758679b4552",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {},
+              "icon": "lucide-info",
+              "title": "笔记属性"
+            }
+          },
+          {
+            "id": "1d1ec83a7080516f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 293.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": true,
+      "graph:查看关系图谱": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "canvas:新建白板": true,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": true,
+      "publish:发布更改": true,
+      "notebook-navigator:笔记本导航器": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false,
+      "i18n:common.i18n": false,
+      "media-extended:Open media library": false,
+      "media-extended:Open media quick switcher": false,
+      "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
+    }
+  },
+  "active": "72951fc4f2bf4084",
+  "lastOpenFiles": [
+    "笔记/index.md",
+    "🔌 知识库插件列表.md",
+    "Archive/SCHOOL/大三/大三下/大数据技术/实验五：ubuntu+在conda部署hadoop-spark.md",
+    "AgentLog/个性化命令.md",
+    "面试/面试题/RAG.md",
+    "面试/面试题/Transformer.md",
+    "面试/面试题/assets/Drawing .excalidraw.md",
+    "Archive/male squirting.md",
+    "Archive/魔方公式.md",
+    "Archive/房屋设计.md",
+    "Archive/Table Tennis/Table Tennis.md",
+    "面试/简历/简历.md",
+    "02-岗位部分/01-专业技能/模型与对齐/大模型基础.md",
+    "Archive/SCHOOL/Graduation Design/定稿3——题目：基于AI视觉技术的考勤系统.md",
+    "Archive/SCHOOL/Graduation Design/二稿——题目：基于AI视觉技术的考勤系统.md",
+    "Archive/SCHOOL/Graduation Design/Graduation Design.md",
+    "面试/面试题/assets/bb1a2d7a7e62868892e3b179105c40b7_MD5.png",
+    "面试/面试题/assets/e0c8b0b8780c5812498a95f02875e35d_MD5.png",
+    "面试/面试题/assets/c06cc9956e9e101266553fd53e3c6d8d_MD5.png",
+    "面试/面试题/assets/dd4cc691ab0bf7f64b25833290c29be2_MD5.png",
+    "面试/面试题/assets",
+    "02-岗位部分/01-专业技能/模型与对齐/NLP基础/Transformer.md",
+    "面试/简历/Archives/第五版-v3-2.md",
+    "AgentLog/projects/pkm-dictionary.md",
+    "AgentLog/projects/Knowledge.md",
+    "面试/简历/Archives/第二版.md",
+    "面试/简历/Archives/第一版.md",
+    "面试/简历/Archives/第三版-添加双链接.md",
+    "面试/简历/Archives",
+    "wiki/entities/深度学习架构/循环神经网络与LSTM.md",
+    "02-岗位部分/01-专业技能/模型与对齐/NLP基础/draw/RNN及其变体/LSTM-架构图.excalidraw.md",
+    "02-岗位部分/01-专业技能/模型与对齐/机器学习/强化学习.md",
+    "面试/面试题",
+    "面试/电商简报系统-简要架构图.drawio",
+    "面试/电商简报系统-自主性架构图.drawio",
+    "面试/商品短文本多级类目分类系统.xmind",
+    "面试/电商智能客服RAG问答系统.xmind",
+    "面试/PingPongRAG/images",
+    "面试/PingPongRAG/images/PingPongRAG.png",
+    "面试/简历/第五版-v2.md.baiduyun.uploading.cfg",
+    "面试/FeedLens/某一次运行.xmind",
+    "面试/人工智能开发面试题/assets/Pasted image 20260302222937.png",
+    "面试/人工智能开发面试题/assets/Pasted image 20260302222738.png",
+    "面试/人工智能开发面试题/assets/file-20260422195705952.png",
+    "面试/人工智能开发面试题/assets/file-20260422195814236.png",
+    "面试/人工智能开发面试题/assets/file-20260422195646353.png",
+    "未命名.canvas",
+    "1-Projects/AI应用开发技术栈.canvas",
+    "1-Projects/黑马AI课程内容.canvas",
+    "1-Projects/LLM_Projects/projects/EduRAG/EduRAG.canvas",
+    "1-Projects/大模型基础与项目/draw/未命名.canvas",
+    "1-Projects/测试和考试/7-自然语言处理项目-1/头条投满分项目/draw/头条投满分项目.canvas",
+    "1-Projects/黑马程序员-大型案例项目/头条投满分项目/draw/未命名.canvas",
+    "Canvas/未命名.canvas",
+    "test.canvas",
+    "2-Areas/数据技术/数据分析/numpy.canvas"
+  ]
+}
