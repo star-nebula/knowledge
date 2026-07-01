@@ -17,4 +17,6 @@ tags:
 
 ---
 
-> 🚧 作坊刚开张，内容将逐步上架。
+## Demo
+
+- [GlowLink：多 Agent 社媒获客系统](glowlink-demo.md) — LangGraph + RAG 混合检索 + MCP，覆盖内容生产→社媒运营→销售转化全链路
