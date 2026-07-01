@@ -1,0 +1,70 @@
+/* 明暗模式配色定义 */
+.theme-light {
+  --core-blue:      #1a73e8;  /* 亮色核心蓝 */
+  --warn-red:       #d32f2f;  /* 亮色警告红 */
+  --emphasis-orange: #e67e22; /* 亮色强调橙 */
+}
+.theme-dark {
+  --core-blue:      #64b5f6;  /* 暗色核心蓝 */
+  --warn-red:       #f44336;  /* 暗色警告红 */
+  --emphasis-orange: #ffb74d; /* 暗色强调橙 */
+}
+
+/* ====================== 自定义样式修改 ====================== */
+
+/* 1. *内容* → 橙色字体，取消斜体 */
+/* 阅读模式 */
+.theme-light em,
+.theme-dark em {
+  font-style: normal !important;
+  color:      var(--emphasis-orange) !important;
+}
+/* 编辑/预览模式 */
+.theme-light .cm-em,
+.theme-dark .cm-em {
+  font-style: normal !important;
+  color:      var(--emphasis-orange) !important;
+}
+
+/* 2. ***内容*** → 蓝色字体，取消加粗+斜体 */
+/* 阅读模式 */
+.theme-light em strong,
+.theme-light strong em,
+.theme-dark em strong,
+.theme-dark strong em {
+  font-weight: normal !important;
+  font-style:  normal !important;
+  color:       var(--core-blue) !important;
+}
+/* 编辑/预览模式 */
+.theme-light .cm-strong.cm-em,
+.theme-dark .cm-strong.cm-em {
+  font-weight: normal !important;
+  font-style:  normal !important;
+  color:       var(--core-blue) !important;
+}
+
+/* 3. ==内容== → 红色字体，移除高亮背景 */
+/* 阅读模式 */
+.theme-light mark,
+.theme-dark mark {
+  background-color: transparent !important;
+  color:            var(--warn-red) !important;
+  padding:          0 !important;
+}
+/* 编辑/预览模式 */
+.theme-light .cm-highlight,
+.theme-dark .cm-highlight {
+  background-color: transparent !important;
+  color:            var(--warn-red) !important;
+}
+
+/* ========== 行内代码 ` ` 样式 ========== */
+code,
+.cm-inline-code {
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  color: inherit !important;
+  opacity: 0.75 !important;
+}
+
