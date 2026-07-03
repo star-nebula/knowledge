@@ -11,10 +11,24 @@
             "id": "72951fc4f2bf4084",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "笔记/🤖 AI应用开发/RAG.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "RAG"
             }
           }
         ]
@@ -172,12 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "笔记/🤖 AI应用开发/RAG.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "RAG 的大纲"
             }
           }
         ],
@@ -207,6 +222,9 @@
   },
   "active": "72951fc4f2bf4084",
   "lastOpenFiles": [
+    "笔记/📚 个人知识管理/03-笔记方法论.md",
+    "笔记/🤖 AI应用开发/RAG.md",
+    "笔记/🌐 网站部署/00-分类图标参考.md",
     "笔记/index.md",
     "🔌 知识库插件列表.md",
     "Archive/SCHOOL/大三/大三下/大数据技术/实验五：ubuntu+在conda部署hadoop-spark.md",
@@ -236,9 +254,6 @@
     "面试/简历/Archives/第一版.md",
     "面试/简历/Archives/第三版-添加双链接.md",
     "面试/简历/Archives",
-    "wiki/entities/深度学习架构/循环神经网络与LSTM.md",
-    "02-岗位部分/01-专业技能/模型与对齐/NLP基础/draw/RNN及其变体/LSTM-架构图.excalidraw.md",
-    "02-岗位部分/01-专业技能/模型与对齐/机器学习/强化学习.md",
     "面试/面试题",
     "面试/电商简报系统-简要架构图.drawio",
     "面试/电商简报系统-自主性架构图.drawio",
