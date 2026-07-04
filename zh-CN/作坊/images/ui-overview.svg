@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2240 1274" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <filter id="imgShadow" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <style>
+    .label-bg { fill: #1a1a1a; stroke: #333; stroke-width: 1; }
+    .label-text { fill: #ff5a5a; font-size: 14px; font-weight: 600; }
+  </style>
+
+  <!-- 背景 -->
+  <rect width="2240" height="1274" fill="#0d0d0d"/>
+
+  <!-- 左上：① 首页 -->
+  <g filter="url(#imgShadow)">
+    <image x="20" y="20" width="1100" height="617" xlink:href="feedlens-1-home.png" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="20" y="20" width="1100" height="617" fill="none" stroke="#2a2a2a" stroke-width="1" rx="4"/>
+  </g>
+  <rect x="20" y="20" width="100" height="24" rx="0" class="label-bg"/>
+  <text x="70" y="37" text-anchor="middle" class="label-text">① 首页</text>
+
+  <!-- 右上：② Goal 设置 -->
+  <g filter="url(#imgShadow)">
+    <image x="1140" y="20" width="1100" height="617" xlink:href="feedlens-2-goal.png" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="1140" y="20" width="1100" height="617" fill="none" stroke="#2a2a2a" stroke-width="1" rx="4"/>
+  </g>
+  <rect x="1140" y="20" width="120" height="24" rx="0" class="label-bg"/>
+  <text x="1200" y="37" text-anchor="middle" class="label-text">② Goal 设置</text>
+
+  <!-- 左下：③ RSS 源管理 -->
+  <g filter="url(#imgShadow)">
+    <image x="20" y="657" width="1100" height="617" xlink:href="feedlens-3-rss.png" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="20" y="657" width="1100" height="617" fill="none" stroke="#2a2a2a" stroke-width="1" rx="4"/>
+  </g>
+  <rect x="20" y="657" width="140" height="24" rx="0" class="label-bg"/>
+  <text x="90" y="674" text-anchor="middle" class="label-text">③ RSS 源管理</text>
+
+  <!-- 右下：④ 反馈记录 -->
+  <g filter="url(#imgShadow)">
+    <image x="1140" y="657" width="1100" height="617" xlink:href="feedlens-4-feedback.png" preserveAspectRatio="xMidYMid slice"/>
+    <rect x="1140" y="657" width="1100" height="617" fill="none" stroke="#2a2a2a" stroke-width="1" rx="4"/>
+  </g>
+  <rect x="1140" y="657" width="120" height="24" rx="0" class="label-bg"/>
+  <text x="1200" y="674" text-anchor="middle" class="label-text">④ 反馈记录</text>
+</svg>
