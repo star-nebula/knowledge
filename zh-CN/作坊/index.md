@@ -17,6 +17,12 @@ tags:
 
 ---
 
+## 项目
+
+- [FeedLens：多 Agent 智能信息简报系统](feedlens-project.md) — LangGraph + DeepSeek + ChromaDB，RSS 采集 → 向量去重 → 多因子排序 → 简报生成 → MCP 推送，全链路 LLM 自主编排
+
+---
+
 ## Demo
 
 - [GlowLink：多 Agent 社媒获客系统](glowlink-demo.md) — LangGraph + RAG 混合检索 + MCP，覆盖内容生产→社媒运营→销售转化全链路
