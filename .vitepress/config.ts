@@ -11,6 +11,39 @@ import head from './head'
 
 const nolebase = presetMarkdownIt()
 
+/**
+ * 修复 nolebase calculateSidebar 生成的 index 页面链接。
+ *
+ * nolebase 对 index.md 生成的链接形如 `/zh-CN/笔记/🌐 网站部署/index`，
+ * 而 VitePress 的 isActive / normalize 只处理 `.md` / `.html` 结尾，
+ * 无法剥离末尾的 `/index`，导致 pager（上下页导航）对所有 index 页面
+ * 都找不到当前页，退化到始终取侧边栏第一项作为 "Next page"。
+ *
+ * 修复方式：将链接末尾的 `/index` 替换为 `/`。
+ */
+function fixSidebarIndexLinks(sidebar: any): any {
+  function walk(items: any[]) {
+    for (const item of items) {
+      if (typeof item.link === 'string' && item.link.endsWith('/index'))
+        item.link = item.link.replace(/\/index$/, '/')
+      if (item.items)
+        walk(item.items)
+    }
+  }
+
+  if (Array.isArray(sidebar)) {
+    walk(sidebar)
+  }
+  else if (sidebar && typeof sidebar === 'object') {
+    for (const key of Object.keys(sidebar)) {
+      if (Array.isArray(sidebar[key]))
+        walk(sidebar[key])
+    }
+  }
+
+  return sidebar
+}
+
 export default defineConfig({
   base: '/knowledge/',
   lastUpdated: true,
@@ -123,11 +156,11 @@ export default defineConfig({
           pattern: `${githubRepoLink}/tree/main/:path`,
           text: '编辑本页面',
         },
-        sidebar: calculateSidebar([
+        sidebar: fixSidebarIndexLinks(calculateSidebar([
           { folderName: 'zh-CN/笔记', separate: true },
           { folderName: 'zh-CN/作坊', separate: true },
           { folderName: 'zh-CN/编目 Catalog', separate: true },
-        ], 'zh-CN'),
+        ], 'zh-CN')),
         footer: {
           message: '每一篇文章，都是时间的标本',
         },
