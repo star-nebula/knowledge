@@ -175,9 +175,9 @@ html, body {
   flex-direction: column;
   margin-bottom: 0;
   /* 给最外层容器自身设背景，让 features/footer 之外的非卡片区
-     （vp-doc 正文行、features 与 footer 之间那段）左右两侧也呈 #161618，
-     不再透出 body 默认 --vp-c-bg(#1b1b1f) 形成"三个长方块"的割裂带。 */
-  background: #161618;
+     （vp-doc 正文行、features 与 footer 之间那段）左右两侧也呈 --home-bg，
+     不再透出 body 默认 --vp-c-bg 形成"三个长方块"的割裂带。 */
+  background: var(--home-bg);
 }
 
 /* 主页去掉默认 .VPContent 的顶部 padding(var(--vp-nav-height)=64px)，
@@ -187,11 +187,11 @@ html, body {
    但本项目把 .VPHome 改成 flex 列容器后负 margin 不可靠。） */
 .VPContent.is-home {
   padding-top: 0 !important;
-  /* 把整个内容区都设为 #161618。.VPHome 自身有背景已盖住其内部空白，
+  /* 把整个内容区都设为 --home-bg。.VPHome 自身有背景已盖住其内部空白，
      但 footer 上方那段（.VPHome margin-bottom 占位区）属于 .VPContent
-     本身且透明，会透出 body 默认 --vp-c-bg(#1b1b1f)。这里一并设背景，
+     本身且透明，会透出 body 默认 --vp-c-bg。这里一并设背景，
      与 features/footer 连成一片，消除"三个长方块"的左右纯色带。 */
-  background: #161618 !important;
+  background: var(--home-bg) !important;
 }
 
 /* Hero 区域：壁纸背景 + 聚光灯 canvas 容器 */
@@ -208,12 +208,34 @@ html, body {
 /* 主页贴顶时（scrollY === 0，默认主题会给 .VPNavBar 加 .top）：
    导航栏及其 .content-body/.divider-line 彻底透明，让 Hero 壁纸透到导航栏背后。
    往下滚动后 .top 被移除，导航栏自动恢复默认的半透明深色背景。 */
+
+/* 强制首页 body 背景为暗色：VitePress 的 body { background-color: var(--vp-c-bg) }
+   在日间模式下是白色 #ffffff。首页导航栏在贴顶时是透明的，会露出 body 背景。
+   夜间模式 body=#1b1b1f 自然融合；日间模式 body=#ffffff 导致导航栏区域变白。
+   这里强制首页 body 为 --home-bg，消除日间模式漏白。 */
+body:has(.VPHome) {
+  --home-bg: #161618;            /* 夜间模式（默认） */
+  background-color: var(--home-bg) !important;
+}
+
+/* 日间模式：遮罩与背景改为白色 */
+html:not(.dark) body:has(.VPHome) {
+  --home-bg: #ffffff;
+}
+
 body:has(.VPHome) .VPNavBar.top,
 body:has(.VPHome) .VPNavBar.top .content-body,
 body:has(.VPHome) .VPNavBar.top .divider-line {
   background-color: transparent !important;
   backdrop-filter: none !important;
   box-shadow: none !important;
+}
+
+/* 首页向下滚动后（.top 被移除），VitePress 默认会给导航栏设 var(--vp-nav-bg-color)
+   = var(--vp-c-bg)，日间模式下为白色。这里强制为 --home-bg 保持一致。 */
+body:has(.VPHome) .VPNavBar:not(.top),
+body:has(.VPHome) .VPNavBar:not(.top) .content-body {
+  background-color: var(--home-bg) !important;
 }
 
 /* 贴顶时壁纸背景上导航文字加阴影，兼顾可读性 */
@@ -230,7 +252,7 @@ body:has(.VPHome) .VPNavBar.top .copy {
   position: absolute; /* 限定在 Hero 区域内，随页面滚动移走，不再全屏固定 */
   inset: 0;
   background: url(/wallpaper.png) center center / cover no-repeat;
-  background-color: #161618;
+  background-color: var(--home-bg);
   z-index: -1;
 }
 
@@ -249,7 +271,7 @@ body:has(.VPHome) .VPNavBar.top .copy {
 .VPHome > .content,
 .VPHome > .vp-doc.container {
   order: 2;
-  background: #161618;
+  background: var(--home-bg);
 }
 
 /* 当 HomePage 内容为空时，折叠间距 */
@@ -263,7 +285,7 @@ body:has(.VPHome) .VPNavBar.top .copy {
 .VPHomeFeatures {
   position: relative;
   z-index: 1;
-  background: #161618;
+  background: var(--home-bg);
   order: 3;
   padding-top: 48px;
   padding-bottom: 24px;
@@ -276,7 +298,7 @@ body:has(.VPHome) .VPNavBar.top .copy {
 .VPFooter {
   position: relative;
   z-index: 1;
-  background: #161618 !important; /* !important 压过默认主题 scoped .VPFooter[data-v-xxx] 的 --vp-c-bg */
+  background: var(--home-bg) !important;
   border-top: none !important; /* 去掉默认主题 1px 黑色(--vp-c-gutter) 分界线，与 features 区连成一色 */
   order: 4;
   padding-top: 16px;
