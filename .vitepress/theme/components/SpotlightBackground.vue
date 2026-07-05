@@ -19,6 +19,29 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
+// ---- 主题感知 ----
+/** 夜间遮罩色（与 CSS --home-bg 一致） */
+const OVERLAY_DARK = '#161618'
+/** 日间遮罩色 */
+const OVERLAY_LIGHT = '#ffffff'
+
+/** 当前是否夜间模式（VitePress 在 <html> 上加 .dark class） */
+function isDarkMode(): boolean {
+  return document.documentElement.classList.contains('dark')
+}
+
+/** 获取当前遮罩颜色 */
+function getOverlayColor(): string {
+  return isDarkMode() ? OVERLAY_DARK : OVERLAY_LIGHT
+}
+
+/** 获取墨水染色颜色（与遮罩同色，使被墨水覆盖的文字融入遮罩背景） */
+function getInkDyeRGBA(opacity: number): string {
+  return isDarkMode()
+    ? `rgba(0,0,0,${opacity})`
+    : `rgba(255,255,255,${opacity})`
+}
+
 // ---- 墨滴系统 ----
 interface InkDrop {
   x: number
@@ -64,6 +87,7 @@ interface TextLayer {
 }
 let textLayers: TextLayer[] = []
 let textResizeObserver: ResizeObserver | null = null
+let themeObserver: MutationObserver | null = null
 
 function getHeroRect() {
   const hero = document.querySelector('.VPHomeHero') as HTMLElement
@@ -298,7 +322,8 @@ function drawTextLayers() {
     ctx.globalCompositeOperation = 'source-over'
     ctx.drawImage(offscreen, 0, 0, width, height)
 
-    // 2) source-atop：黑色墨滴只影响已有像素（文字），透明区域完全无效果
+    // 2) source-atop：墨水染色只影响已有像素（文字），透明区域完全无效果
+    //    染色颜色 = 遮罩色（夜间黑/日间白），使被覆盖文字融入遮罩背景
     //    数学保证：αo = αb，非文字区域 αb=0 → αo=0 → 永远透明
     ctx.globalCompositeOperation = 'source-atop'
     for (const d of drops) {
@@ -312,9 +337,9 @@ function drawTextLayers() {
       const radius = DROP_INIT_R + (d.maxRadius - DROP_INIT_R) * easeOutCubic(t)
       const opacity = DROP_OPACITY * (1 - t) * (1 - t * 0.4)
       const grad = ctx.createRadialGradient(localX, localY, 0, localX, localY, radius)
-      grad.addColorStop(0, `rgba(0,0,0,${opacity})`)
-      grad.addColorStop(0.65, `rgba(0,0,0,${opacity})`)
-      grad.addColorStop(1, 'rgba(0,0,0,0)')
+      grad.addColorStop(0, getInkDyeRGBA(opacity))
+      grad.addColorStop(0.65, getInkDyeRGBA(opacity))
+      grad.addColorStop(1, getInkDyeRGBA(0))
       ctx.fillStyle = grad
       ctx.beginPath()
       ctx.arc(localX, localY, radius, 0, Math.PI * 2)
@@ -330,9 +355,9 @@ function draw() {
   const ctx = canvas.getContext('2d')
   if (!ctx) return
 
-  // 1) 清空 + 铺暗色遮罩
+  // 1) 清空 + 铺遮罩（随主题变化：夜间 #161618 / 日间 #ffffff）
   ctx.clearRect(0, 0, W, H)
-  ctx.fillStyle = '#161618'
+  ctx.fillStyle = getOverlayColor()
   ctx.fillRect(0, 0, W, H)
 
   // 2) destination-out：所有绘制都"挖洞"露出底层壁纸
@@ -422,6 +447,21 @@ onMounted(() => {
   window.addEventListener('mousemove', onMouseMove)
   window.addEventListener('touchmove', onTouchMove, { passive: true })
   window.addEventListener('resize', resize)
+
+  // 监听主题切换：VitePress 在 <html> 上增删 .dark class
+  // 切换时文字颜色变化（白↔深色），需重新渲染 canvas 文字图层
+  themeObserver = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.attributeName === 'class') {
+        updateTextLayerSizes()
+        break
+      }
+    }
+  })
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  })
 })
 
 onUnmounted(() => {
@@ -430,6 +470,10 @@ onUnmounted(() => {
   if (textResizeObserver) {
     textResizeObserver.disconnect()
     textResizeObserver = null
+  }
+  if (themeObserver) {
+    themeObserver.disconnect()
+    themeObserver = null
   }
   const canvas = canvasRef.value
   if (canvas && canvas.parentNode) {
