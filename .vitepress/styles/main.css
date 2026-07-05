@@ -247,14 +247,6 @@ body:has(.VPHome) .VPNavBar:not(.top) .content-body {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* 日间模式：暗字 + 亮影 */
-html:not(.dark) body:has(.VPHome) .VPNavBar.top .title,
-html:not(.dark) body:has(.VPHome) .VPNavBar.top .VPNavBarMenuLink,
-html:not(.dark) body:has(.VPHome) .VPNavBar.top .VPNavBarExtra,
-html:not(.dark) body:has(.VPHome) .VPNavBar.top .copy {
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
-}
-
 /* 壁纸用 ::before 放在最底层，canvas 可以盖住它 */
 .VPHomeHero::before {
   content: '';

@@ -11,10 +11,24 @@
             "id": "1da7a8b6877cc18b",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "笔记/🤖 AI应用开发/RAG.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "RAG"
             }
           }
         ]
@@ -172,12 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "笔记/🤖 AI应用开发/RAG.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "RAG 的大纲"
             }
           }
         ],
