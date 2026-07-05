@@ -161,6 +161,10 @@ html, body {
   display: flex;
   flex-direction: column;
   margin-bottom: 0;
+  /* 给最外层容器自身设背景，让 features/footer 之外的非卡片区
+     （vp-doc 正文行、features 与 footer 之间那段）左右两侧也呈 #161618，
+     不再透出 body 默认 --vp-c-bg(#1b1b1f) 形成"三个长方块"的割裂带。 */
+  background: #161618;
 }
 
 /* 主页去掉默认 .VPContent 的顶部 padding(var(--vp-nav-height)=64px)，
@@ -170,6 +174,11 @@ html, body {
    但本项目把 .VPHome 改成 flex 列容器后负 margin 不可靠。） */
 .VPContent.is-home {
   padding-top: 0 !important;
+  /* 把整个内容区都设为 #161618。.VPHome 自身有背景已盖住其内部空白，
+     但 footer 上方那段（.VPHome margin-bottom 占位区）属于 .VPContent
+     本身且透明，会透出 body 默认 --vp-c-bg(#1b1b1f)。这里一并设背景，
+     与 features/footer 连成一片，消除"三个长方块"的左右纯色带。 */
+  background: #161618 !important;
 }
 
 /* Hero 区域：壁纸背景 + 聚光灯 canvas 容器 */
