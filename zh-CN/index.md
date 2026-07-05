@@ -38,4 +38,5 @@ features:
     icon: 📃
 ---
 
+<SpotlightBackground />
 <HomePage />

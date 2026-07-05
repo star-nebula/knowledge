@@ -4,31 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "0beebf6f59e1eab9",
+        "id": "7d5d0441a2ce9040",
         "type": "tabs",
         "children": [
           {
-            "id": "72951fc4f2bf4084",
+            "id": "1da7a8b6877cc18b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "笔记/🤖 AI应用开发/RAG.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "RAG"
+              "title": "新标签页"
             }
           }
         ]
@@ -186,13 +172,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "笔记/🤖 AI应用开发/RAG.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "RAG 的大纲"
+              "title": "大纲"
             }
           }
         ],
@@ -220,10 +205,21 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "72951fc4f2bf4084",
+  "active": "1da7a8b6877cc18b",
   "lastOpenFiles": [
-    "笔记/📚 个人知识管理/03-笔记方法论.md",
+    "作坊/images/_data_uris.json",
+    "笔记/🤖 AI应用开发/index.md",
+    "作坊/images/feedlens-4-feedback.png",
+    "作坊/images/feedlens-3-rss.png",
+    "作坊/images/feedlens-2-goal.png",
+    "作坊/images/feedlens-1-home.png",
+    "作坊/images/ui-overview.svg",
+    "作坊/images/feedlens-UI.SVG",
+    "作坊/feedlens-project.md",
+    "笔记/🌱 生活/摄影.md",
+    "笔记/🌱 生活/乒乓球技术精华文章汇编.md",
     "笔记/🤖 AI应用开发/RAG.md",
+    "笔记/📚 个人知识管理/03-笔记方法论.md",
     "笔记/🌐 网站部署/00-分类图标参考.md",
     "笔记/index.md",
     "🔌 知识库插件列表.md",
@@ -248,11 +244,6 @@
     "面试/面试题/assets",
     "02-岗位部分/01-专业技能/模型与对齐/NLP基础/Transformer.md",
     "面试/简历/Archives/第五版-v3-2.md",
-    "AgentLog/projects/pkm-dictionary.md",
-    "AgentLog/projects/Knowledge.md",
-    "面试/简历/Archives/第二版.md",
-    "面试/简历/Archives/第一版.md",
-    "面试/简历/Archives/第三版-添加双链接.md",
     "面试/简历/Archives",
     "面试/面试题",
     "面试/电商简报系统-简要架构图.drawio",
@@ -260,14 +251,8 @@
     "面试/商品短文本多级类目分类系统.xmind",
     "面试/电商智能客服RAG问答系统.xmind",
     "面试/PingPongRAG/images",
-    "面试/PingPongRAG/images/PingPongRAG.png",
     "面试/简历/第五版-v2.md.baiduyun.uploading.cfg",
     "面试/FeedLens/某一次运行.xmind",
-    "面试/人工智能开发面试题/assets/Pasted image 20260302222937.png",
-    "面试/人工智能开发面试题/assets/Pasted image 20260302222738.png",
-    "面试/人工智能开发面试题/assets/file-20260422195705952.png",
-    "面试/人工智能开发面试题/assets/file-20260422195814236.png",
-    "面试/人工智能开发面试题/assets/file-20260422195646353.png",
     "未命名.canvas",
     "1-Projects/AI应用开发技术栈.canvas",
     "1-Projects/黑马AI课程内容.canvas",
