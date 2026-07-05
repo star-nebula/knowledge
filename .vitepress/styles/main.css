@@ -100,15 +100,28 @@ html, body {
   line-height: 7rem;
 }
 
-/* 首页子标题样式 */
-.VPHomeHero > .container > .main > .text {
+/* 首页子标题样式
+   注意：.text 实际在 <h1 class="heading"> 内部，不是 .main 的直接子元素 */
+.VPHomeHero .heading .text {
   padding-top: 45px;
   font-size: 4rem;
+  position: relative; /* 让文字染色 canvas（absolute）定位在此元素内 */
 }
 
 /* 首页介绍样式 */
 .VPHomeHero > .container > .main > .tagline {
   padding-top: 24px;
+  position: relative; /* 同上 */
+}
+
+/* 文字染色 canvas：覆盖在 .text / .tagline 上，由 JS 动态创建 */
+.ink-text-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 /* 自适应样式 */
@@ -119,7 +132,7 @@ html, body {
   }
 
   /* 首页子标题样式 */
-  .VPHomeHero > .container > .main > .text {
+  .VPHomeHero .heading .text {
     padding-top: 30px;
     font-size: 3rem;
   }
@@ -138,7 +151,7 @@ html, body {
   }
 
   /* 首页子标题样式 */
-  .VPHomeHero > .container > .main > .text {
+  .VPHomeHero .heading .text {
     padding-top: 20px;
     font-size: 2rem;
   }
