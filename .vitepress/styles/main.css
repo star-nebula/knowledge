@@ -149,9 +149,116 @@ html, body {
   }
 }
 
-/* 主页下方的页脚透明度 */
+/* 主页下方的页脚透明度（保持 1，让 #161618 不在 body 上偏色） */
 .VPFooter {
-  opacity: 0.8;
+  opacity: 1;
+}
+
+/* 确保主页内容在聚光灯 canvas 之上，消除默认底部大间距 */
+.VPHome {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+/* 主页去掉默认 .VPContent 的顶部 padding(var(--vp-nav-height)=64px)，
+   让 .VPHome 直接从 doc y=0 开始。配合 .VPHomeHero margin-top:0，
+   使壁纸 ::before 真正铺到页面最顶部、覆盖到导航栏背后。
+   （默认主题原本靠 .VPHome -> .VPHero 的负 margin 拉回 y=0，
+   但本项目把 .VPHome 改成 flex 列容器后负 margin 不可靠。） */
+.VPContent.is-home {
+  padding-top: 0 !important;
+}
+
+/* Hero 区域：壁纸背景 + 聚光灯 canvas 容器 */
+.VPHomeHero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  order: 1;
+  /* 抵消默认主题 .VPHero 的 margin-top: -var(--vp-nav-height)，
+     让 hero 直接从 doc y=0 开始，壁纸 ::before 才能铺到页面最顶部。 */
+  margin-top: 0 !important;
+}
+
+/* 主页贴顶时（scrollY === 0，默认主题会给 .VPNavBar 加 .top）：
+   导航栏及其 .content-body/.divider-line 彻底透明，让 Hero 壁纸透到导航栏背后。
+   往下滚动后 .top 被移除，导航栏自动恢复默认的半透明深色背景。 */
+body:has(.VPHome) .VPNavBar.top,
+body:has(.VPHome) .VPNavBar.top .content-body,
+body:has(.VPHome) .VPNavBar.top .divider-line {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* 贴顶时壁纸背景上导航文字加阴影，兼顾可读性 */
+body:has(.VPHome) .VPNavBar.top .title,
+body:has(.VPHome) .VPNavBar.top .VPNavBarMenuLink,
+body:has(.VPHome) .VPNavBar.top .VPNavBarExtra,
+body:has(.VPHome) .VPNavBar.top .copy {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* 壁纸用 ::before 放在最底层，canvas 可以盖住它 */
+.VPHomeHero::before {
+  content: '';
+  position: absolute; /* 限定在 Hero 区域内，随页面滚动移走，不再全屏固定 */
+  inset: 0;
+  background: url(/wallpaper.png) center center / cover no-repeat;
+  background-color: #161618;
+  z-index: -1;
+}
+
+/* Hero 内容在 canvas 之上 */
+.VPHomeHero > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Markdown 内容区（HomePage 组件 / index.md 正文槽） */
+/* 注意：VitePress 会把 index.md 正文（含 HomePage 组件）包在
+   .vp-doc.container 里作为 .VPHome 的直接子元素渲染。它的默认 flex
+   order 为 0，若不显式排到 hero 之后，会把 hero 推到约 40px 高的
+   占位之下，导致导航栏上半段揭不出壁纸。这里同时给 .content 和
+   .vp-doc.container 赋 order:-1 之外的 2，让它们都排在 hero(order:1) 后。 */
+.VPHome > .content,
+.VPHome > .vp-doc.container {
+  order: 2;
+  background: #161618;
+}
+
+/* 当 HomePage 内容为空时，折叠间距 */
+.VPHome > .content:empty,
+.VPHome > .content > .content-container:empty {
+  padding: 0;
+  margin: 0;
+}
+
+/* 特性卡片区：移到 HomePage 之后 */
+.VPHomeFeatures {
+  position: relative;
+  z-index: 1;
+  background: #161618;
+  order: 3;
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+
+/* 主页 footer 与 features 区的间隙、footer 区都应是 #161618（main.css 别处已设定）。
+   特性卡片本体保持默认主题的 --vp-c-bg-soft(#202127)，不在此覆盖，保留卡片可识别性。 */
+
+/* 页脚 */
+.VPFooter {
+  position: relative;
+  z-index: 1;
+  background: #161618 !important; /* !important 压过默认主题 scoped .VPFooter[data-v-xxx] 的 --vp-c-bg */
+  border-top: none !important; /* 去掉默认主题 1px 黑色(--vp-c-gutter) 分界线，与 features 区连成一色 */
+  order: 4;
+  padding-top: 16px;
+  padding-bottom: 24px;
 }
 
 /* 正文结尾的 CC 协议链接基本样式 */
