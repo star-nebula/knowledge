@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "笔记/🤖 AI应用开发/RAG.md",
+                "file": "笔记/🤖 AI应用开发/Transformer.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "RAG"
+              "title": "Transformer"
             }
           }
         ]
@@ -186,13 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "笔记/🤖 AI应用开发/RAG.md",
+                "file": "笔记/🤖 AI应用开发/Transformer.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "RAG 的大纲"
+              "title": "Transformer 的大纲"
             }
           }
         ],
@@ -222,6 +222,8 @@
   },
   "active": "1da7a8b6877cc18b",
   "lastOpenFiles": [
+    "笔记/🤖 AI应用开发/RAG.md",
+    "笔记/🤖 AI应用开发/Transformer.md",
     "作坊/images/_data_uris.json",
     "笔记/🤖 AI应用开发/index.md",
     "作坊/images/feedlens-4-feedback.png",
@@ -233,7 +235,6 @@
     "作坊/feedlens-project.md",
     "笔记/🌱 生活/摄影.md",
     "笔记/🌱 生活/乒乓球技术精华文章汇编.md",
-    "笔记/🤖 AI应用开发/RAG.md",
     "笔记/📚 个人知识管理/03-笔记方法论.md",
     "笔记/🌐 网站部署/00-分类图标参考.md",
     "笔记/index.md",
@@ -267,7 +268,6 @@
     "面试/电商智能客服RAG问答系统.xmind",
     "面试/PingPongRAG/images",
     "面试/简历/第五版-v2.md.baiduyun.uploading.cfg",
-    "面试/FeedLens/某一次运行.xmind",
     "未命名.canvas",
     "1-Projects/AI应用开发技术栈.canvas",
     "1-Projects/黑马AI课程内容.canvas",
