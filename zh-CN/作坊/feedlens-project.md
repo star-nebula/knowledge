@@ -1,7 +1,7 @@
 ---
 tags:
   - 作坊
-  - AI Agent
+  - Agent
   - LangGraph
   - DeepSeek
   - RSS
