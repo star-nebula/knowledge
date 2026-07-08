@@ -11,10 +11,24 @@
             "id": "65b8da1432779764",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "档案/index.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "index"
             }
           }
         ]
@@ -172,12 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "档案/index.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "index 的大纲"
             }
           }
         ],
@@ -207,6 +222,8 @@
   },
   "active": "65b8da1432779764",
   "lastOpenFiles": [
+    "档案/index.md",
+    "档案",
     "作坊/ai-tryon-video-demo.md",
     "作坊/feedlens-project.md",
     "作坊/index.md",
@@ -239,7 +256,6 @@
     "面试/简历/简历.md",
     "02-岗位部分/01-专业技能/模型与对齐/大模型基础.md",
     "Archive/SCHOOL/Graduation Design/定稿3——题目：基于AI视觉技术的考勤系统.md",
-    "Archive/SCHOOL/Graduation Design/二稿——题目：基于AI视觉技术的考勤系统.md",
     "面试/面试题/assets/bb1a2d7a7e62868892e3b179105c40b7_MD5.png",
     "面试/面试题/assets/e0c8b0b8780c5812498a95f02875e35d_MD5.png",
     "面试/面试题/assets/c06cc9956e9e101266553fd53e3c6d8d_MD5.png",
@@ -252,7 +268,6 @@
     "面试/商品短文本多级类目分类系统.xmind",
     "面试/电商智能客服RAG问答系统.xmind",
     "面试/PingPongRAG/images",
-    "面试/简历/第五版-v2.md.baiduyun.uploading.cfg",
     "未命名.canvas",
     "1-Projects/AI应用开发技术栈.canvas",
     "1-Projects/黑马AI课程内容.canvas",
