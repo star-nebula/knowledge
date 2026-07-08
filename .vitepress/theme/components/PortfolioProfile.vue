@@ -166,8 +166,7 @@ onUnmounted(() => {
           <p class="pp-hero-tagline">{{ tagline }}</p>
           <p class="pp-hero-summary">{{ summary }}</p>
           <div class="pp-actions">
-            <a :href="withBase('/刘昊晴-个人简历.pdf')" download="刘昊晴-个人简历.pdf" class="pp-btn pp-btn-primary">📄 下载PDF简历</a>
-            <button class="pp-btn pp-btn-ghost" @click="scrollTo('#core-projects')">🔍 查看核心项目</button>
+            <button class="pp-btn pp-btn-primary" @click="scrollTo('#core-projects')">🔍 查看核心项目</button>
           </div>
         </div>
         <div class="pp-hero-right">
