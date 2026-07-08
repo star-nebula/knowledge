@@ -9,6 +9,7 @@ import DocFooter from './components/DocFooter.vue'
 import HomePage from './components/HomePage.vue'
 import NoteExplorer from './components/NoteExplorer.vue'
 import PageMeta from './components/PageMeta.vue'
+import PortfolioProfile from './components/PortfolioProfile.vue'
 import Share from './components/Share.vue'
 
 import 'virtual:uno.css'
@@ -70,6 +71,7 @@ const ExtendedTheme: Theme = {
     app.component('DocFooter', DocFooter)
     app.component('NoteExplorer', NoteExplorer)
     app.component('PageMeta', PageMeta)
+    app.component('PortfolioProfile', PortfolioProfile)
     app.component('Share', Share)
     app.component('AppContainer', AppContainer)
   },
