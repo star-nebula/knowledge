@@ -12,7 +12,7 @@ tags:
 
 ## 架构总览
 
-![GlowLink 系统架构总览](images/architecture-overview.png)
+![GlowLink 系统架构总览](../data/images/architecture-overview.png)
 
 **核心设计**：Supervisor 路由模式——一个「领导」带三个「兵」，每个 Agent 执行后必须返回 Supervisor 判断是否结束。工具权限隔离：ContentAgent 不调 CRM，SalesAgent 不调搜索。
 
@@ -41,7 +41,7 @@ tags:
 
 不是简单的「调 API 查向量库」，而是一个三层漏斗：
 
-![RAG Pipeline 混合检索](images/rag-pipeline.png)
+![RAG Pipeline 混合检索](../data/images/rag-pipeline.png)
 
 - **BM25 关键词检索**（权重 0.4）：精准命中「$49」「试用期」等专有名词
 - **向量语义检索**（权重 0.6）：理解「怎么收费」和「定价」是同一回事
@@ -93,7 +93,7 @@ ContentAgent 在写帖子时，会编造「GlowLink 支持 TikTok 自动发布�
 
 ## 技术决策速查
 
-![技术决策概览](images/tech-decisions.png)
+![技术决策概览](../data/images/tech-decisions.png)
 
 ---
 
