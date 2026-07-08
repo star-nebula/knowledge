@@ -1,367 +1,1032 @@
-# Transformer
-
-## 第一部分：基础认知
-
-> 这一部分回答"为什么应用开发也要懂 Transformer"和"Transformer 出现之前为什么做不到"——建立对 Transformer 价值的全局认知。
-
-### 1. 为什么应用开发也要懂 Transformer？
-
-用大模型做开发，这几个问题一定会遇到：
-
-- **Token 怎么计费的？** 为什么一次交互消耗几万 Token？这和 Transformer 的计算方式直接相关
-- **上下文窗口为什么有上限？** GPT-4 是 128K，Claude 是 200K，为什么不能无限长？这和 Transformer 的复杂度有关
-- **为什么模型会"忘记"前面的内容？** 长对话到后面，模型对开头的信息越来越模糊，这和注意力机制有关
-- **为什么 Prompt 结构化比大段文字效果好？** 这和多注意力头的分工机制有关
-
-> 理解 Transformer 的核心机制——自注意力、多头注意力、位置编码——能够帮助开发者在实际开发中更好地管理上下文、优化 Prompt、控制 Token 成本，而不是只会用 API。
-
-### 2. Transformer 之前：RNN 和 CNN 为什么不够用？
-
-#### RNN（循环神经网络）的致命问题
-
-- **梯度消失**：序列越长，前面的信息传到后面就越弱。处理 1000 个 Token 的文本，第 1 个 Token 的梯度信号到第 1000 步基本没了。这就是为什么 RNN 记不住长距离依赖
-- **串行计算**：RNN 必须一个 Token 一个 Token 地处理，第 2 个 Token 必须等第 1 个处理完。没法并行，训练速度上不去
-
-#### CNN（卷积神经网络）的问题
-
-- **局部感受野**：CNN 天然只能看到局部窗口内的信息，想看全局就得堆很多层。堆层数又带来训练难度
-- **长距离依赖弱**：两个相隔很远的词之间的关系，CNN 很难捕捉到
-
-#### Transformer 的解法：注意力机制
-
-Transformer 用注意力机制一步到位解决了这两个问题：
-
-- **不需要逐步传递信息**：每个 Token 直接和所有其他 Token 计算相关性，不需要像 RNN 那样一步步传。第 1 个 Token 和第 1000 个 Token 的关系，一步就能算出来
-- **可以并行计算**：所有 Token 的注意力可以同时算，不用串行等待。GPU 最擅长这种大规模并行运算
-
-> Transformer 之前，RNN 有梯度消失和串行计算的问题，CNN 有局部感受野的局限。Transformer 的注意力机制让每个 Token 能直接和所有其他 Token 建立关系，而且可以并行计算。这就是为什么所有大模型都绕不开 Transformer。
-
+---
+title: Transformer
+created: 2026-05-23
+tags:
+  - NLP
+  - Transformer
+  - 深度学习
+type: 概念解释
+related: []
 ---
 
-## 第二部分：核心机制
+### 初识 Transformer
 
-> Transformer 有三大核心机制：Self-Attention（每个词看懂上下文）、Multi-Head Attention（多个角度看同一句话）、Positional Encoding（给模型装上顺序感）。理解了这三个，就理解了 Transformer 的本质。
+- 2018年google发表了BERT模型并横扫了NLP领域11项任务，而BERT中Transformer发挥了重要作用，使得Transformer架构流行起来
 
-### 3. Self-Attention：让每个词看懂上下文
+- Transformer 的优势
 
-#### 一句话理解 Self-Attention
+  > RNN、LSTM、GRU 处理长文本存在梯度消失，计算慢，无法并行
 
-**Self-Attention 就是让每个词去看它和其他所有词的关系，然后根据关系远近决定关注多少。**
+  - Transformer 能够利用分布式GPU进行**并行训练**，提升模型训练效率
+  - 在分析预测长文本时，捕捉间隔较长的语义关联效果更好
 
-举个经典例子："银行"这个词，在"我去银行存钱"和"我在河边的银行散步"里意思完全不同。Self-Attention 做的就是——根据上下文里其他词的信息，动态调整"银行"这个词的表示。
+### Transformer 架构
 
-在"存钱"旁边的"银行"是金融机构，在"河边"旁边的"银行"是河岸。**词的意思不是固定的，是由上下文决定的。**
+![[image-20260327211530-87b6ydw.png]]
 
-#### Q、K、V 是什么？
+#### 组件
 
-Self-Attention 用三个矩阵把每个 Token 映射成三个向量：
-
-- **Q（Query）**：我在找什么？——当前词想知道自己和谁有关系
-- **K（Key）**：我有什么？——每个词能提供什么信息
-- **V（Value）**：我的内容是什么？——每个词的实际信息
-
-拿"我去银行存钱"举例：
-
-- "银行"的 Q 去问：谁和我有关系？
-- "存钱"的 K 回答：和我有关系！
-- "河边"的 K 回答：和我没关系
-- 然后根据关系远近加权，把"存钱"的 V 拿过来，更新"银行"的表示
-
-**Q 找对象，K 判断匹不匹配，V 提供实际内容。** 这就是 Self-Attention 的核心逻辑。
-
-#### 对应用开发的启示
-
-**为什么上下文质量决定了输出质量？**
-
-因为 Self-Attention 的本质就是"根据上下文决定关注什么"。若上下文里噪声多，模型就会将注意力分配到不该关注的地方。若是上下文都是相关信息，注意力就能聚焦到正确的内容上。
-
-这就解释了为什么：
-
-- **模糊的 Prompt 效果差**：上下文里没有明确的关键信息，注意力被分散到无关内容上
-- **结构化的 Prompt 效果好**：清晰的结构让注意力更容易找到关键信息
-- **上下文里塞太多无关代码质量下降**：无关信息抢占了注意力，关键信息被稀释
-
-> Self-Attention 的本质就是让每个 Token 根据上下文动态调整自己的表示。Q 找相关词，K 判断匹配度，V 提供内容。这对应用开发的启示是：上下文质量决定注意力分配，注意力分配决定输出质量。所以 Prompt 的结构化和上下文的精准性至关重要。
-
-### 4. Multi-Head Attention：从多个角度看一句话
-
-#### 一个头的局限
-
-单头注意力只有一个 QKV 变换，只能学一种关系模式。但语言里的关系是多样的：
-
-- 语法关系："他吃饭"——"他"和"吃饭"是主谓关系
-- 指代关系："小明说他很开心"——"他"指代"小明"
-- 语义关系："苹果发布了新手机"——"苹果"是公司不是水果
-
-一个注意力头很难同时捕捉这么多种关系。
-
-#### 多头的解法
-
-Multi-Head Attention 就是把 QKV 复制多份，每份独立算注意力，每份学不同的关系模式。8 个头就像 8 个"视角"：
-
-- 第 1 个头关注*语法结构*
-- 第 2 个头关注*指代关系*
-- 第 3 个头关注*语义相近的词*
-- 第 4 个头关注*位置相邻的词*
-- ……
-
-最后把 8 个头的结果拼起来，综合判断。
-
-**不是说模型被手动设计了这些分工，而是在训练过程中，不同的头自然学会了关注不同的关系模式。**
-
-#### 对应用开发的启示
-
-**为什么 Prompt 结构化比大段文字效果好？**
-
-因为多头注意力在处理结构化信息时效率更高。
-
-一段大段文字的 Prompt：
-
+```python
+import copy
+import math
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import numpy as np
+import matplotlib.pyplot as plt
 ```
-我需要你帮我写一个退款接口，参数有订单号和退款金额，要注意幂等校验，部分退款不能超过50%，orders表的结构是这样的...
+###### 词嵌入层
+
+```python
+# 词嵌入层
+class Embedding(nn.Module):
+    def __init__(self, vocab_size, embed_dim):
+        """
+        :param vocab_size: 词汇表大小
+        :param embed_dim: 词嵌入的维度
+        """
+        super().__init__()
+        self.vocab_size = vocab_size
+        self.embed_dim = embed_dim
+        self.embedding = nn.Embedding(vocab_size, embed_dim)
+
+    def forward(self, x):
+        # 进行缩放：输入词的词向量 * √词嵌入的维度
+        # 目的：平衡梯度，避免梯度爆炸或者梯度消失
+        return self.embedding(x) * math.sqrt(self.embed_dim)
+```
+###### 位置编码
+
+- <mark style="background: #FF5582A6;">核心作用</mark>：
+
+  Transformer 是并行处理所有词的，模型不知道词的前后顺序，需要给每个词加上一个“**位置编号**”，让模型知道这个词在句子中的第几个位置
+- 位置编码通过什么生成
+
+  Transformer 编码位置信息：使用 <mark style="background: #ADCCFFA6;">正弦函数和余弦函数</mark> 生成
+
+  > 偶数维度用sin，奇数维度用cos
+
+  $$
+  \begin{align*}
+  PE_{(pos, 2i)} &= \sin\left( \frac{pos}{10000^{\frac{2i}{d_{model}}}} \right) \\
+  PE_{(pos, 2i+1)} &= \cos\left( \frac{pos}{10000^{\frac{2i}{d_{model}}}} \right)
+  \end{align*}
+  $$
+
+  - 其中：
+
+    $pos$：位置（第几个词），$i$：维度索引（从$0$开始，$2i$ 需要覆盖词向量的全部维度），$d_{model}$：词向量的维度
+
+    $10000^{\frac{2i}{d_{model}}}$：周期缩放因子，不同的 $i$ 会让周期不一样（$i$ 越大，周期越长）
+
+  使用三角函数的优点：位置 $pos+k$ 的编码 $=$ 位置 $pos$ 的编码的 **线性组合**(简单的乘加运算)，不是每个位置都要重算三角函数
+
+  > 为什么能做到，因为三角函数
+  >
+  > $$
+  > \begin{align*}
+  > \sin(\alpha + \beta) &= \sin(\alpha)\cos(\beta) + \cos(\alpha)\sin(\beta) \\
+  > \cos(\alpha + \beta) &= \cos(\alpha)\cos(\beta) - \sin(\alpha)\sin(\beta)
+  > \end{align*}
+  > $$
+  >
+  > $α$ 对应 $pos$ 相关的部分，$β$ 对应 $k$ 相关的部分
+
+- （面试）位置编码的好处或目的：
+
+  1. 能够记住词的顺序，通过周期性函数，给每个位置添加标签，让模型能够知道词的先后顺序，比如“我爱你”和“你爱我”
+  2. 计算高效，靠线性组合推导性位置编码，不用计算三角函数，省算力
+  3. 适应任意长度，不管句子多长，随时能算编码，泛化能力强
+  4. 模型处理语言时，更聪明，更灵活
+- 例子
+
+  > 假设词向量维度为4，即每个位置的编码是一个4维向量。
+  >
+  > 维度为4时，$i$ 取 $0$ 和 $1$。
+  >
+  > 当 $pos = 2$ 时：
+  >
+  > $i = 0$​：
+  >
+  > - 第0维：$PE(2, 0) = \sin(2/1) = \sin(2)$
+  > - 第1维：$PE(2, 1) = \cos(2/1) = \cos(2)$
+  >
+  > $i = 1$​：
+  >
+  > - 第2维：$PE(2, 2) = \sin(2/100) = \sin(1/50)$
+  > - 第3维：$PE(2, 3) = \cos(2/100) = \cos(1/50)$
+  >
+  > 因此，位置$pos=2$的4维**位置编码**向量为：
+  >
+  > $$
+  > [\sin(2), \cos(2), \sin(1/50), \cos(1/50)]
+  > $$
+  >
+  > 数值近似为：$[0.909, -0.416, 0.020, 0.998]$  
+
+```python
+# 位置编码
+class PositionalEncoding(nn.Module):
+    def __init__(self, d_model, dropout, max_len=60):
+        """
+        :param d_model: 词向量的维度(词嵌入的维度), 512
+        :param dropout: 随机失活概率
+        :param max_len: 最大序列长度, 60
+        """
+        super().__init__()
+        self.dropout = nn.Dropout(dropout)
+        pe = torch.zeros(max_len, d_model)  # Positional Encoding，存放位置编码信息
+        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)  # 位置索引 shape=[max_len, 1]
+        # 1/10000^(2i/d_model) = 1/e^( (2i/d_model)*(ln(10000) ) =  e^(2i* (-ln(10000)/d_model)) ) 
+        # torch.arange(0, d_model, 2) -> [0, 2, 4, 6, 8, ..., d_model-2] 偶数维度，+1 变成奇数维度
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))  # 1/周期缩放因子 shape=[1, d_model/2]
+        position_values = position * div_term  # 位置索引 * 1/周期缩放因子 shape=[max_len, d_model/2] -> [60, 512]
+        pe[:, 0::2] = torch.sin(position_values)  # 偶数维度
+        pe[:, 1::2] = torch.cos(position_values)  # 奇数维度
+        pe = pe.unsqueeze(0)  # 升维：添加 batch_size 维度 shape=[1, 60, 512]
+        self.register_buffer('pe', pe)  # 缓存位置编码信息, 避免每次训练时重新计算
+```
+###### 【扩展】绘制词汇向量中特征的分布曲线
+
+```python
+# 可视化位置编码
+def plot_position_encoding():
+    pe = PositionalEncoding(d_model=20, dropout=0.1, max_len=100)
+    x = torch.zeros(1, 100, 20)  # [batch_size, seq_len, d_model]
+    y = pe(x)  # shape=[1, 100, 20]
+    # 绘图
+    plt.figure(figsize=(20, 10))
+    plt.plot(np.arange(100), y[0, :, 4:8].detach().numpy())
+    plt.legend([f'dim {p}'for p in [4, 5, 6, 7]])
+    plt.show()
+```
+###### 【扩展】掩码张量
+
+> 掩码张量是一个由 0 和 1 组成的张量，用于在 Transformer 等模型中遮挡或替换另一张量的部分数值，避免模型在训练时提前利用未来信息，保证生成逻辑的合理性。
+
+```python
+import torch
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 上三角矩阵
+def np_triu(x):
+    arr = np.ones((x, x))
+    print(arr)  # 创建一个行列一致的矩阵
+    # print(np.triu(arr, 1))  # 对角线上移
+    # print(np.triu(arr, -1)) # 对角线下移
+    return np.triu(arr)
+
+x = 5
+up_trius = torch.triu(torch.ones((x, x)))  # 上三角矩阵
+print(up_trius)
+low_trius = torch.from_numpy(1 - np.triu(np.ones((x, x)), 1))  # 下三角矩阵
+print(low_trius.data)
+
+# 掩码张量可视化
+def plot_mask(mask):
+    plt.figure(figsize=(5, 5))
+    plt.imshow(mask)
+    plt.show()
+
+plot_mask(torch.triu(torch.ones((10, 10))))
+# 黄色(1)代表没有被遮掩, 紫色(0)代表被遮掩的信息
+# 横坐标:目标词汇的位置, 纵坐标:可查看的位置
+```
+###### 多头注意力机制
+
+>多头注意力机制，是将经线性变换得到的Q、K、V张量**沿词嵌入维度切分为多个头，分别独立执行注意力计算**后再融合结果，以此捕获序列不同表示子空间的语义与依赖关系的注意力机制。
+
+![[Pasted image 20260401085450.png]]
+
+```python
+# 注意力计算
+def attention(query, key, value, mask=None, dropout=None):
+    """
+    计算注意力
+    :param query: 查询张量, shape=[batch_size, seq_len, d_model]
+    :param key: 键张量, shape=[batch_size, seq_len, d_model]
+    :param value: 值张量, shape=[batch_size, seq_len, d_model]
+    :param mask: 掩码张量, shape一般和 score 匹配
+    :param dropout: 随机失活，防止过拟合
+    :return: 输出张量（融合信息） 和 注意力权重
+    """
+    # 自注意力公式：softmax(Q * K^T / sqrt(d_k)) * V
+    d_k = query.size(-1)  # 获取Q的特征维度（最后一个维度 d_model）
+    scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
+    # 掩码处理（可选），处理后再进行softmax的权重会接近于0
+    if mask is not None:
+        scores = scores.masked_fill(mask == 0, -1e9)
+    p_attn = F.softmax(scores, dim=-1)
+    # 随机失活处理
+    if dropout is not None:
+        p_attn = dropout(p_attn)
+    return torch.matmul(p_attn, value), p_attn
 ```
 
-一段结构清晰的 Prompt：
+###### 模块克隆
 
+```python
+# 克隆模块
+def clones(module, N):
+    """
+    创建N个相同的模块,深拷贝,每个模块的参数都是独立的
+    :param module: 被克隆的模块
+    :param N: 堆叠的层数
+    :return: 有N个相同模块的ModuleList
+    """
+    return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
 ```
-目标：写一个退款接口
-参数：订单号、退款金额
-约束：幂等校验、部分退款上限50%
-上下文：orders表结构如下...
+
+###### 多头注意力机制
+
+```python
+# 多头注意力机制
+# 把词向量维度映射到多个头，并行计算多个头，最后再拼接起来
+class MultiHeadAttention(nn.Module):
+    def __init__(self, d_model, num_heads, dropout_p=0.1):
+        super().__init__()
+        self.num_heads = num_heads
+        self.d_model = d_model
+        # 分头
+        assert d_model % num_heads == 0  # 维度必须可以被头数整除
+        self.depth = d_model // num_heads  # 每个头的词嵌入维度
+        # 4个线性层
+        self.linears = clones(nn.Linear(d_model, d_model), 4)
+        # dropout
+        self.dropout = nn.Dropout(dropout_p)
+        # 注意力权重
+        self.attn = None
+
+    def forward(self, query, key, value, mask=None):
+        # query, key, value: [batch_size, seq_len, d_model]
+        # mask: [batch_size, seq_len, seq_len]
+        # 是否需要掩码
+        if mask is not None:
+            mask = mask.unsqueeze(0) 
+        # 获取批量大小
+        batch_size = query.size(0)
+        # 线性变化
+        # [model(x) for model, x in zip(...)] 取前 3 个linear 分别对应给 Q、K、V 做线性变换
+        # view() 将d_model拆成 num_heads × depth ，目的：分头
+        #       [batch_size, seq_len, d_model] -> [batch_size, seq_len, num_heads, depth] 
+        #                          [2, 4, 512] -> [2, 4, 8, 64]
+        # transpose() 交换维度，目的：让 seq_len, depth 紧贴一起，方便后续计算注意力
+        #       [batch_size, seq_len, num_heads, depth] -> [batch_size, num_heads, seq_len, depth]
+        #                                 [2, 4, 8, 64] -> [2, 8, 4, 64]
+        query, key, value = [
+            model(x).view(batch_size, -1, self.num_heads, self.depth).transpose(1, 2)
+            for model, x in zip(self.linears, (query, key, value))  
+        ]
+        # 多头注意力计算
+        # 注意力输出、注意力权重：[batch_size, num_heads, seq_len, depth]、[batch_size, num_heads, seq_len, seq_len]
+        x, self.attn = attention(query, key, value, mask, self.dropout) 
+        # 合并多头：[batch_size, seq_len, num_heads, depth] -> [batch_size, seq_len, d_model]
+        x = x.transpose(1, 2).contiguous().view(batch_size, -1, self.num_heads * self.depth)
+        # 线性变换
+        return self.linears[-1](x)
 ```
 
-每个注意力头可以快速定位到自己关注的部分——语法头看结构，语义头看关键词，指代头看参数对应关系。信息密度一样，但多头注意力在处理结构不清晰的文本时需要额外的计算来提取结构，效率更低。
-
-> Multi-Head Attention 让不同的头关注不同类型的关系——语法、语义、指代等。这解释了为什么结构化的 Prompt 效果更好：每个头可以快速定位到相关部分，注意力分配更高效。在实际开发中刻意用结构化格式写 Prompt，就是为了让多头注意力更容易处理。
-
-### 5. Positional Encoding：给模型装上顺序感
-
-#### Transformer 天生没有顺序感
-
-**Self-Attention 本身是完全不看顺序的。**
-
-把"猫吃鱼"和"鱼吃猫"丢给 Self-Attention，没有位置编码的话，它的处理结果是一样的。因为注意力只看"哪些词之间有关系"，不看"谁在前面谁在后面"。
-
-但顺序对语言太重要了。"狗咬人"和"人咬狗"，词一样，意思完全相反。所以 Transformer 必须通过 Positional Encoding 把位置信息硬加进去，告诉模型"这个词在第几个位置"。
-
-#### 位置编码怎么加的？
-
-早期 Transformer 用的是正弦/余弦函数来编码位置，每个位置有一个独特的向量。现在的模型大多用可学习的位置编码——直接让模型在训练中学出每个位置该用什么向量。
-
-**位置编码就是给每个 Token 打上一个"位置标签"，让模型知道这个词在句子的哪个位置。**
-
-#### 对应用开发的启示
-
-**为什么长上下文后面模型会"忘记"前面的内容？**
-
-位置编码有一个隐含的问题：**模型在训练时见过的位置范围是有限的。** 如果一个模型训练时最长只见过 4096 个 Token 的文本，那它对第 5000 个位置的位置编码就没有学过。虽然可以通过外推（extrapolation）来处理更长的位置，但效果会下降。
-
-这就解释了：
-
-- **为什么上下文窗口有硬上限**：超出训练时见过的位置范围，位置编码就不可靠了
-- **为什么超长上下文质量会下降**：即使模型声称支持 200K 上下文，后半部分的注意力质量也不如前半部分
-- **为什么重要信息要放在 Prompt 开头或结尾**：模型对中间位置的信息关注度天然较低，这是所谓的"中间迷失"（Lost in the Middle）问题
-
-**实践建议**：重要信息别只放中间
-
-- **System Prompt** 放开头定基调（影响全局）
-- **关键指令** 放结尾定方向（最新指令）
-- 上下文放中间（容易忽略）
-
-> Transformer 的 Self-Attention 本身没有顺序感，位置编码是硬加进去的。这意味着模型对位置的处理能力受限于训练时见过的位置范围。超长上下文质量下降、中间位置信息容易被忽略，都和位置编码有关。所以关键信息应放在上下文的开头或结尾，而不是塞在中间。
-
----
-
-## 第三部分：架构选型
-
-> 理解了核心机制后，下一个问题是：Transformer 有三种主流架构变体，它们各有什么优劣？为什么现在几乎所有大模型都选了同一种？
-
-### 6. Encoder / Decoder / Decoder-Only：三大架构怎么选？
-
-"GPT、BERT、T5 的架构有什么区别？为什么现在大模型都用 Decoder-Only？"
-
-这是 Transformer 架构最重要的分支，直接决定了模型能干什么、怎么用。
-
-#### 三大架构对比
-
-| 维度 | Encoder-Only | Encoder-Decoder | Decoder-Only |
-|------|-------------|-----------------|--------------|
-| 代表模型 | BERT | T5、BART | GPT、Claude、LLaMA |
-| 预训练目标 | MLM 掩码语言模型 | Seq2Seq 序列到序列 | CLM 因果语言模型 |
-| 注意力方式 | 双向注意力 | Encoder 双向 + Decoder 单向 | 单向注意力（因果注意力） |
-| 能看到什么 | 整个输入 | Encoder 看全部，Decoder 只看前面 | 只看前面的 Token |
-| 擅长什么 | 理解、分类、抽取 | 翻译、摘要、转换 | 生成、对话、推理 |
-| 生成能力 | 弱 | 强 | 最强 |
-
-#### Encoder-Only：BERT 的路线
-
-BERT 用双向注意力，每个 Token 可以看到前面和后面所有的 Token。
-
-- **好处**：理解能力强，做分类、实体识别、语义相似度这些任务效果很好
-- **坏处**：不能用来生成。因为生成必须是"看前面的词，预测下一个词"，双向注意力等于偷看了答案
-
-BERT 在 2018 年很火，但后来大模型转向生成式，Encoder-Only 就不是主流了。
-
-#### Encoder-Decoder：T5 的路线
-
-Encoder 用双向注意力理解输入，Decoder 用单向注意力生成输出。典型的"理解了再写"模式，适合翻译、摘要这类输入和输出明确分离的任务。Google 的 T5 和 PaLM（部分版本）用这个架构。
-
-#### Decoder-Only：GPT 的路线
-
-三个特征：
-
-- **串行生成**：第 N 个词必须等前面 N-1 个词全部生成完后才能生成
-- **本质是续写**：给定 Prompt，模型接着往下写（对话、代码生成、问答）
-- **末尾影响最大**：最后的 Token 离生成位置最近，所以 Prompt 末尾指令最关键
-
-只用单向注意力，每个 Token 只能看到前面的 Token，预测下一个 Token。这就是自回归生成：看前面的词，预测下一个词，再看前面的词（包括刚预测的），再预测下一个……一步步生成下去。
-
-#### 为什么现在大模型都用 Decoder-Only？
-
-三个原因：
-
-**① Scaling 效果最好**
-同样的参数量和数据量，Decoder-Only 在扩大规模时收益最大。GPT 系列从 1.17 亿参数到 1.8 万亿参数，效果持续提升。这不是偶然——Decoder-Only 的架构更简单统一，规模越大优势越明显。
-
-**② 生成和理解都能做**
-虽然 Decoder-Only 天然是生成式的，但通过 Prompt 设计，它也能做理解任务。反过来，Encoder-Only 就做不了生成。一专多能 > 只能做一样。
-
-**③ 训练更高效**
-Decoder-Only 每个位置的预测目标都是"下一个 Token"，训练目标统一。Encoder-Decoder 需要同时训练理解和生成两个部分，协调成本更高。
-
-#### 对应用开发的启示
-
-**为什么大模型都是"你给它一段文字，它接着往下写"的模式？**
-
-因为 Decoder-Only 的本质就是"给定前面的内容，预测下一个 Token"。你发一段 Prompt，模型就是在"续写"。对话、代码生成、问答，本质上都是续写。
-
-这就解释了：
-
-- **为什么 Prompt 的最后一句特别重要**：模型是接着你最后一句话往下写的，最后一句话的方向决定了生成方向
-- **为什么 Few-shot 有效**：给几个示例，模型就会"续写"出类似格式的内容
-- **为什么 System Prompt 要放在最前面**：最先出现的内容对整个生成过程都有影响，System Prompt 在开头相当于给"续写"定了基调
-
-> 现在主流大模型都用 Decoder-Only，因为它 Scaling 效果最好、生成和理解都能做、训练更高效。这对应用开发的启示是：大模型的本质就是"续写"，Prompt 的结构和位置直接影响生成质量。System Prompt 放开头定基调，关键指令放结尾定方向，中间放上下文。
-
----
-
-## 第四部分：局限性与工程应对
-
-> Transformer 很强，但不是没有代价。理解这些局限性，才能在应用开发中做出更好的技术决策。
-
-### 7. Transformer 的局限性
-
-#### 局限一：O(n²) 计算复杂度
-
-Self-Attention 的计算量和序列长度的平方成正比。**序列长度翻一倍，计算量翻四倍。**
-
-| 序列长度 | 注意力计算量 |
-|----------|-------------|
-| 1K Token | 100 万次 |
-| 2K Token | 400 万次 |
-| 4K Token | 1600 万次 |
-| 128K Token | 163 亿 |
-
-这就是为什么：
-
-- **Token 计费**：序列越长成本越高，不只是线性增长，是平方级增长
-- **上下文窗口不能无限大**：200K 上下文的注意力计算量已经是 40 亿级别，硬件扛不住更大了
-- **长对话越来越慢**：对话越长，每次新生成都要对全部历史做注意力计算
-
-对应用开发的启示：**控制上下文长度不只是省钱，是在控制计算复杂度。**
-
-#### 局限二：位置编码的外推问题
-
-模型对训练时没见过的位置编码不可靠。即使做了长度外推优化，超长上下文的质量也会打折扣。
-
-目前的缓解方案：
-
-- **RoPE（旋转位置编码）**：目前主流方案，GPT-4、LLaMA 都在用，外推能力比正弦编码好
-- **YaRN / NTK-Aware**：通过调整频率来扩展位置编码的有效范围
-- **滑动窗口注意力**：不做全局注意力，只在局部窗口内算，牺牲一些全局信息换取更长的有效长度
-
-但这些都是缓解，不是根治。
-
-#### 局限三：中间迷失（Lost in the Middle）
-
-Transformer 对输入中间部分的信息关注度明显低于开头和结尾。无论模型多大、上下文多长，这个现象都存在。
-
-原因和注意力分配机制有关——开头信息因为位置靠前，对所有后续 Token 都有影响；结尾信息因为距离生成位置最近，也天然获得更多关注。中间的信息两边都不靠，容易被忽略。
-
-对应用开发的启示：**关键信息别放在 Prompt 中间，放开头或结尾。**
-
-#### 局限四：生成是串行的
-
-Decoder-Only 模型生成 Token 是一个一个来的，第 N 个 Token 必须等前 N-1 个 Token 生成完。这种自回归特性决定了生成速度有上限。
-
-Speculative Decoding（投机解码）是一种加速方案：先用小模型快速生成几个候选 Token，再用大模型并行验证，对的留下、错的重新生成。但本质还是没改变串行生成的事实。
-
-对应用开发的启示：**生成比理解慢得多**，需要大量输出的场景要考虑流式返回。
-
-#### 有替代方案吗？
-
-目前有一些架构在探索替代 Transformer，但都还没能真正取代：
-
-- **Mamba（状态空间模型）**：推理速度快，长序列有优势，但生成质量和通用性还比不上 Transformer
-- **RWKV**：结合了 RNN 和 Transformer 的优点，但生态还不成熟
-- **混合架构**：部分层用 Transformer，部分层用其他结构，目前还在探索阶段
-
-Transformer 在并行计算和全局建模之间找到了最好的平衡，目前还没有架构能在通用性和性能上同时超越它。
-
-> Transformer 的核心局限是 O(n²) 的计算复杂度和位置编码的外推问题，这直接导致了上下文窗口有硬上限、Token 成本随长度平方级增长、长上下文中间信息容易被忽略。在应用开发中，通过上下文管理、关键信息前置、流式返回这些策略来应对这些约束。
-
----
-
-## 附录：常见问题速查
-
-> 按文档顺序汇总所有核心问题，适合面试前快速回顾。
-
-**Q：应用开发为什么要懂 Transformer？**
-
-因为 Transformer 的架构决定了大模型能做什么、不能做什么、擅长什么、弱在哪里。Self-Attention 告诉你上下文质量为什么重要，多头注意力告诉你结构化 Prompt 为什么有效，位置编码告诉你长上下文为什么质量下降，O(n²) 复杂度告诉你 Token 成本为什么这么高。不懂架构，优化只能靠试；懂了架构，优化有据可依。
-
-**Q：Transformer 为什么能取代 RNN？**
-
-两个核心优势：① 全局建模——每个 Token 直接和所有其他 Token 建立关系，不需要像 RNN 一步步传递，解决了长距离依赖问题；② 并行计算——所有 Token 的注意力可以同时计算，不像 RNN 必须串行，训练速度快了几个数量级。
-
-**Q：Self-Attention 的 Q、K、V 分别是什么？**
-
-Q（Query）是当前词在找什么，K（Key）是每个词能提供什么，V（Value）是每个词的实际内容。注意力分数由 Q 和 K 的点积决定，输出由注意力分数加权 V 得到。通俗说：Q 找对象，K 判断匹不匹配，V 提供实际内容。
-
-**Q：为什么要 Multi-Head Attention？**
-
-单头注意力只能学一种关系模式，但语言里有多重关系——语法、语义、指代等。多头让不同的头关注不同类型的关系，最后综合判断。这就像从多个角度看同一件事，比只从一个角度看更全面。
-
-**Q：为什么 Prompt 结构化比大段文字效果好？**
-
-因为多头注意力在处理结构化信息时效率更高。每个注意力头可以快速定位到自己关注的部分——语法头看结构，语义头看关键词。信息密度一样，但处理结构不清晰的文本需要额外计算来提取结构，效率更低。
-
-**Q：为什么长上下文后面模型会"忘记"前面的内容？**
-
-位置编码有一个隐含问题：模型在训练时见过的位置范围有限。超出训练范围的位置编码不可靠，超长上下文的后半部分注意力质量下降。此外，"中间迷失"现象导致模型对 Prompt 中间位置的信息天然关注度低。
-
-**Q：GPT、BERT、T5 的架构有什么区别？**
-
-BERT 是 Encoder-Only，双向注意力，擅长理解不能生成。T5 是 Encoder-Decoder，Encoder 双向理解输入，Decoder 单向生成输出，适合翻译摘要。GPT 是 Decoder-Only，单向注意力，擅长生成，通过规模扩大也能做理解任务。现在主流用 Decoder-Only，因为 Scaling 效果最好。
-
-**Q：为什么现在大模型都用 Decoder-Only？**
-
-三个原因：① Scaling 效果最好——参数量和数据量越大，效果提升越稳定；② 生成和理解都能做——虽然天然是生成式，但通过 Prompt 也能做理解任务，而 Encoder-Only 做不了生成；③ 训练更高效——目标统一，就是预测下一个 Token。
-
-**Q：Transformer 的 O(n²) 复杂度，在应用开发中怎么应对？**
-
-四个策略：控制上下文长度（只给相关代码，别把整个项目塞进去）、模型路由（长上下文用大模型，短上下文用小模型省成本）、关键信息前置（避免中间迷失）、流式返回（生成阶段用流式缓解串行瓶颈）。核心思路是在架构约束下做优化，而不是硬刚复杂度。
-
-**Q：为什么 Prompt 末尾的指令对生成结果影响最大？**
-
-Decoder-Only 模型的生成本质是"续写"——接着你最后一个 Token 往下写。末尾的指令直接决定了续写的方向。开头的内容通过注意力影响整个生成过程，但末尾的指令距离生成位置最近，注意力权重天然更高。所以 System Prompt 放开头定基调，关键指令放结尾定方向，上下文放中间。
-
-**Q：目前有能替代 Transformer 的架构吗？**
-
-Mamba（状态空间模型）推理速度快、长序列有优势，RWKV 结合了 RNN 和 Transformer 优点，但两者生成质量和通用性还比不上 Transformer。混合架构仍在探索阶段。Transformer 在并行计算和全局建模之间找到了最佳平衡，短期内难以被替代。
-
----
-
-## 参考来源
-
-- <https://notes.kamacoder.com/interview/llm/transformer_interview.html>
+###### 前馈全连接层
+
+> 在Transformer中前馈全连接层就是具有**两层线性层**的全连接网络
+> 考虑注意力机制可能对复杂过程的拟合程度不够, 通过增加两层网络来增强模型的能力
+
+```python
+# 前馈全连接层
+class FeedForward(nn.Module):
+    def __init__(self, d_model, d_ff, dropout=0.1):
+        super().__init__()
+        self.fc1 = nn.Linear(d_model, d_ff)
+        self.fc2 = nn.Linear(d_ff, d_model)
+        self.dropout = nn.Dropout(dropout)
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.dropout(F.relu(x)) 
+        x = self.fc2(x)
+        return x
+```
+
+###### 规范化层
+
+> **核心目的**：解决<u>深度</u>神经网络训练中的内部协变量偏移问题
+> 深层网络经过多层计算后参数可能会出现过大或过小的情况，这会导致学习过程出现异常、模型收敛缓慢
+> 通过规范层对数值进行规范化，使其特征数值在合理范围内，能有效缓解深层网络堆叠带来的数值不稳定问题
+> 在Transformer中，该模块通常由**层归一化**（Layer Normalization）实现
+> $$f(x) = \lambda \cdot \frac{x - E(x)}{\sqrt{\text{Var}(x)} + \epsilon} + \beta$$
+> BN和LN的区别：
+> ![[Pasted image 20260330174120.png]]
+>
+> [[训练与优化#Batch Normalization（批量归一化）]]
+
+```python
+# 规范化层
+class LayerNorm(nn.Module):
+    def __init__(self, features, eps=1e-6):
+        """
+        :param features: 词嵌入维度（特征数）
+        :param eps: 小常数，避免除零（分母为零）
+        """
+        super().__init__()
+        # 线性公式：y = a * x + b
+        # a: 对标准化后的数据进行缩放，b: 对标准化后的数据进行平移
+        self.a = nn.Parameter(torch.ones(features))   # 可学习的缩放系数
+        self.b = nn.Parameter(torch.zeros(features))  # 可学习的平移系数
+        self.eps = eps
+
+    def forward(self, x):
+        x_mean = x.mean(-1, keepdim=True)  # 计算每个样本(最后一个维度，词嵌入维度)的 均值
+        x_std = x.std(-1, keepdim=True)    # 计算每个样本(最后一个维度，词嵌入维度)的 标准差
+        return self.a * (x - x_mean) / (x_std + self.eps) + self.b  # 规范化后的结果
+```
+#### 子层连接
+
+>编码器由两个子层堆叠而成：**多头自注意力子层**（Multi-Head Self-Attention）和**前馈神经网络子层**（Feed-Forward Network）。每个子层后面都跟随残差连接和层归一化操作。
+
+```python
+import torch.nn as nn
+from element import *
+```
+
+```python
+# 构建子层
+class SublayerConnection(nn.Module):
+    def __init__(self, d_model, dropout=0.1):
+        super().__init__()
+        # 规范化层（层归一化）
+        self.norm = nn.LayerNorm(d_model)
+        # 随机失活
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x, sublayer):
+        # x: 输入张量 [batch_size, seq_len, d_model]
+        # sublayer: 子层对象（如：多头注意力层、前馈全连接层等）
+        # 方式一：先子层处理，再规范化层处理，最后随机失活并残差连接
+        result1 = x + self.dropout(self.norm(sublayer(x)))
+        # 方式二：先规范化层处理，再子层处理，最后随机失活并残差连接
+        # result2 = x + self.dropout(sublayer(self.norm(x)))
+        return result1
+```
+
+```python
+# 编码器层
+class EncoderLayer(nn.Module):
+    def __init__(self, d_model, attn_obj, feed_forward, dropout=0.1):
+        super().__init__()
+        self.d_model = d_model              # 词嵌入维度
+        self.attn_obj = attn_obj            # 注意力对象
+        self.feed_forward = feed_forward    # 前馈全连接对象
+        self.sublayer = clones(SublayerConnection(d_model, dropout), 2)  # 克隆子层(2个)
+
+    def forward(self, x, mask):
+        # 第1个子层（多头自注意力层）
+        x = self.sublayer[0](x, lambda x: self.attn_obj(x, x, x, mask))
+        # 第2个子层（前馈全连接层）
+        x = self.sublayer[1](x, lambda x: self.feed_forward(x))
+        return x
+```
+
+```python
+# 解码器层
+class DecoderLayer(nn.Module):
+    def __init__(self, d_model, mask_attn, attn, feed_forward, dropout=0.1):
+        super().__init__()
+        self.d_model = d_model     # 词向量维度
+        self.mask_attn = mask_attn   # 掩码多头注意力
+        self.attn = attn   # 多头注意力
+        self.feed_forward = feed_forward  # 前馈全连接层
+        self.sublayer = clones(SublayerConnection(d_model, dropout), 3)  # 3个子层连接
+
+    def forward(self, x, encoder_output, source_mask, target_mask):
+        """
+        :param x: 解码器的输入，即 源序列 的词嵌入+位置编码
+        :param encoder_ouyput: 编码器的输出，即 源序列 的词嵌入+位置编码
+        :param source_mask: 源序列 的掩码，用于 编码器-解码器 注意力
+        :param target_mask: 目标序列 的掩码，用于 自注意力
+        :return: 解码器的输出，即目标序列 的词嵌入+位置编码
+        """
+        # 第1个子层（多头自注意力层）
+        x = self.sublayer[0](x, lambda x: self.mask_attn(x, x, x, target_mask))
+        # 第2个子层（多头注意力层）
+        x = self.sublayer[1](x, lambda x: self.attn(x, encoder_output, encoder_output, source_mask))
+        # 第3个子层（前馈全连接层）
+        x = self.sublayer[2](x, lambda x: self.feed_forward(x))
+        return x
+```
+
+#### 编码器和解码器
+
+```python
+import copy
+import torch.nn.functional as F
+from element import *
+from sublayer import *
+```
+
+```python
+# 编码器
+class Encoder(nn.Module):
+    def __init__(self, layer, N):
+        super().__init__()
+        self.layers = clones(layer, N)         # 克隆编码器层(N个)
+        self.norm = LayerNorm(layer.d_model)   # 层规范化
+
+    def forward(self, x, mask):
+        for layer in self.layers:
+            x = layer(x, mask)
+        return self.norm(x)
+
+
+# 解码器
+class Decoder(nn.Module):
+    def __init__(self, layer, N):
+        super().__init__()
+        self.layers = clones(layer, N)         # 克隆解码器层(N个)
+        self.norm = LayerNorm(layer.d_model)   # 层规范化
+
+    def forward(self, x, encoder_output, source_mask, target_mask):
+        for layer in self.layers:
+            x = layer(x, encoder_output, source_mask, target_mask)
+        return self.norm(x)
+```
+#### 模型搭建
+
+```python
+# Transformer 模型构建
+class EncoderDecoder(nn.Module):
+    def __init__(self, source_embed, encoder, target_embed, decoder, generator):
+        super().__init__()
+        self.source_embed = source_embed    # 源语言嵌入
+        self.encoder = encoder              # 编码器
+        self.target_embed = target_embed    # 目标语言嵌入
+        self.decoder = decoder              # 解码器
+        self.generator = generator          # 输出层
+
+    def forward(self, source_x, target_y, source_mask, target_mask):
+        """
+        Transformer 前向传播，先编码，再解码
+        :param source_x: 编码器输入 [batch_size, sen_len]
+        :param target_y: 解码器输入 [batch_size, sen_len]
+        :param sorce_mask: 源语言掩码张量，padding_mask 填充掩码，防止填充的pad子影响注意力计算
+        :param target_mask: 目标语言掩码张量，sentence_mask 句子掩码，防止未来的信息被提前利用
+        :return: 模型预测结果（概率分布结果） [batch_size, sen_len, vocab_size]
+        """
+        encoder_output = self.encode(source_x, source_mask)
+        decoder_output = self.decode(target_y, encoder_output, source_mask, target_mask)
+        return self.generator(decoder_output)
+
+    def encode(self, source_x, source_mask):
+        return self.encoder(self.source_embed(source_x), source_mask)
+    
+    def decode(self, target_y, encoder_output, source_mask, target_mask):
+        # encoder_output: 编码器输出
+        return self.decoder(self.target_embed(target_y), encoder_output, source_mask, target_mask)  
+
+
+# 输出部分：线性层 + 激活层
+class Generator(nn.Module):
+    def __init__(self, d_model, vocab_size):
+        super().__init__()
+        self.fc = nn.Linear(d_model, vocab_size)  # 线性层
+
+    def forward(self, x):
+        return F.log_softmax(self.fc(x), dim=-1)
+```
+
+```python
+# 测试模型
+def model_construction():
+    c = copy.deepcopy
+    d_model = 512
+    droput_p = 0.2
+    # 编码部分
+    source_embed = Embedding(vocab_size=1000, embed_dim=d_model)  # 词嵌入
+    source_pos_encoding = PositionalEncoding(d_model, dropout=0.1)  # 位置编码
+    multi_head_attn = MultiHeadAttention(d_model, num_heads=8)  # 多头注意力层
+    feed_forward = FeedForward(d_model, d_ff=2048)  # 前馈全连接层
+    encoder_layer = EncoderLayer(d_model, multi_head_attn, feed_forward, droput_p)  # 编码器层
+    encoder = Encoder(encoder_layer, N=6)
+    # 解码部分
+    target_embed = c(source_embed)  # 词嵌入
+    target_pos_encoding = c(source_pos_encoding)  # 位置编码
+    mask_attn = c(multi_head_attn)  # 掩码多头注意力层
+    attn = c(multi_head_attn)  # 多头注意力层
+    ff = c(feed_forward)
+    decoder_layer = DecoderLayer(d_model, mask_attn, attn, ff, droput_p)
+    decoder = Decoder(decoder_layer, N=6)
+    # 输出部分
+    generator = Generator(d_model, vocab_size=1000)
+    # 模型搭建
+    model = EncoderDecoder(
+        nn.Sequential(source_embed, source_pos_encoding),
+        encoder,
+        nn.Sequential(target_embed, target_pos_encoding),
+        decoder,
+        generator
+    )
+    print(f"模型结构: {model}")
+    # 模型前向测试
+    source_x = torch.LongTensor([[1, 3, 5, 7],[2, 4, 6, 8]])
+    target_y = torch.LongTensor([[0, 1, 3, 5],[1, 2, 4, 6]])
+    source_mask = torch.zeros(8, 4, 4)
+    target_mask = c(source_mask)
+    output = model(source_x, target_y, source_mask, target_mask)
+    print(f"模型输出: {output.shape}")
+
+    
+if __name__ == '__main__':
+    model_construction()
+```
+输出：
+
+```python
+模型结构: EncoderDecoder(
+  (source_embed): Sequential(  # 输入层（编码器）
+    (0): Embedding(  # 词嵌入
+      (embedding): Embedding(1000, 512)
+    )
+    (1): PositionalEncoding(  # 位置编码
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+  )
+  (encoder): Encoder(  # 编码器
+    (layers): ModuleList(
+      (0-5): 6 x EncoderLayer(  # 编码器层
+        (attn_obj): MultiHeadAttention(  # 多头注意力
+          (linears): ModuleList(
+            (0-3): 4 x Linear(in_features=512, out_features=512, bias=True)
+          )
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (feed_forward): FeedForward(  # 前馈全连接层
+          (fc1): Linear(in_features=512, out_features=2048, bias=True)
+          (fc2): Linear(in_features=2048, out_features=512, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (sublayer): ModuleList(  # 层规范化 + 残差连接
+          (0-1): 2 x SublayerConnection(
+            (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (dropout): Dropout(p=0.2, inplace=False)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (target_embed): Sequential(  # 输入层（解码器）
+    (0): Embedding(
+      (embedding): Embedding(1000, 512)
+    )
+    (1): PositionalEncoding(
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+  )
+  (decoder): Decoder(  # 解码器
+    (layers): ModuleList(
+      (0-5): 6 x DecoderLayer(  # 解码器层
+        (mask_attn): MultiHeadAttention(  # 多头自注意力（sentence-mask）
+          (linears): ModuleList(
+            (0-3): 4 x Linear(in_features=512, out_features=512, bias=True)
+          )
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (attn): MultiHeadAttention(  # 多头注意力（padding-mask）
+          (linears): ModuleList(
+            (0-3): 4 x Linear(in_features=512, out_features=512, bias=True)
+          )
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (feed_forward): FeedForward(  # 前馈全连接层
+          (fc1): Linear(in_features=512, out_features=2048, bias=True)
+          (fc2): Linear(in_features=2048, out_features=512, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+        (sublayer): ModuleList(  # 层规范化 + 残差连接
+          (0-2): 3 x SublayerConnection(
+            (norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+            (dropout): Dropout(p=0.2, inplace=False)
+          )
+        )
+      )
+    )
+    (norm): LayerNorm()
+  )
+  (generator): Generator(  # 输出层
+    (fc): Linear(in_features=512, out_features=1000, bias=True)
+  )
+)
+模型输出: torch.Size([2, 4, 1000])
+```
+
+### Transformers 库使用
+> Huggingface Transformers 是一个开源基于 transformer 模型结构提供的预训练语言库。它支持 Pytorch，Tensorflow2.0，并且支持两个框架的相互转换。
+> Transformers 提供了NLP领域大量state-of-the-art(state-of-the-art) 的 预训练语言模型结构的模型和调用框架。
+> Transformer 社区：[https://huggingface.co/](https://huggingface.co/)
+
+#### 安装 Transformers 库
+```shell
+conda search transformers  # 查看可安装版本
+pip install transformers==4.57.1
+pip install datasets
+```
+#### 相关概念
+- 带头任务头输出 和 不带任务头输出：
+	- **带头**任务头输出：<mark style="background: #ADCCFFA6;">在基座模型之上添加了一个分类头</mark>，模型直接输出 预测标签和概率分数（如 `{'label': 'POSITIVE', 'score': 0.998}`），通常直接用于推理
+		例如：文本分类，完型填空等任务
+	- **不带**任务头输出：<mark style="background: #ADCCFFA6;">只加载基座模型</mark>，模型仅输出高维特征向量（如 `last_hidden_state`），<mark style="background: #FF5582A6;">需要额外添加任务层</mark>（任务头）才能得到具体预测结果。
+		例如：特征提取
+#### Transformers库三层应用结构
+- **管道**（Pipline）方式：高度集成的<u>极简使用方式</u>，只需要几行代码即可实现一个NLP任务。
+- **自动模型**（AutoMode）方式：可载入并使用BERTology系列模型。
+- **具体模型**（SpecificModel）方式：在使用时，需要明确指定具体的模型，并按照每个BERTology系列模型中的特定参数进行调用，该方式相对复杂，但具有较高的灵活度。
+![[Pasted image 20260402110937.png]]
+#### NLP 任务
+- **文本分类** 任务
+	文本分类是指模型可以根据文本中的内容来进行分类。一般是通过有监督训练得到的，文本内容的具体分类，依赖于训练时所使用的样本标签。
+- **特征提取** 任务
+	特征抽取任务只返回文本处理后的特征，属于预训练模型的范畴。特征抽取任务的输出结果需要和其他模型一起工作。
+- **完形填空** 任务
+	完型填空任务又被叫做“遮蔽语言建模任务”，它属于BERT模型训练过程中的子任务。
+- **阅读理解** 任务
+	阅读理解任务又称为“抽取式问答任务”，即输入一段文本和一个问题，让模型输出结果。
+- **文本摘要** 任务
+	输入一段文本，输出一段概况、简单的文字。
+- **NER** 任务
+	命名实体识别（NER），识别文本中的人名（PER）、地名（LOC）、组织（ORG）以及其他实体（MISC）等。其本质上是一个分类任务（又叫序列标注任务），实体词识别是句法分析的基础，而句法分析优势NLP任务的核心。
+##### 管道方式
+
+```python
+import numpy as np
+from transformers import pipeline  # 管道
+from huggingface_hub import snapshot_download  # 下载huggingface中的模型
+```
+
+- 文本分类 任务
+
+  ```python
+  # 情感分类
+  def sentiment_classification():
+      # 下载模型
+      snapshot_download(repo_id="techthiyanes/chinese_sentiment", 
+                    local_dir="./model/transformers/chinese_sentiment")
+      # 加载模型，task：任务类型，model：指定本地模型路径（联网的情况下可自动加载模型对应的分词器）
+      model = pipeline(task="sentiment-analysis", model="./model/transformers/chinese_sentiment")
+      # 情感分析
+      print(model("我爱北京天安门，天安门上太阳升！"))  # [{'label': 'star 5', 'score': 0.6905773878097534}]
+      print(model("这个模型真难用，简直是垃圾！"))  # [{'label': 'star 1', 'score': 0.7544621229171753}]
+  
+  sentiment_classification()
+  ```
+
+- 特征提取 任务
+
+  ```python
+  # 特征提取
+  def feature_extraction():
+      # 下载模型
+      snapshot_download(repo_id="bert-base-chinese", 
+                    local_dir="./model/transformers/bert-base-chinese")
+      # 加载模型，task：任务类型，model：指定本地模型路径（联网的情况下，直接写模型 ID 可自动下载模型）
+      model = pipeline(task="feature-extraction", model="./model/transformers/bert-base-chinese")
+      # 特征提取
+      output = model('人生该如何起头')
+      print(np.array(output).shape, output)  # (1, 9, 768), bert会添加 CLS和SEP 标记，所以原本7个词变为9个词
+  
+  feature_extraction()
+  ```
+
+- 完形填空 任务
+
+  ```python
+  # 完形填空
+  def fill_mask():
+      # 下载模型
+      snapshot_download(repo_id="hfl/chinese-bert-wwm", 
+                    local_dir="./model/transformers/chinese-bert-wwm")
+      # 加载模型，task：任务类型，model：指定本地模型路径（联网的情况下，直接写模型 ID 可自动下载模型）
+      model = pipeline(task="fill-mask", model="./model/transformers/chinese-bert-wwm")
+      # 模型预测
+      output = model('我想明天去[MASK]吃饭。')  # 一次只能预测1个MASK（1个MASK只能填一个词）
+      print(output)
+      '''
+      [{'score': 0.1494479775428772, 'token': 872, 'token_str': '你', 'sequence': '我 想 明 天 去 你 吃 饭 。'}, 
+       {'score': 0.14547568559646606, 'token': 6929, 'token_str': '那', 'sequence': '我 想 明 天 去 那 吃 饭 。'}, 
+       {'score': 0.14154349267482758, 'token': 2157, 'token_str': '家', 'sequence': '我 想 明 天 去 家 吃 饭 。'}, 
+       {'score': 0.09529270976781845, 'token': 1343, 'token_str': '去', 'sequence': '我 想 明 天 去 去 吃 饭 。'}, 
+       {'score': 0.07865447551012039, 'token': 1961, 'token_str': '她', 'sequence': '我 想 明 天 去 她 吃 饭 。'}]
+      '''
+  
+  fill_mask()
+  ```
+
+- 阅读理解 任务
+
+  ```python
+  # 阅读理解
+  def question_answering():
+      # 下载模型
+      snapshot_download(repo_id="luhua/chinese_pretrain_mrc_roberta_wwm_ext_large", 
+                    local_dir="./model/transformers/chinese_pretrain_mrc_roberta_wwm_ext_large")
+      # 加载模型，task：任务类型，model：指定本地模型路径（联网的情况下，直接写模型 ID 可自动下载模型）
+      model = pipeline('question-answering', model="./model/transformers/chinese_pretrain_mrc_roberta_wwm_ext_large")
+      # 模型预测
+      context = "我是一个中国学生，我叫王伟伟，我的喜好是写代码"
+      questions = ["我叫什么名字", "我来自哪里", "我的爱好是什么"]
+      print(model(context=context, question=questions))
+      """
+      [{'score': 0.21465566754341125, 'start': 11, 'end': 14, 'answer': '王伟伟'}, 
+      {'score': 2.781756620606757e-07, 'start': 4, 'end': 6, 'answer': '中国'}, 
+      {'score': 0.17819717526435852, 'start': 20, 'end': 23, 'answer': '写代码'}]
+      """
+  
+  question_answering()
+  ```
+
+- 文本摘要 任务
+
+  ```python
+  # 文本摘要
+  def summarization():
+      # 下载模型
+      snapshot_download(repo_id="sshleifer/distilbart-cnn-12-6", 
+                    local_dir="./model/transformers/distilbart-cnn-12-6")
+      # 加载模型，task：任务类型，model：指定本地模型路径（联网的情况下，直接写模型 ID 可自动下载模型）
+      model = pipeline('summarization', model="./model/transformers/distilbart-cnn-12-6")
+      # 模型预测
+      text = "BERT is a transformers model pretrained on a large corpus of English data " \
+             "in a self-supervised fashion. This means it was pretrained on the raw texts " \
+             "only, with no humans labelling them in any way (which is why it can use lots " \
+             "of publicly available data) with an automatic process to generate inputs and " \
+             "labels from those texts. More precisely, it was pretrained with two objectives:Masked " \
+             "language modeling (MLM): taking a sentence, the model randomly masks 15% of the " \
+             "words in the input then run the entire masked sentence through the model and has " \
+             "to predict the masked words. This is different from traditional recurrent neural " \
+             "networks (RNNs) that usually see the words one after the other, or from autoregressive " \
+             "models like GPT which internally mask the future tokens. It allows the model to learn " \
+             "a bidirectional representation of the sentence.Next sentence prediction (NSP): the models" \
+             " concatenates two masked sentences as inputs during pretraining. Sometimes they correspond to " \
+             "sentences that were next to each other in the original text, sometimes not. The model then " \
+             "has to predict if the two sentences were following each other or not."
+      print(model(text))
+      # [{'summary_text': ' BERT is a transformers model pretrained on a large corpus of English data in a self-supervised fashion . 
+      # It was pretrained with two objectives: Masked language modeling (MLM) and next sentence prediction (NSP) This allows the model to learn a bidirectional representation of the sentence .'}]
+  
+  summarization()
+  ```
+
+- NER 任务
+
+  ```python
+  # 命名实体识别
+  def ner():
+      # 下载模型
+      snapshot_download(repo_id="uer/roberta-base-finetuned-cluener2020-chinese", 
+                    local_dir="./model/transformers/roberta-base-finetuned-cluener2020-chinese")
+      # 加载模型，task：任务类型，model：指定本地模型路径（联网的情况下，直接写模型 ID 可自动下载模型）
+      model = pipeline('ner', model="./model/transformers/roberta-base-finetuned-cluener2020-chinese")
+      # 模型预测
+      print(model('我是一个中国学生，我叫王伟伟，我的喜好是写代码。'))
+      """
+      [{'entity': 'B-position', 'score': np.float32(0.6719871), 'index': 7, 'word': '学', 'start': 6, 'end': 7}, 
+      {'entity': 'I-position', 'score': np.float32(0.94930494), 'index': 8, 'word': '生', 'start': 7, 'end': 8}, 
+      {'entity': 'B-name', 'score': np.float32(0.98282826), 'index': 12, 'word': '王', 'start': 11, 'end': 12}, 
+      {'entity': 'I-name', 'score': np.float32(0.9825546), 'index': 13, 'word': '伟', 'start': 12, 'end': 13}, 
+      {'entity': 'I-name', 'score': np.float32(0.9771797), 'index': 14, 'word': '伟', 'start': 13, 'end': 14}]
+      """
+      # 前缀：B-开头，I-内容，
+      # position: 职位（身份），name: 名字
+  
+  ner()
+  ```
+
+##### 自动模型
+
+```python
+import torch
+# 若本地没有模型，库会自动从 Hugging Face Hub 下载所需的文件
+from transformers import AutoConfig, AutoModel, AutoTokenizer  # 自动配置模型参数，自动加载模型，自动加载和模型匹配的分词器
+from transformers import (AutoModelForSequenceClassification, # 文本分类
+                          AutoModelForMaskedLM,               # 掩码语言模型
+                          AutoModelForQuestionAnswering,      # 问答模型
+                          AutoModelForSeq2SeqLM,              # 文本摘要（序列到序列语言模型）
+                          AutoModelForTokenClassification     # 命名实体识别（token分类）
+                          )
+from rich import print  # 终端打印美化
+```
+
+- 文本分类 任务
+
+  ```python
+  # 情感分类
+  def sentiment_classification():
+      # 模型加载
+      model_ID = "./model/transformers/chinese_sentiment"  # 模型路径 或 模型 ID
+      tokenizer = AutoTokenizer.from_pretrained(model_ID)  # 加载Tokenizer（分词器）
+      model = AutoModelForSequenceClassification.from_pretrained(model_ID)  # 加载文本分类模型（序列分类）
+      # 模型文本
+      text = "我很开心，今天天气不错"
+      # 编码文本：文本 -> torch
+      # text: (待编码的)文本，return_tensors: 返回的类型(默认：list，pt：pytorch，tf：tensorflow，np：numpy)
+      # padding: 填充方式(max_length：填充到最大长度，longest，do_not_pad)，truncation: 是否截断(True：截断)，max_length: (输入)最大长度
+      input_ids = tokenizer.encode(text=text, return_tensors="pt", padding="max_length", truncation=True, max_length=10)
+      # 模型评估（推理模式）
+      model.eval()
+      # 模型预测
+      output1 = model(input_ids)
+      output2 = model(input_ids, return_dict=False)
+      print(output1)  # 返回：SequenceClassifierOutput(loss: 损失函数，logits: 预测结果，hidden_states: 隐藏状态， attentions: 注意力权重)
+      print(output2)  # 预测结果 tensor([[-1.8934, -0.4941, -0.1015,  0.1196,  0.4722]], grad_fn=<AddmmBackward0>)
+      print(output1.logits)  # 预测结果 tensor([[-1.8934, -0.4941, -0.1015,  0.1196,  0.4722]], grad_fn=<AddmmBackward0>)
+  
+  sentiment_classification()
+  ```
+
+- 特征提取 任务
+
+  ```python
+  # 特征提取
+  def feature_extraction():
+      # 模型加载
+      model_ID = "./model/transformers/bert-base-chinese"  # 模型路径 或 模型 ID
+      tokenizer = AutoTokenizer.from_pretrained(model_ID)  # 加载Tokenizer（分词器）
+      model = AutoModel.from_pretrained(model_ID)  # 加载模型
+      # 模型文本
+      text1 = ["人生该如何起头", "人生如何开始"]
+      text2 = ["人生如何开始", "人生应该如何开始"]
+      # 编码文本：文本 -> torch
+      # text: (待编码的)文本，return_tensors: 返回的类型(默认：list，pt：pytorch，tf：tensorflow，np：numpy)
+      # padding: 填充方式(max_length：填充到最大长度，longest，do_not_pad)，truncation: 是否截断(True：截断)，max_length: (输入)最大长度
+      inputs = tokenizer(text1, text2, return_tensors="pt", padding="max_length", truncation=True, max_length=20)
+      print(inputs)  # {'input_ids': 文本的编码结果，'token_type_ids'：段落标记 / 句子对标记，'attention_mask'： 填充标记(0-填充)}
+      # 模型评估（推理模式）
+      model.eval()
+      # 模型预测
+      outputs = model(**inputs)
+      print(outputs)  # 返回：BaseModelOutputWithPoolingAndCrossAttentions()
+      print(outputs.last_hidden_state.shape)  # 最后的隐藏状态 (2, 10, 768) [batch_size, sequence_length, hidden_size]
+      print(outputs.pooler_output.shape)      # 池化后的隐藏状态 (2, 768)   [batch_size, hidden_size]
+  
+  feature_extraction()
+  ```
+
+- 完形填空 任务
+
+  ```python
+  # 完形填空
+  def fill_mask():
+      # 模型加载
+      model_ID = "./model/transformers/chinese-bert-wwm"   # 模型路径 或 模型 ID
+      tokenizer = AutoTokenizer.from_pretrained(model_ID)  # 加载Tokenizer（分词器）
+      model = AutoModelForMaskedLM.from_pretrained(model_ID)  # 加载掩码语言模型
+      # 编码文本：文本 -> torch
+      # text: (待编码的)文本，return_tensors: 返回的类型(默认：list，pt：pytorch，tf：tensorflow，np：numpy)
+      # padding: 填充方式(max_length：填充到最大长度，longest，do_not_pad)，truncation: 是否截断(True：截断)，max_length: (输入)最大长度
+      inputs = tokenizer("我想现在去[MASK]家吃饭", return_tensors="pt", padding="max_length", truncation=True, max_length=15)
+      # print(inputs)  # {'input_ids': 文本的编码结果，'token_type_ids'：段落标记 / 句子对标记，'attention_mask'： 填充标记(0-填充)}
+      # 模型评估（推理模式）
+      model.eval()
+      # 模型预测
+      outputs = model(**inputs)
+      # print(outputs)  # 返回 MaskedLMOutput 对象，logits: 预测结果
+      # print(outputs.logits.shape, outputs.logits)  # [1, 15, 21128]
+      # 获取 [MASK] 的预测结果
+      prediction = torch.argmax(outputs.logits[0][6]).item()  # 预测结果索引
+      prediction = tokenizer.decode([prediction])  # 索引 -> 文本
+      # prediction_list = prediction.convert_ids_to_tokens(prediction)  # ['你']
+      print(f"预测结果为：{prediction}")  # 你
+  
+  fill_mask()
+  ```
+
+- 阅读理解 任务
+
+  ```python
+  # 阅读理解
+  def question_answering():
+      # 模型加载
+      model_ID = "./model/transformers/chinese_pretrain_mrc_roberta_wwm_ext_large"   # 模型路径 或 模型 ID
+      tokenizer = AutoTokenizer.from_pretrained(model_ID)  # 加载Tokenizer（分词器）
+      model = AutoModelForQuestionAnswering.from_pretrained(model_ID)  # 加载问答模型
+      # 编码文本：文本 -> torch
+      context = "我是一个中国学生，我叫王伟伟，我的喜好是写代码"
+      questions = ["我叫什么名字", "我来自哪里", "我的爱好是什么"]
+      # 模型预测
+      model.eval()
+      for question in questions:
+          # text: (待编码的)文本，return_tensors: 返回的类型(默认：list，pt：pytorch，tf：tensorflow，np：numpy)
+          inputs = tokenizer(question, context, return_tensors="pt")
+          outputs = model(**inputs)
+          # 标识输入序列中哪些位置属于“上下文（context）”
+          context_mask = inputs['token_type_ids'][0] == 1  
+          # 把问题区的分数设为负无穷(掩码处理)，避免答案来自问题部分
+          start_logits, end_logits = outputs.start_logits, outputs.end_logits
+          start_logits[0][~context_mask] = -float('inf')
+          end_logits[0][~context_mask] = -float('inf')
+          start_idx, end_idx = torch.argmax(outputs.start_logits), torch.argmax(outputs.end_logits) + 1
+          answer = tokenizer.decode(inputs['input_ids'][0][start_idx:end_idx], skip_special_tokens=True)
+          print(f"问题: {question}\n答案: {answer}\n")
+  
+  question_answering()
+  ```
+
+- 文本摘要 任务
+
+  ```python
+  # 文本摘要
+  def summarization():
+      # 模型加载
+      model_ID = "./model/transformers/distilbart-cnn-12-6"   # 模型路径 或 模型 ID
+      tokenizer = AutoTokenizer.from_pretrained(model_ID)  # 加载Tokenizer（分词器）
+      model = AutoModelForSeq2SeqLM.from_pretrained(model_ID)  # 加载序列到序列语言模型
+      # 编码文本：文本 -> torch
+      text = "BERT is a transformers model pretrained on a large corpus of English data " \
+             "in a self-supervised fashion. This means it was pretrained on the raw texts " \
+             "only, with no humans labelling them in any way (which is why it can use lots " \
+             "of publicly available data) with an automatic process to generate inputs and " \
+             "labels from those texts. More precisely, it was pretrained with two objectives:Masked " \
+             "language modeling (MLM): taking a sentence, the model randomly masks 15% of the " \
+             "words in the input then run the entire masked sentence through the model and has " \
+             "to predict the masked words. This is different from traditional recurrent neural " \
+             "networks (RNNs) that usually see the words one after the other, or from autoregressive " \
+             "models like GPT which internally mask the future tokens. It allows the model to learn " \
+             "a bidirectional representation of the sentence.Next sentence prediction (NSP): the models" \
+             " concatenates two masked sentences as inputs during pretraining. Sometimes they correspond to " \
+             "sentences that were next to each other in the original text, sometimes not. The model then " \
+             "has to predict if the two sentences were following each other or not."
+      inputs = tokenizer(text, return_tensors="pt")  # 返回：inputs_ids, attention_mask
+      # 模型预测
+      model.eval()
+      model_outputs = model.generate(inputs['input_ids'])  # shape=[[1, 84]]
+      # 解码文本：torch -> 文本
+      # skip_special_tokens：是否跳过特殊标记，clean_up_tokenization_spaces：是否清理分词空格
+      outputs = tokenizer.decode(model_outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
+      print(f"摘要结果：{outputs}")
+  
+  summarization()
+  ```
+
+- NER 任务
+
+  ```python
+  # 命名实体识别
+  def ner():
+       # 模型加载
+       model_ID = "./model/transformers/roberta-base-finetuned-cluener2020-chinese"   # 模型路径 或 模型 ID
+       config = AutoConfig.from_pretrained(model_ID)  # 加载模型配置
+       tokenizer = AutoTokenizer.from_pretrained(model_ID)  # 加载Tokenizer（分词器）
+       model = AutoModelForTokenClassification.from_pretrained(model_ID)   # 加载命名实体识别模型（token分类）
+       # 编码文本
+       inputs = tokenizer("我是一个中国学生，我叫王伟伟，我的喜好是写代码。", return_tensors="pt")  # 分词并编码
+       # print(inputs) # {'input_ids', 'attention_mask', 'token_type_ids'}
+       # 模型预测
+       model.eval()
+       model_outputs = model(inputs['input_ids']).logits  # shape: [1, seq_len, num_labels] -> [1, 26, 32]
+       # 模型输出：提取每个 token 对应的实体标签
+       input_tokens = tokenizer.convert_ids_to_tokens(inputs['input_ids'][0])  # ids -> tokens
+       vocab_index = model_outputs[0].argmax(-1)  # 每个 token 的预测标签索引：[1, seq_len, num_labels] -> [seq_len]
+       ouputs = []
+       for i, (label_idx, token)  in enumerate(zip(vocab_index, input_tokens)):
+            if token in tokenizer.all_special_tokens:  # 忽略特殊字符
+                 continue
+            # config.id2label：id -> label，item()：torch -> int
+            ouputs.append({'entity': config.id2label[label_idx.item()], 'index':i, 'word': token})
+       print(ouputs)
+  
+  ner()
+  ```
+
+##### 具体模型
+
+- 完形填空 任务
+
+  ```python
+  import torch
+  # 若本地没有模型，库会自动从 Hugging Face Hub 下载所需的文件
+  from transformers import  BertTokenizer, BertForMaskedLM  # BERT分词器, BERT掩码语言模型
+  # 美化输出
+  from rich import print
+  
+  # 完形填空
+  def fill_mask():
+      # 模型加载
+      model_ID = "./model/transformers/chinese-bert-wwm"   # 模型路径 或 模型 ID
+      tokenizer = BertTokenizer.from_pretrained(model_ID)  # 加载Tokenizer（分词器）
+      model = BertForMaskedLM.from_pretrained(model_ID)  # 加载BERT掩码语言模型
+      # 编码文本：文本 -> torch
+      # text: (待编码的)文本，return_tensors: 返回的类型(默认：list，pt：pytorch，tf：tensorflow，np：numpy)
+      inputs = tokenizer("我想现在去[MASK]家吃饭", return_tensors="pt")
+      # print(inputs)  # {'input_ids': 文本的编码结果，'token_type_ids'：段落标记 / 句子对标记，'attention_mask'： 填充标记(0-填充)}
+      # 模型评估（推理模式）
+      model.eval()
+      # 模型预测
+      outputs = model(**inputs)
+      # print(outputs)  # 返回 MaskedLMOutput 对象，logits: 预测结果
+      # print(outputs.logits.shape, outputs.logits)  # [1, 15, 21128]
+      # 获取 [MASK] 的预测结果
+      prediction = torch.argmax(outputs.logits[0][6]).item()  # 预测结果索引
+      prediction = tokenizer.decode([prediction])  # 索引 -> 文本
+      # prediction_list = prediction.convert_ids_to_tokens(prediction)  # ['你']
+      print(prediction)  # 你
+  
+  fill_mask()
+  ```
