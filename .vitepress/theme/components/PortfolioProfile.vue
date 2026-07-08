@@ -55,9 +55,9 @@ const tagGroups = [
   { key: 'eng', label: '工程 & 工具' },
 ]
 const projects: Project[] = [
-  { id: 1, title: '电商每日精选选品简报系统（多Agent）', period: '2025.10 - 2026.05', tags: ['LangGraph','DeepSeek','ReAct','vLLM'], metric: '运营选品耗时 2h → 10min', details: { pain: '人工选品效率低、偏好难量化、跨批次重复推荐率高', solution: '八阶段多Agent编排架构 + ReAct推理循环 + 两级向量去重', result: '跨批次去重率92%+，偏好学习后命中率提升30%', difficulty: 'ReAct推理防死循环机制、去重召回率与精度平衡' }, link: '/zh-CN/作坊/feedlens-project' },
-  { id: 2, title: '电商智能客服问答系统（RAG）', period: '2024.12 - 2025.08', tags: ['Milvus','DeepSeek','Redis','vLLM'], metric: '意图准确率 95%+ / 缓存命中率 60%+', details: { pain: '传统客服回复慢、知识库更新滞后、数据隐私要求高', solution: '五层RAG分层架构 + 双路召回+重排 + 三级缓存 + vLLM本地部署', result: '响应延迟降低70%，人工介入率下降40%', difficulty: '长上下文召回精度优化、低延迟本地大模型部署' }, link: '/zh-CN/作坊/' },
-  { id: 3, title: '商品短文本类目分类系统（模型轻量化）', period: '2024.08 - 2024.12', tags: ['PyTorch','BERT','模型压缩','FastText'], metric: '准确率 93.97% / 模型体积 399MB → 8MB', details: { pain: '大模型推理慢、部署成本高、边缘设备无法运行', solution: '三种压缩路线对比（量化/蒸馏/剪枝）+ FastText兜底', result: '分类耗时从3min降至秒级，模型体积压缩98%', difficulty: '精度与体积平衡、样本不均衡处理' }, link: '/zh-CN/作坊/' },
+  { id: 1, title: '电商每日精选选品简报系统（多Agent）', period: '2025.10 - 2026.05', tags: ['LangGraph','DeepSeek','ReAct','vLLM'], metric: '运营选品耗时 2h → 10min', details: { pain: '人工选品效率低、偏好难量化、跨批次重复推荐率高', solution: '八阶段多Agent编排架构 + ReAct推理循环 + 两级向量去重', result: '跨批次去重率92%+，偏好学习后命中率提升30%', difficulty: 'ReAct推理防死循环机制、去重召回率与精度平衡' }, link: '/zh-CN/档案/电商选品简报系统-复盘笔记' },
+  { id: 2, title: '电商智能客服问答系统（RAG）', period: '2024.12 - 2025.08', tags: ['Milvus','DeepSeek','Redis','vLLM'], metric: '意图准确率 95%+ / 缓存命中率 60%+', details: { pain: '传统客服回复慢、知识库更新滞后、数据隐私要求高', solution: '五层RAG分层架构 + 双路召回+重排 + 三级缓存 + vLLM本地部署', result: '响应延迟降低70%，人工介入率下降40%', difficulty: '长上下文召回精度优化、低延迟本地大模型部署' }, link: '/zh-CN/档案/电商智能客服RAG系统-复盘笔记' },
+  { id: 3, title: '商品短文本类目分类系统（模型轻量化）', period: '2024.08 - 2024.12', tags: ['PyTorch','BERT','模型压缩','FastText'], metric: '准确率 93.97% / 模型体积 399MB → 8MB', details: { pain: '大模型推理慢、部署成本高、边缘设备无法运行', solution: '三种压缩路线对比（量化/蒸馏/剪枝）+ FastText兜底', result: '分类耗时从3min降至秒级，模型体积压缩98%', difficulty: '精度与体积平衡、样本不均衡处理' }, link: '/zh-CN/档案/商品短文本分类模型轻量化-复盘笔记' },
 ]
 
 const displayedTitle = ref('')
