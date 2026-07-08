@@ -215,4 +215,4 @@ res = client.hybrid_search(
 ```python
 client.drop_collection(collection_name="demo_collection")
 ```
-*（内容由AI生成，仅供参考）*
+
