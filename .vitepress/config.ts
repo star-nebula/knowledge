@@ -142,6 +142,7 @@ export default defineConfig({
           { text: '主页', link: '/zh-CN/' },
           { text: '笔记', link: '/zh-CN/笔记/' },
           { text: '作坊', link: '/zh-CN/作坊/' },
+          { text: '档案', link: '/zh-CN/档案/', activeMatch: '^/zh-CN/档案/' },
           { text: '最近更新', link: '/zh-CN/toc' },
         ],
         lastUpdated: {
@@ -159,6 +160,7 @@ export default defineConfig({
         sidebar: fixSidebarIndexLinks(calculateSidebar([
           { folderName: 'zh-CN/笔记', separate: true },
           { folderName: 'zh-CN/作坊', separate: true },
+          { folderName: 'zh-CN/档案', separate: true },
           { folderName: 'zh-CN/编目 Catalog', separate: true },
         ], 'zh-CN')),
         footer: {
