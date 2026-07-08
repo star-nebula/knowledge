@@ -11,7 +11,7 @@ interface Project {
   details: { pain: string; solution: string; result: string; difficulty: string }
   link: string
 }
-interface TechTag { name: string; group: string; tooltip: string }
+interface TechTag { name: string; group: string; tooltip: string; link?: string }
 interface TimelineItem { period: string; title: string; org: string; desc: string; link?: string; linkText?: string }
 
 const title = '刘昊晴 · AI应用开发工程师'
@@ -23,31 +23,31 @@ const bioFull = '25届本科毕业生，人工智能专业。专注于电商场�
 const contacts = [
   { icon: '📞', value: '13392786414', copyable: true },
   { icon: '📧', value: '13392786414@163.com', copyable: true },
-  { icon: '🔗', value: '个人博客', link: 'https://github.com/star-nebula', external: true },
-  { icon: '📚', value: '知识库主页', link: '/zh-CN/' },
+  { icon: '🐙', value: 'GitHub', link: 'https://github.com/star-nebula/knowledge', external: true },
+  { icon: '📝', value: 'CSDN', link: 'https://blog.csdn.net/qq_69608018?type=blog', external: true },
 ]
 const timeline: TimelineItem[] = [
   { period: '2024.08 - 2026.05', title: 'AI应用开发工程师', desc: '负责电商AI产品线，主导3个核心项目落地', link: '#core-projects', linkText: '跳转查看关联项目' },
   { period: '2021.09 - 2025.06', title: '人工智能（本科）', desc: '主修NLP、深度学习、大模型应用开发', link: '/zh-CN/笔记/', linkText: '跳转知识库学习笔记' },
 ]
 const techTags: TechTag[] = [
-  { name: 'LangGraph', group: 'llm', tooltip: '电商选品多Agent编排框架，实现8阶段Agent工作流' },
-  { name: 'DeepSeek', group: 'llm', tooltip: '核心推理模型，用于选品分析、客服意图识别' },
-  { name: 'ReAct', group: 'llm', tooltip: 'Agent推理范式，实现工具调用与思维链推理' },
-  { name: 'vLLM', group: 'llm', tooltip: '本地模型推理部署框架，支撑14B模型低延迟服务' },
-  { name: 'LoRA', group: 'llm', tooltip: '模型微调技术，用于垂直领域模型适配' },
-  { name: 'MCP', group: 'llm', tooltip: 'Model Context Protocol，多Agent上下文通信协议' },
-  { name: 'PyTorch', group: 'nlp', tooltip: '深度学习框架，模型训练与推理核心工具' },
-  { name: 'BERT', group: 'nlp', tooltip: '预训练模型，商品短文本分类基座模型' },
-  { name: '模型压缩', group: 'nlp', tooltip: '量化/蒸馏/剪枝三路线，399MB到8MB体积压缩' },
-  { name: 'HuggingFace', group: 'nlp', tooltip: '模型仓库与推理工具链' },
-  { name: 'FastText', group: 'nlp', tooltip: '轻量化文本分类兜底方案' },
-  { name: 'Milvus', group: 'eng', tooltip: '电商RAG知识库向量存储，支撑1000+条目混合检索' },
-  { name: 'Redis', group: 'eng', tooltip: '三级缓存实现，缓存命中率60%+' },
+  { name: 'LangGraph', group: 'llm', tooltip: '电商选品多Agent编排框架，实现8阶段Agent工作流', link: '/zh-CN/笔记/🤖 AI应用开发/LangChain Agents 组件' },
+  { name: 'DeepSeek', group: 'llm', tooltip: '核心推理模型，用于选品分析、客服意图识别', link: '/zh-CN/笔记/🤖 AI应用开发/DeepSeek' },
+  { name: 'ReAct', group: 'llm', tooltip: 'Agent推理范式，实现工具调用与思维链推理', link: '/zh-CN/笔记/🤖 AI应用开发/LangChain Agents 组件' },
+  { name: 'vLLM', group: 'llm', tooltip: '本地模型推理部署框架，支撑14B模型低延迟服务', link: '/zh-CN/笔记/🤖 AI应用开发/大模型-知识扩展' },
+  { name: 'LoRA', group: 'llm', tooltip: '模型微调技术，用于垂直领域模型适配', link: '/zh-CN/笔记/🤖 AI应用开发/大模型-基础' },
+  { name: 'MCP', group: 'llm', tooltip: 'Model Context Protocol，多Agent上下文通信协议', link: '/zh-CN/笔记/🤖 AI应用开发/n8n AI Agent 工作流' },
+  { name: 'PyTorch', group: 'nlp', tooltip: '深度学习框架，模型训练与推理核心工具', link: '/zh-CN/笔记/🤖 AI应用开发/深度学习-核心工具' },
+  { name: 'BERT', group: 'nlp', tooltip: '预训练模型，商品短文本分类基座模型', link: '/zh-CN/笔记/🤖 AI应用开发/Transformer' },
+  { name: '模型压缩', group: 'nlp', tooltip: '量化/蒸馏/剪枝三路线，399MB到8MB体积压缩', link: '/zh-CN/笔记/🤖 AI应用开发/AI全景概览' },
+  { name: 'HuggingFace', group: 'nlp', tooltip: '模型仓库与推理工具链', link: '/zh-CN/笔记/🤖 AI应用开发/LangChain Models 组件' },
+  { name: 'FastText', group: 'nlp', tooltip: '轻量化文本分类兜底方案', link: '/zh-CN/笔记/🤖 AI应用开发/NLP-文本预处理' },
+  { name: 'Milvus', group: 'eng', tooltip: '电商RAG知识库向量存储，支撑1000+条目混合检索', link: '/zh-CN/笔记/🤖 AI应用开发/Milvus 向量数据库' },
+  { name: 'Redis', group: 'eng', tooltip: '三级缓存实现，缓存命中率60%+', link: '/zh-CN/笔记/🛠️ 工程工具/Redis 核心概念' },
   { name: 'FastAPI', group: 'eng', tooltip: 'API服务框架，支撑高并发接口请求' },
-  { name: 'MySQL', group: 'eng', tooltip: '业务数据持久化存储' },
-  { name: 'Docker', group: 'eng', tooltip: '容器化部署，实现环境一致性' },
-  { name: 'Streamlit', group: 'eng', tooltip: '快速Demo原型搭建，内部工具演示' },
+  { name: 'MySQL', group: 'eng', tooltip: '业务数据持久化存储', link: '/zh-CN/笔记/🛠️ 工程工具/MySQL 数据库基础' },
+  { name: 'Docker', group: 'eng', tooltip: '容器化部署，实现环境一致性', link: '/zh-CN/笔记/🛠️ 工程工具/Docker' },
+  { name: 'Streamlit', group: 'eng', tooltip: '快速Demo原型搭建，内部工具演示', link: '/zh-CN/笔记/🛠️ 工程工具/Streamlit 入门' },
 ]
 const tagGroups = [
   { key: 'llm', label: '大模型 & 多Agent' },
@@ -237,9 +237,19 @@ onUnmounted(() => {
         <div v-for="g in tagGroups" :key="g.key" class="pp-tech-group">
           <h3 class="pp-tech-group-title">{{ g.label }}</h3>
           <div class="pp-tag-row">
-            <button v-for="tag in tagsByGroup(g.key)" :key="tag.name"
-              class="pp-tech-tag" :class="{ active: activeTag === tag.name, dimmed: activeTag && activeTag !== tag.name }"
-              @click="toggleTag(tag.name)" @mouseenter="showTip(tag.name, $event)" @mouseleave="hideTip">{{ tag.name }}</button>
+            <template v-for="tag in tagsByGroup(g.key)" :key="tag.name">
+              <a v-if="tag.link"
+                :href="withBase(tag.link)"
+                class="pp-tech-tag pp-tech-tag-link"
+                :class="{ dimmed: activeTag && activeTag !== tag.name }"
+                @mouseenter="showTip(tag.name, $event)" @mouseleave="hideTip">
+                {{ tag.name }}
+                <span class="pp-tag-arrow">→</span>
+              </a>
+              <button v-else
+                class="pp-tech-tag" :class="{ active: activeTag === tag.name, dimmed: activeTag && activeTag !== tag.name }"
+                @click="toggleTag(tag.name)" @mouseenter="showTip(tag.name, $event)" @mouseleave="hideTip">{{ tag.name }}</button>
+            </template>
           </div>
         </div>
       </div>
@@ -372,10 +382,14 @@ onUnmounted(() => {
 .pp-tech-groups { display: flex; flex-direction: column; gap: 24px; }
 .pp-tech-group-title { font-size: 15px; font-weight: 600; color: var(--vp-c-text-1); margin-bottom: 12px; }
 .pp-tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.pp-tech-tag { padding: 6px 16px; border-radius: 20px; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font-size: 13px; cursor: pointer; transition: all 0.2s ease; }
+.pp-tech-tag { padding: 6px 16px; border-radius: 20px; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font-size: 13px; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 4px; text-decoration: none; }
 .pp-tech-tag:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
 .pp-tech-tag.active { background: var(--vp-c-brand-1); color: #fff; border-color: var(--vp-c-brand-1); }
 .pp-tech-tag.dimmed { opacity: 0.4; }
+.pp-tech-tag-link { cursor: pointer; }
+.pp-tech-tag-link:hover { background: var(--vp-c-brand-soft); }
+.pp-tag-arrow { font-size: 11px; opacity: 0; transition: opacity 0.2s; }
+.pp-tech-tag-link:hover .pp-tag-arrow { opacity: 1; }
 
 .pp-tag-tooltip { position: fixed; transform: translateX(-50%) translateY(-100%); background: var(--vp-c-bg-soft); color: var(--vp-c-text-1); padding: 8px 14px; border-radius: 6px; font-size: 12px; border: 1px solid var(--vp-c-divider); max-width: 260px; z-index: 9998; box-shadow: 0 4px 12px rgba(0,0,0,0.1); pointer-events: none; }
 .pp-tooltip-enter-active, .pp-tooltip-leave-active { transition: opacity 0.15s; }
