@@ -9,11 +9,11 @@
     <link rel="preload stylesheet" href="/knowledge/assets/style.BukSCJDI.css" as="style">
     <link rel="preload stylesheet" href="/knowledge/vp-icons.css" as="style">
     
-    <script type="module" src="/knowledge/assets/app.B1A1HeWz.js"></script>
+    <script type="module" src="/knowledge/assets/app.iDDfdrSu.js"></script>
     <link rel="preload" href="/knowledge/assets/inter-roman-latin.Cy4MYw_J.woff2" as="font" type="font/woff2" crossorigin="">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.DO4SvIKj.js">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.Dj2JStEk.js">
-    <link rel="modulepreload" href="/knowledge/assets/zh-CN_笔记_🤖 AI应用开发_Transformer.md.qfK6DFM4.lean.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.Cv9wtB_y.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.Xqv01Gzl.js">
+    <link rel="modulepreload" href="/knowledge/assets/zh-CN_笔记_🤖 AI应用开发_Transformer.md.D5tRBHhr.lean.js">
     <script>typeof window<"u"&&(window.location.pathname==="/knowledge/"||window.location.pathname==="/knowledge")&&!window.location.pathname.startsWith("/knowledge/zh-CN")&&(window.location.href="/knowledge/zh-CN/"+window.location.hash);</script>
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
@@ -35,9 +35,9 @@
     <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
     <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
     <link rel="preload" href="/knowledge/assets/inter-roman-latin.Cy4MYw_J.woff2" as="font" type="font/woff2" crossorigin="">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.DO4SvIKj.js">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.Dj2JStEk.js">
-    <link rel="modulepreload" href="/knowledge/assets/zh-CN_笔记_🤖 AI应用开发_Transformer.md.qfK6DFM4.lean.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.Cv9wtB_y.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.Xqv01Gzl.js">
+    <link rel="modulepreload" href="/knowledge/assets/zh-CN_笔记_🤖 AI应用开发_Transformer.md.D5tRBHhr.lean.js">
     <script>typeof window<"u"&&(window.location.pathname==="/knowledge/"||window.location.pathname==="/knowledge")&&!window.location.pathname.startsWith("/knowledge/zh-CN")&&(window.location.href="/knowledge/zh-CN/"+window.location.hash);</script>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/logo.svg" type="image/svg+xml">
@@ -73,8 +73,8 @@
 <span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#C678DD;">    def</span><span style="--shiki-light:#6F42C1;--shiki-dark:#61AFEF;"> forward</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(</span><span style="--shiki-light:#24292E;--shiki-light-font-style:inherit;--shiki-dark:#E5C07B;--shiki-dark-font-style:italic;">self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">, </span><span style="--shiki-light:#24292E;--shiki-light-font-style:inherit;--shiki-dark:#D19A66;--shiki-dark-font-style:italic;">x</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">):</span></span>
 <span class="line"><span style="--shiki-light:#6A737D;--shiki-light-font-style:inherit;--shiki-dark:#7F848E;--shiki-dark-font-style:italic;">        # 进行缩放：输入词的词向量 * √词嵌入的维度</span></span>
 <span class="line"><span style="--shiki-light:#6A737D;--shiki-light-font-style:inherit;--shiki-dark:#7F848E;--shiki-dark-font-style:italic;">        # 目的：平衡梯度，避免梯度爆炸或者梯度消失</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#C678DD;">        return</span><span style="--shiki-light:#005CC5;--shiki-dark:#E5C07B;"> self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">embedding</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(x) </span><span style="--shiki-light:#D73A49;--shiki-dark:#56B6C2;">*</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;"> math.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">sqrt</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#E5C07B;">self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">.embed_dim)</span></span></code></pre></div><h6 id="位置编码" tabindex="-1">位置编码 <a class="header-anchor" href="#位置编码" aria-label="Permalink to “位置编码”">​</a></h6><ul><li><p><mark style="background:#FF5582A6;">核心作用</mark>：</p><p>Transformer 是并行处理所有词的，模型不知道词的前后顺序，需要给每个词加上一个“<strong>位置编号</strong>”，让模型知道这个词在句子中的第几个位置</p></li><li><p>位置编码通过什么生成</p><p>Transformer 编码位置信息：使用 <mark style="background:#ADCCFFA6;">正弦函数和余弦函数</mark> 生成</p><blockquote><p>偶数维度用sin，奇数维度用cos</p></blockquote><span id="mjx-6d4df4c"><style>
-      #mjx-6d4df4c{
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#C678DD;">        return</span><span style="--shiki-light:#005CC5;--shiki-dark:#E5C07B;"> self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">embedding</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(x) </span><span style="--shiki-light:#D73A49;--shiki-dark:#56B6C2;">*</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;"> math.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">sqrt</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#E5C07B;">self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">.embed_dim)</span></span></code></pre></div><h6 id="位置编码" tabindex="-1">位置编码 <a class="header-anchor" href="#位置编码" aria-label="Permalink to “位置编码”">​</a></h6><ul><li><p><mark style="background:#FF5582A6;">核心作用</mark>：</p><p>Transformer 是并行处理所有词的，模型不知道词的前后顺序，需要给每个词加上一个“<strong>位置编号</strong>”，让模型知道这个词在句子中的第几个位置</p></li><li><p>位置编码通过什么生成</p><p>Transformer 编码位置信息：使用 <mark style="background:#ADCCFFA6;">正弦函数和余弦函数</mark> 生成</p><blockquote><p>偶数维度用sin，奇数维度用cos</p></blockquote><span id="mjx-aa73169"><style>
+      #mjx-aa73169{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -229,8 +229,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><ul><li><p>其中：</p><p><span id="mjx-c978774"><style>
-      #mjx-c978774{
+      </style><!----></span><ul><li><p>其中：</p><p><span id="mjx-840fdbf"><style>
+      #mjx-840fdbf{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -385,8 +385,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：位置（第几个词）， <span id="mjx-0c7b06f"><style>
-      #mjx-0c7b06f{
+      </style><!----></span> ：位置（第几个词）， <span id="mjx-8d41d7b"><style>
+      #mjx-8d41d7b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -541,8 +541,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：维度索引（从 <span id="mjx-45fde5b"><style>
-      #mjx-45fde5b{
+      </style><!----></span> ：维度索引（从 <span id="mjx-cd5d5ea"><style>
+      #mjx-cd5d5ea{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -697,8 +697,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 开始， <span id="mjx-8fd8704"><style>
-      #mjx-8fd8704{
+      </style><!----></span> 开始， <span id="mjx-ba31c85"><style>
+      #mjx-ba31c85{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -853,8 +853,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 需要覆盖词向量的全部维度）， <span id="mjx-8a3276c"><style>
-      #mjx-8a3276c{
+      </style><!----></span> 需要覆盖词向量的全部维度）， <span id="mjx-98a15cc"><style>
+      #mjx-98a15cc{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1009,8 +1009,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：词向量的维度</p><p><span id="mjx-1b55492"><style>
-      #mjx-1b55492{
+      </style><!----></span> ：词向量的维度</p><p><span id="mjx-327e75b"><style>
+      #mjx-327e75b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1165,8 +1165,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：周期缩放因子，不同的 <span id="mjx-3ed63ab"><style>
-      #mjx-3ed63ab{
+      </style><!----></span> ：周期缩放因子，不同的 <span id="mjx-20e870b"><style>
+      #mjx-20e870b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1321,8 +1321,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 会让周期不一样（ <span id="mjx-b2aa095"><style>
-      #mjx-b2aa095{
+      </style><!----></span> 会让周期不一样（ <span id="mjx-12f32f7"><style>
+      #mjx-12f32f7{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1477,8 +1477,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 越大，周期越长）</p></li></ul><p>使用三角函数的优点：位置 <span id="mjx-f1ba097"><style>
-      #mjx-f1ba097{
+      </style><!----></span> 越大，周期越长）</p></li></ul><p>使用三角函数的优点：位置 <span id="mjx-3919d5c"><style>
+      #mjx-3919d5c{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1633,8 +1633,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的编码 <span id="mjx-cf1a115"><style>
-      #mjx-cf1a115{
+      </style><!----></span> 的编码 <span id="mjx-9c52023"><style>
+      #mjx-9c52023{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1789,8 +1789,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 位置 <span id="mjx-d80c416"><style>
-      #mjx-d80c416{
+      </style><!----></span> 位置 <span id="mjx-3a410b7"><style>
+      #mjx-3a410b7{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1945,8 +1945,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的编码的 <strong>线性组合</strong>(简单的乘加运算)，不是每个位置都要重算三角函数</p><blockquote><p>为什么能做到，因为三角函数</p><span id="mjx-2c25d12"><style>
-      #mjx-2c25d12{
+      </style><!----></span> 的编码的 <strong>线性组合</strong>(简单的乘加运算)，不是每个位置都要重算三角函数</p><blockquote><p>为什么能做到，因为三角函数</p><span id="mjx-b7c3ca7"><style>
+      #mjx-b7c3ca7{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2101,8 +2101,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><p><span id="mjx-d00f01e"><style>
-      #mjx-d00f01e{
+      </style><!----></span><p><span id="mjx-8a9c42b"><style>
+      #mjx-8a9c42b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2257,8 +2257,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 对应 <span id="mjx-23b2b92"><style>
-      #mjx-23b2b92{
+      </style><!----></span> 对应 <span id="mjx-333cfa3"><style>
+      #mjx-333cfa3{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2413,8 +2413,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 相关的部分， <span id="mjx-ba1c147"><style>
-      #mjx-ba1c147{
+      </style><!----></span> 相关的部分， <span id="mjx-7b4aedc"><style>
+      #mjx-7b4aedc{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2569,8 +2569,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 对应 <span id="mjx-030915f"><style>
-      #mjx-030915f{
+      </style><!----></span> 对应 <span id="mjx-a264139"><style>
+      #mjx-a264139{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2725,8 +2725,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 相关的部分</p></blockquote></li><li><p>（面试）位置编码的好处或目的：</p><ol><li>能够记住词的顺序，通过周期性函数，给每个位置添加标签，让模型能够知道词的先后顺序，比如“我爱你”和“你爱我”</li><li>计算高效，靠线性组合推导性位置编码，不用计算三角函数，省算力</li><li>适应任意长度，不管句子多长，随时能算编码，泛化能力强</li><li>模型处理语言时，更聪明，更灵活</li></ol></li><li><p>例子</p><blockquote><p>假设词向量维度为4，即每个位置的编码是一个4维向量。</p><p>维度为4时， <span id="mjx-d019643"><style>
-      #mjx-d019643{
+      </style><!----></span> 相关的部分</p></blockquote></li><li><p>（面试）位置编码的好处或目的：</p><ol><li>能够记住词的顺序，通过周期性函数，给每个位置添加标签，让模型能够知道词的先后顺序，比如“我爱你”和“你爱我”</li><li>计算高效，靠线性组合推导性位置编码，不用计算三角函数，省算力</li><li>适应任意长度，不管句子多长，随时能算编码，泛化能力强</li><li>模型处理语言时，更聪明，更灵活</li></ol></li><li><p>例子</p><blockquote><p>假设词向量维度为4，即每个位置的编码是一个4维向量。</p><p>维度为4时， <span id="mjx-68cc1b9"><style>
+      #mjx-68cc1b9{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2881,8 +2881,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 取 <span id="mjx-979d0f1"><style>
-      #mjx-979d0f1{
+      </style><!----></span> 取 <span id="mjx-a81f157"><style>
+      #mjx-a81f157{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3037,8 +3037,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 和 <span id="mjx-15d1b23"><style>
-      #mjx-15d1b23{
+      </style><!----></span> 和 <span id="mjx-8d017dd"><style>
+      #mjx-8d017dd{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3193,8 +3193,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 。</p><p>当 <span id="mjx-b3cf7e4"><style>
-      #mjx-b3cf7e4{
+      </style><!----></span> 。</p><p>当 <span id="mjx-24dc085"><style>
+      #mjx-24dc085{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3349,8 +3349,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 时：</p><p><span id="mjx-e89355"><style>
-      #mjx-e89355{
+      </style><!----></span> 时：</p><p><span id="mjx-e038e72"><style>
+      #mjx-e038e72{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3505,8 +3505,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ​：</p><ul><li>第0维： <span id="mjx-af125f8"><style>
-      #mjx-af125f8{
+      </style><!----></span> ​：</p><ul><li>第0维： <span id="mjx-e521bfe"><style>
+      #mjx-e521bfe{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3661,8 +3661,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li><li>第1维： <span id="mjx-b94905e"><style>
-      #mjx-b94905e{
+      </style><!----></span></li><li>第1维： <span id="mjx-fc473f1"><style>
+      #mjx-fc473f1{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3817,8 +3817,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li></ul><p><span id="mjx-e9ac40c"><style>
-      #mjx-e9ac40c{
+      </style><!----></span></li></ul><p><span id="mjx-b7c81c9"><style>
+      #mjx-b7c81c9{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3973,8 +3973,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ​：</p><ul><li>第2维： <span id="mjx-3ccec1b"><style>
-      #mjx-3ccec1b{
+      </style><!----></span> ​：</p><ul><li>第2维： <span id="mjx-f06b03b"><style>
+      #mjx-f06b03b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4129,8 +4129,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li><li>第3维： <span id="mjx-568c2be"><style>
-      #mjx-568c2be{
+      </style><!----></span></li><li>第3维： <span id="mjx-7bc7bc9"><style>
+      #mjx-7bc7bc9{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4285,8 +4285,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li></ul><p>因此，位置 <span id="mjx-e260f7a"><style>
-      #mjx-e260f7a{
+      </style><!----></span></li></ul><p>因此，位置 <span id="mjx-9632e99"><style>
+      #mjx-9632e99{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4441,8 +4441,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的4维<strong>位置编码</strong>向量为：</p><span id="mjx-5d85f38"><style>
-      #mjx-5d85f38{
+      </style><!----></span> 的4维<strong>位置编码</strong>向量为：</p><span id="mjx-d7fd5fa"><style>
+      #mjx-d7fd5fa{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4597,8 +4597,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><p>数值近似为： <span id="mjx-61c356b"><style>
-      #mjx-61c356b{
+      </style><!----></span><p>数值近似为： <span id="mjx-67fceea"><style>
+      #mjx-67fceea{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4890,8 +4890,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">        x </span><span style="--shiki-light:#D73A49;--shiki-dark:#56B6C2;">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#E5C07B;"> self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">fc1</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(x)</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">        x </span><span style="--shiki-light:#D73A49;--shiki-dark:#56B6C2;">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#E5C07B;"> self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">dropout</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(F.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">relu</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(x)) </span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">        x </span><span style="--shiki-light:#D73A49;--shiki-dark:#56B6C2;">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#E5C07B;"> self</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">.</span><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">fc2</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(x)</span></span>
-<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#C678DD;">        return</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;"> x</span></span></code></pre></div><h6 id="规范化层" tabindex="-1">规范化层 <a class="header-anchor" href="#规范化层" aria-label="Permalink to “规范化层”">​</a></h6><blockquote><p><strong>核心目的</strong>：解决<u>深度</u>神经网络训练中的内部协变量偏移问题 深层网络经过多层计算后参数可能会出现过大或过小的情况，这会导致学习过程出现异常、模型收敛缓慢 通过规范层对数值进行规范化，使其特征数值在合理范围内，能有效缓解深层网络堆叠带来的数值不稳定问题 在Transformer中，该模块通常由<strong>层归一化</strong>（Layer Normalization）实现</p><span id="mjx-8cd3ccb"><style>
-      #mjx-8cd3ccb{
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#C678DD;">        return</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;"> x</span></span></code></pre></div><h6 id="规范化层" tabindex="-1">规范化层 <a class="header-anchor" href="#规范化层" aria-label="Permalink to “规范化层”">​</a></h6><blockquote><p><strong>核心目的</strong>：解决<u>深度</u>神经网络训练中的内部协变量偏移问题 深层网络经过多层计算后参数可能会出现过大或过小的情况，这会导致学习过程出现异常、模型收敛缓慢 通过规范层对数值进行规范化，使其特征数值在合理范围内，能有效缓解深层网络堆叠带来的数值不稳定问题 在Transformer中，该模块通常由<strong>层归一化</strong>（Layer Normalization）实现</p><span id="mjx-731e336"><style>
+      #mjx-731e336{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5587,7 +5587,7 @@ g[data-mml-node=&quot;xypic&quot;] path {
 <span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#56B6C2;">    print</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">(prediction)  </span><span style="--shiki-light:#6A737D;--shiki-light-font-style:inherit;--shiki-dark:#7F848E;--shiki-dark-font-style:italic;"># 你</span></span>
 <span class="line"></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#61AFEF;">fill_mask</span><span style="--shiki-light:#24292E;--shiki-dark:#ABB2BF;">()</span></span></code></pre></div></li></ul><!----><!----></div></div></main><footer class="VPDocFooter" data-v-7e86aba9 data-v-0cbbdf1c><!--[--><!--[--><!--[--><!--[--><div class="doc-before-footer-cc-block mt-10 text-sm font-medium" data-v-6bf59db9> 使用 <a class="footer-cc-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/" data-v-6bf59db9>CC BY-SA 4.0</a> 许可协议进行共享 </div><!--]--><!--]--><!--]--><!--]--><div class="edit-info" data-v-0cbbdf1c><div class="edit-link" data-v-0cbbdf1c><a class="VPLink link vp-external-link-icon no-icon edit-link-button" href="https://github.com/star-nebula/knowledge/tree/main/zh-CN/笔记/🤖 AI应用开发/Transformer.md" target="_blank" rel="noreferrer" data-v-0cbbdf1c><!--[--><span class="vpi-square-pen edit-link-icon" data-v-0cbbdf1c></span> 编辑本页面<!--]--></a></div><div class="last-updated" data-v-0cbbdf1c><p class="VPLastUpdated" data-v-0cbbdf1c data-v-0105f91c>最后更新: <time datetime="2026-07-08T14:14:03.000Z" data-v-0105f91c></time></p></div></div><nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-0cbbdf1c><span class="visually-hidden" id="doc-footer-aria-label" data-v-0cbbdf1c>Pager</span><div class="pager" data-v-0cbbdf1c><a class="VPLink link pager-link prev" href="/knowledge/zh-CN/%E7%AC%94%E8%AE%B0/%F0%9F%A4%96%20AI%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/RAG.html" data-v-0cbbdf1c><!--[--><span class="desc" data-v-0cbbdf1c>Previous page</span><span class="title" data-v-0cbbdf1c>RAG</span><!--]--></a></div><div class="pager" data-v-0cbbdf1c><a class="VPLink link pager-link next" href="/knowledge/zh-CN/%E7%AC%94%E8%AE%B0/%F0%9F%A4%96%20AI%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/%E5%A4%A7%E6%A8%A1%E5%9E%8B-%E5%9F%BA%E7%A1%80.html" data-v-0cbbdf1c><!--[--><span class="desc" data-v-0cbbdf1c>Next page</span><span class="title" data-v-0cbbdf1c>大模型-基础</span><!--]--></a></div></nav></footer><!--[--><!--]--></div></div></div><!--[--><!--]--></div></div><footer class="VPFooter has-sidebar" data-v-994256a4 data-v-49de54db><div class="container" data-v-49de54db><p class="message" data-v-49de54db>每一篇文章，都是时间的标本</p><!----></div></footer><!--[--><!--]--></div></div>
-    <script>window.__VP_HASH_MAP__=JSON.parse("{\"readme.md\":\"DhYr5MqI\",\"zh-cn_index.md\":\"C02uRbR_\",\"zh-cn_toc.md\":\"BhHSLtxX\",\"zh-cn_作坊_ai-tryon-video-demo.md\":\"csTBOlyu\",\"zh-cn_作坊_feedlens-project.md\":\"DLT1RSou\",\"zh-cn_作坊_glowlink-demo.md\":\"B8wbBGLI\",\"zh-cn_作坊_index.md\":\"BdV9O0xs\",\"zh-cn_档案_index.md\":\"Mgz7XNaB\",\"zh-cn_档案_商品短文本分类模型轻量化-复盘笔记.md\":\"CZsRCCwq\",\"zh-cn_档案_电商智能客服rag系统-复盘笔记.md\":\"C8aDLUeI\",\"zh-cn_档案_电商选品简报系统-复盘笔记.md\":\"BMXa0mAf\",\"zh-cn_笔记_index.md\":\"BQsZntj4\",\"zh-cn_笔记_🌐 网站部署_00-分类图标参考.md\":\"CAwB4_5p\",\"zh-cn_笔记_🌐 网站部署_01-本地环境搭建.md\":\"Dt-R9Uus\",\"zh-cn_笔记_🌐 网站部署_02-本地预览.md\":\"BSfQfB0U\",\"zh-cn_笔记_🌐 网站部署_03-github pages 自动部署.md\":\"DH64TO_K\",\"zh-cn_笔记_🌐 网站部署_04-常见问题 faq.md\":\"C7xitL8b\",\"zh-cn_笔记_🌐 网站部署_index.md\":\"ClM-L-yB\",\"zh-cn_笔记_🌱 生活_index.md\":\"BECBFRVX\",\"zh-cn_笔记_🌱 生活_乒乓球技术精华文章汇编.md\":\"YOMjs6UP\",\"zh-cn_笔记_🌱 生活_房屋设计_index.md\":\"BHCgxxVc\",\"zh-cn_笔记_🌱 生活_房屋设计_灯光.md\":\"DuxxmLr5\",\"zh-cn_笔记_🌱 生活_摄影.md\":\"BF7zWpVq\",\"zh-cn_笔记_📚 个人知识管理_01-基础概念.md\":\"CTS28wpA\",\"zh-cn_笔记_📚 个人知识管理_02-信息获取与筛选.md\":\"C07CMCm8\",\"zh-cn_笔记_📚 个人知识管理_03-笔记方法论.md\":\"CieMIMmM\",\"zh-cn_笔记_📚 个人知识管理_04-组织与链接.md\":\"DMubGG6J\",\"zh-cn_笔记_📚 个人知识管理_05-输出与创作.md\":\"B85f_DZc\",\"zh-cn_笔记_📚 个人知识管理_06-工具与技术.md\":\"hFkE7HPy\",\"zh-cn_笔记_📚 个人知识管理_07-思维模型与习惯.md\":\"urgHC60R\",\"zh-cn_笔记_📚 个人知识管理_index.md\":\"SPGgJFGB\",\"zh-cn_笔记_🛠️ 工程工具_docker.md\":\"BNIJxHzw\",\"zh-cn_笔记_🛠️ 工程工具_index.md\":\"DeqagZdN\",\"zh-cn_笔记_🛠️ 工程工具_mysql 数据库基础.md\":\"BdI1pM5A\",\"zh-cn_笔记_🛠️ 工程工具_redis 核心概念.md\":\"CBxeYrJx\",\"zh-cn_笔记_🛠️ 工程工具_streamlit 入门.md\":\"fHjO_gQn\",\"zh-cn_笔记_🤖 ai应用开发_ai全景概览.md\":\"DtPmkLRo\",\"zh-cn_笔记_🤖 ai应用开发_deepseek.md\":\"zpfM3V3t\",\"zh-cn_笔记_🤖 ai应用开发_index.md\":\"Czb_BpnL\",\"zh-cn_笔记_🤖 ai应用开发_langchain agents 组件.md\":\"BU7fEjdk\",\"zh-cn_笔记_🤖 ai应用开发_langchain models 组件.md\":\"nv5LdiRW\",\"zh-cn_笔记_🤖 ai应用开发_milvus 向量数据库.md\":\"Dd1a5nDO\",\"zh-cn_笔记_🤖 ai应用开发_n8n ai agent 工作流.md\":\"BLm8ivPK\",\"zh-cn_笔记_🤖 ai应用开发_nlp-文本预处理.md\":\"DmPktnvP\",\"zh-cn_笔记_🤖 ai应用开发_rag.md\":\"f8QghGYu\",\"zh-cn_笔记_🤖 ai应用开发_transformer.md\":\"qfK6DFM4\",\"zh-cn_笔记_🤖 ai应用开发_大模型-基础.md\":\"C0oX4y10\",\"zh-cn_笔记_🤖 ai应用开发_大模型-知识扩展.md\":\"BX080BnL\",\"zh-cn_笔记_🤖 ai应用开发_深度学习-核心工具.md\":\"BmYmRmWm\",\"zh-cn_视图_尚未编写完成的页面.md\":\"Stc7dF-G\",\"zh-cn_视图_未添加标签的页面.md\":\"DDWDX0LW\",\"zh-cn_🔌 知识库插件列表.md\":\"HcuTnlDm\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"Star Nebula Knowledge\",\"description\":\"记录回忆，知识和畅想的地方\",\"base\":\"/knowledge/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"search\":{\"provider\":\"local\",\"options\":{\"locales\":{\"root\":{\"translations\":{\"button\":{\"buttonText\":\"搜索文档\",\"buttonAriaLabel\":\"搜索文档\"},\"modal\":{\"noResultsText\":\"无法找到相关结果\",\"resetButtonTitle\":\"清除查询条件\",\"footer\":{\"selectText\":\"选择\",\"navigateText\":\"切换\"}}}}}}}},\"locales\":{\"root\":{\"lang\":\"zh-CN\",\"label\":\"中文\",\"dir\":\"/zh-CN\",\"link\":\"/zh-CN\",\"themeConfig\":{\"nav\":[{\"text\":\"主页\",\"link\":\"/zh-CN/\"},{\"text\":\"笔记\",\"link\":\"/zh-CN/笔记/\"},{\"text\":\"作坊\",\"link\":\"/zh-CN/作坊/\"},{\"text\":\"档案\",\"link\":\"/zh-CN/档案/\",\"activeMatch\":\"^/zh-CN/档案/\"},{\"text\":\"最近更新\",\"link\":\"/zh-CN/toc\"}],\"lastUpdated\":{\"text\":\"最后更新\"},\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/star-nebula/knowledge\"}],\"darkModeSwitchLabel\":\"切换主题\",\"outline\":{\"label\":\"页面大纲\",\"level\":\"deep\"},\"editLink\":{\"pattern\":\"https://github.com/star-nebula/knowledge/tree/main/:path\",\"text\":\"编辑本页面\"},\"sidebar\":{\"/zh-CN/\":[],\"/zh-CN/笔记/\":[{\"index\":\"🌐 网站部署\",\"text\":\"🌐 网站部署\",\"collapsed\":true,\"items\":[{\"index\":\"00 分类图标参考\",\"text\":\"00 分类图标参考\",\"link\":\"/zh-CN/笔记/🌐 网站部署/00-分类图标参考\"},{\"index\":\"01 本地环境搭建\",\"text\":\"01 本地环境搭建\",\"link\":\"/zh-CN/笔记/🌐 网站部署/01-本地环境搭建\"},{\"index\":\"02 本地预览\",\"text\":\"02 本地预览\",\"link\":\"/zh-CN/笔记/🌐 网站部署/02-本地预览\"},{\"index\":\"03 GitHub Pages 自动部署\",\"text\":\"03 GitHub Pages 自动部署\",\"link\":\"/zh-CN/笔记/🌐 网站部署/03-GitHub Pages 自动部署\"},{\"index\":\"04 常见问题 FAQ\",\"text\":\"04 常见问题 FAQ\",\"link\":\"/zh-CN/笔记/🌐 网站部署/04-常见问题 FAQ\"}],\"link\":\"/zh-CN/笔记/🌐 网站部署/\"},{\"index\":\"🌱 生活\",\"text\":\"🌱 生活\",\"collapsed\":true,\"items\":[{\"index\":\"房屋设计\",\"text\":\"房屋设计\",\"collapsed\":true,\"items\":[{\"index\":\"灯光\",\"text\":\"灯光\",\"link\":\"/zh-CN/笔记/🌱 生活/房屋设计/灯光\"}],\"link\":\"/zh-CN/笔记/🌱 生活/房屋设计/\"},{\"index\":\"乒乓球技术精华文章汇编\",\"text\":\"乒乓球技术精华文章汇编\",\"link\":\"/zh-CN/笔记/🌱 生活/乒乓球技术精华文章汇编\"},{\"index\":\"摄影\",\"text\":\"摄影\",\"link\":\"/zh-CN/笔记/🌱 生活/摄影\"}],\"link\":\"/zh-CN/笔记/🌱 生活/\"},{\"index\":\"📚 个人知识管理\",\"text\":\"📚 个人知识管理\",\"collapsed\":true,\"items\":[{\"index\":\"01 基础概念\",\"text\":\"01 基础概念\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/01-基础概念\"},{\"index\":\"02 信息获取与筛选\",\"text\":\"02 信息获取与筛选\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/02-信息获取与筛选\"},{\"index\":\"03 笔记方法论\",\"text\":\"03 笔记方法论\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/03-笔记方法论\"},{\"index\":\"04 组织与链接\",\"text\":\"04 组织与链接\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/04-组织与链接\"},{\"index\":\"05 输出与创作\",\"text\":\"05 输出与创作\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/05-输出与创作\"},{\"index\":\"06 工具与技术\",\"text\":\"06 工具与技术\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/06-工具与技术\"},{\"index\":\"07 思维模型与习惯\",\"text\":\"07 思维模型与习惯\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/07-思维模型与习惯\"}],\"link\":\"/zh-CN/笔记/📚 个人知识管理/\"},{\"index\":\"🤖 AI应用开发\",\"text\":\"🤖 AI应用开发\",\"collapsed\":true,\"items\":[{\"index\":\"AI全景概览\",\"text\":\"AI全景概览\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/AI全景概览\"},{\"index\":\"DeepSeek\",\"text\":\"DeepSeek\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/DeepSeek\"},{\"index\":\"LangChain Agents 组件\",\"text\":\"LangChain Agents 组件\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/LangChain Agents 组件\"},{\"index\":\"LangChain Models 组件\",\"text\":\"LangChain Models 组件\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/LangChain Models 组件\"},{\"index\":\"Milvus 向量数据库\",\"text\":\"Milvus 向量数据库\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/Milvus 向量数据库\"},{\"index\":\"n8n AI Agent 工作流\",\"text\":\"n8n AI Agent 工作流\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/n8n AI Agent 工作流\"},{\"index\":\"NLP-文本预处理\",\"text\":\"NLP-文本预处理\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/NLP-文本预处理\"},{\"index\":\"RAG\",\"text\":\"RAG\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/RAG\"},{\"index\":\"Transformer\",\"text\":\"Transformer\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/Transformer\"},{\"index\":\"大模型-基础\",\"text\":\"大模型-基础\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/大模型-基础\"},{\"index\":\"大模型-知识扩展\",\"text\":\"大模型-知识扩展\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/大模型-知识扩展\"},{\"index\":\"深度学习-核心工具\",\"text\":\"深度学习-核心工具\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/深度学习-核心工具\"}],\"link\":\"/zh-CN/笔记/🤖 AI应用开发/\"},{\"index\":\"🛠️ 工程工具\",\"text\":\"🛠️ 工程工具\",\"collapsed\":true,\"items\":[{\"index\":\"Docker 核心概念\",\"text\":\"Docker 核心概念\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/Docker\"},{\"index\":\"MySQL 数据库基础\",\"text\":\"MySQL 数据库基础\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/MySQL 数据库基础\"},{\"index\":\"Redis 核心概念\",\"text\":\"Redis 核心概念\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/Redis 核心概念\"},{\"index\":\"Streamlit 入门\",\"text\":\"Streamlit 入门\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/Streamlit 入门\"}],\"link\":\"/zh-CN/笔记/🛠️ 工程工具/\"}],\"/zh-CN/作坊/\":[{\"index\":\"AI电商换装视频生成系统\",\"text\":\"AI电商换装视频生成系统\",\"link\":\"/zh-CN/作坊/ai-tryon-video-demo\"},{\"index\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"text\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"link\":\"/zh-CN/作坊/feedlens-project\"},{\"index\":\"GlowLink：多 Agent 社媒获客系统\",\"text\":\"GlowLink：多 Agent 社媒获客系统\",\"link\":\"/zh-CN/作坊/glowlink-demo\"}],\"/zh-CN/档案/\":[{\"index\":\"商品短文本类目分类系统（模型轻量化）\",\"text\":\"商品短文本类目分类系统（模型轻量化）\",\"link\":\"/zh-CN/档案/商品短文本分类模型轻量化-复盘笔记\"},{\"index\":\"电商智能客服问答系统（RAG）\",\"text\":\"电商智能客服问答系统（RAG）\",\"link\":\"/zh-CN/档案/电商智能客服RAG系统-复盘笔记\"},{\"index\":\"电商每日精选选品简报系统（多Agent）\",\"text\":\"电商每日精选选品简报系统（多Agent）\",\"link\":\"/zh-CN/档案/电商选品简报系统-复盘笔记\"}],\"/zh-CN/编目 Catalog/\":[]},\"footer\":{\"message\":\"每一篇文章，都是时间的标本\"}}}},\"scrollOffset\":134,\"cleanUrls\":false,\"additionalConfig\":{}}");</script>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"readme.md\":\"TvAbt0en\",\"zh-cn_index.md\":\"YTgIf9qI\",\"zh-cn_toc.md\":\"DBujQc5y\",\"zh-cn_作坊_ai-tryon-video-demo.md\":\"COd4K2Tc\",\"zh-cn_作坊_feedlens-project.md\":\"BppR8R7Y\",\"zh-cn_作坊_glowlink-demo.md\":\"D_XqXrYf\",\"zh-cn_作坊_index.md\":\"CjF3AHgM\",\"zh-cn_档案_index.md\":\"BqEYBP2N\",\"zh-cn_档案_商品短文本分类模型轻量化-复盘笔记.md\":\"DefmGFCt\",\"zh-cn_档案_电商智能客服rag系统-复盘笔记.md\":\"nfSbWQQT\",\"zh-cn_档案_电商选品简报系统-复盘笔记.md\":\"D6kuumkd\",\"zh-cn_笔记_index.md\":\"bN4Wn_BV\",\"zh-cn_笔记_🌐 网站部署_00-分类图标参考.md\":\"BbXA81rK\",\"zh-cn_笔记_🌐 网站部署_01-本地环境搭建.md\":\"f-D-Rfi8\",\"zh-cn_笔记_🌐 网站部署_02-本地预览.md\":\"q0b856yX\",\"zh-cn_笔记_🌐 网站部署_03-github pages 自动部署.md\":\"CFnyMJBi\",\"zh-cn_笔记_🌐 网站部署_04-常见问题 faq.md\":\"C-eo1_2E\",\"zh-cn_笔记_🌐 网站部署_index.md\":\"CmDC_l-k\",\"zh-cn_笔记_🌱 生活_index.md\":\"Ce9R7U3q\",\"zh-cn_笔记_🌱 生活_乒乓球技术精华文章汇编.md\":\"eBmB7iQz\",\"zh-cn_笔记_🌱 生活_房屋设计_index.md\":\"B2U-WZ_Y\",\"zh-cn_笔记_🌱 生活_房屋设计_灯光.md\":\"BT-fNauS\",\"zh-cn_笔记_🌱 生活_摄影.md\":\"BMxvyRUD\",\"zh-cn_笔记_📚 个人知识管理_01-基础概念.md\":\"CbK3lWzr\",\"zh-cn_笔记_📚 个人知识管理_02-信息获取与筛选.md\":\"BBKUm5dp\",\"zh-cn_笔记_📚 个人知识管理_03-笔记方法论.md\":\"z1NZxjyg\",\"zh-cn_笔记_📚 个人知识管理_04-组织与链接.md\":\"CucQIO95\",\"zh-cn_笔记_📚 个人知识管理_05-输出与创作.md\":\"TxZhxahY\",\"zh-cn_笔记_📚 个人知识管理_06-工具与技术.md\":\"C9xvQGAS\",\"zh-cn_笔记_📚 个人知识管理_07-思维模型与习惯.md\":\"BDxj_-p1\",\"zh-cn_笔记_📚 个人知识管理_index.md\":\"CJzNXnzm\",\"zh-cn_笔记_🛠️ 工程工具_docker.md\":\"D4N9ZL9P\",\"zh-cn_笔记_🛠️ 工程工具_index.md\":\"BW06R8y1\",\"zh-cn_笔记_🛠️ 工程工具_mysql 数据库基础.md\":\"BdrK0K2z\",\"zh-cn_笔记_🛠️ 工程工具_redis 核心概念.md\":\"ClULNLLW\",\"zh-cn_笔记_🛠️ 工程工具_streamlit 入门.md\":\"MngdG0zL\",\"zh-cn_笔记_🤖 ai应用开发_ai全景概览.md\":\"G4aUgGws\",\"zh-cn_笔记_🤖 ai应用开发_deepseek.md\":\"SfPq9lpZ\",\"zh-cn_笔记_🤖 ai应用开发_index.md\":\"B52ml6DR\",\"zh-cn_笔记_🤖 ai应用开发_langchain agents 组件.md\":\"CLxUTK6Z\",\"zh-cn_笔记_🤖 ai应用开发_langchain models 组件.md\":\"CK5SkQmZ\",\"zh-cn_笔记_🤖 ai应用开发_milvus 向量数据库.md\":\"Z8KlkmhG\",\"zh-cn_笔记_🤖 ai应用开发_n8n ai agent 工作流.md\":\"C8Vh36S7\",\"zh-cn_笔记_🤖 ai应用开发_nlp-文本预处理.md\":\"DmyuUMlU\",\"zh-cn_笔记_🤖 ai应用开发_rag.md\":\"2AwUEqR8\",\"zh-cn_笔记_🤖 ai应用开发_transformer.md\":\"D5tRBHhr\",\"zh-cn_笔记_🤖 ai应用开发_大模型-基础.md\":\"D1m4eqHd\",\"zh-cn_笔记_🤖 ai应用开发_大模型-知识扩展.md\":\"DB11og5U\",\"zh-cn_笔记_🤖 ai应用开发_深度学习-核心工具.md\":\"Dqw9jhfh\",\"zh-cn_视图_尚未编写完成的页面.md\":\"BG0Moi2w\",\"zh-cn_视图_未添加标签的页面.md\":\"cCClQD_8\",\"zh-cn_🔌 知识库插件列表.md\":\"a-JUWwGo\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"Star Nebula Knowledge\",\"description\":\"记录回忆，知识和畅想的地方\",\"base\":\"/knowledge/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"search\":{\"provider\":\"local\",\"options\":{\"locales\":{\"root\":{\"translations\":{\"button\":{\"buttonText\":\"搜索文档\",\"buttonAriaLabel\":\"搜索文档\"},\"modal\":{\"noResultsText\":\"无法找到相关结果\",\"resetButtonTitle\":\"清除查询条件\",\"footer\":{\"selectText\":\"选择\",\"navigateText\":\"切换\"}}}}}}}},\"locales\":{\"root\":{\"lang\":\"zh-CN\",\"label\":\"中文\",\"dir\":\"/zh-CN\",\"link\":\"/zh-CN\",\"themeConfig\":{\"nav\":[{\"text\":\"主页\",\"link\":\"/zh-CN/\"},{\"text\":\"笔记\",\"link\":\"/zh-CN/笔记/\"},{\"text\":\"作坊\",\"link\":\"/zh-CN/作坊/\"},{\"text\":\"档案\",\"link\":\"/zh-CN/档案/\",\"activeMatch\":\"^/zh-CN/档案/\"},{\"text\":\"最近更新\",\"link\":\"/zh-CN/toc\"}],\"lastUpdated\":{\"text\":\"最后更新\"},\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/star-nebula/knowledge\"}],\"darkModeSwitchLabel\":\"切换主题\",\"outline\":{\"label\":\"页面大纲\",\"level\":\"deep\"},\"editLink\":{\"pattern\":\"https://github.com/star-nebula/knowledge/tree/main/:path\",\"text\":\"编辑本页面\"},\"sidebar\":{\"/zh-CN/\":[],\"/zh-CN/笔记/\":[{\"index\":\"🌐 网站部署\",\"text\":\"🌐 网站部署\",\"collapsed\":true,\"items\":[{\"index\":\"00 分类图标参考\",\"text\":\"00 分类图标参考\",\"link\":\"/zh-CN/笔记/🌐 网站部署/00-分类图标参考\"},{\"index\":\"01 本地环境搭建\",\"text\":\"01 本地环境搭建\",\"link\":\"/zh-CN/笔记/🌐 网站部署/01-本地环境搭建\"},{\"index\":\"02 本地预览\",\"text\":\"02 本地预览\",\"link\":\"/zh-CN/笔记/🌐 网站部署/02-本地预览\"},{\"index\":\"03 GitHub Pages 自动部署\",\"text\":\"03 GitHub Pages 自动部署\",\"link\":\"/zh-CN/笔记/🌐 网站部署/03-GitHub Pages 自动部署\"},{\"index\":\"04 常见问题 FAQ\",\"text\":\"04 常见问题 FAQ\",\"link\":\"/zh-CN/笔记/🌐 网站部署/04-常见问题 FAQ\"}],\"link\":\"/zh-CN/笔记/🌐 网站部署/\"},{\"index\":\"🌱 生活\",\"text\":\"🌱 生活\",\"collapsed\":true,\"items\":[{\"index\":\"房屋设计\",\"text\":\"房屋设计\",\"collapsed\":true,\"items\":[{\"index\":\"灯光\",\"text\":\"灯光\",\"link\":\"/zh-CN/笔记/🌱 生活/房屋设计/灯光\"}],\"link\":\"/zh-CN/笔记/🌱 生活/房屋设计/\"},{\"index\":\"乒乓球技术精华文章汇编\",\"text\":\"乒乓球技术精华文章汇编\",\"link\":\"/zh-CN/笔记/🌱 生活/乒乓球技术精华文章汇编\"},{\"index\":\"摄影\",\"text\":\"摄影\",\"link\":\"/zh-CN/笔记/🌱 生活/摄影\"}],\"link\":\"/zh-CN/笔记/🌱 生活/\"},{\"index\":\"📚 个人知识管理\",\"text\":\"📚 个人知识管理\",\"collapsed\":true,\"items\":[{\"index\":\"01 基础概念\",\"text\":\"01 基础概念\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/01-基础概念\"},{\"index\":\"02 信息获取与筛选\",\"text\":\"02 信息获取与筛选\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/02-信息获取与筛选\"},{\"index\":\"03 笔记方法论\",\"text\":\"03 笔记方法论\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/03-笔记方法论\"},{\"index\":\"04 组织与链接\",\"text\":\"04 组织与链接\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/04-组织与链接\"},{\"index\":\"05 输出与创作\",\"text\":\"05 输出与创作\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/05-输出与创作\"},{\"index\":\"06 工具与技术\",\"text\":\"06 工具与技术\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/06-工具与技术\"},{\"index\":\"07 思维模型与习惯\",\"text\":\"07 思维模型与习惯\",\"link\":\"/zh-CN/笔记/📚 个人知识管理/07-思维模型与习惯\"}],\"link\":\"/zh-CN/笔记/📚 个人知识管理/\"},{\"index\":\"🤖 AI应用开发\",\"text\":\"🤖 AI应用开发\",\"collapsed\":true,\"items\":[{\"index\":\"AI全景概览\",\"text\":\"AI全景概览\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/AI全景概览\"},{\"index\":\"DeepSeek\",\"text\":\"DeepSeek\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/DeepSeek\"},{\"index\":\"LangChain Agents 组件\",\"text\":\"LangChain Agents 组件\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/LangChain Agents 组件\"},{\"index\":\"LangChain Models 组件\",\"text\":\"LangChain Models 组件\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/LangChain Models 组件\"},{\"index\":\"Milvus 向量数据库\",\"text\":\"Milvus 向量数据库\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/Milvus 向量数据库\"},{\"index\":\"n8n AI Agent 工作流\",\"text\":\"n8n AI Agent 工作流\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/n8n AI Agent 工作流\"},{\"index\":\"NLP-文本预处理\",\"text\":\"NLP-文本预处理\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/NLP-文本预处理\"},{\"index\":\"RAG\",\"text\":\"RAG\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/RAG\"},{\"index\":\"Transformer\",\"text\":\"Transformer\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/Transformer\"},{\"index\":\"大模型-基础\",\"text\":\"大模型-基础\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/大模型-基础\"},{\"index\":\"大模型-知识扩展\",\"text\":\"大模型-知识扩展\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/大模型-知识扩展\"},{\"index\":\"深度学习-核心工具\",\"text\":\"深度学习-核心工具\",\"link\":\"/zh-CN/笔记/🤖 AI应用开发/深度学习-核心工具\"}],\"link\":\"/zh-CN/笔记/🤖 AI应用开发/\"},{\"index\":\"🛠️ 工程工具\",\"text\":\"🛠️ 工程工具\",\"collapsed\":true,\"items\":[{\"index\":\"Docker 核心概念\",\"text\":\"Docker 核心概念\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/Docker\"},{\"index\":\"MySQL 数据库基础\",\"text\":\"MySQL 数据库基础\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/MySQL 数据库基础\"},{\"index\":\"Redis 核心概念\",\"text\":\"Redis 核心概念\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/Redis 核心概念\"},{\"index\":\"Streamlit 入门\",\"text\":\"Streamlit 入门\",\"link\":\"/zh-CN/笔记/🛠️ 工程工具/Streamlit 入门\"}],\"link\":\"/zh-CN/笔记/🛠️ 工程工具/\"}],\"/zh-CN/作坊/\":[{\"index\":\"AI电商换装视频生成系统\",\"text\":\"AI电商换装视频生成系统\",\"link\":\"/zh-CN/作坊/ai-tryon-video-demo\"},{\"index\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"text\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"link\":\"/zh-CN/作坊/feedlens-project\"},{\"index\":\"GlowLink：多 Agent 社媒获客系统\",\"text\":\"GlowLink：多 Agent 社媒获客系统\",\"link\":\"/zh-CN/作坊/glowlink-demo\"}],\"/zh-CN/档案/\":[{\"index\":\"商品短文本类目分类系统（模型轻量化）\",\"text\":\"商品短文本类目分类系统（模型轻量化）\",\"link\":\"/zh-CN/档案/商品短文本分类模型轻量化-复盘笔记\"},{\"index\":\"电商智能客服问答系统（RAG）\",\"text\":\"电商智能客服问答系统（RAG）\",\"link\":\"/zh-CN/档案/电商智能客服RAG系统-复盘笔记\"},{\"index\":\"电商每日精选选品简报系统（多Agent）\",\"text\":\"电商每日精选选品简报系统（多Agent）\",\"link\":\"/zh-CN/档案/电商选品简报系统-复盘笔记\"}],\"/zh-CN/编目 Catalog/\":[]},\"footer\":{\"message\":\"每一篇文章，都是时间的标本\"}}}},\"scrollOffset\":134,\"cleanUrls\":false,\"additionalConfig\":{}}");</script>
     
   </body>
 </html>
