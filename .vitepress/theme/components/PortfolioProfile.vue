@@ -18,7 +18,7 @@ const title = '刘昊晴 · AI应用开发工程师'
 const tagline = '多Agent编排 / RAG全链路 / LLM工程化'
 const summary = '电商场景AI解决方案落地，从0到1构建多Agent选品与智能客服系统'
 const bioShort = '25届本科毕业生，专注AI应用开发，有电商AI产品线落地经验，擅长多Agent系统、RAG pipeline和LLM工程化。'
-const bioFull = '25届本科毕业生，人工智能专业，现任小络科技AI应用开发工程师。专注于电商场景AI解决方案落地，从0到1主导了多Agent选品简报系统、电商智能客服RAG系统、商品短文本分类模型轻量化等核心项目，在多Agent编排、RAG全链路优化、模型部署推理等方面积累了丰富的工程实践经验。'
+const bioFull = '25届本科毕业生，人工智能专业。专注于电商场景AI解决方案落地，从0到1主导了多Agent选品简报系统、电商智能客服RAG系统、商品短文本分类模型轻量化等核心项目，在多Agent编排、RAG全链路优化、模型部署推理等方面积累了丰富的工程实践经验。'
 
 const contacts = [
   { icon: '📞', value: '13392786414', copyable: true },
@@ -27,8 +27,8 @@ const contacts = [
   { icon: '📚', value: '知识库主页', link: '/zh-CN/' },
 ]
 const timeline: TimelineItem[] = [
-  { period: '2024.08 - 2026.05', title: 'AI应用开发工程师', org: '小络科技', desc: '负责电商AI产品线，主导3个核心项目落地', link: '#core-projects', linkText: '跳转查看关联项目' },
-  { period: '2021.09 - 2025.06', title: '人工智能（本科）', org: '岭南师范学院', desc: '主修NLP、深度学习、大模型应用开发', link: '/zh-CN/笔记/', linkText: '跳转知识库学习笔记' },
+  { period: '2024.08 - 2026.05', title: 'AI应用开发工程师', desc: '负责电商AI产品线，主导3个核心项目落地', link: '#core-projects', linkText: '跳转查看关联项目' },
+  { period: '2021.09 - 2025.06', title: '人工智能（本科）', desc: '主修NLP、深度学习、大模型应用开发', link: '/zh-CN/笔记/', linkText: '跳转知识库学习笔记' },
 ]
 const techTags: TechTag[] = [
   { name: 'LangGraph', group: 'llm', tooltip: '电商选品多Agent编排框架，实现8阶段Agent工作流' },
@@ -67,8 +67,16 @@ const expandedProjects = ref<Set<number>>(new Set())
 const toastMessage = ref('')
 const toastVisible = ref(false)
 const sectionsVisible = ref<Record<string, boolean>>({})
+const activeSection = ref('hero')
 const activeTooltip = ref<string | null>(null)
 const tooltipPos = ref({ x: 0, y: 0 })
+
+const tocItems = [
+  { id: 'hero', label: '个人简介' },
+  { id: 'about', label: '关于我' },
+  { id: 'tech-stack', label: '技术栈' },
+  { id: 'core-projects', label: '核心项目' },
+]
 
 const filteredProjects = computed(() => !activeTag.value ? projects : projects.filter(p => p.tags.includes(activeTag.value)))
 const tagsByGroup = (g: string) => techTags.filter(t => t.group === g)
@@ -102,6 +110,20 @@ function onCardMove(e: MouseEvent) {
 }
 function onCardLeave(e: MouseEvent) { (e.currentTarget as HTMLElement).style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)' }
 
+function updateActiveSection() {
+  const sections = ['hero', 'about', 'tech-stack', 'core-projects']
+  const navOffset = 120
+  let current = 'hero'
+  for (const id of sections) {
+    const el = document.querySelector(`[data-section="${id}"]`) as HTMLElement | null
+    if (el && el.getBoundingClientRect().top <= navOffset) {
+      current = id
+    }
+  }
+  activeSection.value = current
+}
+
+let scrollHandler: (() => void) | null = null
 let observer: IntersectionObserver | null = null
 function observeSections() {
   observer = new IntersectionObserver(entries => {
@@ -111,6 +133,10 @@ function observeSections() {
     })
   }, { threshold: 0.1 })
   document.querySelectorAll('[data-section]').forEach(el => observer!.observe(el))
+
+  scrollHandler = updateActiveSection
+  window.addEventListener('scroll', scrollHandler, { passive: true })
+  updateActiveSection()
 }
 function showTip(tag: string, e: MouseEvent) {
   activeTooltip.value = tag
@@ -120,10 +146,15 @@ function showTip(tag: string, e: MouseEvent) {
 function hideTip() { activeTooltip.value = null }
 
 onMounted(() => { typeTitle(); setTimeout(observeSections, 200) })
-onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnect() })
+onUnmounted(() => {
+  if (typeTimer) clearInterval(typeTimer)
+  observer?.disconnect()
+  if (scrollHandler) window.removeEventListener('scroll', scrollHandler)
+})
 </script>
 <template>
-  <div class="pp-root">
+  <div class="pp-layout">
+    <div class="pp-root">
     <Transition name="pp-toast">
       <div v-if="toastVisible" class="pp-toast">{{ toastMessage }}</div>
     </Transition>
@@ -184,7 +215,7 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
               <div class="pp-timeline-dot"></div>
               <div class="pp-timeline-content">
                 <div class="pp-timeline-period">{{ item.period }}</div>
-                <div class="pp-timeline-title">{{ item.title }} · {{ item.org }}</div>
+                <div class="pp-timeline-title">{{ item.title }}  {{ item.org }}</div>
                 <div class="pp-timeline-desc">{{ item.desc }}</div>
                 <a v-if="item.link" :href="item.link.startsWith('#') ? item.link : withBase(item.link)" class="pp-timeline-link"
                   @click="item.link.startsWith('#') ? (e) => { e.preventDefault(); scrollTo(item.link) } : null">
@@ -197,7 +228,7 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
       </div>
     </section>
 
-    <section data-section="tech" id="tech-stack" class="pp-section pp-tech" :class="{ visible: sectionsVisible.tech }">
+    <section data-section="tech-stack" id="tech-stack" class="pp-section pp-tech" :class="{ visible: sectionsVisible['tech-stack'] }">
       <h2 class="pp-section-title">技术栈</h2>
       <div v-if="activeTag" class="pp-filter-hint">
         当前筛选: <span class="pp-filter-tag">{{ activeTag }}</span>
@@ -221,7 +252,7 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
       </div>
     </Transition>
 
-    <section data-section="projects" id="core-projects" class="pp-section pp-projects" :class="{ visible: sectionsVisible.projects }">
+    <section data-section="core-projects" id="core-projects" class="pp-section pp-projects" :class="{ visible: sectionsVisible['core-projects'] }">
       <h2 class="pp-section-title">核心项目</h2>
       <div class="pp-projects-grid">
         <div v-for="p in filteredProjects" :key="p.id" class="pp-project-card" :class="{ expanded: isProjectExpanded(p.id) }"
@@ -247,19 +278,45 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
         </div>
       </div>
     </section>
+    </div>
+    <nav class="pp-toc">
+      <div class="pp-toc-inner">
+        <div class="pp-toc-title"></div>
+        <ul class="pp-toc-list">
+          <li v-for="item in tocItems" :key="item.id">
+            <a
+              href="#"
+              class="pp-toc-link"
+              :class="{ active: activeSection === item.id }"
+              @click.prevent="scrollTo('#' + item.id)"
+            >{{ item.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
 </template>
 
 <style scoped>
-.pp-root { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.pp-layout { max-width: 80%; margin: 0 auto; display: grid; grid-template-columns: 1fr 180px; gap: 32px; padding: 0 24px; position: relative; }
+.pp-root { min-width: 0; }
+
+/* Right TOC */
+.pp-toc { position: relative; }
+.pp-toc-inner { position: sticky; top: 80px; padding: 16px 0; border-left: 1px solid var(--vp-c-divider); }
+.pp-toc-title { font-size: 12px; font-weight: 600; color: var(--vp-c-text-3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; padding-left: 16px; }
+.pp-toc-list { list-style: none; margin: 0; padding: 0; }
+.pp-toc-link { display: block; padding: 6px 0 6px 16px; font-size: 13px; color: var(--vp-c-text-3); text-decoration: none; border-left: 2px solid transparent; margin-left: -1px; transition: all 0.2s ease; line-height: 1.5; }
+.pp-toc-link:hover { color: var(--vp-c-text-1); }
+.pp-toc-link.active { color: var(--vp-c-brand-1); border-left-color: var(--vp-c-brand-1); font-weight: 500; }
 .pp-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: var(--vp-c-brand-1); color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 14px; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
 .pp-toast-enter-active, .pp-toast-leave-active { transition: all 0.3s ease; }
 .pp-toast-enter-from, .pp-toast-leave-to { opacity: 0; transform: translateX(-50%) translateY(20px); }
-.pp-section { padding: 64px 0; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.pp-section { padding: 40px 0; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .pp-section.visible { opacity: 1; transform: translateY(0); }
-.pp-section-title { font-size: 28px; font-weight: 700; color: var(--vp-c-text-1); margin-bottom: 32px; padding-bottom: 12px; border-bottom: 2px solid var(--vp-c-divider); }
+.pp-section-title { font-size: 28px; font-weight: 700; color: var(--vp-c-text-1); margin-bottom: 32px; padding-bottom: 12px; }
 
-.pp-hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: center; min-height: 60vh; }
+.pp-hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: center; min-height: auto; }
 .pp-hero-title { font-size: 42px; font-weight: 700; color: var(--vp-c-text-1); margin-bottom: 16px; line-height: 1.3; }
 .pp-cursor { color: var(--vp-c-brand-1); animation: pp-blink 1s step-end infinite; }
 @keyframes pp-blink { 50% { opacity: 0; } }
@@ -348,6 +405,8 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
 .pp-expand-enter-to, .pp-expand-leave-from { opacity: 1; max-height: 500px; }
 
 @media (max-width: 1024px) {
+  .pp-layout { grid-template-columns: 1fr; padding: 0 24px; }
+  .pp-toc { display: none; }
   .pp-projects-grid { grid-template-columns: repeat(2, 1fr); }
   .pp-hero-grid { grid-template-columns: 1fr; gap: 32px; min-height: auto; }
   .pp-about-grid { grid-template-columns: 1fr; }
@@ -360,16 +419,50 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
   .pp-info-value { text-align: left; }
 }
 @media (max-width: 640px) {
-  .pp-root { padding: 0 16px; }
-  .pp-section { padding: 40px 0; }
+  .pp-layout { padding: 0 16px; }
+  .pp-section { padding: 32px 0; }
   .pp-hero-title { font-size: 28px; }
-  .pp-section-title { font-size: 22px; }
-  .pp-projects-grid { grid-template-columns: 1fr; }
+  .pp-section-title { font-size: 22px; margin-bottom: 20px; }
+  .pp-hero { padding-top: 24px; }
+  .pp-projects-grid { grid-template-columns: 1fr; gap: 16px; }
   .pp-project-metric { font-size: 17px; }
+  .pp-project-card { padding: 20px; }
   .pp-info-card { flex-direction: column; text-align: center; align-items: center; }
   .pp-avatar { width: 100px; height: 100px; margin: 0 0 16px; }
   .pp-info-list { align-items: center; }
   .pp-info-item { align-items: center; }
   .pp-info-value { text-align: center; }
+  .pp-contact-card { padding: 20px; }
+  .pp-bio-box { padding: 16px 20px; }
+}
+</style>
+
+<style>
+.VPContent:has(.pp-layout),
+.VPDoc:has(.pp-layout),
+.VPDoc:has(.pp-layout) .container,
+.VPDoc:has(.pp-layout) .content-container,
+.VPDoc:has(.pp-layout) .content,
+.VPDoc:has(.pp-layout) .main,
+.VPDoc:has(.pp-layout) .doc-container,
+.VPDoc:has(.pp-layout) .doc-content-container,
+.vp-doc:has(.pp-layout),
+.vp-doc:has(.pp-layout) > div {
+  max-width: unset !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.vp-doc:has(.pp-layout) h1:first-of-type { display: none; }
+.VPDoc:has(.pp-layout) .VPDocFooter { max-width: 1400px; margin: 32px auto 0; padding: 0 24px; }
+.VPDoc:has(.pp-layout) .VPDocAside,
+.VPDoc:has(.pp-layout) .aside-container,
+.VPDoc:has(.pp-layout) .aside {
+  display: none !important;
+}
+.VPDoc:has(.pp-layout) .main-container,
+.VPDoc:has(.pp-layout) .content-container {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 </style>
