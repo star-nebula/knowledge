@@ -135,7 +135,7 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
           <p class="pp-hero-tagline">{{ tagline }}</p>
           <p class="pp-hero-summary">{{ summary }}</p>
           <div class="pp-actions">
-            <button class="pp-btn pp-btn-primary" @click="showToast('简历下载功能开发中')">📄 下载PDF简历</button>
+            <a :href="withBase('/刘昊晴-个人简历.pdf')" download="刘昊晴-个人简历.pdf" class="pp-btn pp-btn-primary">📄 下载PDF简历</a>
             <button class="pp-btn pp-btn-ghost" @click="scrollTo('#core-projects')">🔍 查看核心项目</button>
           </div>
         </div>
@@ -162,7 +162,9 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
       <h2 class="pp-section-title">关于我</h2>
       <div class="pp-about-grid">
         <div class="pp-info-card">
-          <div class="pp-avatar">👨‍💻</div>
+          <div class="pp-avatar">
+            <img :src="withBase('/avatar.png')" alt="刘昊晴头像" class="pp-avatar-img" @error="(e: Event) => { (e.target as HTMLImageElement).src = withBase('/avatar.svg') }" />
+          </div>
           <div class="pp-info-list">
             <div class="pp-info-item"><span class="pp-info-label">毕业届别</span><span class="pp-info-value">25届本科</span></div>
             <div class="pp-info-item"><span class="pp-info-label">专业</span><span class="pp-info-value">人工智能</span></div>
@@ -264,7 +266,7 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
 .pp-hero-tagline { font-size: 18px; color: var(--vp-c-brand-1); font-weight: 500; margin-bottom: 12px; }
 .pp-hero-summary { font-size: 15px; color: var(--vp-c-text-2); line-height: 1.8; margin-bottom: 28px; }
 .pp-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.pp-btn { padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s ease; }
+.pp-btn { padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s ease; display: inline-flex; align-items: center; text-decoration: none; line-height: 1.4; }
 .pp-btn-primary { background: var(--vp-c-brand-1); color: #fff; }
 .pp-btn-primary:hover { background: var(--vp-c-brand-2); transform: translateY(-1px); }
 .pp-btn-ghost { background: transparent; color: var(--vp-c-text-1); border: 1px solid var(--vp-c-divider); }
@@ -281,13 +283,15 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
 .pp-copy-btn { background: transparent; border: 1px solid var(--vp-c-divider); border-radius: 4px; padding: 4px 6px; cursor: pointer; color: var(--vp-c-text-3); transition: all 0.2s; display: flex; align-items: center; }
 .pp-copy-btn:hover { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); }
 
-.pp-about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 32px; }
-.pp-info-card { border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 24px; background: var(--vp-c-bg-soft); height: fit-content; }
-.pp-avatar { font-size: 48px; text-align: center; margin-bottom: 20px; }
-.pp-info-list { display: flex; flex-direction: column; gap: 12px; }
-.pp-info-item { display: flex; flex-direction: column; gap: 4px; }
+.pp-about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; }
+.pp-info-card { border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 24px; background: var(--vp-c-bg-soft); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pp-avatar { width: 120px; height: 120px; margin: 0 0 20px; border-radius: 50%; overflow: hidden; border: 3px solid var(--vp-c-brand-1); box-shadow: 0 4px 16px rgba(0,0,0,0.15); flex-shrink: 0; display: flex; align-items: center; justify-content: center; line-height: 0; }
+.dark .pp-avatar { box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+.pp-avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; margin: 0 !important; border-radius: 50%; }
+.pp-info-list { display: flex; flex-direction: column; gap: 12px; width: 100%; align-items: center; }
+.pp-info-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
 .pp-info-label { font-size: 12px; color: var(--vp-c-text-3); }
-.pp-info-value { font-size: 14px; color: var(--vp-c-text-1); font-weight: 500; }
+.pp-info-value { font-size: 14px; color: var(--vp-c-text-1); font-weight: 500; text-align: center; }
 .pp-bio-box { border: 1px solid var(--vp-c-divider); border-radius: 8px; padding: 20px 24px; background: var(--vp-c-bg-soft); margin-bottom: 24px; }
 .pp-bio-text { font-size: 14px; color: var(--vp-c-text-2); line-height: 1.8; margin: 0 0 12px; }
 .pp-expand-btn { background: none; border: none; color: var(--vp-c-brand-1); font-size: 13px; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 4px; }
@@ -347,8 +351,13 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
   .pp-projects-grid { grid-template-columns: repeat(2, 1fr); }
   .pp-hero-grid { grid-template-columns: 1fr; gap: 32px; min-height: auto; }
   .pp-about-grid { grid-template-columns: 1fr; }
-  .pp-info-card { display: flex; gap: 24px; align-items: center; }
-  .pp-avatar { margin-bottom: 0; }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .pp-info-card { flex-direction: row; text-align: left; align-items: center; padding: 20px 24px; }
+  .pp-avatar { width: 80px; height: 80px; margin: 0; }
+  .pp-info-list { align-items: flex-start; }
+  .pp-info-item { align-items: flex-start; }
+  .pp-info-value { text-align: left; }
 }
 @media (max-width: 640px) {
   .pp-root { padding: 0 16px; }
@@ -357,6 +366,10 @@ onUnmounted(() => { if (typeTimer) clearInterval(typeTimer); observer?.disconnec
   .pp-section-title { font-size: 22px; }
   .pp-projects-grid { grid-template-columns: 1fr; }
   .pp-project-metric { font-size: 17px; }
-  .pp-info-card { flex-direction: column; text-align: center; }
+  .pp-info-card { flex-direction: column; text-align: center; align-items: center; }
+  .pp-avatar { width: 100px; height: 100px; margin: 0 0 16px; }
+  .pp-info-list { align-items: center; }
+  .pp-info-item { align-items: center; }
+  .pp-info-value { text-align: center; }
 }
 </style>
