@@ -11,10 +11,24 @@
             "id": "b55dea09492e9ac7",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "作坊/ai-tryon-video-demo.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "ai-tryon-video-demo"
             }
           }
         ]
@@ -172,12 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "作坊/ai-tryon-video-demo.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "ai-tryon-video-demo 的大纲"
             }
           }
         ],
@@ -205,8 +220,11 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "d161037d735277cc",
+  "active": "b55dea09492e9ac7",
   "lastOpenFiles": [
+    "笔记/🤖 AI应用开发/index.md",
+    "笔记/🌐 网站部署/index.md",
+    "笔记/🌐 网站部署/02-本地预览.md",
     "data/images/ui-overview.svg",
     "data/images/tech-decisions.png",
     "data/images/rag-pipeline.png",
@@ -217,7 +235,6 @@
     "data/images/file-20260425232358422.png",
     "data/images/file-20260425232324661.png",
     "作坊/images/tech-decisions.png",
-    "data/images/LLM 解码阶段 KV Cache 工作原理.svg",
     "笔记/🛠️ 工程工具/index.md",
     "data/images",
     "笔记/🛠️ 工程工具/assets",
@@ -245,8 +262,6 @@
     "作坊/ai-tryon-video-demo.md",
     "作坊/feedlens-project.md",
     "作坊/index.md",
-    "作坊/glowlink-demo.md",
-    "笔记/🤖 AI应用开发/Transformer.md",
     "作坊/images/_data_uris.json",
     "面试/面试题/assets",
     "面试/简历/Archives",
