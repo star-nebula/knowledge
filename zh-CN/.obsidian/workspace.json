@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "98cc49f41afbe596",
+        "id": "04e1025c6ccbf120",
         "type": "tabs",
         "children": [
           {
-            "id": "b55dea09492e9ac7",
+            "id": "7b6af6a6c28ac44f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "作坊/ai-tryon-video-demo.md",
-                "mode": "source",
+                "file": "笔记/🤖 AI应用开发/RAG.md",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "ai-tryon-video-demo"
+              "title": "RAG"
             }
           }
         ]
@@ -186,13 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "作坊/ai-tryon-video-demo.md",
+                "file": "笔记/🤖 AI应用开发/RAG.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "ai-tryon-video-demo 的大纲"
+              "title": "RAG 的大纲"
             }
           }
         ],
@@ -220,9 +220,24 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "b55dea09492e9ac7",
+  "active": "7b6af6a6c28ac44f",
   "lastOpenFiles": [
+    "笔记/🤖 AI应用开发/Transformer 架构与实现.md",
+    "笔记/🤖 AI应用开发/RAG.md",
+    "笔记/🤖 AI应用开发/Transformer 应用开发视角.md",
+    "笔记/🤖 AI应用开发/深度学习-核心工具.md",
+    "档案/电商选品简报系统-复盘笔记.md",
+    "笔记/🤖 AI应用开发/n8n AI Agent 工作流.md",
+    "笔记/🤖 AI应用开发/大模型-知识扩展.md",
+    "笔记/🤖 AI应用开发/Milvus 向量数据库.md",
+    "笔记/🤖 AI应用开发/NLP-文本预处理.md",
+    "笔记/🤖 AI应用开发/LangChain Models 组件.md",
+    "笔记/🤖 AI应用开发/AI全景概览.md",
+    "笔记/🤖 AI应用开发/大模型-基础.md",
     "笔记/🤖 AI应用开发/index.md",
+    "笔记/🤖 AI应用开发/DeepSeek.md",
+    "笔记/🤖 AI应用开发/LangChain Agents 组件.md",
+    "作坊/ai-tryon-video-demo.md",
     "笔记/🌐 网站部署/index.md",
     "笔记/🌐 网站部署/02-本地预览.md",
     "data/images/ui-overview.svg",
@@ -242,26 +257,11 @@
     "笔记/🛠️ 工程工具/Docker.md",
     "笔记/🛠️ 工程工具/MySQL 数据库基础.md",
     "笔记/🛠️ 工程工具/Redis 核心概念.md",
-    "笔记/🤖 AI应用开发/Milvus 向量数据库.md",
-    "笔记/🤖 AI应用开发/NLP-文本预处理.md",
-    "笔记/🤖 AI应用开发/LangChain Models 组件.md",
-    "笔记/🤖 AI应用开发/AI全景概览.md",
-    "笔记/🤖 AI应用开发/深度学习-核心工具.md",
-    "笔记/🤖 AI应用开发/n8n AI Agent 工作流.md",
-    "笔记/🤖 AI应用开发/大模型-知识扩展.md",
-    "笔记/🤖 AI应用开发/大模型-基础.md",
-    "笔记/🤖 AI应用开发/LangChain Agents 组件.md",
-    "笔记/🤖 AI应用开发/DeepSeek.md",
     "笔记/🛠️ 工程工具",
     "🔌 知识库插件列表.md",
     "档案/index.md",
     "档案/商品短文本分类模型轻量化-复盘笔记.md",
-    "档案/电商智能客服RAG系统-复盘笔记.md",
-    "档案/电商选品简报系统-复盘笔记.md",
     "档案",
-    "作坊/ai-tryon-video-demo.md",
-    "作坊/feedlens-project.md",
-    "作坊/index.md",
     "作坊/images/_data_uris.json",
     "面试/面试题/assets",
     "面试/简历/Archives",
