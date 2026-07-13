@@ -1,12 +1,12 @@
 ---
-AIGC:
-    Label: "1"
-    ContentProducer: 001191440300708461136T1XGW3
-    ProduceID: 8f2fa46874289e2cb6a624d55d5ab0b9_cbda98007a9c11f182885254006c9bbf
-    ReservedCode1: 6cYjobXhZGWRmeDXvAgFkqf+s/0d60e/0Thg2fVGntgQhTPwaE8AAT4ExvfZfKRG/bnvAfvZEAf/xeiKpGqpy/0wwKVLpFkQNGpBxNdd+EP1UBkvVlWGJ4OHhsTaBjZ0fzsNkWQn4o8aBtPRsGrPqiYa5YPbO0Or18zhNjQC74XUpqlqJY98dL+WBGQ=
-    ContentPropagator: 001191440300708461136T1XGW3
-    PropagateID: 8f2fa46874289e2cb6a624d55d5ab0b9_cbda98007a9c11f182885254006c9bbf
-    ReservedCode2: 6cYjobXhZGWRmeDXvAgFkqf+s/0d60e/0Thg2fVGntgQhTPwaE8AAT4ExvfZfKRG/bnvAfvZEAf/xeiKpGqpy/0wwKVLpFkQNGpBxNdd+EP1UBkvVlWGJ4OHhsTaBjZ0fzsNkWQn4o8aBtPRsGrPqiYa5YPbO0Or18zhNjQC74XUpqlqJY98dL+WBGQ=
+title: n8n AI Agent 工作流
+created: 2026-07-08
+tags:
+  - n8n
+  - MCP
+  - 工作流
+  - Agent
+type: 步骤操作
 ---
 
 
