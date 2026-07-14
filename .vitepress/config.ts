@@ -13,7 +13,12 @@ const SITE_BASE = '/knowledge/'
 import { githubRepoLink, siteDescription, siteName } from '../metadata'
 import head from './head'
 
-const nolebase = presetMarkdownIt()
+// unlazyImages 关闭：它依赖 thumbnail-hash 生成的 map.json 来给图片注入 blur-up 懒加载
+// 属性。站点内容用 obsidian-image-embed 渲染普通 <img>，不需要该组件，且关闭 map 生成后
+// 在 GHPages 干净 checkout 上会因找不到 map.json 而构建失败。
+const nolebase = presetMarkdownIt({
+  unlazyImages: false,
+})
 
 /**
  * 修复 nolebase calculateSidebar 生成的 index 页面链接。
