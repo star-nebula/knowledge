@@ -50,6 +50,38 @@ function fixSidebarIndexLinks(sidebar: any): any {
 
 export default defineConfig({
   base: SITE_BASE,
+  // 仅构建「站点内容」文件夹，排除 Obsidian 私人库（Knowledge/Resources/Skills/...
+  // 等）。这些私人笔记引用了 vault/Attachments 中无法被 Skia 解码的损坏图，
+  // 会让 @nolebase/thumbnail-hash 在构建期崩溃（Failed to make image from encoded data）。
+  // srcExclude 相对 srcDir（即仓库根 E:\knowledge）匹配，故用 **/ 前缀兜底。
+  srcExclude: [
+    '**/Knowledge/**',
+    '**/Projects/**',
+    '**/DailyNotes/**',
+    '**/Inbox/**',
+    '**/Interview/**',
+    '**/Resources/**',
+    '**/Skills/**',
+    '**/Canvas/**',
+    '**/Templates/**',
+    '**/Archive/**',
+    '**/rules/**',
+    '**/AgentLog/**',
+    '**/Published/**',
+    '**/.opencode/**',
+    '**/.trash/**',
+    '**/.workbuddy/**',
+    '**/.obsidian/**',
+    '**/.codebuddy/**',
+    '**/data/**',
+    '**/视图/**',
+    '**/Home.md',
+    '**/AGENT.md',
+  ],
+  // 仅构建「站点内容」文件夹（vault/笔记、vault/作坊、vault/档案、vault/编目 Catalog），
+  // 排除 Obsidian 私人库。好处：① 构建更快、产物更干净；② 私人笔记不会被发布。
+  // 注意：srcExclude 只影响「页面构建」，不影响 thumbnail-hash（该插件已在本仓库
+  // vite.config.ts 中关闭，因为它会全量扫描仓库图片并在损坏图上卡死/崩溃）。
   lastUpdated: true,
   vue: {
     template: {
@@ -59,7 +91,6 @@ export default defineConfig({
         img: ['src'],
         image: ['xlink:href', 'href'],
         use: ['xlink:href', 'href'],
-        NolebaseUnlazyImg: ['src'],
       },
     },
   },
