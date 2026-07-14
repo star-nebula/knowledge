@@ -6,6 +6,9 @@ import { BiDirectionalLinks } from '@nolebase/markdown-it-bi-directional-links'
 import MarkdownItFootnote from 'markdown-it-footnote'
 import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { defineConfig } from 'vitepress'
+import { obsidianImageEmbed } from './markdown/obsidian-image-embed'
+
+const SITE_BASE = '/knowledge/'
 
 import { githubRepoLink, siteDescription, siteName } from '../metadata'
 import head from './head'
@@ -15,7 +18,7 @@ const nolebase = presetMarkdownIt()
 /**
  * 修复 nolebase calculateSidebar 生成的 index 页面链接。
  *
- * nolebase 对 index.md 生成的链接形如 `/zh-CN/笔记/🌐 网站部署/index`，
+ * nolebase 对 index.md 生成的链接形如 `/vault/笔记/🌐 网站部署/index`，
  * 而 VitePress 的 isActive / normalize 只处理 `.md` / `.html` 结尾，
  * 无法剥离末尾的 `/index`，导致 pager（上下页导航）对所有 index 页面
  * 都找不到当前页，退化到始终取侧边栏第一项作为 "Next page"。
@@ -46,7 +49,7 @@ function fixSidebarIndexLinks(sidebar: any): any {
 }
 
 export default defineConfig({
-  base: '/knowledge/',
+  base: SITE_BASE,
   lastUpdated: true,
   vue: {
     template: {
@@ -136,15 +139,15 @@ export default defineConfig({
     root: {
       lang: 'zh-CN',
       label: '中文',
-      dir: '/zh-CN',
-      link: '/zh-CN',
+      dir: '/vault',
+      link: '/vault',
       themeConfig: {
         nav: [
-          { text: '主页', link: '/zh-CN/' },
-          { text: '笔记', link: '/zh-CN/笔记/' },
-          { text: '作坊', link: '/zh-CN/作坊/' },
-          { text: '档案', link: '/zh-CN/档案/', activeMatch: '^/zh-CN/档案/' },
-          { text: '最近更新', link: '/zh-CN/toc' },
+          { text: '主页', link: '/vault/' },
+          { text: '笔记', link: '/vault/笔记/' },
+          { text: '作坊', link: '/vault/作坊/' },
+          { text: '档案', link: '/vault/档案/', activeMatch: '^/vault/档案/' },
+          { text: '最近更新', link: '/vault/toc' },
         ],
         lastUpdated: {
           text: '最后更新',
@@ -159,11 +162,11 @@ export default defineConfig({
           text: '编辑本页面',
         },
         sidebar: fixSidebarIndexLinks(calculateSidebar([
-          { folderName: 'zh-CN/笔记', separate: true },
-          { folderName: 'zh-CN/作坊', separate: true },
-          { folderName: 'zh-CN/档案', separate: true },
-          { folderName: 'zh-CN/编目 Catalog', separate: true },
-        ], 'zh-CN')),
+          { folderName: 'vault/笔记', separate: true },
+          { folderName: 'vault/作坊', separate: true },
+          { folderName: 'vault/档案', separate: true },
+          { folderName: 'vault/编目 Catalog', separate: true },
+        ], 'vault')),
         footer: {
           message: '每一篇文章，都是时间的标本',
         },
@@ -180,6 +183,7 @@ export default defineConfig({
       await nolebase.install(md)
     },
     config: (md) => {
+      md.use(obsidianImageEmbed(SITE_BASE))
       md.use(MarkdownItFootnote)
       md.use(MarkdownItMathjax3)
       // Obsidian 风格双向链接：[[页面名]] 解析为站内链接（baseDir 对齐 VitePress base '/knowledge/'）
