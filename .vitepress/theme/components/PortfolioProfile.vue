@@ -28,26 +28,26 @@ const contacts = [
 ]
 const timeline: TimelineItem[] = [
   { period: '2024.08 - 2026.05', title: 'AI应用开发工程师', desc: '负责电商AI产品线，主导3个核心项目落地', link: '#core-projects', linkText: '跳转查看关联项目' },
-  { period: '2021.09 - 2025.06', title: '人工智能（本科）', desc: '主修NLP、深度学习、大模型应用开发', link: '/zh-CN/笔记/', linkText: '跳转知识库学习笔记' },
+  { period: '2021.09 - 2025.06', title: '人工智能（本科）', desc: '主修NLP、深度学习、大模型应用开发', link: '/vault/笔记/', linkText: '跳转知识库学习笔记' },
 ]
 const techTags: TechTag[] = [
-  { name: 'LangGraph', group: 'llm', tooltip: '电商选品多Agent编排框架，实现8阶段Agent工作流', link: '/zh-CN/笔记/🤖 AI应用开发/LangChain Agents 组件' },
-  { name: 'DeepSeek', group: 'llm', tooltip: '核心推理模型，用于选品分析、客服意图识别', link: '/zh-CN/笔记/🤖 AI应用开发/DeepSeek' },
-  { name: 'ReAct', group: 'llm', tooltip: 'Agent推理范式，实现工具调用与思维链推理', link: '/zh-CN/笔记/🤖 AI应用开发/LangChain Agents 组件' },
-  { name: 'vLLM', group: 'llm', tooltip: '本地模型推理部署框架，支撑14B模型低延迟服务', link: '/zh-CN/笔记/🤖 AI应用开发/大模型-知识扩展' },
-  { name: 'LoRA', group: 'llm', tooltip: '模型微调技术，用于垂直领域模型适配', link: '/zh-CN/笔记/🤖 AI应用开发/大模型-基础' },
-  { name: 'MCP', group: 'llm', tooltip: 'Model Context Protocol，多Agent上下文通信协议', link: '/zh-CN/笔记/🤖 AI应用开发/n8n AI Agent 工作流' },
-  { name: 'PyTorch', group: 'nlp', tooltip: '深度学习框架，模型训练与推理核心工具', link: '/zh-CN/笔记/🤖 AI应用开发/深度学习-核心工具' },
-  { name: 'BERT', group: 'nlp', tooltip: '预训练模型，商品短文本分类基座模型', link: '/zh-CN/笔记/🤖 AI应用开发/Transformer' },
-  { name: '模型压缩', group: 'nlp', tooltip: '量化/蒸馏/剪枝三路线，399MB到8MB体积压缩', link: '/zh-CN/笔记/🤖 AI应用开发/AI全景概览' },
-  { name: 'HuggingFace', group: 'nlp', tooltip: '模型仓库与推理工具链', link: '/zh-CN/笔记/🤖 AI应用开发/LangChain Models 组件' },
-  { name: 'FastText', group: 'nlp', tooltip: '轻量化文本分类兜底方案', link: '/zh-CN/笔记/🤖 AI应用开发/NLP-文本预处理' },
-  { name: 'Milvus', group: 'eng', tooltip: '电商RAG知识库向量存储，支撑1000+条目混合检索', link: '/zh-CN/笔记/🤖 AI应用开发/Milvus 向量数据库' },
-  { name: 'Redis', group: 'eng', tooltip: '三级缓存实现，缓存命中率60%+', link: '/zh-CN/笔记/🛠️ 工程工具/Redis 核心概念' },
+  { name: 'LangGraph', group: 'llm', tooltip: '电商选品多Agent编排框架，实现8阶段Agent工作流', link: '/vault/笔记/🤖 AI应用开发/LangChain Agents 组件' },
+  { name: 'DeepSeek', group: 'llm', tooltip: '核心推理模型，用于选品分析、客服意图识别', link: '/vault/笔记/🤖 AI应用开发/DeepSeek' },
+  { name: 'ReAct', group: 'llm', tooltip: 'Agent推理范式，实现工具调用与思维链推理', link: '/vault/笔记/🤖 AI应用开发/LangChain Agents 组件' },
+  { name: 'vLLM', group: 'llm', tooltip: '本地模型推理部署框架，支撑14B模型低延迟服务', link: '/vault/笔记/🤖 AI应用开发/大模型-知识扩展' },
+  { name: 'LoRA', group: 'llm', tooltip: '模型微调技术，用于垂直领域模型适配', link: '/vault/笔记/🤖 AI应用开发/大模型-基础' },
+  { name: 'MCP', group: 'llm', tooltip: 'Model Context Protocol，多Agent上下文通信协议', link: '/vault/笔记/🤖 AI应用开发/n8n AI Agent 工作流' },
+  { name: 'PyTorch', group: 'nlp', tooltip: '深度学习框架，模型训练与推理核心工具', link: '/vault/笔记/🤖 AI应用开发/深度学习-核心工具' },
+  { name: 'BERT', group: 'nlp', tooltip: '预训练模型，商品短文本分类基座模型', link: '/vault/笔记/🤖 AI应用开发/Transformer' },
+  { name: '模型压缩', group: 'nlp', tooltip: '量化/蒸馏/剪枝三路线，399MB到8MB体积压缩', link: '/vault/笔记/🤖 AI应用开发/AI全景概览' },
+  { name: 'HuggingFace', group: 'nlp', tooltip: '模型仓库与推理工具链', link: '/vault/笔记/🤖 AI应用开发/LangChain Models 组件' },
+  { name: 'FastText', group: 'nlp', tooltip: '轻量化文本分类兜底方案', link: '/vault/笔记/🤖 AI应用开发/NLP-文本预处理' },
+  { name: 'Milvus', group: 'eng', tooltip: '电商RAG知识库向量存储，支撑1000+条目混合检索', link: '/vault/笔记/🤖 AI应用开发/Milvus 向量数据库' },
+  { name: 'Redis', group: 'eng', tooltip: '三级缓存实现，缓存命中率60%+', link: '/vault/笔记/🛠️ 工程工具/Redis 核心概念' },
   { name: 'FastAPI', group: 'eng', tooltip: 'API服务框架，支撑高并发接口请求' },
-  { name: 'MySQL', group: 'eng', tooltip: '业务数据持久化存储', link: '/zh-CN/笔记/🛠️ 工程工具/MySQL 数据库基础' },
-  { name: 'Docker', group: 'eng', tooltip: '容器化部署，实现环境一致性', link: '/zh-CN/笔记/🛠️ 工程工具/Docker' },
-  { name: 'Streamlit', group: 'eng', tooltip: '快速Demo原型搭建，内部工具演示', link: '/zh-CN/笔记/🛠️ 工程工具/Streamlit 入门' },
+  { name: 'MySQL', group: 'eng', tooltip: '业务数据持久化存储', link: '/vault/笔记/🛠️ 工程工具/MySQL 数据库基础' },
+  { name: 'Docker', group: 'eng', tooltip: '容器化部署，实现环境一致性', link: '/vault/笔记/🛠️ 工程工具/Docker' },
+  { name: 'Streamlit', group: 'eng', tooltip: '快速Demo原型搭建，内部工具演示', link: '/vault/笔记/🛠️ 工程工具/Streamlit 入门' },
 ]
 const tagGroups = [
   { key: 'llm', label: '大模型 & 多Agent' },
@@ -55,9 +55,9 @@ const tagGroups = [
   { key: 'eng', label: '工程 & 工具' },
 ]
 const projects: Project[] = [
-  { id: 1, title: '电商每日精选选品简报系统（多Agent）', period: '2025.10 - 2026.05', tags: ['LangGraph','DeepSeek','ReAct','vLLM'], metric: '运营选品耗时 2h → 10min', details: { pain: '人工选品效率低、偏好难量化、跨批次重复推荐率高', solution: '八阶段多Agent编排架构 + ReAct推理循环 + 两级向量去重', result: '跨批次去重率92%+，偏好学习后命中率提升30%', difficulty: 'ReAct推理防死循环机制、去重召回率与精度平衡' }, link: '/zh-CN/档案/电商选品简报系统-复盘笔记' },
-  { id: 2, title: '电商智能客服问答系统（RAG）', period: '2024.12 - 2025.08', tags: ['Milvus','DeepSeek','Redis','vLLM'], metric: '意图准确率 95%+ / 缓存命中率 60%+', details: { pain: '传统客服回复慢、知识库更新滞后、数据隐私要求高', solution: '五层RAG分层架构 + 双路召回+重排 + 三级缓存 + vLLM本地部署', result: '响应延迟降低70%，人工介入率下降40%', difficulty: '长上下文召回精度优化、低延迟本地大模型部署' }, link: '/zh-CN/档案/电商智能客服RAG系统-复盘笔记' },
-  { id: 3, title: '商品短文本类目分类系统（模型轻量化）', period: '2024.08 - 2024.12', tags: ['PyTorch','BERT','模型压缩','FastText'], metric: '准确率 93.97% / 模型体积 399MB → 8MB', details: { pain: '大模型推理慢、部署成本高、边缘设备无法运行', solution: '三种压缩路线对比（量化/蒸馏/剪枝）+ FastText兜底', result: '分类耗时从3min降至秒级，模型体积压缩98%', difficulty: '精度与体积平衡、样本不均衡处理' }, link: '/zh-CN/档案/商品短文本分类模型轻量化-复盘笔记' },
+  { id: 1, title: '电商每日精选选品简报系统（多Agent）', period: '2025.10 - 2026.05', tags: ['LangGraph','DeepSeek','ReAct','vLLM'], metric: '运营选品耗时 2h → 10min', details: { pain: '人工选品效率低、偏好难量化、跨批次重复推荐率高', solution: '八阶段多Agent编排架构 + ReAct推理循环 + 两级向量去重', result: '跨批次去重率92%+，偏好学习后命中率提升30%', difficulty: 'ReAct推理防死循环机制、去重召回率与精度平衡' }, link: '/vault/档案/电商选品简报系统-复盘笔记' },
+  { id: 2, title: '电商智能客服问答系统（RAG）', period: '2024.12 - 2025.08', tags: ['Milvus','DeepSeek','Redis','vLLM'], metric: '意图准确率 95%+ / 缓存命中率 60%+', details: { pain: '传统客服回复慢、知识库更新滞后、数据隐私要求高', solution: '五层RAG分层架构 + 双路召回+重排 + 三级缓存 + vLLM本地部署', result: '响应延迟降低70%，人工介入率下降40%', difficulty: '长上下文召回精度优化、低延迟本地大模型部署' }, link: '/vault/档案/电商智能客服RAG系统-复盘笔记' },
+  { id: 3, title: '商品短文本类目分类系统（模型轻量化）', period: '2024.08 - 2024.12', tags: ['PyTorch','BERT','模型压缩','FastText'], metric: '准确率 93.97% / 模型体积 399MB → 8MB', details: { pain: '大模型推理慢、部署成本高、边缘设备无法运行', solution: '三种压缩路线对比（量化/蒸馏/剪枝）+ FastText兜底', result: '分类耗时从3min降至秒级，模型体积压缩98%', difficulty: '精度与体积平衡、样本不均衡处理' }, link: '/vault/档案/商品短文本分类模型轻量化-复盘笔记' },
 ]
 
 const displayedTitle = ref('')
