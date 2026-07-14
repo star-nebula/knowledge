@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: 开始阅读
-      link: /zh-CN/笔记/index
+      link: /vault/笔记/index
     - theme: alt
       text: GitHub 上浏览
       link: https://github.com/star-nebula/knowledge
