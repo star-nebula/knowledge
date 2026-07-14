@@ -2,6 +2,7 @@ import { presetMarkdownIt } from '@nolebase/integrations/vitepress/markdown-it'
 import { transformHeadMeta } from '@nolebase/vitepress-plugin-meta'
 import { calculateSidebar } from '@nolebase/vitepress-plugin-sidebar'
 // import { buildEndGenerateOpenGraphImages } from '@nolebase/vitepress-plugin-og-image/vitepress'
+import { BiDirectionalLinks } from '@nolebase/markdown-it-bi-directional-links'
 import MarkdownItFootnote from 'markdown-it-footnote'
 import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { defineConfig } from 'vitepress'
@@ -181,6 +182,14 @@ export default defineConfig({
     config: (md) => {
       md.use(MarkdownItFootnote)
       md.use(MarkdownItMathjax3)
+      // Obsidian 风格双向链接：[[页面名]] 解析为站内链接（baseDir 对齐 VitePress base '/knowledge/'）
+      md.use(BiDirectionalLinks, {
+        baseDir: '/knowledge/',
+        // 排除非内容目录，避免把 Obsidian 库/构建产物等当成链接目标
+        excludesPatterns: ['_*', 'dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata'],
+        // 未匹配的链接仍渲染为无效链接（带 .nolebase-route-link-invalid 类），便于发现死链
+        stillRenderNoMatched: true,
+      })
     },
   },
   async transformHead(context) {

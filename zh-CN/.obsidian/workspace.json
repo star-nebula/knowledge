@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "04e1025c6ccbf120",
+        "id": "65d5d8532d904e9d",
         "type": "tabs",
         "children": [
           {
-            "id": "7b6af6a6c28ac44f",
+            "id": "fa3b0fe571cd38f6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "笔记/🤖 AI应用开发/RAG.md",
-                "mode": "preview",
+                "file": "作坊/ai-tryon-video-demo.md",
+                "mode": "source",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "RAG"
+              "title": "ai-tryon-video-demo"
             }
           }
         ]
@@ -63,7 +63,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:AI Agent",
+                "query": "Pasted Image 20260430112116_723.png",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -90,7 +90,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3-wiki/topics/大模型与AI应用学习路径/AI范式转移：从Chat到Agent.md",
+                "file": "作坊/ai-tryon-video-demo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +100,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "AI范式转移：从Chat到Agent 的反向链接列表"
+              "title": "ai-tryon-video-demo 的反向链接列表"
             }
           },
           {
@@ -186,13 +186,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "笔记/🤖 AI应用开发/RAG.md",
+                "file": "作坊/ai-tryon-video-demo.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "RAG 的大纲"
+              "title": "ai-tryon-video-demo 的大纲"
             }
           }
         ],
@@ -220,54 +220,53 @@
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "7b6af6a6c28ac44f",
+  "active": "fa3b0fe571cd38f6",
   "lastOpenFiles": [
-    "笔记/🤖 AI应用开发/Transformer 架构与实现.md",
+    "作坊/feedlens-project.md",
+    "作坊/glowlink-demo.md",
+    "Attachments",
+    "作坊/ai-tryon-video-demo.md",
+    "视图/未添加标签的页面.md",
+    "视图/尚未编写完成的页面.md",
+    "档案/电商选品简报系统-复盘笔记.md",
+    "档案/电商智能客服RAG系统-复盘笔记.md",
+    "档案/商品短文本分类模型轻量化-复盘笔记.md",
+    "笔记/🤖 AI应用开发/大模型-基础.md",
+    "Attachments/file-20260714200547718.png",
+    "笔记/🤖 AI应用开发/assets/file-20260714200440387.png",
+    "笔记/🤖 AI应用开发/assets/15cf9f6fffb67fcda183897b05926f30_MD5.jpg",
+    "笔记/🤖 AI应用开发/assets/file-20260714200345183.png",
+    "笔记/🤖 AI应用开发/assets",
+    "笔记/📚 个人知识管理/index.md",
+    "笔记/📚 个人知识管理/07-思维模型与习惯.md",
+    "笔记/📚 个人知识管理/01-基础概念.md",
+    "index.md",
+    "笔记/🛠️ 工程工具/Streamlit 入门.md",
+    "作坊/index.md",
+    "作坊/assets",
+    "🔌 知识库插件列表.md",
+    "笔记/🤖 AI应用开发/大模型-知识扩展.md",
+    "档案/index.md",
     "笔记/🤖 AI应用开发/RAG.md",
+    "笔记/🤖 AI应用开发/Transformer 架构与实现.md",
     "笔记/🤖 AI应用开发/Transformer 应用开发视角.md",
     "笔记/🤖 AI应用开发/深度学习-核心工具.md",
-    "档案/电商选品简报系统-复盘笔记.md",
     "笔记/🤖 AI应用开发/n8n AI Agent 工作流.md",
-    "笔记/🤖 AI应用开发/大模型-知识扩展.md",
     "笔记/🤖 AI应用开发/Milvus 向量数据库.md",
     "笔记/🤖 AI应用开发/NLP-文本预处理.md",
-    "笔记/🤖 AI应用开发/LangChain Models 组件.md",
-    "笔记/🤖 AI应用开发/AI全景概览.md",
-    "笔记/🤖 AI应用开发/大模型-基础.md",
-    "笔记/🤖 AI应用开发/index.md",
-    "笔记/🤖 AI应用开发/DeepSeek.md",
-    "笔记/🤖 AI应用开发/LangChain Agents 组件.md",
-    "作坊/ai-tryon-video-demo.md",
-    "笔记/🌐 网站部署/index.md",
-    "笔记/🌐 网站部署/02-本地预览.md",
-    "data/images/ui-overview.svg",
-    "data/images/tech-decisions.png",
-    "data/images/rag-pipeline.png",
-    "data/images/architecture-overview.png",
-    "data/images/139239-20191126141006657-1969131669-20250728214318-05c3fdq.png",
-    "data/images/file-20260425232419715.png",
-    "data/images/file-20260425232409366.png",
-    "data/images/file-20260425232358422.png",
-    "data/images/file-20260425232324661.png",
-    "作坊/images/tech-decisions.png",
-    "笔记/🛠️ 工程工具/index.md",
-    "data/images",
+    "Attachments/ui-overview.svg",
+    "Attachments/tech-decisions.png",
+    "Attachments/rag-pipeline.png",
+    "Attachments/architecture-overview.png",
+    "Attachments/139239-20191126141006657-1969131669-20250728214318-05c3fdq.png",
+    "Attachments/file-20260425232419715.png",
+    "Attachments",
     "笔记/🛠️ 工程工具/assets",
-    "笔记/🛠️ 工程工具/Streamlit 入门.md",
-    "笔记/🛠️ 工程工具/Docker.md",
-    "笔记/🛠️ 工程工具/MySQL 数据库基础.md",
-    "笔记/🛠️ 工程工具/Redis 核心概念.md",
     "笔记/🛠️ 工程工具",
-    "🔌 知识库插件列表.md",
-    "档案/index.md",
-    "档案/商品短文本分类模型轻量化-复盘笔记.md",
     "档案",
     "作坊/images/_data_uris.json",
     "面试/面试题/assets",
     "面试/简历/Archives",
-    "面试/面试题",
-    "面试/电商简报系统-简要架构图.drawio",
-    "面试/电商简报系统-自主性架构图.drawio",
     "未命名.canvas",
     "1-Projects/AI应用开发技术栈.canvas",
     "1-Projects/黑马AI课程内容.canvas",
