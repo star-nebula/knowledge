@@ -10,7 +10,7 @@
 # Obsidian
 
 **/.obsidian/*
-!**/.obsidian/workspace*
+!**/.obsidian/workspaces.json
 !**/.obsidian/graph*
 !**/.obsidian/snippets/
 .opencode/
