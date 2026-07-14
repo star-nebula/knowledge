@@ -291,7 +291,7 @@ Streamlit 6 个页面：
 | 执行日志 | 查看每次管线执行的详细日志 |
 | 执行仪表盘 | 可视化统计（采集趋势、质量趋势、反馈分布） |
 
-![FeedLens UI 界面总览](../data/images/ui-overview.svg)
+![FeedLens UI 界面总览](ui-overview.svg)
 
 ---
 

@@ -18,11 +18,11 @@ tags:
 
 ## 项目
 
-- [FeedLens：多 Agent 智能信息简报系统](feedlens-project.md) — LangGraph + DeepSeek + ChromaDB，RSS 采集 → 向量去重 → 多因子排序 → 简报生成 → MCP 推送，全链路 LLM 自主编排
+- [[feedlens-project|FeedLens：多 Agent 智能信息简报系统]] — LangGraph + DeepSeek + ChromaDB，RSS 采集 → 向量去重 → 多因子排序 → 简报生成 → MCP 推送，全链路 LLM 自主编排
 
 ---
 
 ## Demo
 
-- [GlowLink：多 Agent 社媒获客系统](glowlink-demo.md) — LangGraph + RAG 混合检索 + MCP，覆盖内容生产→社媒运营→销售转化全链路
-- [AI电商换装视频生成系统](ai-tryon-video-demo.md) — 阿里云 OutfitAnyone + 万相 animate-mix，产品图 → AI换装 → 分镜视频复刻，全云端自动化
+- [[glowlink-demo|GlowLink：多 Agent 社媒获客系统]] — LangGraph + RAG 混合检索 + MCP，覆盖内容生产→社媒运营→销售转化全链路
+- [[ai-tryon-video-demo|AI电商换装视频生成系统]] — 阿里云 OutfitAnyone + 万相 animate-mix，产品图 → AI换装 → 分镜视频复刻，全云端自动化
