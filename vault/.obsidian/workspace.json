@@ -52,7 +52,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byModifiedTime",
+                "sortOrder": "custom",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -190,13 +190,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Attachments/Transformer/assets/Pasted Image 20260327174543_305.png",
+                "file": "Knowledge/Engineering/分治算法.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Pasted Image 20260327174543_305 的大纲"
+              "title": "分治算法 的大纲"
             }
           }
         ],
@@ -226,6 +226,13 @@
   },
   "active": "d161037d735277cc",
   "lastOpenFiles": [
+    "Knowledge/Methods/Markdown 语法.md",
+    "Knowledge/Methods/笔记方法七合一.md",
+    "index.md",
+    "Published/索引.md",
+    "Home.md",
+    "Published/网页笔记四步工作流.md",
+    "Projects/WebNote-Workflow/posts/网页笔记四步工作流.md",
     "Attachments/Transformer/assets/Pasted Image 20260330093956_034.png",
     "Attachments/RNN及其变体/结构解释图.excalidraw.md",
     "Attachments/注意力机制/2-普通Encoder-Decoder框架.excalidraw.md",
@@ -237,7 +244,6 @@
     "Resources/黑马程序员-人工智能/6-自然语言处理基础/4.transformer.md",
     "Archive/2026-07-模型与对齐迁移备份/NLP基础/Transformer.md",
     "Knowledge/AI/Transformer.md",
-    "Home.md",
     "Templates/PublishedNote.md",
     "Knowledge/AI/NLP-文本预处理.md",
     "Archive/2026-07-模型与对齐迁移备份/NLP基础/文本预处理.md",
@@ -245,7 +251,6 @@
     "Knowledge/AI/NLP-文本预处理.md.baiduyun.uploading.cfg",
     "Knowledge/AI/大模型-基础.md.baiduyun.uploading.cfg",
     "Knowledge/AI/大模型-基础.md",
-    "Projects/WebNote-Workflow/posts/网页笔记四步工作流.md",
     "Templates/PublishedNote.md.baiduyun.uploading.cfg",
     "rules/指南-发布内容.md.baiduyun.uploading.cfg",
     "Published/网页笔记四步工作流.md.baiduyun.uploading.cfg",
@@ -253,15 +258,11 @@
     "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/content/index.md.baiduyun.uploading.cfg",
     "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/04-待确认提案.md.baiduyun.uploading.cfg",
     "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/03-核查表.md.baiduyun.uploading.cfg",
-    "Published/网页笔记四步工作流.md",
     "DailyNotes/2026/Invalid date.md",
-    "Published/索引.md",
     "Templates/source.md",
     "rules/指南-发布内容.md",
     "Projects/WebNote-Workflow/README.md",
     "Resources/AI精英学院/Agent OS 的第一课：会分工，才会用 Agent.md",
-    "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/04-待确认提案.md",
-    "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/02-笔记.md",
     "Attachments/eecf57ed13fff8a72b0449cea15922b5_MD5.webp",
     "Attachments/a44c4fda203aab2a4d5b76a33b6c3573_MD5.webp",
     "Attachments/e8477270c15bba1950195743d0e6fac6_MD5.webp",
@@ -271,7 +272,6 @@
     "Attachments/bdb349d982ad4f5f5c3d5f038989be4f_MD5.webp",
     "Attachments/133e1928715c87fa3cdcc264352eb327_MD5.webp",
     "Attachments/196333da6a9a51b271661bed3d99ef71_MD5.webp",
-    "Attachments/48e83773673a0529be562593147e46ef_MD5.webp",
     "Skills/obsidian-canvas-creator/assets/template-mindmap-simple.canvas",
     "Skills/obsidian-canvas-creator/assets/template-freeform-grouped.canvas",
     "未命名.canvas",

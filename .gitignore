@@ -33,6 +33,11 @@ vault/Published/
 vault/Home.md
 vault/AGENT.md
 
+# 附件：默认全部不入库(仅本地 + 百度云备份, 防止 740+ 张私人图泄到 GitHub)
+# 由 scripts/sync-published-assets.mjs 把「被 git 跟踪的笔记(=站点内容)引用到的图片」
+# 用 git add -f 显式追踪, 从而只让发布需要的图片进 GitHub
+vault/Attachments/**
+
 # Temporary files
 
 .temp
