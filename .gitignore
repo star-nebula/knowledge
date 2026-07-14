@@ -13,6 +13,25 @@
 !**/.obsidian/workspace*
 !**/.obsidian/graph*
 !**/.obsidian/snippets/
+.opencode/
+
+# 个人笔记(从 BaiduSyncdisk/obsidian 迁入, 不发布到网站, 仅百度云备份)
+# 发布改为显式开关: 给笔记加 status: published 并接入 nav/sidebar, 而非靠文件夹
+vault/Knowledge/
+vault/Projects/
+vault/DailyNotes/
+vault/Inbox/
+vault/Interview/
+vault/Resources/
+vault/Skills/
+vault/Canvas/
+vault/Templates/
+vault/Archive/
+vault/rules/
+vault/AgentLog/
+vault/Published/
+vault/Home.md
+vault/AGENT.md
 
 # Temporary files
 
