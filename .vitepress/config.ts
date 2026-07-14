@@ -241,12 +241,53 @@ export default defineConfig({
 
     return head
   },
-  // async buildEnd(siteConfig) {
-  //   await buildEndGenerateOpenGraphImages({
-  //     baseUrl: targetDomain,
-  //     category: {
-  //       byLevel: 2,
-  //     },
-  //   })(siteConfig)
-  // },
+  async buildEnd(siteConfig) {
+    const fs = await import('node:fs')
+    const path = await import('node:path')
+    const outDir = siteConfig.outDir
+    const base = SITE_BASE
+    const home = `${base}vault/`
+
+    // 1) 根路径 /knowledge/ 没有 index.html（内容在 /vault/），GitHub Pages 会直接回退到 404.html。
+    //    这里写一个根 index.html 做客户端跳转，避免依赖 404 流程、也更明确。
+    const rootHtml = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url=${home}">
+<script>location.href="${home}" + (location.hash || "")</script>
+</head>
+<body><a href="${home}">进入首页</a></body>
+</html>`
+    fs.writeFileSync(path.join(outDir, 'index.html'), rootHtml)
+
+    // 2) 修复 VitePress 2.0 alpha 的内置重定向：它把“默认语言路径”算成了 lang 值
+    //    (/knowledge/zh-CN/)，而实际内容在 /knowledge/vault/。该错误跳转目标在 404 页和
+    //    每个内容页的内联脚本里都会出现，递归全部改掉（旧 /zh-CN/ 路径已不存在，无副作用）。
+    const wrong = `${base}zh-CN/`
+    const right = `${base}vault/`
+
+    // 3) VitePress 把 locale 的 dir 选项 (/vault) 误用为 <html dir> 属性（应为 ltr/rtl）。
+    //    浏览器对非法 dir 值按 ltr 处理，无功能影响，此处顺手修正所有页面（含嵌套 excalidraw 页）。
+    const walkDir = (dir: string) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fp = path.join(dir, entry.name)
+        if (entry.isDirectory()) {
+          walkDir(fp)
+          continue
+        }
+        if (!entry.name.endsWith('.html'))
+          continue
+        let s = fs.readFileSync(fp, 'utf-8')
+        if (s.includes(wrong) || s.includes('dir="/vault"')) {
+          if (s.includes(wrong))
+            s = s.split(wrong).join(right)
+          if (s.includes('dir="/vault"'))
+            s = s.replace(/dir="\/vault"/g, 'dir="ltr"')
+          fs.writeFileSync(fp, s)
+        }
+      }
+    }
+    walkDir(outDir)
+  },
 })
