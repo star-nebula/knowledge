@@ -4,18 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "65d5d8532d904e9d",
+        "id": "7cf35b9be972777c",
         "type": "tabs",
         "children": [
           {
-            "id": "fa3b0fe571cd38f6",
+            "id": "a5a06906c1954e1d",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "笔记/📚 个人知识管理/index.md",
+                "file": "Home.md",
                 "mode": "source",
-                "source": true,
+                "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
                   "collapseAll": false,
@@ -27,8 +28,9 @@
                   "unlinkedCollapsed": true
                 }
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Home"
             }
           }
         ]
@@ -50,7 +52,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "custom",
+                "sortOrder": "byModifiedTime",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -63,7 +65,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Pasted Image 20260430112116_723.png",
+                "query": "1-Transformer-架构图.excalidraw",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -90,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "作坊/feedlens-project.md",
+                "file": "Knowledge/AllNote-MOC.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +102,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "feedlens-project 的反向链接列表"
+              "title": "AllNote-MOC 的反向链接列表"
             }
           },
           {
@@ -109,12 +111,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2-Areas/AI应用开发/04_机器学习/强化学习.md",
+                "file": "Knowledge/AI/RAG 概述.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "强化学习 的出链列表"
+              "title": "RAG 概述 的出链列表"
             }
           },
           {
@@ -123,15 +125,15 @@
             "state": {
               "type": "notebook-navigator",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "notebook-navigator"
+              "icon": "notebook-navigator",
+              "title": "笔记本导航器"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 317.5
+    "width": 348.5
   },
   "right": {
     "id": "e53e79380065f4ba",
@@ -175,9 +177,11 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {},
+              "state": {
+                "file": "Attachments/Transformer/assets/Pasted Image 20260327174543_305.png"
+              },
               "icon": "lucide-info",
-              "title": "笔记属性"
+              "title": "Pasted Image 20260327174543_305的笔记属性"
             }
           },
           {
@@ -186,13 +190,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "笔记/📚 个人知识管理/index.md",
+                "file": "Attachments/Transformer/assets/Pasted Image 20260327174543_305.png",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "Pasted Image 20260327174543_305 的大纲"
             }
           }
         ],
@@ -212,62 +216,64 @@
       "command-palette:打开命令面板": false,
       "bases:新建数据库": true,
       "publish:发布更改": true,
-      "notebook-navigator:笔记本导航器": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false,
       "i18n:common.i18n": false,
+      "notebook-navigator:笔记本导航器": false,
       "media-extended:Open media library": false,
       "media-extended:Open media quick switcher": false,
+      "obsidian-excalidraw-plugin:新建绘图文件": false,
       "obsidian-local-images-plus:Local Images Plus  0.16.4\r\nLocalize attachments (plugin folder)": false
     }
   },
-  "active": "fa3b0fe571cd38f6",
+  "active": "d161037d735277cc",
   "lastOpenFiles": [
-    "data/images",
-    "作坊/feedlens-project.md",
-    "作坊/glowlink-demo.md",
-    "作坊/ai-tryon-video-demo.md",
-    "Attachments",
-    "视图/未添加标签的页面.md",
-    "视图/尚未编写完成的页面.md",
-    "档案/电商选品简报系统-复盘笔记.md",
-    "档案/电商智能客服RAG系统-复盘笔记.md",
-    "档案/商品短文本分类模型轻量化-复盘笔记.md",
-    "笔记/🤖 AI应用开发/大模型-基础.md",
-    "Attachments/file-20260714200547718.png",
-    "笔记/🤖 AI应用开发/assets/file-20260714200440387.png",
-    "笔记/🤖 AI应用开发/assets/15cf9f6fffb67fcda183897b05926f30_MD5.jpg",
-    "笔记/🤖 AI应用开发/assets/file-20260714200345183.png",
-    "笔记/🤖 AI应用开发/assets",
-    "笔记/📚 个人知识管理/index.md",
-    "笔记/📚 个人知识管理/07-思维模型与习惯.md",
-    "笔记/📚 个人知识管理/01-基础概念.md",
-    "index.md",
-    "笔记/🛠️ 工程工具/Streamlit 入门.md",
-    "作坊/index.md",
-    "作坊/assets",
-    "🔌 知识库插件列表.md",
-    "笔记/🤖 AI应用开发/大模型-知识扩展.md",
-    "档案/index.md",
-    "笔记/🤖 AI应用开发/RAG.md",
-    "笔记/🤖 AI应用开发/Transformer 架构与实现.md",
-    "笔记/🤖 AI应用开发/Transformer 应用开发视角.md",
-    "笔记/🤖 AI应用开发/深度学习-核心工具.md",
-    "笔记/🤖 AI应用开发/n8n AI Agent 工作流.md",
-    "笔记/🤖 AI应用开发/Milvus 向量数据库.md",
-    "笔记/🤖 AI应用开发/NLP-文本预处理.md",
-    "Attachments/ui-overview.svg",
-    "Attachments/tech-decisions.png",
-    "Attachments/rag-pipeline.png",
-    "Attachments/architecture-overview.png",
-    "Attachments/139239-20191126141006657-1969131669-20250728214318-05c3fdq.png",
-    "Attachments/file-20260425232419715.png",
-    "Attachments",
-    "笔记/🛠️ 工程工具/assets",
-    "笔记/🛠️ 工程工具",
-    "档案",
-    "作坊/images/_data_uris.json",
-    "面试/面试题/assets",
-    "面试/简历/Archives",
+    "Attachments/Transformer/assets/Pasted Image 20260330093956_034.png",
+    "Attachments/RNN及其变体/结构解释图.excalidraw.md",
+    "Attachments/注意力机制/2-普通Encoder-Decoder框架.excalidraw.md",
+    "Attachments/注意力机制/3-引入Attention的Encoder-Decoder框架.excalidraw.md",
+    "Attachments/注意力机制/6-Soft Attention的本质思想.excalidraw.md",
+    "Attachments/注意力机制/5-注意力概率分布的计算方式.excalidraw.md",
+    "Attachments/注意力机制/9-注意力机制实现步骤.md",
+    "Attachments/Transformer/1-Transformer-架构图.excalidraw.md",
+    "Resources/黑马程序员-人工智能/6-自然语言处理基础/4.transformer.md",
+    "Archive/2026-07-模型与对齐迁移备份/NLP基础/Transformer.md",
+    "Knowledge/AI/Transformer.md",
+    "Home.md",
+    "Templates/PublishedNote.md",
+    "Knowledge/AI/NLP-文本预处理.md",
+    "Archive/2026-07-模型与对齐迁移备份/NLP基础/文本预处理.md",
+    "Archive/2026-07-模型与对齐迁移备份/NLP基础/文本预处理.md.baiduyun.uploading.cfg",
+    "Knowledge/AI/NLP-文本预处理.md.baiduyun.uploading.cfg",
+    "Knowledge/AI/大模型-基础.md.baiduyun.uploading.cfg",
+    "Knowledge/AI/大模型-基础.md",
+    "Projects/WebNote-Workflow/posts/网页笔记四步工作流.md",
+    "Templates/PublishedNote.md.baiduyun.uploading.cfg",
+    "rules/指南-发布内容.md.baiduyun.uploading.cfg",
+    "Published/网页笔记四步工作流.md.baiduyun.uploading.cfg",
+    "Published/索引.md.baiduyun.uploading.cfg",
+    "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/content/index.md.baiduyun.uploading.cfg",
+    "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/04-待确认提案.md.baiduyun.uploading.cfg",
+    "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/03-核查表.md.baiduyun.uploading.cfg",
+    "Published/网页笔记四步工作流.md",
+    "DailyNotes/2026/Invalid date.md",
+    "Published/索引.md",
+    "Templates/source.md",
+    "rules/指南-发布内容.md",
+    "Projects/WebNote-Workflow/README.md",
+    "Resources/AI精英学院/Agent OS 的第一课：会分工，才会用 Agent.md",
+    "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/04-待确认提案.md",
+    "Projects/WebNote-Workflow/runs/2026-07-14-OpenClaw面试题/02-笔记.md",
+    "Attachments/eecf57ed13fff8a72b0449cea15922b5_MD5.webp",
+    "Attachments/a44c4fda203aab2a4d5b76a33b6c3573_MD5.webp",
+    "Attachments/e8477270c15bba1950195743d0e6fac6_MD5.webp",
+    "Attachments/561fff77fd1532ce1cff76438607c04a_MD5.webp",
+    "Attachments/291b1cede8cb35180d5ea2c0286c9ca4_MD5.webp",
+    "Attachments/469856fbdca5bb4d6646676b8a3fa460_MD5.webp",
+    "Attachments/bdb349d982ad4f5f5c3d5f038989be4f_MD5.webp",
+    "Attachments/133e1928715c87fa3cdcc264352eb327_MD5.webp",
+    "Attachments/196333da6a9a51b271661bed3d99ef71_MD5.webp",
+    "Attachments/48e83773673a0529be562593147e46ef_MD5.webp",
+    "Skills/obsidian-canvas-creator/assets/template-mindmap-simple.canvas",
+    "Skills/obsidian-canvas-creator/assets/template-freeform-grouped.canvas",
     "未命名.canvas",
     "1-Projects/AI应用开发技术栈.canvas",
     "1-Projects/黑马AI课程内容.canvas",
@@ -275,8 +281,6 @@
     "1-Projects/大模型基础与项目/draw/未命名.canvas",
     "1-Projects/测试和考试/7-自然语言处理项目-1/头条投满分项目/draw/头条投满分项目.canvas",
     "1-Projects/黑马程序员-大型案例项目/头条投满分项目/draw/未命名.canvas",
-    "Canvas/未命名.canvas",
-    "test.canvas",
-    "2-Areas/数据技术/数据分析/numpy.canvas"
+    "Canvas/未命名.canvas"
   ]
 }
