@@ -443,3 +443,29 @@ body:has(.VPHome) .VPNavBar:not(.top) .content-body {
   color: white;
   background-color: #4b4b4b;
 }
+
+/**
+  缺失图片警告块(obsidian-image-embed 插件渲染)
+*/
+.obsidian-image-missing {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px dashed #c05621;
+  border-radius: 6px;
+  background-color: color-mix(in srgb, #c05621 12%, transparent);
+  color: #c05621;
+  font-size: 0.9rem;
+}
+
+.obsidian-image-missing code {
+  font-family: var(--vp-font-family-mono, monospace);
+  background-color: rgba(0, 0, 0, 0.12);
+  padding: 0 0.3em;
+  border-radius: 3px;
+}
+
+.dark .obsidian-image-missing {
+  background-color: color-mix(in srgb, #f0883e 14%, transparent);
+  border-color: #f0883e;
+  color: #f0883e;
+}

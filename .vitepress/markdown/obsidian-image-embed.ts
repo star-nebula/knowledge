@@ -11,7 +11,9 @@ import type MarkdownIt from 'markdown-it'
  * 只有「相对于当前 md 文件的相对路径」能被正确打包。因此这里用 env.path 算出相对引用。
  *
  * 仅当目标带图片扩展名时才拦截；非图片的 `![[note]]`（Obsidian 的笔记内嵌）保持原样。
- * 找不到文件的图渲染成「图片缺失」占位（data-URI SVG），构建不挂，且能在页面上看出缺图。
+ * 找不到文件的图渲染成「图片缺失」警告块（纯文本 div，不用 data-URI），
+ * 避免 @nolebase/thumbnail-hash 插件对 data-URI 解码失败导致构建崩溃；
+ * 同时页面上能直接看出缺图。
  */
 const IMAGE_EXT = /\.(png|jpe?g|gif|svg|webp|bmp|avif|ico)$/i
 
@@ -34,11 +36,7 @@ function buildIndex(root: string): Map<string, string> {
 }
 
 function missingPlaceholder(name: string): string {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='320' height='180'>`
-    + `<rect width='100%' height='100%' fill='#262626' stroke='#444'/>`
-    + `<text x='50%' y='50%' fill='#9a9a9a' font-size='14' font-family='sans-serif' text-anchor='middle' dominant-baseline='middle'>图片缺失：${name}</text>`
-    + `</svg>`
-  return `data:image/svg+xml,${encodeURIComponent(svg)}`
+  return `<div class="obsidian-image-missing">⚠️ 图片缺失，需补回：<code>${name}</code></div>`
 }
 
 export function obsidianImageEmbed(root: string): (md: MarkdownIt) => void {
@@ -88,19 +86,14 @@ export function obsidianImageEmbed(root: string): (md: MarkdownIt) => void {
           width = rest[1]
       }
 
-      // 缺失文件：渲染占位，构建不挂
+      // 缺失文件：渲染警告块(纯文本 div，无 data-URI，构建不挂)
       if (!att) {
         if (!warned.has(fileBase)) {
           warned.add(fileBase)
           // eslint-disable-next-line no-console
           console.warn(`[obsidian-image-embed] 图片缺失，需补回：${fileBase}`)
         }
-        const attrs = [
-          `src="${missingPlaceholder(fileBase)}"`,
-          `alt="图片缺失：${fileBase}"`,
-          'class="obsidian-image-missing"',
-        ].filter(Boolean).join(' ')
-        return `<img ${attrs} />`
+        return missingPlaceholder(fileBase)
       }
 
       // 计算相对路径（Vite 据此打包，自动处理 base 与哈希）
