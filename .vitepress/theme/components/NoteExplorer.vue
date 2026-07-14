@@ -15,7 +15,7 @@ interface FolderEntry {
 }
 
 // Auto-discover all markdown files at build time via Vite glob
-const allModules = import.meta.glob('/zh-CN/笔记/**/*.md')
+const allModules = import.meta.glob('/vault/笔记/**/*.md')
 const allPaths = Object.keys(allModules)
 
 function naturalSort(a: string, b: string): number {
@@ -30,7 +30,7 @@ function buildTree(): FolderEntry[] {
   const folderMap = new Map<string, FileEntry[]>()
 
   for (const filePath of allPaths) {
-    const relative = filePath.replace('/zh-CN/笔记/', '')
+    const relative = filePath.replace('/vault/笔记/', '')
     const slashIdx = relative.indexOf('/')
     if (slashIdx === -1) continue
 
@@ -47,8 +47,8 @@ function buildTree(): FolderEntry[] {
       name: baseName,
       displayName: stripNumberPrefix(baseName),
       path: isIndex
-        ? `/zh-CN/笔记/${folderName}/`
-        : `/zh-CN/笔记/${folderName}/${baseName}`,
+        ? `/vault/笔记/${folderName}/`
+        : `/vault/笔记/${folderName}/${baseName}`,
       isIndex,
     })
   }
@@ -91,7 +91,7 @@ function isOpen(folderName: string) {
           </svg>
         </span>
         <a
-          :href="withBase(folder.files.find(f => f.isIndex)?.path || `/zh-CN/笔记/${folder.name}/`)"
+          :href="withBase(folder.files.find(f => f.isIndex)?.path || `/vault/笔记/${folder.name}/`)"
           class="folder-name"
           @click.stop
         >
@@ -118,7 +118,7 @@ function isOpen(folderName: string) {
     </div>
 
     <div v-if="tree.length === 0" class="empty-hint">
-      暂无笔记分类，在 <code>zh-CN/笔记/</code> 下创建文件夹即可自动显示。
+      暂无笔记分类，在 <code>vault/笔记/</code> 下创建文件夹即可自动显示。
     </div>
   </div>
 </template>
