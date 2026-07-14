@@ -216,3 +216,8 @@ res = client.hybrid_search(
 client.drop_collection(collection_name="demo_collection")
 ```
 
+
+## 相关阅读
+
+- [[RAG|RAG 检索增强生成]]
+- [[大模型-基础]]

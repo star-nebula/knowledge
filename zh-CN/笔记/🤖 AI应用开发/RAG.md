@@ -522,3 +522,9 @@ RAG 适合知识频繁更新、需要可溯源的场景，微调适合固化领�
 ## 参考来源
 
 - https://notes.kamacoder.com/interview/llm/rag_interview.html#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E
+
+## 相关阅读
+
+- [[大模型-基础]]
+- [[Milvus 向量数据库]]
+- [[大模型-知识扩展]]

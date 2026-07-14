@@ -60,3 +60,10 @@ type: 步骤操作
 | **Simple Memory** | 保留对话上下文 |
 | **MCP Client Tool** | 通过 MCP 协议接入外部工具（搜索、文件系统等） |
 
+
+## 相关阅读
+
+- [[网页笔记四步工作流]]
+- [[LangChain Agents 组件|LangChain Agents]]
+- [[RAG|RAG]]
+- [[大模型-基础]]
