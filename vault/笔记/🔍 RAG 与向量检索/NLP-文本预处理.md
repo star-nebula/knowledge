@@ -1,12 +1,19 @@
 ---
 title: NLP-文本预处理
 created: 2026-05-23
-tags: [ai, nlp, rag, text-processing, vector-db]
-  - NLP
-  - 文本预处理
 type: 概念解释
 related: []
+tags:
+  - ai
+  - nlp
+  - rag
+  - text-processing
+  - vector-db
+  - NLP
+  - 文本预处理
+
 ---
+
 ### 作用
 
 核心作用：**将杂乱、非结构化的原始文本转化为干净、规范、计算机易于处理的格式**，通过去除噪声、统一标准，为后续的特征提取和模型训练奠定高质量的数据基础。

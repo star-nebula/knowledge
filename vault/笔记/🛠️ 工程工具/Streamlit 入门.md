@@ -1,15 +1,21 @@
 ---
 title: Streamlit 入门
 created: 2026-07-08
-tags: [engineering, python, streamlit, tool]
+tags:
+  - engineering
+  - python
+  - streamlit
+  - tool
   - Streamlit
   - Python
   - 前端
 type: 步骤操作
 related:
-  - "[[聊天机器人实现]]"
-  - "[[Python-MOC]]"
+  - '[[聊天机器人实现]]'
+  - '[[Python-MOC]]'
+
 ---
+
 # Streamlit 入门
 
 Streamlit 是一个 Python 框架，可在几分钟内将脚本转为可分享的 Web 应用。

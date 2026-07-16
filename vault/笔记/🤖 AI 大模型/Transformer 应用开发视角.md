@@ -1,5 +1,6 @@
 ---
 tags: [ai, foundation-model, llm, transformer]
+
 ---
 
 # Transformer

@@ -1,5 +1,8 @@
 ---
-tags: [ai, rag, vector-db]
+tags:
+  - ai
+  - rag
+  - vector-db
   - RAG
   - 检索增强生成
   - Embedding
@@ -7,7 +10,9 @@ tags: [ai, rag, vector-db]
   - 混合检索
   - Rerank
   - 幻觉治理
+
 ---
+
 # RAG 核心知识点全集
 
 ## 第一部分：基础认知

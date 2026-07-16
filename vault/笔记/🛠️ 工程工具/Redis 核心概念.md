@@ -1,22 +1,29 @@
 ---
 title: Redis 核心概念
 date: 2026-05-25
-tags: [cache, database, engineering, redis, tool]
+tags:
+  - cache
+  - database
+  - engineering
+  - redis
+  - tool
   - Redis
   - NoSQL
   - 数据库
   - 数据类型
 type: 概念解释
 related:
-  - "[[Redis-MOC]]"
-  - "[[Redis 安装与配置]]"
-  - "[[Python Redis 客户端]]"
-  - "[[Python Redis 实战案例]]"
-  - "[[MySQL 数据库基础]]"
-  - "[[数据库开发概览]]"
+  - '[[Redis-MOC]]'
+  - '[[Redis 安装与配置]]'
+  - '[[Python Redis 客户端]]'
+  - '[[Python Redis 实战案例]]'
+  - '[[MySQL 数据库基础]]'
+  - '[[数据库开发概览]]'
 reference:
 status: raw
+
 ---
+
 # Redis 核心概念：数据类型与基础操作
 
 ## RDBMS 与 NoSQL

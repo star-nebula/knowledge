@@ -1,21 +1,27 @@
 ---
 title: MySQL 数据库基础
 date: 2026-05-25
-tags: [database, engineering, mysql, tool]
+tags:
+  - database
+  - engineering
+  - mysql
+  - tool
   - MySQL
   - 数据库
   - SQL
 type: 概念解释
 related:
-  - "[[MySQL-MOC]]"
-  - "[[MySQL 开窗函数]]"
-  - "[[MySQL 内置函数]]"
-  - "[[MySQL 事务]]"
-  - "[[MySQL 锁机制]]"
-  - "[[MySQL 电商案例]]"
+  - '[[MySQL-MOC]]'
+  - '[[MySQL 开窗函数]]'
+  - '[[MySQL 内置函数]]'
+  - '[[MySQL 事务]]'
+  - '[[MySQL 锁机制]]'
+  - '[[MySQL 电商案例]]'
 reference:
 status: raw
+
 ---
+
 # MySQL 数据库基础
 
 > 数据库操作的基础语法和核心概念，包括SQL语句分类、数据定义/操作/查询语言、约束、表关联关系、多表查询等。
