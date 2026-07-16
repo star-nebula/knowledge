@@ -1,13 +1,12 @@
 ---
 title: DeepSeek
 date: 2026-07-08
-tags:
+tags: [ai, deepseek, foundation-model, llm]
   - AI
   - 大模型
   - DeepSeek
 type: topic
 ---
-
 ## 📘DeepSeek 基础知识介绍
 
 ### 1. 背景

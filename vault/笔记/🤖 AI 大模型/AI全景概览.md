@@ -1,13 +1,12 @@
 ---
 title: AI全景概览
 date: 2025-05-02
-tags:
+tags: [ai, foundation-model, llm, overview]
   - AI
   - 人工智能导论
   - 概览
 type: topic
 ---
-
 # AI 全景概览
 
 > 来源：《人工智能导论：模型与算法》吴飞 著

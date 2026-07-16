@@ -1,14 +1,13 @@
 ---
 title: Transformer
 created: 2026-05-23
-tags:
+tags: [ai, foundation-model, llm, transformer]
   - NLP
   - Transformer
   - 深度学习
 type: 概念解释
 related: []
 ---
-
 ### 初识 Transformer
 
 - 2018年google发表了BERT模型并横扫了NLP领域11项任务，而BERT中Transformer发挥了重要作用，使得Transformer架构流行起来

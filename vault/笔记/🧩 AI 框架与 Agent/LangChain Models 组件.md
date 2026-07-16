@@ -1,6 +1,6 @@
 ---
 title: LangChain Models 组件
-tags: [langchain, models, llm, embeddings, framework]
+tags: [agent, ai, embeddings, framework, langchain, llm, models]
 type: 概念解释
 created: 2026-07-08
 related:
@@ -8,7 +8,6 @@ related:
   - "[[LangChain Prompts 组件]]"
   - "[[LangChain Chains 组件]]"
 ---
-
 # LangChain Models 组件
 
 LangChain 支持三种模型类型，分别服务于不同的输入输出形态。

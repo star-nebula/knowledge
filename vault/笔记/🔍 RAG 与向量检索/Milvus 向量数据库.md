@@ -1,4 +1,5 @@
 ---
+tags: [ai, milvus, rag, vector-db]
 AIGC:
     Label: "1"
     ContentProducer: 001191440300708461136T1XGW3
@@ -8,9 +9,6 @@ AIGC:
     PropagateID: 8f2fa46874289e2cb6a624d55d5ab0b9_cd97ceb37a9c11f182885254006c9bbf
     ReservedCode2: n1MeUMUQssBmrSRavFOsz8T4gEuonk6JpuK7yxq+n64yMj2fKZl9I0AygGj0COSgmyc+cCtgfyYNRuFLg9eqimtNN5XRpAsrdHEquwNmVYknJ2xMn+xOfpLxywlDgNfR4p10o5LvZ84gWl7kBT9QKDokg6I4HPSWQDJajxjrBkvWzQ6rWk7oukxS82Q=
 ---
-
-
-
 # Milvus 向量数据库
 
 ## 什么是 Milvus
@@ -219,5 +217,5 @@ client.drop_collection(collection_name="demo_collection")
 
 ## 相关阅读
 
-- [[笔记/🤖 AI应用开发/RAG|RAG 检索增强生成]]
+- [[RAG 核心知识点全集|RAG 检索增强生成]]
 - [[大模型-基础]]
