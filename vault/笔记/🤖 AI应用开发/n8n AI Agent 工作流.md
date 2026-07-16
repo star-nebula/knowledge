@@ -65,5 +65,5 @@ type: 步骤操作
 
 - [[网页笔记四步工作流]]
 - [[LangChain Agents 组件|LangChain Agents]]
-- [[RAG|RAG]]
+- [[笔记/🤖 AI应用开发/RAG|RAG]]
 - [[大模型-基础]]
