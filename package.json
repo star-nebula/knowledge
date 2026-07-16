@@ -21,9 +21,10 @@
     "dev": "pnpm run docs:dev",
     "build": "pnpm run docs:build",
     "serve": "pnpm run docs:serve",
-    "docs:dev": "vitepress dev",
+    "docs:dev": "node scripts/sync-published-notes.mjs && vitepress dev",
     "docs:build": "vitepress build",
     "docs:serve": "vitepress serve",
+    "sync:notes": "node scripts/sync-published-notes.mjs",
     "sync:assets": "node scripts/sync-published-assets.mjs",
     "update": "tsx scripts/update.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
