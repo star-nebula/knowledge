@@ -1,6 +1,6 @@
 ---
 title: LangChain Agents 组件
-tags: [langchain, agents, tools, framework]
+tags: [agent, agents, ai, framework, langchain, tools]
 type: 概念解释
 created: 2026-07-08
 related:
@@ -8,7 +8,6 @@ related:
   - "[[LangChain Chains 组件]]"
   - "[[LangChain Memory 组件]]"
 ---
-
 # LangChain Agents 组件
 
 Agents 组件根据用户需求，**自动选择并调用第三方工具**（如搜索引擎、数学计算），解决大模型自身局限（如实时信息、复杂数学问题）。代理类型示例：`AgentType.ZERO_SHOT_REACT_DESCRIPTION`。

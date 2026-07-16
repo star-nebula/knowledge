@@ -1,7 +1,7 @@
 ---
 title: Redis 核心概念
 date: 2026-05-25
-tags:
+tags: [cache, database, engineering, redis, tool]
   - Redis
   - NoSQL
   - 数据库
@@ -17,7 +17,6 @@ related:
 reference:
 status: raw
 ---
-
 # Redis 核心概念：数据类型与基础操作
 
 ## RDBMS 与 NoSQL
