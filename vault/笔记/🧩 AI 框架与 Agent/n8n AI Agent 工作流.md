@@ -1,16 +1,13 @@
 ---
 title: n8n AI Agent 工作流
 created: 2026-07-08
-tags:
+tags: [agent, ai, automation, framework, n8n]
   - n8n
   - MCP
   - 工作流
   - Agent
 type: 步骤操作
 ---
-
-
-
 # n8n AI Agent 工作流
 
 使用 n8n 低代码工作流平台集成 AI Agent，通过 MCP 协议扩展工具能力，实现自动化智能工作流。
@@ -65,5 +62,5 @@ type: 步骤操作
 
 - [[网页笔记四步工作流]]
 - [[LangChain Agents 组件|LangChain Agents]]
-- [[笔记/🤖 AI应用开发/RAG|RAG]]
+- [[RAG 核心知识点全集|RAG 核心知识点全集]]
 - [[大模型-基础]]

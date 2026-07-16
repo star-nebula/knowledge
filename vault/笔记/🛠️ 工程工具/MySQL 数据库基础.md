@@ -1,7 +1,7 @@
 ---
 title: MySQL 数据库基础
 date: 2026-05-25
-tags:
+tags: [database, engineering, mysql, tool]
   - MySQL
   - 数据库
   - SQL
@@ -16,7 +16,6 @@ related:
 reference:
 status: raw
 ---
-
 # MySQL 数据库基础
 
 > 数据库操作的基础语法和核心概念，包括SQL语句分类、数据定义/操作/查询语言、约束、表关联关系、多表查询等。

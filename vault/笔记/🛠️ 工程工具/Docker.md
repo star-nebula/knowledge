@@ -1,7 +1,7 @@
 ---
 title: Docker 核心概念
 created: 2026-07-08
-tags:
+tags: [docker, engineering, tool]
   - Docker
   - 容器
   - 部署
@@ -10,7 +10,6 @@ related:
   - "[[Docker-MOC]]"
   - "[[win11 部署 Docker]]"
 ---
-
 # Docker 核心概念
 
 Docker 是一个**容器化平台**，将应用及其依赖打包进轻量级容器，实现"一次构建，到处运行"。
