@@ -1,8 +1,6 @@
 ---
 tags:
   - 部署
-  - 部署/GitHub Pages
-  - 部署/GitHub Actions
   - CI/CD
 ---
 
