@@ -73,5 +73,5 @@ print(f"AIMessage--> {res['messages'][-1].content}")
 ## 相关阅读
 
 - [[n8n AI Agent 工作流]]
-- [[大模型-基础]]
+- [[Knowledge/AI/大模型-基础]]
 - [[网页笔记四步工作流]]
