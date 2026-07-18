@@ -69,4 +69,4 @@ tags:
 - [[网页笔记四步工作流]]
 - [[LangChain Agents 组件|LangChain Agents]]
 - [[RAG 核心知识点全集|RAG 核心知识点全集]]
-- [[大模型-基础]]
+- [[Knowledge/AI/大模型-基础]]
