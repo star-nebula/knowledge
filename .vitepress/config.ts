@@ -2,7 +2,6 @@ import { presetMarkdownIt } from '@nolebase/integrations/vitepress/markdown-it'
 import { transformHeadMeta } from '@nolebase/vitepress-plugin-meta'
 import { calculateSidebar } from '@nolebase/vitepress-plugin-sidebar'
 // import { buildEndGenerateOpenGraphImages } from '@nolebase/vitepress-plugin-og-image/vitepress'
-import { BiDirectionalLinks } from '@nolebase/markdown-it-bi-directional-links'
 import MarkdownItFootnote from 'markdown-it-footnote'
 import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { defineConfig } from 'vitepress'
@@ -28,8 +27,40 @@ import head from './head'
 // unlazyImages 关闭：它依赖 thumbnail-hash 生成的 map.json 来给图片注入 blur-up 懒加载
 // 属性。站点内容用 obsidian-image-embed 渲染普通 <img>，不需要该组件，且关闭 map 生成后
 // 在 GHPages 干净 checkout 上会因找不到 map.json 而构建失败。
+// 双向链接（BiDirectionalLinks）的 excludesPatterns 必须与 VitePress 的 srcExclude 对齐：
+// 否则 nolebase 会把未发布的私有 Vault 目录（Projects/.trash/Resources/...）也编入 [[ ]] 链接索引，
+// 与已发布笔记同名时发生 basename 冲突（例：网页笔记四步工作流.md 在 Projects/.trash 均有副本
+// → 冲突 → 正文 [[网页笔记四步工作流]] 解析失败、渲染成原始 [[ ]]）。
+// 注意：早期曾「额外」用 md.use(BiDirectionalLinks, {...}) 手动注册一次，但 presetMarkdownIt 的
+// install() 已经注册了 BiDirectionalLinks（默认 excludes），两次注册导致实际生效的是默认 excludes
+// 的那一次，手动配置的 excludesPatterns 形同虚设。因此这里只通过 preset 的 options 单一配置，
+// 不再手动 md.use，确保 excludes 真正生效。
 const nolebase = presetMarkdownIt({
   unlazyImages: false,
+  bidirectionalLinks: {
+    options: {
+      // 注意：baseDir 必须设为根路径 '/'，而不是站点的 base '/knowledge/'。
+      // nolebase 生成 href 的逻辑是 posix.join(baseDir, <相对仓库根的路径>)；
+      // 而 VitePress 自身的 base('/knowledge/') 会对所有链接再统一加一次前缀。
+      // 若这里写成 '/knowledge/'，最终结果会变成 '/knowledge/knowledge/...'（双前缀、404）。
+      // 因此这里只输出根相对路径 '/vault/...'，由 VitePress 的 base 补成 '/knowledge/vault/...'。
+      baseDir: '/',
+      // 未匹配的链接仍渲染为无效链接（带 .nolebase-route-link-invalid 类），便于发现死链
+      stillRenderNoMatched: true,
+      // 与 VitePress srcExclude 对齐：排除所有「未发布」私有 Vault 目录
+      excludesPatterns: [
+        'dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata',
+        // Archive 备份目录含与 Attachments 同名的图片/附件副本，同名冲突会误报；
+        // 同时排除 Attachments 内的 .md（Excalidraw 画图文件用 [[Pasted Image]] 引用粘贴图，会产生噪声），
+        // 但保留 .png 等图片扫描以确保 ![[image]] 嵌入可解析。
+        '**/Archive/**', 'vault/Attachments/**/*.md',
+        '**/Projects/**', '**/DailyNotes/**', '**/Inbox/**', '**/Interview/**', '**/Resources/**',
+        '**/Skills/**', '**/Canvas/**', '**/Templates/**', '**/rules/**', '**/AgentLog/**',
+        '**/Published/**', '**/.trash/**', '**/data/**', '**/视图/**', '**/Home.md', '**/AGENT.md',
+        '**/.opencode/**', '**/.codebuddy/**',
+      ],
+    },
+  },
 })
 
 /**
@@ -269,27 +300,6 @@ export default defineConfig({
       md.use(obsidianImageEmbed(SITE_BASE))
       md.use(MarkdownItFootnote)
       md.use(MarkdownItMathjax3)
-      // Obsidian 风格双向链接：[[页面名]] 解析为站内链接（baseDir 对齐 VitePress base '/knowledge/'）
-      md.use(BiDirectionalLinks, {
-        baseDir: '/knowledge/',
-        // 排除非内容目录，避免把 Obsidian 库/构建产物等当成链接目标
-        // 注意：刻意不排除 `_mocs`（生成型 MOC 落地页所在目录），否则栏目间
-        // `[[...]]` 互链会全部渲染为“未匹配”无效链接。
-        // 2026-07-19：加入 `**/Archive/**` —— Vault 的 Archive 备份目录含有与
-        // `vault/Attachments` 同名的图片/附件副本，nolebase 按裸 basename 建索引时
-        // 发生同名冲突会删掉 basename 表项，导致正文中 `![[image.png]]` 嵌入触发
-        // `[WARN] No matched file found` 误报（图片实际由 obsidianImageEmbed 正确渲染）。
-        // 排除 Archive 后冲突消除、警告消失，且 Archive 为备份不应作为站内链接目标。
-        // 2026-07-19(续)：加入 `vault/Attachments/**/*.md` —— `vault/Attachments` 是附件
-        // 存储区，其下混有 Obsidian Excalidraw 画图文件（`*.excalidraw.md`），这些文件用
-        // `[[Pasted Image...png]]` 引用粘贴图片，被 nolebase 当成 wikilink 扫描后解析失败、
-        // 刷出上千条 `No matched file found` 误报。排除 Attachments 内的 .md（仅排除 .md，
-        // 图片 `.png` 仍保留扫描以确保 `![[image]]` 目标可被解析）即可彻底消除这类噪声，
-        // 且不影响正文 wikilink 解析（内容笔记均在 vault/Knowledge，不在 Attachments）。
-        excludesPatterns: ['dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata', '**/Archive/**', 'vault/Attachments/**/*.md'],
-        // 未匹配的链接仍渲染为无效链接（带 .nolebase-route-link-invalid 类），便于发现死链
-        stillRenderNoMatched: true,
-      })
     },
   },
   async transformHead(context) {
