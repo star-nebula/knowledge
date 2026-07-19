@@ -156,7 +156,7 @@ export function buildKnowledgeSidebar(): SidebarItem[] {
       link: resolveMoc([main]) ?? undefined,
       items: subItems,
       collapsible: true,
-      collapsed: false,
+      collapsed: true,
     })
   }
   return result
