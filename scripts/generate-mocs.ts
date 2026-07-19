@@ -160,7 +160,6 @@ for (const { path: catPath, node } of nodeByPath.values()) {
 // 顶层总览页（nav 落地）
 const overviewTarget = `${MOCS_DIR}/知识库总览-MOC.md`
 const overviewContent = (() => {
-  const mains = Object.keys(buildTree().root.children)
   const lines: string[] = []
   lines.push('---')
   lines.push('title: 知识库总览')
@@ -172,10 +171,7 @@ const overviewContent = (() => {
   lines.push('')
   lines.push('> 由 `scripts/generate-mocs.ts` 自动生成。')
   lines.push('')
-  lines.push('按主分类浏览：')
-  lines.push('')
-  for (const m of mains)
-    lines.push(`- [[${m}]]`)
+  lines.push('<KnowledgeExplorer />')
   lines.push('')
   return lines.join('\n')
 })()

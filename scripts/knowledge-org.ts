@@ -59,14 +59,19 @@ export function mocFileName(categories: string[]): string {
   return `${categories.join(' · ').replace(/\//g, '·')}-MOC.md`
 }
 
-/** category 数组 -> 站点内 link（路由路径，不含 base 前缀 /knowledge/） */
+/**
+ * category 数组 -> 站点内 link（路由路径，不含 base 前缀 /knowledge/）。
+ * 文件名可能含 `%`（如 `300%法则.md`），直接拼进 link 会让 VitePress 的
+ * `isActive` 在 `decodeURI` 时抛 `URIError: URI malformed`。故把 `%` 预编码为
+ * `%25`，浏览器/Vue Router 解码后即还原为 `%`，路由匹配正常。
+ */
 export function mocLink(categories: string[]): string {
-  return `/${MOCS_DIR}/${mocFileName(categories)}`.replace(/^\/+/, '/')
+  return `/${MOCS_DIR}/${mocFileName(categories)}`.replace(/^\/+/, '/').replace(/%/g, '%25')
 }
 
 /** rel (vault/Knowledge/AI/Transformer.md) -> 站点路由 (/vault/Knowledge/AI/Transformer) */
 export function noteLink(rel: string): string {
-  return `/${rel.replace(/\\/g, '/').replace(/\.md$/, '')}`.replace(/^\/+/, '/')
+  return `/${rel.replace(/\\/g, '/').replace(/\.md$/, '')}`.replace(/^\/+/, '/').replace(/%/g, '%25')
 }
 
 /**
