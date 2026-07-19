@@ -22,7 +22,7 @@
     "build": "pnpm run docs:build",
     "serve": "pnpm run docs:serve",
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
+    "docs:build": "node scripts/build.mjs",
     "docs:serve": "vitepress serve",
     "sync:assets": "node scripts/sync-published-assets.mjs",
     "update": "tsx scripts/update.ts",

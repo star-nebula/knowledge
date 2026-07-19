@@ -7,8 +7,20 @@ import MarkdownItFootnote from 'markdown-it-footnote'
 import MarkdownItMathjax3 from 'markdown-it-mathjax3'
 import { defineConfig } from 'vitepress'
 import { obsidianImageEmbed } from './markdown/obsidian-image-embed'
+import { sanitizeWikiPercent } from './markdown/sanitize-wikilink-percent'
+import { buildKnowledgeSidebar } from '../scripts/knowledge-org'
+
+import { existsSync } from 'node:fs'
+import { resolve } from 'node:path'
 
 const SITE_BASE = '/knowledge/'
+
+// vault/Knowledge/ 默认被 .gitignore 忽略（私人库，不发布到网站，仅本地 + 百度云备份）。
+// 本地开发/构建时该目录存在 → 全量渲染知识库；CI 干净 checkout 下不存在 → 自动跳过，
+// 避免「构建失败」与「死链 nav」。详见 .gitignore 第 18-20 行注释。
+// 通过检测目录是否存在决定接入，使同一份 config 在本地与 CI 下都能构建通过。
+const KNOWLEDGE_DIR = resolve(process.cwd(), 'vault/Knowledge')
+const HAS_KNOWLEDGE = existsSync(KNOWLEDGE_DIR)
 
 import { githubRepoLink, siteDescription, siteName } from '../metadata'
 import head from './head'
@@ -53,36 +65,59 @@ function fixSidebarIndexLinks(sidebar: any): any {
   return sidebar
 }
 
+/**
+ * 组装整站侧边栏：nolebase calculateSidebar 负责「站点内容」四个目录
+ * （笔记/作坊/档案/编目 Catalog），Knowledge 由 buildKnowledgeSidebar()
+ * 按各笔记的 category frontmatter 实时生成，以 `/vault/Knowledge/` 为 key 注入。
+ */
+function buildSiteSidebar() {
+  const base = calculateSidebar([
+    { folderName: 'vault/笔记', separate: true },
+    { folderName: 'vault/作坊', separate: true },
+    { folderName: 'vault/档案', separate: true },
+    { folderName: 'vault/编目 Catalog', separate: true },
+  ], 'vault')
+  const knowledge = HAS_KNOWLEDGE ? buildKnowledgeSidebar() : []
+  if (knowledge.length > 0)
+    (base as Record<string, any>)['/vault/Knowledge/'] = knowledge
+  return fixSidebarIndexLinks(base)
+}
+
+const srcExclude = [
+  '**/Projects/**',
+  '**/DailyNotes/**',
+  '**/Inbox/**',
+  '**/Interview/**',
+  '**/Resources/**',
+  '**/Skills/**',
+  '**/Canvas/**',
+  '**/Templates/**',
+  '**/Archive/**',
+  '**/rules/**',
+  '**/AgentLog/**',
+  '**/Published/**',
+  '**/.opencode/**',
+  '**/.trash/**',
+  '**/.workbuddy/**',
+  '**/.obsidian/**',
+  '**/.codebuddy/**',
+  '**/data/**',
+  '**/视图/**',
+  '**/Home.md',
+  '**/AGENT.md',
+]
+// CI 干净 checkout 下 vault/Knowledge/ 不存在（被 .gitignore 忽略），额外排除以免扫描私人库
+if (!HAS_KNOWLEDGE)
+  srcExclude.push('**/Knowledge/**')
+
 export default defineConfig({
   base: SITE_BASE,
   // 仅构建「站点内容」文件夹，排除 Obsidian 私人库（Knowledge/Resources/Skills/...
   // 等）。这些私人笔记引用了 vault/Attachments 中无法被 Skia 解码的损坏图，
   // 会让 @nolebase/thumbnail-hash 在构建期崩溃（Failed to make image from encoded data）。
   // srcExclude 相对 srcDir（即仓库根 E:\knowledge）匹配，故用 **/ 前缀兜底。
-  srcExclude: [
-    '**/Knowledge/**',
-    '**/Projects/**',
-    '**/DailyNotes/**',
-    '**/Inbox/**',
-    '**/Interview/**',
-    '**/Resources/**',
-    '**/Skills/**',
-    '**/Canvas/**',
-    '**/Templates/**',
-    '**/Archive/**',
-    '**/rules/**',
-    '**/AgentLog/**',
-    '**/Published/**',
-    '**/.opencode/**',
-    '**/.trash/**',
-    '**/.workbuddy/**',
-    '**/.obsidian/**',
-    '**/.codebuddy/**',
-    '**/data/**',
-    '**/视图/**',
-    '**/Home.md',
-    '**/AGENT.md',
-  ],
+  // 注：Knowledge 是否纳入构建由 HAS_KNOWLEDGE（目录是否存在）决定，见下方 srcExclude 处理。
+  srcExclude,
   // 仅构建「站点内容」文件夹（vault/笔记、vault/作坊、vault/档案、vault/编目 Catalog），
   // 排除 Obsidian 私人库。好处：① 构建更快、产物更干净；② 私人笔记不会被发布。
   // 注意：srcExclude 只影响「页面构建」，不影响 thumbnail-hash（该插件已在本仓库
@@ -183,6 +218,9 @@ export default defineConfig({
           { text: '笔记', link: '/vault/笔记/' },
           { text: '作坊', link: '/vault/作坊/' },
           { text: '档案', link: '/vault/档案/', activeMatch: '^/vault/档案/' },
+          ...(HAS_KNOWLEDGE
+            ? [{ text: '知识库', link: '/vault/Knowledge/_mocs/知识库总览-MOC', activeMatch: '^/vault/Knowledge/' }]
+            : []),
           { text: '最近更新', link: '/vault/toc' },
         ],
         lastUpdated: {
@@ -197,12 +235,7 @@ export default defineConfig({
           pattern: `${githubRepoLink}/tree/main/:path`,
           text: '编辑本页面',
         },
-        sidebar: fixSidebarIndexLinks(calculateSidebar([
-          { folderName: 'vault/笔记', separate: true },
-          { folderName: 'vault/作坊', separate: true },
-          { folderName: 'vault/档案', separate: true },
-          { folderName: 'vault/编目 Catalog', separate: true },
-        ], 'vault')),
+        sidebar: buildSiteSidebar(),
         footer: {
           message: '每一篇文章，都是时间的标本',
         },
@@ -216,9 +249,23 @@ export default defineConfig({
     },
     math: true,
     preConfig: async (md) => {
+      sanitizeWikiPercent(md)
       await nolebase.install(md)
     },
     config: (md) => {
+      // 渲染期兜底：Obsidian 笔记存在文件名/链接含裸 %（如 `300%法则.md`），
+      // VitePress 的 link_open → normalizeHref → decodeURI 会因非法 % 直接抛错导致整站构建失败。
+      // 这里在 nolebase 解析之后、VitePress 归一化之前，把链接 href 里的“孤立 %”转义为 %25，
+      // 避免崩溃（链接仍指向 URL 编码后的真实路径）。源文件不做改动。
+      const origLinkOpen = md.renderer.rules.link_open
+        ?? ((tokens: any, idx: any, options: any, env: any, self: any) => self.renderToken(tokens, idx, options))
+      md.renderer.rules.link_open = (tokens: any, idx: any, options: any, env: any, self: any) => {
+        const token = tokens[idx]
+        const href = token.attrGet('href') || ''
+        if (href && /%(?![0-9A-Fa-f]{2})/.test(href))
+          token.attrSet('href', href.replace(/%(?![0-9A-Fa-f]{2})/g, '%25'))
+        return origLinkOpen(tokens, idx, options, env, self)
+      }
       md.use(obsidianImageEmbed(SITE_BASE))
       md.use(MarkdownItFootnote)
       md.use(MarkdownItMathjax3)
@@ -226,7 +273,9 @@ export default defineConfig({
       md.use(BiDirectionalLinks, {
         baseDir: '/knowledge/',
         // 排除非内容目录，避免把 Obsidian 库/构建产物等当成链接目标
-        excludesPatterns: ['_*', 'dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata'],
+        // 注意：刻意不排除 `_mocs`（生成型 MOC 落地页所在目录），否则栏目间
+        // `[[...]]` 互链会全部渲染为“未匹配”无效链接。
+        excludesPatterns: ['dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata'],
         // 未匹配的链接仍渲染为无效链接（带 .nolebase-route-link-invalid 类），便于发现死链
         stillRenderNoMatched: true,
       })
