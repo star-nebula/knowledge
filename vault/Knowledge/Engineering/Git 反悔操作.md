@@ -1,0 +1,125 @@
+---
+title: Git 反悔操作
+created: 2026-05-22
+tags:
+  - Git
+  - 版本控制
+  - 回滚
+type: 步骤操作
+related:
+  - "[[Git-MOC]]"
+  - "[[Git 基础]]"
+  - "[[Git 命令速查]]"
+reference:
+category: ["🛠️ 工程工具", "Git"]
+---
+
+## 反悔操作
+
+[GitFAQ-那些可以反悔的神操作_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Mg4y1R7Zz/?buvid=XX63B426EE87E8C753284D30129B9CF21DA58&from_spmid=main.my-history.0.0&is_story_h5=false&mid=lYUoVUTjQoKNMsBYlP0U2Q%3D%3D&p=1&plat_id=122&share_from=ugc&share_medium=android&share_plat=android&share_session_id=6eaa5986-9579-421f-97a5-05505999a516&share_source=COPY&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1716979047&unique_k=WRDm01P&up_id=1979118757&vd_source=ef07229398779363e8a56f68ad3b105e)
+
+### 1 撤销 本地尚未提交的更改
+
+```powershell
+Common Lisp git checkout   # 问题：包含多个不相关的功能
+```
+
+### 2 撤销 提交到缓存中的文件
+
+```powershell
+git reset HEAD # 删除全部
+git reset <file>
+```
+
+### 3 撤销 最近一次的本地 commit
+
+```powershell
+git reset HEAD^ # 不会修改文件 
+git reset --hard HEAD^
+```
+
+### 4 撤销 第一个本地提交
+
+```powershell
+git update-ref -d HEAD 
+git rm --cached -r .
+```
+
+### 5 撤销 本地分支上中间的某个提交
+
+```powershell
+git rebase -i <base-branch>
+# 选择那些记录需要保留
+pick fds789 redme 0
+d fsd798 readme 1   # 要丢弃的记录将 pick 改为 d
+pick fdhi3 readme 2
+# 解决冲突
+vim README.md
+git rebase --continu
+```
+
+### 6 撤销 一个本地 git rm 的文件
+
+```powershell
+git reset HEAD <file>
+git checkout <file>
+```
+
+### 7 撤销 一个本地 git mv
+
+```powershell
+git mv <f2> <f1>
+```
+
+### 8 修改 最新的 commit
+
+```powershell
+git commit --amend
+```
+
+### 9 撤销 本地的 merge
+
+```powershell
+git reset --hard HEAD^
+```
+
+### 10 撤销 本地的 rebase
+
+```powershell
+git reset --hard ORIG_HEAD
+```
+
+### 11 撤销 发生冲突的 merge 和 rebase
+
+```powershell
+git merge --abort 
+git rebase --abort
+```
+
+### 12 撤销 刚执行的 git pull
+
+```powershell
+git reflog                    # 查看本地的所有操作记录
+git reset --hard HEAD@{1}     # @{} 是要撤销的记录
+```
+
+### 13 撤销 最新的一次 push
+
+```powershell
+git reset --hard HEAD^
+git push --force   # 会覆盖服务器上的commit，可能会受限
+```
+
+### 14 撤销 一个 push 到远端的 branch / tag
+
+```powershell
+git push origin -d <branch/tag>
+```
+
+### 本地和远程仓库都回退到同一个版本
+
+```powershell
+git branch  # 查看当前分支
+git reset --hard HEAD^  # HEAD^ --版本号
+git push --force-with-lease origin <branch-name>  # <branch-name> 要推送的分支
+```
