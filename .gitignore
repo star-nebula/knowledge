@@ -15,9 +15,10 @@
 !**/.obsidian/snippets/
 .opencode/
 
-# 个人笔记(从 BaiduSyncdisk/obsidian 迁入, 不发布到网站, 仅百度云备份)
-# 发布改为显式开关: 给笔记加 status: published 并接入 nav/sidebar, 而非靠文件夹
+# 个人笔记(从 BaiduSyncdisk/obsidian 迁入)。发布走显式开关: 给笔记加 status: published 并接入 nav/sidebar。
+# vault/Knowledge/ 例外: 经用户决策(2026-07-19)整体发布到网站, 故用 ! 取反纳入版本库。
 vault/Knowledge/
+!vault/Knowledge/
 vault/Projects/
 vault/DailyNotes/
 vault/Inbox/
