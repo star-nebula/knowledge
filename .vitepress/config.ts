@@ -275,7 +275,18 @@ export default defineConfig({
         // 排除非内容目录，避免把 Obsidian 库/构建产物等当成链接目标
         // 注意：刻意不排除 `_mocs`（生成型 MOC 落地页所在目录），否则栏目间
         // `[[...]]` 互链会全部渲染为“未匹配”无效链接。
-        excludesPatterns: ['dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata'],
+        // 2026-07-19：加入 `**/Archive/**` —— Vault 的 Archive 备份目录含有与
+        // `vault/Attachments` 同名的图片/附件副本，nolebase 按裸 basename 建索引时
+        // 发生同名冲突会删掉 basename 表项，导致正文中 `![[image.png]]` 嵌入触发
+        // `[WARN] No matched file found` 误报（图片实际由 obsidianImageEmbed 正确渲染）。
+        // 排除 Archive 后冲突消除、警告消失，且 Archive 为备份不应作为站内链接目标。
+        // 2026-07-19(续)：加入 `vault/Attachments/**/*.md` —— `vault/Attachments` 是附件
+        // 存储区，其下混有 Obsidian Excalidraw 画图文件（`*.excalidraw.md`），这些文件用
+        // `[[Pasted Image...png]]` 引用粘贴图片，被 nolebase 当成 wikilink 扫描后解析失败、
+        // 刷出上千条 `No matched file found` 误报。排除 Attachments 内的 .md（仅排除 .md，
+        // 图片 `.png` 仍保留扫描以确保 `![[image]]` 目标可被解析）即可彻底消除这类噪声，
+        // 且不影响正文 wikilink 解析（内容笔记均在 vault/Knowledge，不在 Attachments）。
+        excludesPatterns: ['dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata', '**/Archive/**', 'vault/Attachments/**/*.md'],
         // 未匹配的链接仍渲染为无效链接（带 .nolebase-route-link-invalid 类），便于发现死链
         stillRenderNoMatched: true,
       })
