@@ -15,6 +15,8 @@ interface NoteEntry {
 }
 interface Branch {
   name: string
+  /** 从根到本节点的完整 category 路径，如 ["🌱 生活"]；用于解析对应 MOC */
+  path: string[]
   children: Branch[]
   notes: NoteEntry[]
 }
@@ -25,6 +27,34 @@ const modules = import.meta.glob('/vault/Knowledge/**/*.md', {
   query: '?raw',
   import: 'default',
 }) as Record<string, string>
+
+// ---- 运行时 MOC 索引：把 _mocs 下的 *-MOC.md 映射成「分支可跳转」的路由 ----
+// 命中规则与 knowledge-org.ts 的 resolveMoc 一致：
+//   1) 末级分类名 === 某 *-MOC.md 的基名（如 ["🤖 AI大模型","机器学习"] → 命中 机器学习-MOC.md）
+//   2) 层级名用 " · " 连接 === 某 生成的 X · Y-MOC.md（基名即 join）
+const mocByBase = new Map<string, string>()
+for (const p of Object.keys(modules)) {
+  if (!p.includes('/_mocs/'))
+    continue
+  const fileBase = p.split('/').pop()!.replace(/\.md$/, '')
+  if (!fileBase.endsWith('-MOC'))
+    continue
+  const name = fileBase.slice(0, -4)
+  const route = p.replace(/\.md$/, '').replace(/%/g, '%25')
+  mocByBase.set(name, route)
+}
+
+function resolveMoc(cats: string[]): string | null {
+  if (cats.length === 0)
+    return null
+  const last = cats[cats.length - 1]
+  if (mocByBase.has(last))
+    return mocByBase.get(last)!
+  const key = cats.join(' · ')
+  if (mocByBase.has(key))
+    return mocByBase.get(key)!
+  return null
+}
 
 function parseCategory(raw: string): string[] {
   const m = raw.match(/category:\s*\[([^\]]*)\]/)
@@ -43,10 +73,10 @@ function naturalSort(a: string, b: string): number {
 function buildRoots(): Branch[] {
   const roots: Branch[] = []
 
-  const ensureChild = (parent: Branch, name: string): Branch => {
+  const ensureChild = (parent: Branch, name: string, cats: string[]): Branch => {
     let child = parent.children.find(c => c.name === name)
     if (!child) {
-      child = { name, children: [], notes: [] }
+      child = { name, path: cats, children: [], notes: [] }
       parent.children.push(child)
     }
     return child
@@ -62,12 +92,12 @@ function buildRoots(): Branch[] {
     // 在 roots 中找/建根分类
     let branch = roots.find(r => r.name === cats[0])
     if (!branch) {
-      branch = { name: cats[0], children: [], notes: [] }
+      branch = { name: cats[0], path: [cats[0]], children: [], notes: [] }
       roots.push(branch)
     }
-    // 逐层 descend，把子分类挂到父的 children 上
+    // 逐层 descend，把子分类挂到父的 children 上（同时记录完整 category 路径）
     for (let i = 1; i < cats.length; i++)
-      branch = ensureChild(branch, cats[i])
+      branch = ensureChild(branch, cats[i], cats.slice(0, i + 1))
 
     // 文件名可能含 `%`（如 `300%法则.md`）。把 `%` 预编码为 `%25`，
     // 浏览器/Vue Router 解码后还原为 `%`，与 VitePress 路由匹配一致。
@@ -90,7 +120,13 @@ function buildRoots(): Branch[] {
 const roots = buildRoots()
 const props = defineProps<{ node?: Branch; depth?: number }>()
 const depth = computed(() => props.depth ?? 0)
-const open = ref(depth.value < 1)
+
+// 默认合并（折叠）——符合「内容默认折叠」的需求；左侧 VitePress 侧边栏同步在
+// knowledge-org.ts 的 buildKnowledgeSidebar 顶层 collapsed 改为 true。
+const open = ref(false)
+
+// 本分支是否有对应 MOC 可跳转（有则分支名渲染为链接，点名跳 MOC；无则点名仅展开）
+const mocPath = computed(() => resolveMoc(props.node?.path ?? []))
 </script>
 
 <template>
@@ -104,13 +140,12 @@ const open = ref(depth.value < 1)
 
   <!-- 分支模式：递归渲染单个分类节点 -->
   <div v-else class="ke-branch">
-    <div
-      class="ke-header"
-      :style="{ paddingLeft: depth * 16 + 12 + 'px' }"
-      @click="open = !open"
-    >
-      <span class="ke-chevron" :class="{ open }">▶</span>
-      <span class="ke-name">{{ node.name }}</span>
+    <div class="ke-header" :style="{ paddingLeft: depth * 16 + 12 + 'px' }">
+      <span class="ke-chevron" :class="{ open }" @click.stop="open = !open">▶</span>
+      <!-- 有对应 MOC：分支名作为链接，点击跳转到该 MOC；箭头仍负责展开/折叠 -->
+      <a v-if="mocPath" class="ke-name ke-link" :href="withBase(mocPath)">{{ node.name }}</a>
+      <!-- 无 MOC：整行点击展开/折叠 -->
+      <span v-else class="ke-name" @click="open = !open">{{ node.name }}</span>
       <span class="ke-count">
         {{ node.notes.length }} 篇{{ node.children.length ? ' · ' + node.children.length + ' 类' : '' }}
       </span>
@@ -183,6 +218,15 @@ const open = ref(depth.value < 1)
   font-size: 15px;
   font-weight: 600;
   color: var(--vp-c-text-1);
+}
+.ke-name.ke-link {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  transition: color 0.12s, opacity 0.12s;
+}
+.ke-name.ke-link:hover {
+  opacity: 0.78;
+  text-decoration: underline;
 }
 
 .ke-count {
