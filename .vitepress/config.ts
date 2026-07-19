@@ -246,12 +246,9 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '主页', link: '/vault/' },
-          { text: '笔记', link: '/vault/笔记/' },
+          { text: '知识库', link: '/vault/Knowledge/_mocs/知识库总览-MOC', activeMatch: '^/vault/Knowledge/' },
           { text: '作坊', link: '/vault/作坊/' },
           { text: '档案', link: '/vault/档案/', activeMatch: '^/vault/档案/' },
-          ...(HAS_KNOWLEDGE
-            ? [{ text: '知识库', link: '/vault/Knowledge/_mocs/知识库总览-MOC', activeMatch: '^/vault/Knowledge/' }]
-            : []),
           { text: '最近更新', link: '/vault/toc' },
         ],
         lastUpdated: {
