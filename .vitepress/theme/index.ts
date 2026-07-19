@@ -7,6 +7,7 @@ import { h } from 'vue'
 import AppContainer from './components/AppContainer.vue'
 import DocFooter from './components/DocFooter.vue'
 import HomePage from './components/HomePage.vue'
+import KnowledgeExplorer from './components/KnowledgeExplorer.vue'
 import NoteExplorer from './components/NoteExplorer.vue'
 import PageMeta from './components/PageMeta.vue'
 import PortfolioProfile from './components/PortfolioProfile.vue'
@@ -69,6 +70,7 @@ const ExtendedTheme: Theme = {
 
     app.component('HomePage', HomePage)
     app.component('DocFooter', DocFooter)
+    app.component('KnowledgeExplorer', KnowledgeExplorer)
     app.component('NoteExplorer', NoteExplorer)
     app.component('PageMeta', PageMeta)
     app.component('PortfolioProfile', PortfolioProfile)
