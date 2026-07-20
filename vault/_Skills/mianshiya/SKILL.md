@@ -1,17 +1,18 @@
 ---
 skill_name: mianshiya
-description: 从面试鸭 (mianshiya.com) 抓取面试题完整内容（含推荐答案 + 面试问答），并整理为结构化 Obsidian 笔记。处理反 DevTools 检测，产出可复用的 clean content。
-version: 1.0.0
+description: 从面试鸭 (mianshiya.com) 批量抓取面试题完整内容（含推荐答案 + 面试问答），并整理为结构化 Obsidian 笔记。支持从专题页面自动提取所有题目链接并逐题抓取，处理反 DevTools 检测，产出可复用的 clean content。
+version: 2.1.0
 agent_created: true
 ---
 
-# mianshiya — 面试鸭内容抓取与整理
+# mianshiya — 面试鸭内容批量抓取与整理
 
-从 [mianshiya.com](https://www.mianshiya.com) 抓取面试题页面，提取完整内容并整理为结构化 Markdown 笔记。
+从 [mianshiya.com](https://www.mianshiya.com) 批量抓取面试题页面，自动提取专题下所有题目，逐题提取完整内容并整理为结构化 Markdown 笔记。
 
 ## 使用场景
 
-- 用户提供 mianshiya.com 面试题 URL，要求抓取内容
+- 用户提供 **专题链接**（如 `https://www.mianshiya.com/bank/2052284728362414082`），要求批量抓取该专题下所有题目
+- 用户提供 **单题链接**（如 `https://www.mianshiya.com/bank/{bankId}/question/{questionId}`），抓取单个题目
 - 需要将面试题整理为 Obsidian 知识库笔记
 - 批量抓取面试题库
 
@@ -21,47 +22,139 @@ agent_created: true
 2. 浏览器扩展已连接（Edge/Chrome）
 3. 用户浏览器中已登录 mianshiya.com（可选，但登录后可看全部内容）
 
-## 核心工作流
+## URL 类型识别
 
-### 阶段一：抓取「推荐答案」标签页
+执行前先判断用户提供的 URL 类型：
 
-这是页面的默认标签页，包含：回答重点、扩展知识、面试官追问。
+| URL 模式 | 类型 | 处理方式 |
+|----------|------|----------|
+| `https://www.mianshiya.com/bank/{bankId}` | 专题页面 | → 执行**阶段零**提取所有题目链接，再逐题执行阶段一~四 |
+| `https://www.mianshiya.com/bank/{bankId}/question/{questionId}` | 单题页面 | → 跳过阶段零，直接执行阶段一~四 |
+| `https://www.mianshiya.com/bank/{bankId}?current={n}&pageSize=20` | 专题分页 | → 同专题页面，从该 URL 开始提取 |
+
+---
+
+## 阶段零：专题页面题目列表自动提取
+
+**目标**：从专题页面自动提取所有题目的链接和标题，处理分页，输出题目列表。
+
+### 步骤
+
+```
+1. 解析专题 URL，提取 bankId
+   - URL 格式：https://www.mianshiya.com/bank/{bankId}
+   - bankId 为纯数字，如 2052284728362414082
+
+2. 用 webfetch 获取专题首页内容
+   - webfetch url=https://www.mianshiya.com/bank/{bankId} format=markdown
+
+3. 从返回内容中提取分页信息
+   - 查找 "总共 N 条" 获取题目总数
+   - 计算总页数：ceil(N / 20)
+   - 分页 URL 格式：https://www.mianshiya.com/bank/{bankId}?current={page}&pageSize=20
+
+4. 用 webfetch 获取所有分页内容（并行获取各分页）
+   - 对每一页执行 webfetch
+   - page 范围：1 到 总页数
+
+5. 从各页 markdown 内容中提取题目链接
+   - 链接格式：https://www.mianshiya.com/bank/{bankId}/question/{questionId}
+   - 用正则匹配：https://www\.mianshiya\.com/bank/\d+/question/\d+
+   - 去重（同一题目可能在不同位置出现）
+
+6. 输出题目列表，格式：
+   题目序号 | 题目标题 | 题目URL
+```
+
+### 提取示例
+
+从 webfetch 返回的 markdown 中，题目链接以如下形式出现：
+
+```markdown
+[什么是 AI Agent？它和直接调用大模型 API 有什么区别？](https://www.mianshiya.com/bank/2052284728362414082/question/2052284768782921729)
+```
+
+提取后得到：
+- URL：`https://www.mianshiya.com/bank/2052284728362414082/question/2052284768782921729`
+- 标题：`什么是 AI Agent？它和直接调用大模型 API 有什么区别？`
+
+### 用户确认
+
+提取完成后，向用户展示题目列表并确认：
+- 共发现 N 道题目
+- 列出前 5 道题目标题作为预览
+- 询问用户：是否全部抓取？或选择部分题目抓取？
+- 询问目标输出目录（Obsidian vault 中的路径）
+
+---
+
+## 阶段一：抓取「推荐答案」标签页（逐题循环）
+
+对题目列表中的每一道题执行以下操作：
 
 ```
 1. bsk session start                          → 获取 session_id
+   （如已有 session 则复用）
+
 2. bsk tab create --url <面试题URL> --session <id>
+
 3. bsk wait-ms 8s                             → 等待 JS 渲染
+
 4. bsk snapshot --session <id>                → 获取完整 ARIA 树
 ```
 
 **关键**：必须在新创建的 agent tab 中加载，首次加载时 disable-devtool 检测尚未触发，可以拿到完整 snapshot。
 
-### 阶段二：抓取「面试问答」标签页
+**进度跟踪**：每完成一道题，向用户报告进度（如 "已完成 3/50"）。
 
-⚠️ **mianshiya.com 使用了 disable-devtool 反检测库**，CDP 连接触发后页面会重定向到 404。
+**中断恢复**：如中途中断，已完成的题目笔记已写入磁盘，下次执行时可跳过已存在的文件。
 
-**已确认无法自动化的操作**：
-- 在 agent tab 中点击标签页切换 → 触发检测 → 页面跳转
-- 借用用户已打开的 tab → CDP 连接触发检测 → 页面跳转
+---
 
-**唯一可行方案：request-help（人工协助）**
+## 阶段二：抓取「面试问答」标签页（逐题循环）
 
+面试问答标签页可直接通过 URL 参数 `?tab=faq` 访问，无需在页面内点击切换标签页。
+
+**URL 构造规则**：`{题目URL}?tab=faq`
+
+例如：
 ```
-1. bsk tab create --url <面试题URL> --session <id>
-2. bsk wait-ms 3s
-3. bsk request-help --session <id> \
-     --prompt "请点击页面上的「面试问答」标签页，等待内容加载完成后点击「继续」" \
-     --title "切换到面试问答标签页" \
-     --timeout 2m
-4. 等待用户操作完成后
-5. bsk snapshot --session <id>                → 获取面试问答标签页内容
+题目 URL：https://www.mianshiya.com/bank/2052284728362414082/question/1924281357186498562
+面试问答 URL：https://www.mianshiya.com/bank/2052284728362414082/question/1924281357186498562?tab=faq
 ```
 
-**备选方案**：如果 request-help 也因页面跳转失败，则：
-- 告知用户手动复制「面试问答」标签页内容
-- 或从已打开的浏览器标签页中手动复制
+**执行步骤**：
 
-### 阶段三：内容整理
+```
+1. bsk tab create --url <题目URL>?tab=faq --session <id>
+2. bsk wait-ms 8s                             → 等待 JS 渲染
+3. bsk snapshot --session <id>                → 获取面试问答标签页完整 ARIA 树
+```
+
+**注意**：与阶段一一样，必须在新创建的 agent tab 中首次加载，避免 disable-devtool 检测触发。
+
+### 空内容检测
+
+⚠️ **并非所有题目都有「面试问答」标签页内容。**
+
+抓取 snapshot 后必须检测页面是否实际包含面试问答内容：
+
+1. 在 snapshot 中搜索以下标志性文本：
+   - "面试问答" 标签处于选中/激活状态
+   - Q&A 形式的内容（问答对）
+2. 如果 snapshot 中**没有**问答对内容，或页面显示"暂无内容"/空白区域，则判定该题无面试问答
+3. 跳过该题的面试问答部分，在笔记中标注"本题暂无面试问答内容"
+4. 继续处理下一道题，不中断整体流程
+
+### 批量优化
+
+- 批量抓取时，阶段一和阶段二对同一道题可连续执行（先抓推荐答案，再抓面试问答）
+- 也可先批量执行所有题目的阶段一，再批量执行阶段二，减少 tab 创建次数
+- 向用户确认是否需要抓取面试问答标签页；如不需要，跳过阶段二直接进入阶段三
+
+---
+
+## 阶段三：内容整理（逐题处理）
 
 从 snapshot 中提取文本，按以下结构整理：
 
@@ -71,6 +164,7 @@ agent_created: true
 > 来源：<URL>
 > 抓取时间：YYYY-MM-DD
 > 标签：<从页面提取的标签>
+> 难度：<简单/中等/困难>
 
 ## 回答重点
 （完整保留原文，包括「拆选扔」展开内容）
@@ -92,24 +186,55 @@ agent_created: true
 （从「面试问答」标签页提取的 Q&A 对）
 ```
 
-### 阶段四：清理与对比
+---
 
-1. 将抓取内容写入 `Inbox/题目编号. 标题.md`
+## 阶段四：批量写入与清理
+
+1. 将每道题的抓取内容写入 `{输出目录}/{序号}. {标题}.md`
+   - 文件名中的标题需做文件系统安全处理（去除特殊字符 `/ \ : * ? " < > |`）
+   - 序号保持专题页面中的原始顺序
 2. 与用户手动复制版本对比（如存在）
 3. 修正差异：
    - 补充缺失的「面试问答」部分
    - 恢复代码反引号格式（`before_tool_call`、`buildAgentSystemPrompt` 等）
    - 统一标题层级
-4. 输出对比报告至 `Inbox/_comparison_report.md`
+4. 生成专题索引文件 `{输出目录}/_index.md`，包含：
+   - 专题名称和来源 URL
+   - 题目总数和抓取完成数
+   - 每道题的序号、标题、链接、本地文件路径
+5. 输出对比报告至 `{输出目录}/_comparison_report.md`（如有对比）
+
+### 专题索引文件格式
+
+```markdown
+# {专题名称}
+
+> 来源：<专题URL>
+> 抓取时间：YYYY-MM-DD
+> 题目总数：N
+> 抓取完成：M
+
+## 题目列表
+
+| 序号 | 标题 | 难度 | 本地文件 |
+|------|------|------|----------|
+| 1 | 什么是 AI Agent？... | 简单 | [[1. 什么是 AI Agent]] |
+| 2 | AI Agent 的核心组件... | 简单 | [[2. AI Agent 的核心组件]] |
+| ... | ... | ... | ... |
+```
+
+---
 
 ## 已知限制
 
 | 限制 | 影响 | 解决方案 |
 |------|------|---------|
-| disable-devtool 检测 | 无法自动切换标签页 | request-help 人工协助 |
+| 部分题目无面试问答 | 该标签页内容为空 | 阶段二空内容检测，跳过并标注"暂无" |
 | snapshot 丢失内联格式 | 代码反引号、加粗等丢失 | 后期从手动版恢复 |
 | 需登录才能看完整内容 | 匿名用户可能看不到所有答案 | 确保浏览器已登录 |
 | 页面 JS 渲染需等待 | 过早 snapshot 内容为空 | wait-ms 8s 以上 |
+| 专题分页 | 单页仅显示 20 条 | 阶段零自动遍历所有分页 |
+| 批量抓取耗时较长 | 50 题约需 15-20 分钟 | 支持中断恢复，跳过已存在文件 |
 
 ## 内容结构模板
 
@@ -132,6 +257,19 @@ mianshiya 面试题页面标准结构：
 └── 相关题目列表
 ```
 
+mianshiya 专题页面标准结构：
+
+```
+├── 专题标题 + 封面图
+├── 专题描述
+├── 题目列表（分页展示，每页 20 条）
+│   ├── 题目标题（可点击跳转）
+│   ├── 难度标签
+│   └── 知识点标签
+├── 分页控件（1 2 3 ...）
+└── 总条数统计
+```
+
 ## 关闭会话
 
 ```
@@ -141,6 +279,32 @@ bsk session stop <id>                    → 关闭会话
 
 ## 示例
 
+### 示例一：批量抓取专题
+
+用户输入：
+```
+帮我抓取这个专题的所有题目：https://www.mianshiya.com/bank/2052284728362414082
+```
+
+执行流程：
+1. 识别为专题 URL → 执行阶段零
+2. webfetch 获取专题页面，提取到 50 道题目（3 页分页）
+3. 向用户展示题目列表，确认抓取范围和输出目录
+4. 逐题执行阶段一~四
+5. 生成专题索引文件
+
+### 示例二：抓取单题
+
+用户输入：
+```
+帮我抓取这道题：https://www.mianshiya.com/bank/2052284728362414082/question/2052284768782921729
+```
+
+执行流程：
+1. 识别为单题 URL → 跳过阶段零
+2. 直接执行阶段一~四
+
 执行时主动向用户确认：
 - 目标输出目录（Obsidian vault 中的路径）
+- 是否需要抓取「面试问答」标签页（部分题目可能无此内容，将自动跳过）
 - 是否需要与已有笔记做对比（如有，请提供现有笔记文件路径）
