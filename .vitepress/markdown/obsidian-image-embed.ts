@@ -44,32 +44,58 @@ export function obsidianImageEmbed(root: string): (md: MarkdownIt) => void {
   const warned = new Set<string>()
 
   return (md: MarkdownIt) => {
-    md.inline.ruler.before('link', 'obsidian_image_embed', (state, silent) => {
+    // 必须抢在 nolebase 的双向链接规则之前拦截图片型嵌入；否则 ![[Attachments/x.jpg]]
+    // 会被 nolebase 当成未解析嵌件渲染成死链(#)。nolebase 注册的规则名在不同版本下可能是
+    // 'bi_directional_link_replace' 或 'obsidian-wikilink'，这里动态探测；若均未启用
+    // nolebase，则锚到永远存在的 'text'（内联规则链首），保证本规则最先处理 ![[。
+    const ruler = md.inline.ruler as any
+    const names: string[] = (ruler.__rules__ || []).map((x: any) => x.name)
+    const nolebaseRule = names.find((n: string) => /bi_directional|wikilink/i.test(n))
+    const anchor = nolebaseRule || 'text'
+    md.inline.ruler.before(anchor, 'obsidian_image_embed', (state, silent) => {
       const start = state.pos
-      if (state.src.charCodeAt(start) !== 0x21 /* ! */)
+      const c0 = state.src.charCodeAt(start)
+      let hasBang = false
+      let innerStart: number
+      // 情况 A：![[...]] 图片嵌入（Obsidian embed）
+      if (c0 === 0x21 /* ! */ && state.src.charCodeAt(start + 1) === 0x5B /* [ */ && state.src.charCodeAt(start + 2) === 0x5B /* [ */) {
+        hasBang = true
+        innerStart = start + 3
+      }
+      // 情况 B：[[...]] 无 ! 的图片链接（Obsidian 粘贴时自动生成的「打开附件」链接，如
+      // [[Attachments/x.jpg|Open: Pasted image ...png]]）。博客上无「打开附件」概念，且裸
+      // <a href> 不会被 VitePress 打包解析，故直接丢弃，避免 nolebase 渲染成死链(#)。
+      else if (c0 === 0x5B /* [ */ && state.src.charCodeAt(start + 1) === 0x5B /* [ */) {
+        hasBang = false
+        innerStart = start + 2
+      }
+      else {
         return false
-      if (state.src.slice(start + 1, start + 3) !== '[[')
-        return false
-      const end = state.src.indexOf(']]', start + 3)
+      }
+      const end = state.src.indexOf(']]', innerStart)
       if (end < 0)
         return false
 
-      const raw = state.src.slice(start + 3, end)
+      const raw = state.src.slice(innerStart, end)
       const [name, ...rest] = raw.split('|').map(s => s.trim())
       const fileBase = name.split('/').pop() || ''
+      // 仅拦截图片型：非图片的 [[笔记]] / ![[笔记]] 一律回退给 nolebase（双向链接/笔记嵌入）。
       if (!IMAGE_EXT.test(fileBase))
         return false
 
       if (!silent) {
         const token = state.push('obsidian_image_embed', '', 0)
-        token.meta = { fileBase, rest }
+        token.meta = { fileBase, rest, hasBang }
       }
       state.pos = end + 2
       return true
     })
 
     md.renderer.rules.obsidian_image_embed = (tokens, idx, _options, env) => {
-      const { fileBase, rest } = tokens[idx].meta
+      const { fileBase, rest, hasBang } = tokens[idx].meta
+      // 情况 B：无 ! 的图片链接（Obsidian「打开附件」链接），博客上无意义，直接丢弃。
+      if (!hasBang)
+        return ''
       const att = index.get(fileBase)
 
       let alt = ''
