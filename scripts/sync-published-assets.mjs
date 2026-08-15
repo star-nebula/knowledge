@@ -63,7 +63,7 @@ for (const md of trackedMd) {
   const txt = stripCode(raw)
   let m
   while ((m = embRe.exec(txt)))
-    needed.add(m[1].toLowerCase())
+    needed.add(path.basename(m[1]).toLowerCase())
   while ((m = mdImgRe.exec(txt)))
     needed.add(path.basename(m[1].split('?')[0]).toLowerCase())
 }

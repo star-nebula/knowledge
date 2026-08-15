@@ -294,7 +294,10 @@ export default defineConfig({
           token.attrSet('href', href.replace(/%(?![0-9A-Fa-f]{2})/g, '%25'))
         return origLinkOpen(tokens, idx, options, env, self)
       }
-      md.use(obsidianImageEmbed(SITE_BASE))
+      // 用项目根目录作为图片索引的 cwd，而非 URL 基址 SITE_BASE。
+      // SITE_BASE('/knowledge/') 在 Windows 下碰巧解析到项目根，但在 Linux CI 上是
+      // 不存在的绝对路径，会导致图片索引为空、所有 ![[Attachments/...]] 渲染为“图片缺失”。
+      md.use(obsidianImageEmbed(process.cwd()))
       md.use(MarkdownItFootnote)
       md.use(MarkdownItMathjax3)
     },
