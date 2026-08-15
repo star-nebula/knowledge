@@ -294,9 +294,10 @@ export default defineConfig({
           token.attrSet('href', href.replace(/%(?![0-9A-Fa-f]{2})/g, '%25'))
         return origLinkOpen(tokens, idx, options, env, self)
       }
-      // 用项目根目录作为图片索引的 cwd，而非 URL 基址 SITE_BASE。
-      // SITE_BASE('/knowledge/') 在 Windows 下碰巧解析到项目根，但在 Linux CI 上是
-      // 不存在的绝对路径，会导致图片索引为空、所有 ![[Attachments/...]] 渲染为“图片缺失”。
+      // 用项目根目录作为图片索引的 cwd。obsidianImageEmbed 内部会动态探测并抢在 nolebase 的
+      // 双向链接规则（bi_directional_link_replace）之前注册，从而把 ![[Attachments/x.jpg]]
+      // 拦截成 <img>，而不是被渲染成死链(#)。非图片的 ![[笔记]] 不匹配 IMAGE_EXT，
+      // 自动回退给 nolebase，不影响双向链接/图谱。
       md.use(obsidianImageEmbed(process.cwd()))
       md.use(MarkdownItFootnote)
       md.use(MarkdownItMathjax3)
