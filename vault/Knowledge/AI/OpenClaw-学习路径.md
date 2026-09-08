@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-架构总览]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # OpenClaw 学习路径

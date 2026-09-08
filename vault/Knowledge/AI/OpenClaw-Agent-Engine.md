@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-Tools-System]]"
   - "[[OpenClaw-ACP]]"
   - "[[OpenClaw-Context-Engine]]"
+category: ["🧩 AI框架与Agent", "OpenClaw"]
 ---
 
 # Agent Engine 代理引擎

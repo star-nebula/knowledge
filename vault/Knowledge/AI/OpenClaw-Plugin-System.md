@@ -17,6 +17,7 @@ related:
   - "[[OpenClaw-Tools-System]]"
   - "[[OpenClaw-Hook-System]]"
   - "[[OpenClaw-Config-System]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Plugin System 插件系统

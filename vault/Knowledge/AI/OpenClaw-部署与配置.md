@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-Cron-Daemon]]"
   - "[[OpenClaw-Secrets]]"
   - "[[OpenClaw-代码组织与技术债务]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # OpenClaw 部署与配置

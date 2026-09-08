@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-MCP]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Tools System 工具系统

@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-Channels]]"
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-ACP]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Session Manager 会话管理器

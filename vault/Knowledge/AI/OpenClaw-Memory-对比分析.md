@@ -17,6 +17,7 @@ source: "[[Resources/OpenClaw/OpenClaw 记忆模块与传统Agent系统对比分
 related:
   - "[[OpenClaw-MOC]]"
   - "[[OpenClaw-Memory-System]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # OpenClaw 记忆系统 vs 传统 Agent 框架

@@ -20,6 +20,7 @@ related:
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Memory-对比分析]]"
   - "[[OpenClaw-Security]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # OpenClaw 记忆系统

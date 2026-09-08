@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-Model-Catalog]]"
   - "[[OpenClaw-Secrets]]"
   - "[[OpenClaw-Context-Engine]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # LLM Client 大语言模型客户端

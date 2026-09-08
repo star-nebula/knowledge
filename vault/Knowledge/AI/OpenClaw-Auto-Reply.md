@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-Hook-System]]"
   - "[[OpenClaw-Session-Manager]]"
   - "[[OpenClaw-Gateway-Server]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Auto-Reply / Dispatch 自动回复与调度
