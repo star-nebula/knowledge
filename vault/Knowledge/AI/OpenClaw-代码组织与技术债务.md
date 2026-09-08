@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-MOC]]"
   - "[[OpenClaw-部署与配置]]"
   - "[[OpenClaw-架构总览]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # OpenClaw 代码组织与技术债务

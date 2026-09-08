@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Channels]]"
   - "[[OpenClaw-Config-System]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Secrets Manager 秘密管理器

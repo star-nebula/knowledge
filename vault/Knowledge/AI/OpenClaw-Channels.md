@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-Session-Manager]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Channels 频道抽象

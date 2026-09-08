@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-MOC]]"
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Agent-Engine]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Model Catalog 模型目录

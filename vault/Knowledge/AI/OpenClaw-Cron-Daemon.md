@@ -18,6 +18,7 @@ related:
   - "[[OpenClaw-Config-System]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Gateway-Server]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Cron & Daemon 定时任务与守护进程

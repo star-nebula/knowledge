@@ -13,6 +13,7 @@ category: ["🧩 AI框架与Agent"]
 
 - [[AI 应用核心范式-MOC|AI 应用核心范式]]
 - [[框架与中间件-MOC|框架与中间件]]
+- [[OpenClaw-MOC|OpenClaw]]
 
 ## 笔记清单
 
@@ -29,3 +30,5 @@ category: ["🧩 AI框架与Agent"]
 - [[LangChain Prompts 组件]]
 - [[n8n AI Agent 工作流]]
 - [[n8n 本地部署]]
+- [[OpenClaw-Agent-Engine]]
+- [[OpenClaw-MCP]]

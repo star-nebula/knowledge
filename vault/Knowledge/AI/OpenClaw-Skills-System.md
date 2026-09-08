@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Context-Engine]]"
   - "[[OpenClaw-Agent-Engine]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Skills System 技能系统

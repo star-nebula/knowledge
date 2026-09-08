@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Plugin-System]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Hook System 钩子系统

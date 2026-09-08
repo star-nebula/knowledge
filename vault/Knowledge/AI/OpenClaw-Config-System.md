@@ -17,6 +17,7 @@ related:
   - "[[OpenClaw-Secrets]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Gateway-Server]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Config System 配置系统

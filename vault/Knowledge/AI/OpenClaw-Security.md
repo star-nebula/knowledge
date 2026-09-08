@@ -19,6 +19,7 @@ related:
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Memory-System]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Security 安全模块

@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-Plugin-System]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # OpenClaw 架构总览

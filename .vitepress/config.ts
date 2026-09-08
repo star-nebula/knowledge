@@ -121,6 +121,7 @@ const srcExclude = [
   '**/Interview/**',
   '**/Resources/**',
   '**/Skills/**',
+  '**/skills/**',
   '**/Canvas/**',
   '**/Templates/**',
   '**/Archive/**',

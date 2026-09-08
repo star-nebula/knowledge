@@ -17,6 +17,7 @@ related:
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Session-Manager]]"
   - "[[OpenClaw-Context-Engine]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # OpenClaw ACP——多 Agent 协作

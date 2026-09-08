@@ -17,6 +17,7 @@ related:
   - "[[OpenClaw-Config-System]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Channels]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Gateway Server 网关服务器

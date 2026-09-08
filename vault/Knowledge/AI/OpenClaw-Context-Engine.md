@@ -19,6 +19,7 @@ related:
   - "[[OpenClaw-Memory-System]]"
   - "[[OpenClaw-Skills-System]]"
   - "[[OpenClaw-Plugin-System]]"
+category: ["🤖 AI大模型", "OpenClaw"]
 ---
 
 # Context Engine 上下文引擎

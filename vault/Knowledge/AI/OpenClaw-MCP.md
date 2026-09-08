@@ -16,6 +16,7 @@ related:
   - "[[OpenClaw-Tools-System]]"
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Agent-Engine]]"
+category: ["🧩 AI框架与Agent", "OpenClaw"]
 ---
 
 # MCP（Model Context Protocol）
