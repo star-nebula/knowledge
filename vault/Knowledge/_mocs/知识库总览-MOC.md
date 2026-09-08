@@ -6,6 +6,4 @@ generated: true
 
 # 知识库总览
 
-> 由 `scripts/generate-mocs.ts` 自动生成。
-
 <KnowledgeExplorer />

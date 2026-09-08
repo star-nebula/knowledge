@@ -104,8 +104,6 @@ function renderMoc(titlePath: string[], node: TreeNode): string {
   lines.push('')
   lines.push(`# ${title}`)
   lines.push('')
-  lines.push('> 本页由 `scripts/generate-mocs.ts` 自动生成，请勿手动编辑；修改笔记的 `category` 后重跑脚本即可刷新。')
-  lines.push('')
 
   if (subSections.length) {
     lines.push('## 子栏目')
@@ -168,8 +166,6 @@ const overviewContent = (() => {
   lines.push('---')
   lines.push('')
   lines.push('# 知识库总览')
-  lines.push('')
-  lines.push('> 由 `scripts/generate-mocs.ts` 自动生成。')
   lines.push('')
   lines.push('<KnowledgeExplorer />')
   lines.push('')

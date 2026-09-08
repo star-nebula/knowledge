@@ -7,8 +7,6 @@ category: ["🤖 AI大模型"]
 
 # 🤖 AI大模型
 
-> 本页由 `scripts/generate-mocs.ts` 自动生成，请勿手动编辑；修改笔记的 `category` 后重跑脚本即可刷新。
-
 ## 子栏目
 
 - [[AI 应用核心范式-MOC|AI 应用核心范式]]
