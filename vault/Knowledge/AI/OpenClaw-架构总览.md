@@ -1,4 +1,5 @@
 ---
+title: OpenClaw 架构总览
 type: overviews
 tags:
   - AI
@@ -11,12 +12,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/OpenClaw 架构详解]]、[[Resources/OpenClaw/OpenClaw 核心结构详解]]、[[Resources/OpenClaw/OpenClaw 框架详解]]、[[Resources/OpenClaw/技术架构]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-Plugin-System]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw"]
 ---
 
 # OpenClaw 架构总览
@@ -214,7 +215,7 @@ openclaw gateway start
 
 ## 相关笔记
 
-- [[OpenClaw-MOC]] — 知识地图
+- [[🦀 OpenClaw-MOC]] — 知识地图
 - [[OpenClaw-Gateway-Server]] — 网关服务器详解
 - [[OpenClaw-Agent-Engine]] — Agent 执行引擎详解
 - [[OpenClaw-Auto-Reply]] — 自动回复与调度

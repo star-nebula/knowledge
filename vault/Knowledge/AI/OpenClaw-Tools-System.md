@@ -13,12 +13,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/09-tools-system]]、[[Resources/OpenClaw/核心组件/05-ToolExecution]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-MCP]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "能力层"]
 ---
 
 # Tools System 工具系统

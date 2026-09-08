@@ -12,12 +12,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/04-config-system]]、[[Resources/OpenClaw/核心组件/06-ConfigIO]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Security]]"
   - "[[OpenClaw-Secrets]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Gateway-Server]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "基础层"]
 ---
 
 # Config System 配置系统

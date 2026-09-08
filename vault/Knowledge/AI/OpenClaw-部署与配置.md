@@ -13,12 +13,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/部署与配置]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Config-System]]"
   - "[[OpenClaw-Cron-Daemon]]"
   - "[[OpenClaw-Secrets]]"
   - "[[OpenClaw-代码组织与技术债务]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "操作指南"]
 ---
 
 # OpenClaw 部署与配置

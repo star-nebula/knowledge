@@ -13,10 +13,10 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/08-model-catalog]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Agent-Engine]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "能力层"]
 ---
 
 # Model Catalog 模型目录

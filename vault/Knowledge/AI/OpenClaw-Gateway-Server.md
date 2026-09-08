@@ -12,12 +12,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/01-gateway-server]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-架构总览]]"
   - "[[OpenClaw-Config-System]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Channels]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "基础层"]
 ---
 
 # Gateway Server 网关服务器

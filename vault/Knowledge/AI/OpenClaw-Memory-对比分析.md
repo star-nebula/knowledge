@@ -15,9 +15,9 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/OpenClaw 记忆模块与传统Agent系统对比分析]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Memory-System]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "专题分析"]
 ---
 
 # OpenClaw 记忆系统 vs 传统 Agent 框架

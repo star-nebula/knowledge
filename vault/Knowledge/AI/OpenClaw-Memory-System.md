@@ -14,13 +14,13 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/OpenClaw 记忆模块详解]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Context-Engine]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Memory-对比分析]]"
   - "[[OpenClaw-Security]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "支撑层"]
 ---
 
 # OpenClaw 记忆系统

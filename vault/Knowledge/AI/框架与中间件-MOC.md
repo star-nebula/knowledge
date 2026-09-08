@@ -52,7 +52,7 @@ LangChain 是围绕大语言模型的应用开发框架（Harrison Chase，2022�
 
 OpenClaw 是个人 AI 助手平台，30+ 消息渠道 + 40+ 模型提供商 + Agent 执行引擎 + Plugin SDK。
 
-→ [[OpenClaw-MOC]]
+→ [[🦀 OpenClaw-MOC]]
 
 ## 学习路径
 

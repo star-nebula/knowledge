@@ -12,13 +12,13 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/14-session-manager]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Channels]]"
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-ACP]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "支撑层"]
 ---
 
 # Session Manager 会话管理器

@@ -12,11 +12,11 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/15-hook-system]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Plugin-System]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "支撑层"]
 ---
 
 # Hook System 钩子系统
