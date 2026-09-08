@@ -13,10 +13,10 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/开发指南/01-code-organization]], [[Resources/OpenClaw/开发指南/03-tech-debt]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-部署与配置]]"
   - "[[OpenClaw-架构总览]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "操作指南"]
 ---
 
 # OpenClaw 代码组织与技术债务

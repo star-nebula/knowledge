@@ -12,11 +12,11 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/17-secrets]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Channels]]"
   - "[[OpenClaw-Config-System]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "支撑层"]
 ---
 
 # Secrets Manager 秘密管理器

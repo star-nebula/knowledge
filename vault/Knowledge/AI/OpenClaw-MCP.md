@@ -12,11 +12,11 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/11-mcp]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Tools-System]]"
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Agent-Engine]]"
-category: ["🧩 AI框架与Agent", "OpenClaw"]
+category: ["🦀 OpenClaw", "能力层"]
 ---
 
 # MCP（Model Context Protocol）

@@ -14,12 +14,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/16-security]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Config-System]]"
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Memory-System]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "支撑层"]
 ---
 
 # Security 安全模块

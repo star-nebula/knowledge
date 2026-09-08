@@ -12,11 +12,11 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/10-skills-system]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Context-Engine]]"
   - "[[OpenClaw-Agent-Engine]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "能力层"]
 ---
 
 # Skills System 技能系统

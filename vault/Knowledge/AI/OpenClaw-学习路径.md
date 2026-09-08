@@ -12,11 +12,11 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/OpenClaw 学习与掌握核心指南]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-架构总览]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "操作指南"]
 ---
 
 # OpenClaw 学习路径

@@ -13,12 +13,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/07-llm-client]]、[[Resources/OpenClaw/核心组件/04-LLM-Stream]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Model-Catalog]]"
   - "[[OpenClaw-Secrets]]"
   - "[[OpenClaw-Context-Engine]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "能力层"]
 ---
 
 # LLM Client 大语言模型客户端

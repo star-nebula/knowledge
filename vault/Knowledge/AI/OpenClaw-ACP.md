@@ -13,11 +13,11 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心组件/07-ACP]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Session-Manager]]"
   - "[[OpenClaw-Context-Engine]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "专题分析"]
 ---
 
 # OpenClaw ACP——多 Agent 协作

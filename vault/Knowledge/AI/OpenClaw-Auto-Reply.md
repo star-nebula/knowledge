@@ -13,12 +13,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/03-auto-reply]]、[[Resources/OpenClaw/核心组件/02-Dispatch]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Hook-System]]"
   - "[[OpenClaw-Session-Manager]]"
   - "[[OpenClaw-Gateway-Server]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "基础层"]
 ---
 
 # Auto-Reply / Dispatch 自动回复与调度

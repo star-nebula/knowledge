@@ -13,13 +13,13 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/13-context-engine]]、[[Resources/OpenClaw/核心组件/08-ContextCompaction]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Memory-System]]"
   - "[[OpenClaw-Skills-System]]"
   - "[[OpenClaw-Plugin-System]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "支撑层"]
 ---
 
 # Context Engine 上下文引擎

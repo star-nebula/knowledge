@@ -14,11 +14,11 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/18-cron-daemon]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Config-System]]"
   - "[[OpenClaw-Agent-Engine]]"
   - "[[OpenClaw-Gateway-Server]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "支撑层"]
 ---
 
 # Cron & Daemon 定时任务与守护进程

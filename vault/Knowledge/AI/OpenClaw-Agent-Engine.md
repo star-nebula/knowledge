@@ -12,13 +12,13 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/02-agent-engine]]、[[Resources/OpenClaw/核心组件/01-AgentCommand]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-架构总览]]"
   - "[[OpenClaw-LLM-Client]]"
   - "[[OpenClaw-Tools-System]]"
   - "[[OpenClaw-ACP]]"
   - "[[OpenClaw-Context-Engine]]"
-category: ["🧩 AI框架与Agent", "OpenClaw"]
+category: ["🦀 OpenClaw", "基础层"]
 ---
 
 # Agent Engine 代理引擎

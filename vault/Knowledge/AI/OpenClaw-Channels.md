@@ -13,12 +13,12 @@ updated: 2026-09-07
 status: integrated
 source: "[[Resources/OpenClaw/核心模块/06-channels]]"
 related:
-  - "[[OpenClaw-MOC]]"
+  - "[[🦀 OpenClaw-MOC]]"
   - "[[OpenClaw-Plugin-System]]"
   - "[[OpenClaw-Gateway-Server]]"
   - "[[OpenClaw-Auto-Reply]]"
   - "[[OpenClaw-Session-Manager]]"
-category: ["🤖 AI大模型", "OpenClaw"]
+category: ["🦀 OpenClaw", "扩展层"]
 ---
 
 # Channels 频道抽象
