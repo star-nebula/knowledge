@@ -15,6 +15,7 @@
 !**/.obsidian/snippets/
 .opencode/
 _agent_scripts/
+发布/
 
 # 个人笔记(从 BaiduSyncdisk/obsidian 迁入)。发布走显式开关: 给笔记加 status: published 并接入 nav/sidebar。
 vault/Projects/

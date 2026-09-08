@@ -7,8 +7,6 @@ category: ["🛠️ 工程工具"]
 
 # 🛠️ 工程工具
 
-> 本页由 `scripts/generate-mocs.ts` 自动生成，请勿手动编辑；修改笔记的 `category` 后重跑脚本即可刷新。
-
 ## 子栏目
 
 - [[IDE与环境-MOC|IDE与环境]]
