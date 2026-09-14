@@ -128,6 +128,7 @@ const srcExclude = [
   '**/rules/**',
   '**/AgentLog/**',
   '**/Published/**',
+  '**/Memory/**',
   '**/.opencode/**',
   '**/.trash/**',
   '**/.workbuddy/**',

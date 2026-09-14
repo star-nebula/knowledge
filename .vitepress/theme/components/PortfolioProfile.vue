@@ -14,16 +14,14 @@ interface Project {
 interface TechTag { name: string; group: string; tooltip: string; link?: string }
 interface TimelineItem { period: string; title: string; org: string; desc: string; link?: string; linkText?: string }
 
-const title = 'AI · AI应用开发工程师'
+const title = 'AI应用开发工程师'
 const tagline = '多Agent编排 / RAG全链路 / LLM工程化'
 const summary = '电商场景AI解决方案落地，从0到1构建多Agent选品与智能客服系统'
 const bioShort = '25届本科毕业生，专注AI应用开发，有电商AI产品线落地经验，擅长多Agent系统、RAG pipeline和LLM工程化。'
-const bioFull = '25届本科毕业生，人工智能专业。专注于电商场景AI解决方案落地，从0到1主导了多Agent选品简报系统、电商智能客服RAG系统、商品短文本分类模型轻量化等核心项目，在多Agent编排、RAG全链路优化、模型部署推理等方面积累了丰富的工程实践经验。'
+const bioFull = '25届本科毕业生，人工智能专业。专注于电商场景AI解决方案落地，从0到1主导了多Agent选品简报系统、电商智能客服RAG系统、商品短文本分类模型轻量化等核心项目，在多Agent编排、RAG全链路优化、模型部署推理等方面积累了丰富的工程实践经验。联系方式请通过 GitHub 私信或 CSDN 留言。'
 
 const contacts = [
-  { icon: '📞', value: 'contact-via-github', copyable: true },
-  { icon: '📧', value: 'contact-via-github@example.invalid', copyable: true },
-  { icon: '🐙', value: 'GitHub', link: 'https://github.com/star-nebula/knowledge', external: true },
+  { icon: '🐙', value: 'GitHub', link: 'https://github.com/star-nebula', external: true },
   { icon: '📝', value: 'CSDN', link: 'https://blog.csdn.net/qq_69608018?type=blog', external: true },
 ]
 const timeline: TimelineItem[] = [
@@ -193,7 +191,7 @@ onUnmounted(() => {
       <div class="pp-about-grid">
         <div class="pp-info-card">
           <div class="pp-avatar">
-            <img :src="withBase('/avatar.png')" alt="AI头像" class="pp-avatar-img" @error="(e: Event) => { (e.target as HTMLImageElement).src = withBase('/avatar.svg') }" />
+            <img :src="withBase('/avatar.png')" alt="头像" class="pp-avatar-img" />
           </div>
           <div class="pp-info-list">
             <div class="pp-info-item"><span class="pp-info-label">毕业届别</span><span class="pp-info-value">25届本科</span></div>
