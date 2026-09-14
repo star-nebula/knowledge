@@ -32,6 +32,8 @@ vault/Published/
 vault/Home.md
 AGENT.md
 vault/发布/
+# 跨软件永久记忆库(个人工作/副业/背调记录,绝不入公开仓库;2026-09-14 审计后移出)
+vault/Memory/
 
 # 附件：默认全部不入库(仅本地 + 百度云备份, 防止 740+ 张私人图泄到 GitHub)
 # 由 scripts/sync-published-assets.mjs 把「被 git 跟踪的笔记(=站点内容)引用到的图片」
