@@ -4,9 +4,11 @@ import { onMounted, watch } from 'vue'
 
 /**
  * 站点访问统计（2026-09-14）
- * - 不蒜子：免注册计数，页脚展示「总访问量 / 访客数 / 本页访问」；脚本挂载失败时静默隐藏
+ * - 不蒜子：免注册计数；内容页脚显示「总访问 / 访客 / 本页」，主页（site=true）只显示「总访问 / 访客」
  * - 51LA v6：后台分析，脚本在 head.ts，ck 号见 head.ts 内注释
+ * 用法：<SiteStats site /> 主页简版；<SiteStats /> 内容页全量版
  */
+const props = defineProps<{ site?: boolean }>()
 const route = useRoute()
 
 // 不蒜子是按「脚本加载时刻的 URL」回填的，VitePress 是 SPA，
@@ -34,8 +36,10 @@ watch(() => route.path, loadBusuanzi)
     <span class="stat-item">👁 本站总访问 <span id="busuanzi_value_site_pv" class="stat-num" /> 次</span>
     <span class="stat-sep">·</span>
     <span class="stat-item">访客 <span id="busuanzi_value_site_uv" class="stat-num" /> 人</span>
-    <span class="stat-sep">·</span>
-    <span class="stat-item">本页 <span id="busuanzi_value_page_pv" class="stat-num" /> 次</span>
+    <template v-if="!site">
+      <span class="stat-sep">·</span>
+      <span class="stat-item">本页 <span id="busuanzi_value_page_pv" class="stat-num" /> 次</span>
+    </template>
   </div>
 </template>
 
@@ -45,10 +49,12 @@ watch(() => route.path, loadBusuanzi)
   flex-wrap: wrap;
   gap: 6px;
   align-items: center;
+  justify-content: center;
   margin-top: 12px;
   font-size: 13px;
   color: var(--vp-c-text-2);
 }
+.site-stats.home-stats { margin-top: 0; }
 .stat-num { font-weight: 600; color: var(--vp-c-text-1); }
 .stat-sep { opacity: 0.5; }
 </style>
