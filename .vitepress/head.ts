@@ -4,6 +4,9 @@ import { creatorNames, creatorUsernames, siteDescription, siteName, targetDomain
 export default [
   // Redirect root path to zh-CN locale
   ['script', {}, `if (typeof window !== 'undefined' && (window.location.pathname === '/knowledge/' || window.location.pathname === '/knowledge') && !window.location.pathname.startsWith('/knowledge/zh-CN')) { window.location.href = '/knowledge/zh-CN/' + window.location.hash; }`],
+  // 51LA v6 访问统计（后台 https://v6.51.la ）：注册站点后把 ck 值填到下面 LA_CK。
+  // ck 为空字符串时脚本不注入，零副作用。注意 ${"LA_CK"} 是刻意转义，运行时由浏览器侧模板拼接。
+  ['script', {}, `(function(){var LA_CK="";if(!LA_CK)return;var s=document.createElement("script");s.src="https://js.51.la/v6/"+LA_CK+".js";s.async=true;document.head.appendChild(s)})()`],
   ['meta', {
     name: 'theme-color',
     content: '#ffffff',
