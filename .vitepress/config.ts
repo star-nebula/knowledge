@@ -263,7 +263,9 @@ export default defineConfig({
       lang: 'zh-CN',
       label: '中文',
       dir: '/vault',
-      link: '/vault',
+      // 注意：link 必须带尾斜杠，否则 normalizeLink 会补成 vault.html（GitHub Pages 404）；
+      // 带斜杠 → /vault/ → 目录首页，200。
+      link: '/vault/',
       themeConfig: {
         nav: [
           { text: '主页', link: '/vault/' },
