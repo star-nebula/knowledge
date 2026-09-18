@@ -32,6 +32,7 @@ vault/Published/
 vault/Home.md
 AGENT.md
 vault/发布/
+vault/视图/
 # 跨软件永久记忆库(个人工作/副业/背调记录,绝不入公开仓库;2026-09-14 审计后移出)
 vault/Memory/
 
@@ -77,5 +78,5 @@ components.d.ts
 *.log
 
 # Skill 工作台与备份（本地运维态，不入库）
-vault/workbenches/skill-workbench/data/
+# （工作台本体已于 2026-09-14 迁至 E:\Projects\workbenches\skill-workbench，脱离本仓库）
 backup/

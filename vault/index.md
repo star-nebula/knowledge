@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: 开始阅读
-      link: /vault/笔记/index
+      link: /vault/Knowledge/_mocs/知识库总览-MOC
     - theme: alt
       text: GitHub 上浏览
       link: https://github.com/star-nebula/knowledge
