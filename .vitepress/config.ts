@@ -9,14 +9,37 @@ import { obsidianImageEmbed } from './markdown/obsidian-image-embed'
 import { sanitizeWikiPercent } from './markdown/sanitize-wikilink-percent'
 import { buildKnowledgeSidebar } from '../scripts/knowledge-org'
 
-import { existsSync } from 'node:fs'
+import { existsSync, readdirSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 const SITE_BASE = '/knowledge/'
 
-// vault/Knowledge/ 默认被 .gitignore 忽略（私人库，不发布到网站，仅本地 + 百度云备份）。
-// 本地开发/构建时该目录存在 → 全量渲染知识库；CI 干净 checkout 下不存在 → 自动跳过，
-// 避免「构建失败」与「死链 nav」。详见 .gitignore 第 18-20 行注释。
+// 站点发布面：唯一事实来源。新增/移除发布目录只改这里。
+// 三处派生共用同一份清单，保证「git 跟踪 / 构建渲染 / 双链索引」三面始终对齐：
+//   1. srcExclude：非发布目录一律不渲染成页面
+//   2. nolebase bidirectionalLinks excludesPatterns：非发布目录不编入 [[ ]] 双链索引
+//      （必须与 srcExclude 对齐，否则未发布笔记会被解析、与已发布同名笔记冲突）
+//   3. scripts/check-publish-boundary.mjs：校验 git 跟踪面 ⊆ 发布面 + 构建产物链接 ⊆ 发布面
+//
+// 发布面 = 内容目录 + 站点运行必需文件（首页/目录页/数据源/插件列表），
+// 文件级条目用 `vault/<文件>` 形式；目录级用 `vault/<目录>`（含子目录）。
+const PUBLISHED_DIRS = [
+  'vault/作坊',
+  'vault/档案',
+  'vault/Knowledge',
+  // 附件：被 git 跟踪的图片即已发布图片（pnpm sync:assets 只 add 已发布笔记引用的图）。
+  // 整目录放行，便于 ![[image]] 嵌入解析；私人图仍在 .gitignore 里不会进仓库。
+  'vault/Attachments',
+  // 站点运行必需文件（不在内容目录内，但必须随站点发布）
+  'vault/index.md',
+  'vault/toc.md',
+  'vault/data/toc.data.ts',
+  'vault/🔌 知识库插件列表.md',
+]
+
+// vault/Knowledge/ 已入库并随站点发布（见 README「内容板块」），目录存在性检测只作兜底：
+// 某些 checkout / 分支可能没有该目录（历史上它曾被 .gitignore 排除为私人库），此时跳过渲染，
+// 避免「构建失败」与「死链 nav」。
 // 通过检测目录是否存在决定接入，使同一份 config 在本地与 CI 下都能构建通过。
 const KNOWLEDGE_DIR = resolve(process.cwd(), 'vault/Knowledge')
 const HAS_KNOWLEDGE = existsSync(KNOWLEDGE_DIR)
@@ -47,17 +70,15 @@ const nolebase = presetMarkdownIt({
       baseDir: '/',
       // 未匹配的链接仍渲染为无效链接（带 .nolebase-route-link-invalid 类），便于发现死链
       stillRenderNoMatched: true,
-      // 与 VitePress srcExclude 对齐：排除所有「未发布」私有 Vault 目录
+      // 与 VitePress srcExclude 对齐：排除所有「未发布」私有 Vault 目录。
+      // 由 buildExcludes() 同源生成（与 srcExclude 共用一份数据），
+      // 避免两处各自维护导致漂移（见顶部 PUBLISHED_DIRS 注释）。
       excludesPatterns: [
-        'dist', 'node_modules', '.obsidian', '.vitepress', '.workbuddy', 'public', 'scripts', 'metadata',
+        ...buildExcludes(),
         // Archive 备份目录含与 Attachments 同名的图片/附件副本，同名冲突会误报；
         // 同时排除 Attachments 内的 .md（Excalidraw 画图文件用 [[Pasted Image]] 引用粘贴图，会产生噪声），
         // 但保留 .png 等图片扫描以确保 ![[image]] 嵌入可解析。
-        '**/Archive/**', 'vault/Attachments/**/*.md',
-        '**/Projects/**', '**/DailyNotes/**', '**/Inbox/**', '**/Interview/**', '**/Resources/**',
-        '**/Skills/**', '**/Canvas/**', '**/Templates/**', '**/rules/**', '**/AgentLog/**',
-        '**/Published/**', '**/.trash/**', '**/data/**', '**/视图/**', '**/Home.md', '**/AGENT.md',
-        '**/.opencode/**', '**/.codebuddy/**',
+        'vault/Attachments/**/*.md',
       ],
     },
   },
@@ -66,7 +87,7 @@ const nolebase = presetMarkdownIt({
 /**
  * 修复 nolebase calculateSidebar 生成的 index 页面链接。
  *
- * nolebase 对 index.md 生成的链接形如 `/vault/笔记/🌐 网站部署/index`，
+ * nolebase 对 index.md 生成的链接形如 `/vault/作坊/网站部署/index`，
  * 而 VitePress 的 isActive / normalize 只处理 `.md` / `.html` 结尾，
  * 无法剥离末尾的 `/index`，导致 pager（上下页导航）对所有 index 页面
  * 都找不到当前页，退化到始终取侧边栏第一项作为 "Next page"。
@@ -97,16 +118,14 @@ function fixSidebarIndexLinks(sidebar: any): any {
 }
 
 /**
- * 组装整站侧边栏：nolebase calculateSidebar 负责「站点内容」四个目录
- * （笔记/作坊/档案/编目 Catalog），Knowledge 由 buildKnowledgeSidebar()
+ * 组装整站侧边栏：nolebase calculateSidebar 负责「站点内容」目录（作坊/档案），
+ * Knowledge 由 buildKnowledgeSidebar()
  * 按各笔记的 category frontmatter 实时生成，以 `/vault/Knowledge/` 为 key 注入。
  */
 function buildSiteSidebar() {
   const base = calculateSidebar([
-    { folderName: 'vault/笔记', separate: true },
     { folderName: 'vault/作坊', separate: true },
     { folderName: 'vault/档案', separate: true },
-    { folderName: 'vault/编目 Catalog', separate: true },
   ], 'vault')
   const knowledge = HAS_KNOWLEDGE ? buildKnowledgeSidebar() : []
   if (knowledge.length > 0)
@@ -114,48 +133,47 @@ function buildSiteSidebar() {
   return fixSidebarIndexLinks(base)
 }
 
+// 生成「排除所有不在发布面的 vault 顶层条目」的 glob 规则。
+// 原理：枚举 vault/ 下真实存在的顶层条目（目录/文件），凡不在 PUBLISHED_DIRS 清单内的
+// 一律排除（目录 → **/<name>/**，文件 → **/<name>）。这样新增私人目录无需手写任何规则，
+// 且与 nolebase 双链索引共用同一份数据（见顶部 PUBLISHED_DIRS 注释）。
+// 注意：vault/Attachments 的图片不在此排除（图片不参与页面渲染，且要支持图片嵌入）。
+function buildExcludes() {
+  const vaultRoot = resolve(process.cwd(), 'vault')
+  // PUBLISHED_DIRS 里既有目录也有文件：取顶层名作为白名单
+  const published = new Set(PUBLISHED_DIRS.map(d => d.replace(/^vault\//, '').split('/')[0]))
+  const excludes: string[] = []
+  for (const entry of readdirSync(vaultRoot, { withFileTypes: true })) {
+    const name = entry.name
+    if (published.has(name))
+      continue
+    excludes.push(entry.isDirectory() ? `**/${name}/**` : `**/${name}`)
+  }
+  return excludes
+}
+
 const srcExclude = [
-  '**/Projects/**',
-  '**/DailyNotes/**',
-  '**/Inbox/**',
-  '**/Interview/**',
-  '**/Resources/**',
-  '**/Skills/**',
-  '**/skills/**',
-  '**/Canvas/**',
-  '**/Templates/**',
-  '**/Archive/**',
-  '**/rules/**',
-  '**/AgentLog/**',
-  '**/Published/**',
-  '**/Memory/**',
+  // 仓库根级别的私有项（非 vault 顶层目录，buildExcludes 不覆盖）
   'backup/**',
-  '**/.opencode/**',
-  '**/.trash/**',
-  '**/.workbuddy/**',
-  '**/.obsidian/**',
-  '**/.codebuddy/**',
-  '**/data/**',
-  '**/视图/**',
-  '**/Home.md',
-  '**/AGENT.md',
+  // vault 顶层「不在发布面」的目录/文件：由 buildExcludes() 动态生成
+  ...buildExcludes(),
+  // 追加硬排除：发布目录内若有个别不应渲染的，放这里（当前无）
+  // '**/发布/**',
 ]
-// CI 干净 checkout 下 vault/Knowledge/ 不存在（被 .gitignore 忽略），额外排除以免扫描私人库
+// 目录缺失时（见上方 HAS_KNOWLEDGE 说明）额外排除，避免构建扫描不存在的路径
 if (!HAS_KNOWLEDGE)
   srcExclude.push('**/Knowledge/**')
 
 export default defineConfig({
   base: SITE_BASE,
-  // 仅构建「站点内容」文件夹，排除 Obsidian 私人库（Knowledge/Resources/Skills/...
+  // 仅构建「站点内容」文件夹，排除 Obsidian 私人库（Resources/Inbox/DailyNotes/...
   // 等）。这些私人笔记引用了 vault/Attachments 中无法被 Skia 解码的损坏图，
   // 会让 @nolebase/thumbnail-hash 在构建期崩溃（Failed to make image from encoded data）。
   // srcExclude 相对 srcDir（即仓库根 E:\knowledge）匹配，故用 **/ 前缀兜底。
-  // 注：Knowledge 是否纳入构建由 HAS_KNOWLEDGE（目录是否存在）决定，见下方 srcExclude 处理。
   srcExclude,
-  // 仅构建「站点内容」文件夹（vault/笔记、vault/作坊、vault/档案、vault/编目 Catalog），
+  // 仅构建「站点内容」文件夹（vault/作坊、vault/档案；Knowledge 由 buildKnowledgeSidebar 接入），
   // 排除 Obsidian 私人库。好处：① 构建更快、产物更干净；② 私人笔记不会被发布。
-  // 注意：srcExclude 只影响「页面构建」，不影响 thumbnail-hash（该插件已在本仓库
-  // vite.config.ts 中关闭，因为它会全量扫描仓库图片并在损坏图上卡死/崩溃）。
+  // 发布面清单见顶部 PUBLISHED_DIRS。
   lastUpdated: true,
   vue: {
     template: {

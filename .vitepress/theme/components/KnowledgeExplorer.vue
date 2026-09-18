@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { withBase } from 'vitepress'
 
-// 与 NoteExplorer 同理：构建期通过 Vite glob 自动发现 vault/Knowledge 下全部 .md，
+// 构建期通过 Vite glob 自动发现 vault/Knowledge 下全部 .md，
 // 读取每篇笔记的 `category` frontmatter，构建多级分类树。
 // 关键差异：按 category 多级树渲染（而非按文件夹），且链接用显式路径
 // /vault/Knowledge/... 走 VitePress 路由，完全不经过 nolebase 的裸名解析，
