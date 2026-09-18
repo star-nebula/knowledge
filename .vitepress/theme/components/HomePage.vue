@@ -9,7 +9,7 @@ import SiteStats from './SiteStats.vue'
     <div class="content-container">
       <main class="main">
         <div class="vp-doc" mt-10 flex flex-col items-center>
-          <SiteStats site class="home-stats" />
+          <SiteStats class="home-stats" />
           <template v-if="creators && creators.length > 0">
             <h2 id="meet-the-team" font-normal op50 p="t-10 b-2">
               {{ siteName }} 的创作者
