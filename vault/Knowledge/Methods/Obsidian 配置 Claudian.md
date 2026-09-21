@@ -8,11 +8,11 @@ tags:
   - 知识管理
 type: 步骤操作
 related:
-  - "[[「Methods」MOC]]"
+  - "[[📚 个人知识管理-MOC]]"
   - "[[Vercel 博客部署]]"
   - "[[Markdown 语法]]"
 reference:
-  - "[[Obsidian AI Agent 配置指南：Claudian + Obsidian-CSDN博客|CSDN]]"
+  - "Obsidian AI Agent 配置指南：Claudian + Obsidian（CSDN 博客，外链见正文）"
 category: ["📚 个人知识管理", "个人能力"]
 ---
 参考：[Obsidian AI Agent 配置指南：Claudian + Obsidian-CSDN博客](https://blog.csdn.net/yinxing408033943/article/details/158386753?ops_request_misc=elastic_search_misc&request_id=f23909899dc15443d9ff5f5708587139&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~ElasticCommercialInsert~search_v2-2-158386753-null-null.142^v102^pc_search_result_base3&utm_term=obsidian接入claude&spm=1018.2226.3001.4187)

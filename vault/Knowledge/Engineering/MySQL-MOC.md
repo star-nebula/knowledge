@@ -49,7 +49,7 @@ abstract: 关系型数据库 MySQL 全景——SQL 语法、事务/锁机制、P
 
 ## 关联
 
-- [[「Engineering」MOC]]
+- [[🛠️ 工程工具-MOC]]
 - [[DataAnalysis-MOC]] — 取数后衔接 Pandas/NumPy 数据处理
 - [[Redis-MOC]] — 缓存层与持久层互补
 - [[Python-MOC]] — pymysql 依赖 Python 语言基础

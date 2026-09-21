@@ -4,7 +4,7 @@ tags: [langchain, memory, chat-history, framework]
 type: 概念解释
 created: 2026-07-08
 related:
-  - "[[LangChain-MOC]]"
+  - "[[🧩 AI框架与Agent-MOC]]"
   - "[[LangChain Agents 组件]]"
   - "[[LangChain Chains 组件]]"
 category: ["🧩 AI框架与Agent", "框架与中间件"]

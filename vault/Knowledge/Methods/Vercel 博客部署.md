@@ -8,7 +8,7 @@ tags:
   - 博客部署
 type: 步骤操作
 related:
-  - "[[「Methods」MOC]]"
+  - "[[📚 个人知识管理-MOC]]"
   - "[[Obsidian 配置 Claudian]]"
   - "[[Markdown 语法]]"
   - "[[Git 基础]]"

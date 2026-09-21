@@ -80,7 +80,7 @@ AI 应用/
 | [[n8n 本地部署]] | n8n 工作流自动化工具本地部署，含汉化 |
 | [[n8n AI Agent 工作流]] | n8n 中集成 AI Agent + MCP 工具 |
 | [[DeepSeek]] | DeepSeek 基础知识与模型部署使用 |
-| [[Claude Code 接入模型]] | Claude Code 接入 DeepSeek/GLM 等第三方模型 |
+| [[Claude Code 接入 DeepSeek 与 GLM|Claude Code 接入模型]] | Claude Code 接入 DeepSeek/GLM 等第三方模型 |
 
 ## 学习路径
 
@@ -92,7 +92,7 @@ AI 应用/
 
 ## 关联专题
 
-- [[NLP 基础]]：Transformer、注意力机制等底层原理
+- [[NLP基础-MOC|NLP 基础]]：Transformer、注意力机制等底层原理
 - [[模型部署-MOC]]：Docker/Ollama 部署实践
 - [[模型与对齐]]：大模型全景、强化学习对齐
 

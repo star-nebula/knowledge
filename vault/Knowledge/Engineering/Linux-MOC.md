@@ -31,6 +31,6 @@ Linux 基础 → Ubuntu 配置 → Ubuntu 远程桌面 → VSCode 远程开发�
 
 ## 关联
 
-- [[「Engineering」MOC]]
+- [[🛠️ 工程工具-MOC]]
 - [[Git-MOC]] — 服务端 Git 与远程仓库
 - [[IDE与环境-MOC]] — 服务器端 Python 环境（Anaconda）

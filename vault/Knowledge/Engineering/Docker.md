@@ -7,7 +7,7 @@ tags:
   - 部署
 type: 概念解释
 related:
-  - "[[Docker-MOC]]"
+  - "[[🛠️ 工程工具-MOC]]"
   - "[[win11 部署 Docker]]"
 reference:
 category: ["🛠️ 工程工具", "模型部署"]

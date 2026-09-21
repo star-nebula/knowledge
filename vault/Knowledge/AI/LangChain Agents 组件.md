@@ -4,7 +4,7 @@ tags: [langchain, agents, tools, framework]
 type: 概念解释
 created: 2026-07-08
 related:
-  - "[[LangChain-MOC]]"
+  - "[[🧩 AI框架与Agent-MOC]]"
   - "[[LangChain Chains 组件]]"
   - "[[LangChain Memory 组件]]"
 reference: ""

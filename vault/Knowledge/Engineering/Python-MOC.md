@@ -86,7 +86,7 @@ abstract: 24 篇原子笔记覆盖 Python 基础语法、核心范式、并发�
 
 ## 关联
 
-- [[「Engineering」MOC]]
-- [[数据处理]] — Pandas/NumPy/MySQL/Redis
-- [[前端开发]] — HTML/CSS/JS/Vue3
+- [[🛠️ 工程工具-MOC]]
+- [[DataAnalysis-MOC|数据处理]] — Pandas/NumPy/MySQL/Redis
+- [[Frontend-MOC|前端开发]] — HTML/CSS/JS/Vue3
 - [[IDE与环境-MOC|IDE与环境]] — PyCharm/Anaconda/Git

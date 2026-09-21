@@ -40,7 +40,7 @@ Anaconda 环境管理 → PyCharm/Jupyter 配置 → 项目工具链（如 FVM�
 
 ## 关联
 
-- [[「Engineering」MOC]]
+- [[🛠️ 工程工具-MOC]]
 - [[Python-MOC]] — 这些工具主要服务于 Python/AI 开发
 - [[Linux-MOC]] — 服务器端环境配置基础
 - [[VSCode 远程开发配置]] — 客户端连服务端开发的关键链路

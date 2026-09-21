@@ -226,11 +226,11 @@ abstract: 神经网络入门到 CNN/RNN 经典架构，含 PyTorch 核心工具�
 
 
 
-- [[NLP 基础]]：Transformer、注意力机制等深度学习在 NLP 中的应用
+- [[NLP基础-MOC|NLP 基础]]：Transformer、注意力机制等深度学习在 NLP 中的应用
 
 
 
-- [[模型部署]]：训练完模型后如何部署上线
+- [[模型部署-MOC|模型部署]]：训练完模型后如何部署上线
 
 
 

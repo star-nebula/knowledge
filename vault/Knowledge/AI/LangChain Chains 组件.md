@@ -4,7 +4,7 @@ tags: [langchain, chains, lcel, framework]
 type: 概念解释
 created: 2026-07-08
 related:
-  - "[[LangChain-MOC]]"
+  - "[[🧩 AI框架与Agent-MOC]]"
   - "[[LangChain Prompts 组件]]"
   - "[[LangChain Models 组件]]"
 category: ["🧩 AI框架与Agent", "框架与中间件"]

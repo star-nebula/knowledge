@@ -44,7 +44,7 @@ abstract: NoSQL 缓存数据库 Redis 导航——核心概念、Windows 部署�
 
 ## 关联
 
-- [[「Engineering」MOC]]
+- [[🛠️ 工程工具-MOC]]
 - [[MySQL-MOC]] — 持久层与缓存层互补
 - [[数据库开发概览]] — NoSQL 与关系型对比的入口
 - [[Python-MOC]] — redis-py 依赖 Python 语言基础

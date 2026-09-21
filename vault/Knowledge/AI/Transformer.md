@@ -318,7 +318,7 @@ class FeedForward(nn.Module):
 > BN和LN的区别：
 > ![[Pasted image 20260330174120.png]]
 >
-> [[训练与优化#Batch Normalization（批量归一化）]]
+> [[深度学习-训练与优化#Batch Normalization（批量归一化）]]
 
 ```python
 # 规范化层

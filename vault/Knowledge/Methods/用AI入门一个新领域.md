@@ -7,7 +7,7 @@ tags:
   - Prompt工程
 type: 步骤操作
 related:
-  - "[[学习方法-MOC]]"
+  - "[[📚 个人知识管理-MOC]]"
   - "[[搭建知识体系：七大学习模型]]"
 reference:
 category: ["📚 个人知识管理", "个人能力"]

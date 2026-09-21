@@ -43,7 +43,7 @@ abstract: NumPy/Pandas/Matplotlib 三大支柱——AI/ML 数据基础设施全�
 
 ## 关联
 
-- [[「Engineering」MOC]]
+- [[🛠️ 工程工具-MOC]]
 - [[Python-MOC]] — Python 语言基础是数据分析的前置
 - [[MySQL-MOC]] — 结构化数据存储是分析的下游
 - [[IDE与环境-MOC]] — Jupyter 是数据分析交互式载体

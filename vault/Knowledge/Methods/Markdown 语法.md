@@ -7,7 +7,7 @@ tags:
   - 笔记方法
 type: 概念解释
 related:
-  - "[[「Methods」MOC]]"
+  - "[[📚 个人知识管理-MOC]]"
   - "[[Obsidian 配置 Claudian]]"
   - "[[Vercel 博客部署]]"
   - "[[Python-MOC]]"
