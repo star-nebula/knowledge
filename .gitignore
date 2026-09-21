@@ -17,7 +17,7 @@
 .opencode/
 # 本地诊断脚本：只放行代码与文档，产物/临时文件仍忽略。
 # 勿写成「忽略整个目录」——那样 git add 会静默跳过脚本本体（2026-09-21 实测：
-# commit 43cdc751 名为「新增 todo_audit.py」，实际只进了 README.md）
+# 曾有一次提交标题写「新增 todo_audit.py」，实际只进了 README.md）
 _agent_scripts/*
 !_agent_scripts/*.py
 !_agent_scripts/*.ts
