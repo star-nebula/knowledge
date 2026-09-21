@@ -127,14 +127,30 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
   - `python link_audit.py` —— 全库报告写入 `_agent_scripts/_out/link_audit.txt`
   - `python link_audit.py --layers Memory,Knowledge` —— 只看指定顶层目录的断链
   - `-o <文件>` 指定输出；`--quiet` 只打印计数
-- **四个必踩的口径陷阱（均已内建处理）**：
+- **五个必踩的口径陷阱（均已内建处理）**：
   1. **代码块 / 行内代码里的 `[[...]]`** Obsidian 不解析 —— 不剥离必然误报（实测 `ref_scan.py` 同类问题少报 5 处、本脚本旧口径虚增 500+）
   2. **判定表必须收录全库所有文件**（笔记 **+ 附件**）—— 只收 `.md` 会把 `![[image.png]]` 全部误判为断链
   3. **`[[Note]]` 与 `[[Note.md]]` 两种写法都有效**，且 Windows 下大小写不敏感（`[[todo]]` 命中 `Todo.md`）
   4. **站点视角漏报** —— 判定表是全库的，站点却只发布 `PUBLISHED_DIRS`。目标**只在非发布目录**（`Resources/` `Archive/` `Canvas/` `DailyNotes/`）里有同名文件时，Obsidian 算活链、**站点是死链**。本脚本把它单列为输出第二段「站点侧死链」，并只报「引用方在发布层」的（否则 `DailyNotes/`→`DailyNotes-MOC` 202 处噪声会淹没真问题）。发布面从 `.vitepress/config.ts` **正则抽取**，不手工维护。
+  5. **站点段必须剥离 frontmatter** —— frontmatter 不渲染，`reference:` / `source:` 里的剪藏链**永远到不了站点**，把它们算进「站点侧死链」是**假红**（2026-09-21 实测：27 行里的 17 行都在 frontmatter，真问题只有 10 行）。站点段用 `fm_end_line()` 跳过 frontmatter；**主断链表不跳** —— Obsidian 侧确实会解析它。
 - 输出分两段：`## 一、真断链（全库无同名文件）` / `## 二、站点侧死链（只在非发布目录里有同名 → 站点 404）`。
-- 实测基线（2026-09-21 批 B 执行后）：md 1589 篇 / wikilink 2814 条 / **断链目标 103 / 命中 339 行**（改前 141 / 405）；**站点侧死链 6 目标 / 28 行**。
+- 实测基线（2026-09-21 批 B 执行后）：md 1589 篇 / wikilink 2814 条 / **断链目标 103 / 命中 339 行**（改前 141 / 405）；站点侧死链 **6 目标 / 28 行 → 全部清除后 0**。
+- 配套硬规则：`vault/rules/原子笔记编写规范.md` §5.3「链接与发布边界」—— 正文禁止指向非发布区的 wikilink，溯源一律写 frontmatter 的 `reference:`。
 - 处置清单见 `vault/Memory/Projects/knowledge/断链修复筛选清单-2026-09-21.md`。
+- 运行环境：受管 Python 3.13（仅标准库）。
+
+### `commit_msg_guard.py`
+提交消息**围栏守卫** —— 剥掉套在 commit message 最外层的 markdown 代码围栏，并兼作全历史体检。
+- 背景（2026-09-21）：部分 AI 工具会把整个提交消息包进一对 ``` 再交给 `git commit`，于是 `git log --oneline` 显示成 ```` ``` docs(xxx): … ````。**实测本仓 1103 个提交中 86 个中招**，集中在最近 115 个（第 115 位 `e66f395b` 起，分界线之前的历史干净）。已用 `git commit-tree` 链式重建一次性清除（115 个提交换哈希、86 个消息被剥；tree / 作者 / 提交时间原样保留），远端 `main` / `develop` / 标签 `v1.0.0` 均已同步。
+- 用法：
+  - `python commit_msg_guard.py <msg-file>` —— 原地剥围栏，由 `.git/hooks/commit-msg` 调用
+  - `python commit_msg_guard.py --check <file>` —— 只报不改，会改则退出码 1
+  - `python commit_msg_guard.py --scan` —— 扫全历史，报还有多少提交中招（0 则退出码 0，可当门禁）
+- **判定规则（只动最外层那一对，绝不碰消息内部）**：① 首个逻辑行必须是孤立的 ``` ② 末尾非空行必须是孤立的 ``` ③ 二者之间至少留一行非空正文。三条同时满足才剥 —— 所以消息内部贴的 diff / shell 片段里的围栏**不会被误剥**。
+- **钩子是薄壳，逻辑在本脚本**：`.git/hooks/commit-msg` 只负责定位解释器并调用本文件。理由：钩子不在版本库里，换机器就丢；逻辑放脚本里才受版本管理。
+- **钩子里的解释器要用绝对路径** —— 该钩子环境 PATH 里连 `grep` / `date` / `wc` 都没有（同 `mem_git.py` 那批发现），靠 `command -v python` 未必找得到受管解释器；钩子已写成「绝对路径优先，找不到再退化为 `python`」。
+- **钩子在此环境不看执行位**：`os.chmod` 在 E 盘无效（实测 `0o666`），但 git 照样调用 —— 现有 `pre-commit` 同样如此，可作旁证。别因为 `chmod` 没生效就以为钩子不工作。
+- **验证钩子的正确姿势：在沙箱仓里测，别在真实仓试** —— 真实仓的 `pre-commit` 会跑 `sync-published-assets.mjs` 往索引里塞文件，「造一个空提交」实测会污染暂存区。做法：`git init` 一个临时仓 → 拷入脚本与钩子 → 分别提交「围栏包裹的消息 / 干净消息 / 消息内部含代码块」三种样本 → 看前两种与第三种是否符合预期。
 - 运行环境：受管 Python 3.13（仅标准库）。
 
 ### `debug_ruler.ts`
@@ -161,3 +177,5 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
 - **核验「有没有入库」要看 `git ls-files`，不是 `git status`** —— 被忽略的文件在 `status` 里根本不会出现，`git status` clean ≠ 文件已入库。若要判单个文件，用 `git ls-files --error-unmatch <path>` **看退出码**（该命令会把失败原因写到 stderr，合并 2>&1 再加 `-ne ""` 判断会得到「全部已跟踪」的假结论）。
 - **提交消息文件别用 PowerShell `Set-Content -Encoding UTF8` 生成**（PS 5.1 会写 BOM）→ `git commit -F` 后消息**首字符变成 `\ufeff`**。用 Python `encoding="utf-8", newline="\n"` 写、或 `[IO.File]::WriteAllText` 配无 BOM 编码；校验：`git cat-file commit HEAD` 取消息段，前 3 字节不应是 `ef bb bf`。
 - **git 的中文输出经 PowerShell 捕获会显示成乱码**（`鏂板` 之类），那是 PS 5.1 控制台编码假象，**不代表库数据损坏**。要复核编码就用 Python `subprocess.run(..., capture_output=True)` + `decode("utf-8")`，不要凭 PowerShell 的回显下结论。
+- **提交消息别被 AI 工具套上 ``` 围栏** —— 部分工具会把整条消息包进一对代码围栏，`git log --oneline` 就成了 ```` ``` docs(xxx): … ````。已装 `.git/hooks/commit-msg` 调用 `commit_msg_guard.py` 自动剥掉（历史里 86 个中招的用 `commit-tree` 重建清除）。自查：`python commit_msg_guard.py --scan`。
+- **本仓远端是 SSH（`git@github.com:`）** —— 沙箱隔离会拒绝读 `~/.ssh/known_hosts`，报 `hostkeys_find_by_key_hostfile: … Permission denied` + `Host key verification failed`。**推送必须在非沙箱环境下执行**，否则会误判成"没有权限/仓库不存在"。
