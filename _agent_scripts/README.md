@@ -127,3 +127,19 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
 - 这些脚本仅用于本地诊断，**不参与站点构建**（不在 `vault/` 下，VitePress 不会渲染）。
 - `createMarkdownRenderer` 有模块级缓存，两种顺序需分两次进程运行。
 - 顶层 await 在 `tsx -e` 的 cjs 输出下会报错，故一律用 `.ts` 文件方式运行。
+
+## 入库与提交（本目录的 git 约定）
+
+- **`.gitignore` 用「忽略目录内容 + 白名单」，不要写「忽略整个目录」**：
+  ```
+  _agent_scripts/*
+  !_agent_scripts/*.py
+  !_agent_scripts/*.ts
+  !_agent_scripts/*.md
+  _agent_scripts/_tmp*
+  ```
+  写成 `_agent_scripts/`（目录级忽略）会让 `git add` **静默跳过脚本本体** —— 提交照样成功、消息还能写「新增 X 脚本」，而 X 从未进库。**2026-09-21 实测踩到**：提交 `43cdc751` 标题为「新增待办归档体检工具 todo_audit.py」，`git show --stat` 实际只有 `README.md` 12 行，5 个 py（`encoding_guard` / `link_audit` / `mem_index` / `ref_scan` / `todo_audit`）全在库外，且 `git status` 显示 clean（被忽略故不列出）→ **典型的假成功**。
+  末行 `_tmp*` **后置反排除**是必需的：白名单 `*.py` 会连带放行临时脚本 `_tmp*.py`（靠 gitignore「最后匹配者胜」压回）。
+- **核验「有没有入库」要看 `git ls-files`，不是 `git status`** —— 被忽略的文件在 `status` 里根本不会出现，`git status` clean ≠ 文件已入库。若要判单个文件，用 `git ls-files --error-unmatch <path>` **看退出码**（该命令会把失败原因写到 stderr，合并 2>&1 再加 `-ne ""` 判断会得到「全部已跟踪」的假结论）。
+- **提交消息文件别用 PowerShell `Set-Content -Encoding UTF8` 生成**（PS 5.1 会写 BOM）→ `git commit -F` 后消息**首字符变成 `\ufeff`**。用 Python `encoding="utf-8", newline="\n"` 写、或 `[IO.File]::WriteAllText` 配无 BOM 编码；校验：`git cat-file commit HEAD` 取消息段，前 3 字节不应是 `ef bb bf`。
+- **git 的中文输出经 PowerShell 捕获会显示成乱码**（`鏂板` 之类），那是 PS 5.1 控制台编码假象，**不代表库数据损坏**。要复核编码就用 Python `subprocess.run(..., capture_output=True)` + `decode("utf-8")`，不要凭 PowerShell 的回显下结论。
