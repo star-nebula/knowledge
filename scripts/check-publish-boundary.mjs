@@ -2,7 +2,8 @@
 // 发布边界校验：保证「什么被发布」与 PUBLISHED_DIRS 清单一致，防漂移。
 //
 // 三查：
-//   1. git 跟踪面 ⊆ 发布面：仓库里被 git 跟踪的 vault 文件，其顶层目录必须属于发布面
+//   1. git 跟踪面 ⊆ 发布面 ∪ 入库不发布面：仓库里被 git 跟踪的 vault 文件，其顶层目录
+//      必须属于「发布面」（PUBLISHED_DIRS）或「入库但不发布」名单（TRACKED_ONLY_DIRS）
 //      （私人目录被误 git add 时在此报出——gitignore 只管忽略，add -f 可绕过）
 //   2. 构建产物链接 ⊆ 发布面：.vitepress/dist 里所有 /vault/... 页面链接必须属于发布面
 //   3. srcExclude 与 nolebase excludesPatterns 一致性：config.ts 里两份排除规则由
@@ -36,6 +37,15 @@ const OBSIDIAN_CONFIG = new Set([
   'vault/.obsidian/workspaces.json',
   'vault/.obsidian/snippets/Color.css',
 ])
+// 入库但不发布：进 GitHub 仓库源码（可 clone / 浏览 / 搜索），但不渲染成站点页面。
+// 与 PUBLISHED_DIRS 的区别 —— 后者是「网站访客看得到」，这里是「只在仓库源码里可见」。
+// 需求来源：vault/rules/（知识库操作规范）需随仓库做版本管理，但内容是本机工作方法、
+// 不适合出现在站点上。加入此名单后，检查 1 不再把它判为「误 add」。
+// 注意：不要为了让它通过校验而塞进 PUBLISHED_DIRS —— 那样 rules 会被渲染成网页。
+const TRACKED_ONLY_DIRS = [
+  'vault/rules',
+]
+const trackedOnlyTop = new Set(TRACKED_ONLY_DIRS.map(d => d.split('/')[1]))
 // 特殊放行：首页自身链接 /vault/（index.md）
 const ALLOW_ROOT_LINK = new Set(['vault/'])
 
@@ -44,6 +54,8 @@ const fail = (msg) => { failures++; console.error(`  ✗ ${msg}`) }
 const pass = (msg) => console.log(`  ✓ ${msg}`)
 
 console.log('发布面清单:', PUBLISHED_DIRS.join(', '))
+if (TRACKED_ONLY_DIRS.length)
+  console.log('入库不发布清单:', TRACKED_ONLY_DIRS.join(', '))
 
 // ── 检查 1：git 跟踪面 ⊆ 发布面 ──────────────────────────────
 console.log('\n[1/3] git 跟踪面 ⊆ 发布面')
@@ -61,6 +73,8 @@ const trackedOutside = tracked
     if (parts.length === 2 && publishedRootFiles.has(parts[1])) return false
     // vault/data/ 目录整体在发布面内（toc.data.ts 数据源）
     if (parts[1] === 'data') return false
+    // 入库但不发布（见 TRACKED_ONLY_DIRS）：进仓库源码，但不进站点
+    if (trackedOnlyTop.has(parts[1])) return false
     return true
   })
 if (trackedOutside.length) {
@@ -68,7 +82,7 @@ if (trackedOutside.length) {
   console.log('  前 10 个：', trackedOutside.slice(0, 10).join(', '))
 }
 else {
-  pass(`git 跟踪的 ${tracked.length} 个 vault 文件全部在发布面内`)
+  pass(`git 跟踪的 ${tracked.length} 个 vault 文件全部在发布面或「入库不发布」名单内`)
 }
 
 // ── 检查 2：构建产物链接 ⊆ 发布面 ─────────────────────────────

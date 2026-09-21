@@ -28,6 +28,8 @@ _agent_scripts/_tmp*
 # 个人笔记(从 BaiduSyncdisk/obsidian 迁入)。
 # 发布面由 .vitepress/config.ts 顶部 PUBLISHED_DIRS 白名单决定(目录级): 不在白名单的
 # vault 顶层条目一律不渲染、不进 GitHub Pages(旧描述「给笔记加 status: published」已废)。
+# ⚠ 区分两个面：「不入库」= 不进公开仓库源码(可被 clone/搜索)；「不发布」= 不渲染成站点页面。
+# 下列各项两者皆是——唯一例外是 vault/rules/（已入库但不发布，见下方注释）。
 vault/DailyNotes/
 vault/Inbox/
 vault/Interview/
@@ -35,7 +37,9 @@ vault/Resources/
 vault/Canvas/
 vault/Templates/
 vault/Archive/
-vault/rules/
+# vault/rules/ 自 2026-09-21 起改为「入库但不发布」：知识库操作规范随仓库做版本管理，
+# 但仍在 PUBLISHED_DIRS 之外 → 只进 GitHub 源码、不渲染成站点页面。
+# 白名单在 scripts/check-publish-boundary.mjs 的 TRACKED_ONLY_DIRS（两处需同步）。
 vault/Home.md
 # AI 入口与索引（本地智能体专用，绝不进公开仓库）
 # AGENTS.md = 现行入口（各工具约定的自动加载名）；AGENT.md = 旧名，保留忽略以防误建
