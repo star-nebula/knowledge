@@ -70,8 +70,9 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
   - 体检门禁：`python mem_index.py --check`（报告「缺索引 / 缺失行 / 失效行 / 手工地图页漏列顶层项」，有漂移退出码 1）
   - 单层：`--layer Lessons`（可选 `Preferences` / `Plans` / `Lessons` / `Workflows` / `Projects`）
 - 覆盖范围：`Preferences` `Plans` `Lessons` `Workflows` `Projects`（**`Decisions` 除外**——`Rule.md` §9 规定其专用格式，勿用本脚本覆盖）。
-- 顺带校验两张**手工**地图页是否漏列顶层项：`vault/_index.md`（vault 顶层 25 项）、`Memory/_index.md`。
+- 顺带校验两张**手工**地图页是否漏列顶层项：`vault/_index.md`（vault 顶层 **24 项** —— 2026-09-21 删除 `视图/` 后由 25 更新）、`Memory/_index.md`。
 - **顶层项口径**（`top_entries()`）：**排除点开头的项** —— `.git` / `.obsidian` / `.trash` 等属工具与仓库基础设施，不算「内容」。2026-09-21 在 `Memory/` 内建独立本地 git 仓后，多出的 `.git` 曾让 `--check` 报「地图页漏列」而**假红**。
+- **本校验的已知局限**：`check_top_level()` 只判「**实际存在的**顶层项是否被地图页提及」，**不判地图页是否多列了已删除的项** —— 即顶层目录被删后，**不同步清单也不会报红**。故删顶层目录时「同步清单」属**语义正确性**要求，**不能靠 `--check` 兜底**。
 - 一句话定位取值优先级：frontmatter `summary` / `description` → 正文首个实质段落（截 62 字）。
 - **坑**：`_index.md` 的表头说明由脚本模板生成，直接手改表头会在下次 `--write` 时被覆盖——要改表头请改脚本里的 `EXTRA_NOTE`；表格**数据行**的手工内容是安全的。
 - 运行环境：受管 Python 3.13（仅标准库）。
