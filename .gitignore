@@ -22,6 +22,8 @@ _agent_scripts/*
 !_agent_scripts/*.py
 !_agent_scripts/*.ts
 !_agent_scripts/*.md
+# 临时/调试文件始终忽略（上面的 *.py 白名单会放行 _tmp*.py，故需后置反排除）
+_agent_scripts/_tmp*
 
 # 个人笔记(从 BaiduSyncdisk/obsidian 迁入)。
 # 发布面由 .vitepress/config.ts 顶部 PUBLISHED_DIRS 白名单决定(目录级): 不在白名单的
