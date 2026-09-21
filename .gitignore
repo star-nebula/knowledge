@@ -37,6 +37,36 @@ vault/Resources/
 vault/Canvas/
 vault/Templates/
 vault/Archive/
+
+# ── 结构占位（2026-09-21）────────────────────────────────────────────────
+# 下列私有目录在公开仓库里只保留「空文件夹」形态：**内容一律不入库**，仅提交 1 个占位文件
+# `<目录>/.gitkeep`。原因：git 本身不记录空目录，必须有占位文件才能在 GitHub 上显出目录名。
+# 三行式**必须按此顺序**，不能只写一行 `!<目录>/.gitkeep`：
+#     ① !<目录>/          先放行目录（盖过上面那行目录级忽略）
+#     ② <目录>/*          再忽略目录下的一切内容（注意 gitignore 的 `*` 连点开头的文件也匹配）
+#     ③ !<目录>/.gitkeep  最后只放行占位文件
+# 依据 git 规则：「父目录被排除时，无法重新包含其下的文件」，故必须先 ① 把目录放行回来。
+# 校验侧白名单在 scripts/check-publish-boundary.mjs 的 STRUCTURE_ONLY_FILES（**精确到文件**，
+# 不整目录放行）——将来误 add 了这些目录里的真实笔记 / 图片，仍会被 `pnpm check:boundary` 拦下。
+!vault/Archive/
+vault/Archive/*
+!vault/Archive/.gitkeep
+!vault/Canvas/
+vault/Canvas/*
+!vault/Canvas/.gitkeep
+!vault/DailyNotes/
+vault/DailyNotes/*
+!vault/DailyNotes/.gitkeep
+!vault/Inbox/
+vault/Inbox/*
+!vault/Inbox/.gitkeep
+!vault/Resources/
+vault/Resources/*
+!vault/Resources/.gitkeep
+!vault/Templates/
+vault/Templates/*
+!vault/Templates/.gitkeep
+
 # vault/rules/ 自 2026-09-21 起改为「入库但不发布」：知识库操作规范随仓库做版本管理，
 # 但仍在 PUBLISHED_DIRS 之外 → 只进 GitHub 源码、不渲染成站点页面。
 # 白名单在 scripts/check-publish-boundary.mjs 的 TRACKED_ONLY_DIRS（两处需同步）。
@@ -46,7 +76,6 @@ vault/Home.md
 AGENTS.md
 AGENT.md
 vault/_index.md
-vault/视图/
 
 # 已废弃体系的忽略行（实测 2026-09-21：以下目录均不存在）——
 # 保留仅为防误建（防同步软件/误操作重建后被 commit 进公开仓库）；勿据此认为目录存在。
@@ -54,6 +83,8 @@ vault/Skills/
 vault/AgentLog/
 vault/Published/
 vault/发布/
+# vault/视图/ 于 2026-09-21 删除（2 个 Dataview 查询页，查询目标早已失效）；忽略行保留同理，防误建。
+vault/视图/
 
 # 跨软件永久记忆库(个人工作/副业/背调记录,绝不入公开仓库;2026-09-14 审计后移出)
 vault/Memory/

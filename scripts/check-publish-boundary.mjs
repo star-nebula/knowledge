@@ -2,8 +2,9 @@
 // 发布边界校验：保证「什么被发布」与 PUBLISHED_DIRS 清单一致，防漂移。
 //
 // 三查：
-//   1. git 跟踪面 ⊆ 发布面 ∪ 入库不发布面：仓库里被 git 跟踪的 vault 文件，其顶层目录
-//      必须属于「发布面」（PUBLISHED_DIRS）或「入库但不发布」名单（TRACKED_ONLY_DIRS）
+//   1. git 跟踪面 ⊆ 发布面 ∪ 入库不发布面 ∪ 结构占位面：仓库里被 git 跟踪的 vault 文件，
+//      其顶层目录必须属于「发布面」（PUBLISHED_DIRS）、「入库但不发布」名单
+//      （TRACKED_ONLY_DIRS），或本身是「结构占位文件」（STRUCTURE_ONLY_FILES，仅 .gitkeep）
 //      （私人目录被误 git add 时在此报出——gitignore 只管忽略，add -f 可绕过）
 //   2. 构建产物链接 ⊆ 发布面：.vitepress/dist 里所有 /vault/... 页面链接必须属于发布面
 //   3. srcExclude 与 nolebase excludesPatterns 一致性：config.ts 里两份排除规则由
@@ -46,6 +47,21 @@ const TRACKED_ONLY_DIRS = [
   'vault/rules',
 ]
 const trackedOnlyTop = new Set(TRACKED_ONLY_DIRS.map(d => d.split('/')[1]))
+
+// 结构占位（2026-09-21）：下列私有目录在公开仓库里只保留「空文件夹」形态 —— 内容一律不入库，
+// 仅提交 1 个占位文件 `<目录>/.gitkeep`（git 不记录空目录，必须有占位文件才能在 GitHub 上显出目录名）。
+// ⚠ **精确到「文件」而非「目录」**：故意不走 TRACKED_ONLY_DIRS 那样的目录级放行，
+// 这样将来误 add 了这些目录里的真实笔记 / 图片，检查 1 仍会拦下（保留误 add 安全网）。
+// 配套：.gitignore 中每个目录的三行式反排除（先放行目录 → 忽略其内容 → 放行占位文件）。
+const STRUCTURE_ONLY_FILES = new Set([
+  'vault/Archive/.gitkeep',
+  'vault/Canvas/.gitkeep',
+  'vault/DailyNotes/.gitkeep',
+  'vault/Inbox/.gitkeep',
+  'vault/Resources/.gitkeep',
+  'vault/Templates/.gitkeep',
+])
+
 // 特殊放行：首页自身链接 /vault/（index.md）
 const ALLOW_ROOT_LINK = new Set(['vault/'])
 
@@ -56,6 +72,8 @@ const pass = (msg) => console.log(`  ✓ ${msg}`)
 console.log('发布面清单:', PUBLISHED_DIRS.join(', '))
 if (TRACKED_ONLY_DIRS.length)
   console.log('入库不发布清单:', TRACKED_ONLY_DIRS.join(', '))
+if (STRUCTURE_ONLY_FILES.size)
+  console.log('结构占位（只提交空文件夹占位文件，内容不入库）:', STRUCTURE_ONLY_FILES.size, '个')
 
 // ── 检查 1：git 跟踪面 ⊆ 发布面 ──────────────────────────────
 console.log('\n[1/3] git 跟踪面 ⊆ 发布面')
@@ -67,6 +85,8 @@ const tracked = execSync('git ls-files vault', { cwd: ROOT, encoding: 'utf8' })
 const trackedOutside = tracked
   .filter(f => {
     if (OBSIDIAN_CONFIG.has(f)) return false
+    // 结构占位文件（<目录>/.gitkeep）：只表明该目录存在，不含任何内容
+    if (STRUCTURE_ONLY_FILES.has(f)) return false
     const parts = f.split('/')
     if (publishedTop.has(parts[1])) return false
     // vault 根散文件（index.md / toc.md / 插件列表.md）在发布面内
@@ -82,7 +102,7 @@ if (trackedOutside.length) {
   console.log('  前 10 个：', trackedOutside.slice(0, 10).join(', '))
 }
 else {
-  pass(`git 跟踪的 ${tracked.length} 个 vault 文件全部在发布面或「入库不发布」名单内`)
+  pass(`git 跟踪的 ${tracked.length} 个 vault 文件全部在发布面 / 「入库不发布」/ 结构占位名单内`)
 }
 
 // ── 检查 2：构建产物链接 ⊆ 发布面 ─────────────────────────────
