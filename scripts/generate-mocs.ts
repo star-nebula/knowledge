@@ -78,6 +78,16 @@ function isGeneratedMoc(file: string): boolean {
   }
 }
 
+/**
+ * rel -> 文件名（不含扩展名，即 Obsidian/VitePress 解析 wikilink 所用的键）。
+ * ⚠️ 不能用 `title` 生成 wikilink：wikilink 按**文件名**解析，而 `title` 是可任意起的
+ * 展示名（例：文件 `机器学习-KNN算法.md` 的 title 是 `KNN算法`）。用 title 会生成
+ * `[[KNN算法]]` 这类**必然断链**的链接，且每次重跑生成器都会重新写坏。
+ */
+function noteBasename(rel: string): string {
+  return rel.replace(/\\/g, '/').split('/').pop()!.replace(/\.md$/, '')
+}
+
 /** 渲染一个生成型 MOC 的内容（子栏目 + 直接笔记） */
 function renderMoc(titlePath: string[], node: TreeNode): string {
   const title = titlePath.join(' · ')
@@ -118,8 +128,11 @@ function renderMoc(titlePath: string[], node: TreeNode): string {
   if (directNotes.length) {
     lines.push('## 笔记清单')
     lines.push('')
-    for (const n of directNotes)
-      lines.push(`- [[${n.title}]]`)
+    for (const n of directNotes) {
+      // target 用文件名（解析键），alias 用 title（展示名）；两者相同则省略 alias
+      const base = noteBasename(n.rel)
+      lines.push(base === n.title ? `- [[${base}]]` : `- [[${base}|${n.title}]]`)
+    }
     lines.push('')
   }
 

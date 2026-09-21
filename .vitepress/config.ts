@@ -269,7 +269,11 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: '主页', link: '/vault/' },
-          { text: '知识', link: '/vault/Knowledge/_mocs/知识库总览-MOC', activeMatch: '^/vault/Knowledge/' },
+          // 「知识」项随 HAS_KNOWLEDGE 条件化：vault/Knowledge 缺失时整项不出，避免死链 nav。
+          // （srcExclude 与 sidebar 早已条件化，唯此处遗漏）
+          ...(HAS_KNOWLEDGE
+            ? [{ text: '知识', link: '/vault/Knowledge/_mocs/知识库总览-MOC', activeMatch: '^/vault/Knowledge/' }]
+            : []),
           { text: '作坊', link: '/vault/作坊/' },
           { text: '档案', link: '/vault/档案/', activeMatch: '^/vault/档案/' },
           { text: '最近', link: '/vault/toc' },
