@@ -23,4 +23,4 @@ reference:
 
 核心：增长的根基是靠谱的人 + 真实的内容，不是铺量。
 
-来源：[[AI personal growth app_中文]]（StarterStory 访谈，访问于 2026-09-21）。
+来源：StarterStory 访谈（访问于 2026-09-21）。

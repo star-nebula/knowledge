@@ -11,7 +11,7 @@ abstract: 从 MyFutureSelf（AI 个人成长 App）创始人访谈中提炼的�
 
 # 个人成长产品创业启示
 
-基于 [[AI personal growth app_中文]]（StarterStory 对 MyFutureSelf 创始人的访谈）拆出的方法论笔记。
+从 StarterStory 对 MyFutureSelf（AI 个人成长 App）创始人的访谈中提炼的方法论笔记。
 
 ## 思维模型与方法
 

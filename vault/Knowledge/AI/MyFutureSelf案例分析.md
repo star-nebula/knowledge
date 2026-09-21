@@ -23,4 +23,4 @@ MyFutureSelf 是一款 **AI 驱动的个人成长移动应用**，核心理念�
 
 启示：AI 应用创业可以不写代码起步，先验证、快速发布、用分发放大。
 
-来源：[StarterStory 原文](https://www.starterstory.com/stories/myfutureself)（访问于 2026-09-21），中文剪藏见 [[AI personal growth app_中文]]。
+来源：[StarterStory 原文](https://www.starterstory.com/stories/myfutureself)（访问于 2026-09-21）。

@@ -12,7 +12,7 @@
   python _agent_scripts/link_audit.py --out D:/tmp/x.txt           # 指定输出文件
   python _agent_scripts/link_audit.py --quiet                       # 只打印计数行
 
-判定规则（四处易错，均已内建）
+判定规则（五处易错，均已内建）
   1. 剥离代码块与行内代码 —— Obsidian 不解析其中的 [[...]]，不剥离必然误报
   2. 判定表收录**全库所有文件**（笔记 + 附件）—— 否则 ![[img.png]] 全被误判为断链
   3. 同时认 [[Note]] 与 [[Note.md]] 两种写法，并带 Windows 大小写不敏感回退（[[todo]] 命中 Todo.md）
@@ -20,6 +20,9 @@
      若某目标**只**在非发布目录（Resources/ Archive/ Canvas/ .opencode/ …）里有同名文件，
      Obsidian 里算活链，但站点上 nolebase 双链索引不含该目录 → 渲染成死链（404）。
      本脚本把它单列为「站点侧死链」段，不计入主断链表。
+  5. **frontmatter 不参与渲染**：站点只输出正文。而 frontmatter 的 reference: / source:
+     常放指向剪藏原文（Resources/）的链接 —— 这类链接在站点上**根本不出现**，不算死链。
+     故「站点侧死链」段跳过 frontmatter 区；主断链表仍保留它（Obsidian 侧确实解析该链接）。
 
 退出码
   0 = 扫描完成（不代表无断链）    1 = 参数/路径错误
@@ -102,6 +105,17 @@ def main():
     def strip_code(t):
         return inline.sub(blank, fence.sub(blank, t))
 
+    def fm_end_line(txt):
+        """frontmatter 收尾行号（1-based，含收尾的 ---）；无 frontmatter 返回 0。
+        站点不渲染 frontmatter，其中的链接不该计入站点死链。"""
+        lines = txt.split("\n")
+        if not lines or lines[0].strip() != "---":
+            return 0
+        for i in range(1, len(lines)):
+            if lines[i].strip() == "---":
+                return i + 1
+        return 0
+
     broken = defaultdict(list)
     pubmiss = defaultdict(list)
     published = load_published()
@@ -114,6 +128,7 @@ def main():
             continue
         clean = strip_code(txt)
         lines = txt.split("\n")
+        fm_end = fm_end_line(txt)
         for m in wl.finditer(clean):
             raw = m.group(1).strip()
             tgt = raw.split("|")[0].split("#")[0].strip()
@@ -125,9 +140,11 @@ def main():
             ln = clean[:m.start()].count("\n")
             ctx = lines[ln].strip() if ln < len(lines) else ""
             if hits:
-                # 站点视角：引用方在发布层、但所有同名命中都落在非发布目录 →
-                # Obsidian 活链、站点死链。引用方本身不在发布层的不算（那两页都不渲染，无 404 可言）
+                # 站点视角：引用方在发布层、命中行不在 frontmatter、且所有同名命中都落在
+                # 非发布目录 → Obsidian 活链、站点死链。引用方本身不在发布层的不算
+                # （那两页都不渲染，无 404 可言）；frontmatter 行同样不渲染，也不计。
                 if (published
+                        and (ln + 1) > fm_end
                         and re.split(r"[\\/]", rel)[0] in published
                         and not ({re.split(r"[\\/]", h)[0] for h in hits} & published)):
                     pubmiss[tgt].append((rel, ln + 1, ctx[:170]))
@@ -172,7 +189,7 @@ def main():
     main_rows, shown = render("## 一、真断链（全库无同名文件）", broken)
     out.extend(main_rows)
     out.append("")
-    site_rows, _ = render("## 二、站点侧死链（全库有同名，但只在非发布目录里 → 站点 404）", pubmiss)
+    site_rows, _ = render("## 二、站点侧死链（正文引用了只存在于非发布目录的同名文件 → 站点 404；frontmatter 不计）", pubmiss)
     out.extend(site_rows)
 
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
