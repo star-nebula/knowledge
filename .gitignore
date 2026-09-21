@@ -17,22 +17,32 @@
 .opencode/
 _agent_scripts/
 
-# 个人笔记(从 BaiduSyncdisk/obsidian 迁入)。发布走显式开关: 给笔记加 status: published 并接入 nav/sidebar。
+# 个人笔记(从 BaiduSyncdisk/obsidian 迁入)。
+# 发布面由 .vitepress/config.ts 顶部 PUBLISHED_DIRS 白名单决定(目录级): 不在白名单的
+# vault 顶层条目一律不渲染、不进 GitHub Pages(旧描述「给笔记加 status: published」已废)。
 vault/DailyNotes/
 vault/Inbox/
 vault/Interview/
 vault/Resources/
-vault/Skills/
 vault/Canvas/
 vault/Templates/
 vault/Archive/
 vault/rules/
+vault/Home.md
+# AI 入口与索引（本地智能体专用，绝不进公开仓库）
+# AGENTS.md = 现行入口（各工具约定的自动加载名）；AGENT.md = 旧名，保留忽略以防误建
+AGENTS.md
+AGENT.md
+vault/_index.md
+vault/视图/
+
+# 已废弃体系的忽略行（实测 2026-09-21：以下目录均不存在）——
+# 保留仅为防误建（防同步软件/误操作重建后被 commit 进公开仓库）；勿据此认为目录存在。
+vault/Skills/
 vault/AgentLog/
 vault/Published/
-vault/Home.md
-AGENT.md
 vault/发布/
-vault/视图/
+
 # 跨软件永久记忆库(个人工作/副业/背调记录,绝不入公开仓库;2026-09-14 审计后移出)
 vault/Memory/
 
