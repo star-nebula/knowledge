@@ -71,6 +71,7 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
   - 单层：`--layer Lessons`（可选 `Preferences` / `Plans` / `Lessons` / `Workflows` / `Projects`）
 - 覆盖范围：`Preferences` `Plans` `Lessons` `Workflows` `Projects`（**`Decisions` 除外**——`Rule.md` §9 规定其专用格式，勿用本脚本覆盖）。
 - 顺带校验两张**手工**地图页是否漏列顶层项：`vault/_index.md`（vault 顶层 25 项）、`Memory/_index.md`。
+- **顶层项口径**（`top_entries()`）：**排除点开头的项** —— `.git` / `.obsidian` / `.trash` 等属工具与仓库基础设施，不算「内容」。2026-09-21 在 `Memory/` 内建独立本地 git 仓后，多出的 `.git` 曾让 `--check` 报「地图页漏列」而**假红**。
 - 一句话定位取值优先级：frontmatter `summary` / `description` → 正文首个实质段落（截 62 字）。
 - **坑**：`_index.md` 的表头说明由脚本模板生成，直接手改表头会在下次 `--write` 时被覆盖——要改表头请改脚本里的 `EXTRA_NOTE`；表格**数据行**的手工内容是安全的。
 - 运行环境：受管 Python 3.13（仅标准库）。
@@ -85,6 +86,23 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
 - 检查三件事：① **完成信号残留** —— 带 `✅` `✔` `已执行完毕` `已完成：` `已结清` `已归档` 等强标记却未移走的条目（引用块说明行与「不再继续」删除线留档**单独计数、不拦门禁**）② **分组名 ↔ `Projects/` 目录名映射** —— 规则要求分组标题一律取目录名，否则归档无处落地 ③ **`working/completed.md` 是否存在** —— 归档前需先建
 - **坑 1**：本机 PowerShell 会吞 stdout → 默认写文件再 Read 读回（与 `link_audit.py` 同）。
 - **坑 2**：强信号词会命中**指针行** —— 在 Todo 里写归档指引要用「记录见 / 详情见」，别写「已归档」，否则自己把自己判成违规（本次实测踩到）。
+- 运行环境：受管 Python 3.13（仅标准库）。
+
+### `mem_git.py`
+记忆库**独立本地仓**工具（`vault/Memory`）——把「记忆库有版本历史、且永不上云」变成可执行、可校验。
+- 背景（2026-09-21 用户裁定）：记忆库此前**零版本保护**（父仓 `.gitignore` 整体忽略，`ls-files` 0 个），改错无处回溯。方案：在 `Memory/` 内建**独立本地仓**，不配任何远端。
+- 用法：
+  - 状态：`python mem_git.py`（报告默认写 `_agent_scripts/_out/mem_git.txt`）
+  - **收尾 / 季度门禁**：`python mem_git.py --check --structure-only`（只验结构，不因「有未提交改动」而红）
+  - 完整门禁：`python mem_git.py --check`（「有未提交改动」**也算违规**、退出码 1 —— 设计如此，别当故障）
+  - 提交：`python mem_git.py commit -m "…"`（一条命令 `add -A` + commit，无改动自动跳过）；`-F <文件>` 从文件读消息（自动容忍 BOM）
+  - 重建：`python mem_git.py init`（幂等：init + 仓库配置 + `.gitignore` + 两个守卫）；`lockdown`（应急清远端 + 重装拒推钩子）
+- **三道保险**：① 不配远端 ② 本层 `.git/hooks/pre-push` 一律拒绝推送 ③ 父仓 `.git/hooks/pre-commit` **顶部**插私有面守卫，拒绝任何触碰 `vault/Memory` 的提交。
+- **钩子必须「只用 shell 内建」**：用探针钩子实测该环境 PATH 里**没有 `grep` / `date` / `wc`**（msys 的 `/usr/bin` 不在 PATH）→ 用外部命令写的守卫会**静默失效**。附带发现：父仓原 `pre-commit` 里拦 100 MB 大文件的 `wc -c` 因此**从未生效**。
+- **父仓守卫必须插在钩子顶部，不能追加到末尾**：原钩子末尾是 `git diff --cached --name-only | while read f; do … done`——管道里的 `exit 1` 只终止**子 shell**，追加在其后会让大文件拦截静默解除。
+- **`git add -f` 的两种形态**（2026-09-21 实测）：① 加**单个文件** `vault/Memory/x.md` → **静默不入暂存**（嵌套仓被 git 当嵌入式仓库，退出码 0、暂存区为空 = 典型「假成功」）② 加**整个目录** `vault/Memory` → 生成 **gitlink**，暂存名 `vault/Memory`（**不带斜杠**）。守卫正则必须两形态都覆盖。
+- 实测端到端：暂存 gitlink 后真实 `git commit` 被拦下、**HEAD 未变、无提交产生**；`git push` 被拒（退出码 1）；提交消息前 3 字节非 `ef bb bf`（无 BOM）。
+- 注：这是**嵌套在父仓内的独立仓**，父仓 `git status` 看不到它；钩子不在版本库里，换机器跑一次 `init` 重装。
 - 运行环境：受管 Python 3.13（仅标准库）。
 
 ### `ref_scan.py`

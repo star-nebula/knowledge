@@ -235,6 +235,21 @@ def write_or_check(idx: Path, content: str, check: bool, problems: list[str]) ->
 # --------------------------------------------------------------------------- #
 # 手工地图页的顶层覆盖校验
 # --------------------------------------------------------------------------- #
+def top_entries(d: Path) -> list[str]:
+    """顶层项名，供**手工地图页**的覆盖校验用（「地图页有没有漏列某顶层项」）。
+
+    排除两类，否则门禁会假红：
+      ① `_index.md` —— 地图页自身（自引用）；
+      ② **点开头的项** —— `.git` / `.obsidian` / `.trash` 等工具与仓库基础设施，
+         不是「内容」。2026-09-21 在 `vault/Memory` 内建独立本地 git 仓后，多出的
+         `.git` 与 `.gitignore` 曾让 `--check` 报「地图页漏列」。
+    """
+    return sorted(
+        p.name for p in d.iterdir()
+        if p.name != "_index.md" and not p.name.startswith(".")
+    )
+
+
 def check_top_level(idx: Path, items: list[str], label: str, problems: list[str]) -> None:
     if not idx.exists():
         problems.append(f"[缺地图页] {idx.relative_to(REPO)}")
@@ -307,11 +322,9 @@ def main() -> int:
         print(f"[{layer}] {len(rows)} 条")
         write_or_check(idx, content, args.check, problems)
 
-    # 手工地图页的顶层覆盖（排除地图页自身，避免自引用误报）
-    vault_top = sorted(p.name for p in VAULT.iterdir() if p.name != "_index.md")
-    check_top_level(VAULT / "_index.md", vault_top, "vault 顶层", problems)
-    mem_top = sorted(p.name for p in MEM.iterdir() if p.name != "_index.md")
-    check_top_level(MEM / "_index.md", mem_top, "Memory 顶层", problems)
+    # 手工地图页的顶层覆盖（排除地图页自身与点开头的工具/仓库基础设施，见 top_entries）
+    check_top_level(VAULT / "_index.md", top_entries(VAULT), "vault 顶层", problems)
+    check_top_level(MEM / "_index.md", top_entries(MEM), "Memory 顶层", problems)
 
     print(f"-- 共 {total} 条；手工地图页校验完成")
     if args.check:
