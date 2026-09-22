@@ -241,8 +241,8 @@ def top_entries(d: Path) -> list[str]:
     排除两类，否则门禁会假红：
       ① `_index.md` —— 地图页自身（自引用）；
       ② **点开头的项** —— `.git` / `.obsidian` / `.trash` 等工具与仓库基础设施，
-         不是「内容」。2026-09-21 在 `vault/Memory` 内建独立本地 git 仓后，多出的
-         `.git` 与 `.gitignore` 曾让 `--check` 报「地图页漏列」。
+         不是「内容」。（历史注：2026-09-21 曾在 `vault/Memory` 内建独立本地 git 仓，
+         多出的 `.git` 与 `.gitignore` 让 `--check` 报「地图页漏列」；该仓同日已删。）
     """
     return sorted(
         p.name for p in d.iterdir()

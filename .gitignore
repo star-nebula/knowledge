@@ -29,7 +29,7 @@ _agent_scripts/_tmp*
 # 发布面由 .vitepress/config.ts 顶部 PUBLISHED_DIRS 白名单决定(目录级): 不在白名单的
 # vault 顶层条目一律不渲染、不进 GitHub Pages(旧描述「给笔记加 status: published」已废)。
 # ⚠ 区分两个面：「不入库」= 不进公开仓库源码(可被 clone/搜索)；「不发布」= 不渲染成站点页面。
-# 下列各项两者皆是——唯一例外是 vault/rules/（已入库但不发布，见下方注释）。
+# 下列各项的**内容**两者皆是；例外有二：① vault/rules/（已入库但不发布，见下方注释）② 下方 6 个目录的**结构占位**（只入库 1 个 .gitkeep，内容仍不入库）。
 vault/DailyNotes/
 vault/Inbox/
 vault/Interview/
