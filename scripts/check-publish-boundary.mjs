@@ -17,9 +17,12 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, resolve } from 'node:path'
 
 const ROOT = process.cwd()
+// 注意：本清单必须与 .vitepress/config.ts 顶部 PUBLISHED_DIRS 保持一致（两处手工同源）。
+// 2026-09-24：`vault/🔌 知识库插件列表.md` 已迁至 `vault/Knowledge/Methods/`，
+// 随目录级白名单发布，文件级条目已同步移除。
 const PUBLISHED_DIRS = [
   'vault/作坊', 'vault/档案', 'vault/Knowledge', 'vault/Attachments',
-  'vault/index.md', 'vault/toc.md', 'vault/data/toc.data.ts', 'vault/🔌 知识库插件列表.md',
+  'vault/index.md', 'vault/toc.md', 'vault/data/toc.data.ts',
 ]
 // 顶层目录级白名单（用于判断链接/跟踪面）
 const publishedTop = new Set(

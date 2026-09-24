@@ -21,7 +21,7 @@ const SITE_BASE = '/knowledge/'
 //      （必须与 srcExclude 对齐，否则未发布笔记会被解析、与已发布同名笔记冲突）
 //   3. scripts/check-publish-boundary.mjs：校验 git 跟踪面 ⊆ 发布面 + 构建产物链接 ⊆ 发布面
 //
-// 发布面 = 内容目录 + 站点运行必需文件（首页/目录页/数据源/插件列表），
+// 发布面 = 内容目录 + 站点运行必需文件（首页/目录页/数据源），
 // 文件级条目用 `vault/<文件>` 形式；目录级用 `vault/<目录>`（含子目录）。
 const PUBLISHED_DIRS = [
   'vault/作坊',
@@ -34,8 +34,10 @@ const PUBLISHED_DIRS = [
   'vault/index.md',
   'vault/toc.md',
   'vault/data/toc.data.ts',
-  'vault/🔌 知识库插件列表.md',
 ]
+// 注：`vault/🔌 知识库插件列表.md` 曾以「站点必需文件」形式列在此处（vault 根散文件）。
+// 2026-09-24 已迁入 `vault/Knowledge/Methods/知识库插件列表.md` 并按原子笔记规范补 frontmatter
+// （category/category 决定其侧边栏归类），随 `vault/Knowledge` 目录级放行发布，故文件级条目移除。
 
 // vault/Knowledge/ 已入库并随站点发布（见 README「内容板块」），目录存在性检测只作兜底：
 // 某些 checkout / 分支可能没有该目录（历史上它曾被 .gitignore 排除为私人库），此时跳过渲染，
