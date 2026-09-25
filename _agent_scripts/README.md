@@ -52,6 +52,30 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
 - **坑 2**：回收 ≠ 永久删除，`--trash` 一律走回收站；执行前务必先 `--dry-run` 列清单确认。
 - 运行环境：受管 venv `C:/Users/stars/.workbuddy/binaries/python/envs/default/Scripts/python.exe`（该 venv 已装 `send2trash` + `pywin32`）。
 
+### `feishu_import/` —— 飞书知识库 → Obsidian 导入
+三个脚本，详见 `feishu_import/README.md`（含 `lark-cli` 前置命令与坑）。
+**结构为「单层」**：一篇发布内容 = 一篇文稿笔记，发布元数据直接写在该笔记 frontmatter，Base 圈 `文稿/` 目录（2026-09-24 起；此前是「台账笔记 + 文稿笔记」两层，已合并）。
+
+> ⚠️ **这套脚本使命已完结（2026-09-24）**：飞书原件当日整体删除，源数据（飞书树 / 多维表格记录 / 画板）
+> 不再可得 → 均已不可运行，留作流程存档。`vault/自媒体内容/` 直接当正本用。
+
+- `feishu_import/bitable_merge.py`：飞书**多维表格**记录 → **合并进对应文稿的 frontmatter** + 生成 **Bases** 视图文件（4 视图：全部 / 按状态 / 按类别 / 卡片）。
+  - ⚠️ **已不可运行**：对齐用的 `飞书文档`/`飞书节点` 键随飞书清理一并移除 → 扫不到文稿。另 `.base` 现由 Obsidian 手工维护（视图排布按使用习惯调过），重跑会覆盖。
+- `feishu_import/wiki_docs_to_notes.py`：飞书 wiki **文档（docx）** → Obsidian **文稿快照**（含图片 / 附件本地化、画板转 `![[…excalidraw]]` 引用）。
+  - 用法：`python wiki_docs_to_notes.py all --bundle <bundle.json> --vault-root <vault/自媒体内容> --wb-map '<{画板token:本地名}>'`
+  - `--cache` 记 token→本地路径，重跑**不重下**已获得的素材（本次附件 213 MB，断点续传很关键）。
+  - **重导保护**：`render` 会保留它不负责的 frontmatter 键（即发布元数据），否则每次重导飞书都会把这些冲光。
+  - **但它救不了正文**：重导是整篇重写，本地正文改动会被打回（实测：Jev 的 `- [x]` 清单被重置）。**已本地编辑过的文稿请改用外科式行删除。**
+  - `DROP_KEYS = {飞书文档, 飞书节点, 飞书记录ID}`：飞书残留键重导时直接丢弃；`--origin-deleted` 表示原件已删 → 不写头部横幅。
+- `feishu_import/svg2excalidraw.py`：飞书**画板** SVG → Obsidian **Excalidraw 可编辑文件**（画板层唯一落地形态）。
+  - 用法：`python svg2excalidraw.py --src <svg目录> --excalidraw-out <目录> --prefix "Jev-"`
+  - **转换有不可逆损失**：粗体丢失、渐变退化为中间色、中文需手动开 `loadChineseFonts` —— 已接受（换「能双击改」）。
+  - **本库不再保留 SVG 源档**（2026-09-24 定：画板只留 `excalidraw/`）；`--svg-out` 仅作应急留档选项。
+- **字节级回归**（截至 2026-09-24 当晚清理后）：`wiki_docs_to_notes.py render` **18/19 篇逐字节一致**
+  （唯一例外 Jev 有三处**本地编辑**：`- [x]` 清单 + 标题引号，**该差异应保留**）、7 个 `.excalidraw.md` 元素层一致。
+- 运行环境：受管 Python 3.13（无需第三方库，纯标准库）。
+- **注意**：`_agent_scripts/*` 的 `.gitignore` 白名单只放行**顶层** `*.py|ts|md`，子目录（本目录、`xhs_card/`）**不入库** —— 本目录的脚本是本地件，未进公开仓库（与 `xhs_card/` 同例）。
+
 ### `encoding_guard.py`
 文本文件**编码守卫**：扫描目录列出所有非 UTF-8 文本文件，并可按需原地转码为 UTF-8。
 - 背景：本项目多数工具**覆写已存在文件时会沿用该文件原编码**。原本以 GBK 落盘的中文 md，改完内容后仍是 GBK，Obsidian 按 UTF-8 读即整篇乱码（新建文件不受影响，默认 UTF-8）。

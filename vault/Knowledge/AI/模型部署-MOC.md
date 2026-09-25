@@ -34,6 +34,7 @@ abstract: Docker 容器化、Ollama 本地模型服务、FastAPI 部署工具链
 | [[Ollama 集成 Chatbox]] | Chatbox 客户端配置本地 Ollama 模型 |
 | [[Ubuntu 部署 DeepSeek]] | Ubuntu 服务器上 Ollama + DeepSeek 部署流程 |
 | [[DeepSeek Harness 部署流程]] | 本地 `npx @deepseek-ai/dsh web` 一键拉起 DeepSeek Web 界面（含 API Key 申请与 Node.js 安装） |
+| [[DeepSeek-Harness-桌面端安装]] | 桌面端（Electron）无预编译包，源码构建两条路径：未装过 / 已装过 |
 
 ### 部署工具链
 
