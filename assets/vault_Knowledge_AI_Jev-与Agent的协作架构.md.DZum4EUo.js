@@ -1,0 +1,50 @@
+import{_ as t,a8 as n,o as l,c as i,ah as d,K as a}from"./chunks/framework.br3QDbaE.js";import"./chunks/theme.9Ei_K6CH.js";const f=JSON.parse('{"title":"Jev 与 Agent 的协作架构","description":"","frontmatter":{"title":"Jev 与 Agent 的协作架构","created":"2026-09-23T00:00:00.000Z","tags":["AI","Jev","Agent","架构"],"type":"概念解释","related":["[[Jev-MOC]]","[[Jev-与传统LLM的区别]]","[[AI Agent 概述]]"],"reference":"","category":["🧩 AI框架与Agent","Jev"]},"headers":[],"relativePath":"vault/Knowledge/AI/Jev-与Agent的协作架构.md","filePath":"vault/Knowledge/AI/Jev-与Agent的协作架构.md","lastUpdated":1790323638000}'),c={name:"vault/Knowledge/AI/Jev-与Agent的协作架构.md"};function r(o,s,h,g,b,k){const e=n("NolebaseGitContributors"),p=n("NolebaseGitChangelog");return l(),i("div",null,[s[0]||(s[0]=d(`<h1 id="jev-与-agent-的协作架构" tabindex="-1">Jev 与 Agent 的协作架构 <a class="header-anchor" href="#jev-与-agent-的协作架构" aria-label="Permalink to “Jev 与 Agent 的协作架构”">​</a></h1><h2 id="三层分工" tabindex="-1">三层分工 <a class="header-anchor" href="#三层分工" aria-label="Permalink to “三层分工”">​</a></h2><p>AI 应用不必把所有步骤都交给 LLM，更工程化的做法是让三种角色各管一段：</p><table tabindex="0"><thead><tr><th>组件</th><th>最擅长的事情</th></tr></thead><tbody><tr><td><strong>Code</strong></td><td>确定性逻辑与执行、数据操作</td></tr><tr><td><strong>Jev</strong></td><td>不确定但边界明确的智能判断</td></tr><tr><td><strong>LLM</strong></td><td>复杂推理与内容生成</td></tr></tbody></table><div class="language-text"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki shiki-themes github-light one-dark-pro" style="--shiki-light:#24292e;--shiki-dark:#abb2bf;--shiki-light-bg:#fff;--shiki-dark-bg:#282c34;" tabindex="0" dir="ltr"><code><span class="line"><span>AI 应用 = Code + Jev + LLM</span></span></code></pre></div><div class="language-text"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki shiki-themes github-light one-dark-pro" style="--shiki-light:#24292e;--shiki-dark:#abb2bf;--shiki-light-bg:#fff;--shiki-dark-bg:#282c34;" tabindex="0" dir="ltr"><code><span class="line"><span>            Agent</span></span>
+<span class="line"><span>              │</span></span>
+<span class="line"><span>      ┌───────┼────────┐</span></span>
+<span class="line"><span>      ↓       ↓        ↓</span></span>
+<span class="line"><span>     Code    Jev      LLM</span></span>
+<span class="line"><span>      │       │        │</span></span>
+<span class="line"><span>   确定规则  智能判断   复杂推理</span></span>
+<span class="line"><span>   执行动作  快速决策   内容生成</span></span></code></pre></div><h2 id="拆解一个客服-agent" tabindex="-1">拆解一个客服 Agent <a class="header-anchor" href="#拆解一个客服-agent" aria-label="Permalink to “拆解一个客服 Agent”">​</a></h2><table tabindex="0"><thead><tr><th>步骤</th><th>由谁做</th><th>内容</th></tr></thead><tbody><tr><td>①</td><td>Jev</td><td>判断「是不是退款问题？」</td></tr><tr><td>②</td><td>Jev</td><td>判断「应该调用哪个系统？」</td></tr><tr><td>③</td><td>Code</td><td>执行确定动作：查询订单</td></tr><tr><td>④</td><td>LLM</td><td>综合订单与支付信息做复杂分析</td></tr><tr><td>⑤</td><td>LLM</td><td>生成最终回复</td></tr></tbody></table><p>对应的流水线：</p><div class="language-text"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki shiki-themes github-light one-dark-pro" style="--shiki-light:#24292e;--shiki-dark:#abb2bf;--shiki-light-bg:#fff;--shiki-dark-bg:#282c34;" tabindex="0" dir="ltr"><code><span class="line"><span>用户</span></span>
+<span class="line"><span> ↓</span></span>
+<span class="line"><span>Jev：快速判断（分类 / 路由 / 风险）</span></span>
+<span class="line"><span> ↓</span></span>
+<span class="line"><span>Code：执行确定动作</span></span>
+<span class="line"><span> ↓</span></span>
+<span class="line"><span>LLM：复杂分析（仅在需要时）</span></span>
+<span class="line"><span> ↓</span></span>
+<span class="line"><span>Jev：验证 / 审核产出</span></span>
+<span class="line"><span> ↓</span></span>
+<span class="line"><span>Code：最终执行</span></span></code></pre></div><h2 id="一个更完整的工程架构" tabindex="-1">一个更完整的工程架构 <a class="header-anchor" href="#一个更完整的工程架构" aria-label="Permalink to “一个更完整的工程架构”">​</a></h2><div class="language-text"><button title="Copy Code" class="copy"></button><span class="lang">text</span><pre class="shiki shiki-themes github-light one-dark-pro" style="--shiki-light:#24292e;--shiki-dark:#abb2bf;--shiki-light-bg:#fff;--shiki-dark-bg:#282c34;" tabindex="0" dir="ltr"><code><span class="line"><span>                  用户请求</span></span>
+<span class="line"><span>                      │</span></span>
+<span class="line"><span>                      ▼</span></span>
+<span class="line"><span>                 ┌────────┐</span></span>
+<span class="line"><span>                 │  Jev   │</span></span>
+<span class="line"><span>                 └────┬───┘</span></span>
+<span class="line"><span>                      │</span></span>
+<span class="line"><span>          ┌───────────┼───────────┐</span></span>
+<span class="line"><span>          ▼           ▼           ▼</span></span>
+<span class="line"><span>        分类        风险判断     工具选择</span></span>
+<span class="line"><span>          │           │           │</span></span>
+<span class="line"><span>          └───────────┼───────────┘</span></span>
+<span class="line"><span>                      ▼</span></span>
+<span class="line"><span>                    Code</span></span>
+<span class="line"><span>                      │</span></span>
+<span class="line"><span>              是否需要复杂推理？</span></span>
+<span class="line"><span>                ┌─────┴─────┐</span></span>
+<span class="line"><span>               Yes          No</span></span>
+<span class="line"><span>                │            │</span></span>
+<span class="line"><span>                ▼            ▼</span></span>
+<span class="line"><span>               LLM         直接执行</span></span>
+<span class="line"><span>                │</span></span>
+<span class="line"><span>                ▼</span></span>
+<span class="line"><span>             生成答案</span></span>
+<span class="line"><span>                │</span></span>
+<span class="line"><span>                ▼</span></span>
+<span class="line"><span>             Jev 质检</span></span>
+<span class="line"><span>                │</span></span>
+<span class="line"><span>         ┌──────┴──────┐</span></span>
+<span class="line"><span>       通过            不通过</span></span>
+<span class="line"><span>        │               │</span></span>
+<span class="line"><span>        ▼               ▼</span></span>
+<span class="line"><span>      返回           人工处理</span></span></code></pre></div><p>这个结构体现了 Jev 的核心定位：<strong>它不是站在 LLM 的对面，而是与 LLM、Code 一起组成 AI 应用</strong>。其中最典型的用法是：Jev 在前面做分流与决策，LLM 只在需要复杂推理时被调用，最后再由 Jev 做质检。</p><p><em>（内容由AI生成，仅供参考）</em></p>`,14)),a(e),a(p)])}const A=t(c,[["render",r]]);export{f as __pageData,A as default};
