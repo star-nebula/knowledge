@@ -11,7 +11,7 @@ nolebase:
 ---
 
 <script setup>
-import { data } from './data/toc.data'
+import { data } from './toc.data'
 </script>
 
 <NolebaseRecentUpdates :data="data" />

@@ -30,10 +30,15 @@ const PUBLISHED_DIRS = [
   // 附件：被 git 跟踪的图片即已发布图片（pnpm sync:assets 只 add 已发布笔记引用的图）。
   // 整目录放行，便于 ![[image]] 嵌入解析；私人图仍在 .gitignore 里不会进仓库。
   'vault/Attachments',
-  // 站点运行必需文件（不在内容目录内，但必须随站点发布）
-  'vault/index.md',
-  'vault/toc.md',
-  'vault/data/toc.data.ts',
+  // 站点运行必需页（2026-09-25：原 vault 根散文件 index.md / toc.md / data/toc.data.ts
+  // 迁入两个独立目录，vault 根不再留站点文件）。
+  //   vault/主页/index.md  VitePress `layout: home` 首页 → /knowledge/vault/主页/
+  //   vault/最近/toc.md    「最近」页，数据源同目录 toc.data.ts → /knowledge/vault/最近/toc
+  // ⚠ 只能按**目录级**放行：check-publish-boundary.mjs 的白名单只认「顶层目录」与「vault 根散文件」
+  //   两种形态，子目录内的文件级条目会被判成误 add。目录级放行的代价（整目录公开）由该脚本的
+  //   SITE_PAGE_FILES 精确文件清单兜底——往这两个目录塞白名单外的笔记，`pnpm check:boundary` 会拦。
+  'vault/主页',
+  'vault/最近',
 ]
 // 注：`vault/🔌 知识库插件列表.md` 曾以「站点必需文件」形式列在此处（vault 根散文件）。
 // 2026-09-24 已迁入 `vault/Knowledge/Methods/知识库插件列表.md` 并按原子笔记规范补 frontmatter
@@ -157,6 +162,12 @@ function buildExcludes() {
 const srcExclude = [
   // 仓库根级别的私有项（非 vault 顶层目录，buildExcludes 不覆盖）
   'backup/**',
+  // 运维脚本区（2026-09-25 补）：_agent_scripts/ 下 164 个 md 曾被当站点内容渲染，
+  // 其中 _out/verify/** 是脚本验证时留下的**自媒体文稿副本**（该目录 .gitignore 已排除，
+  // GitHub Pages CI 干净检出时不存在，但本地 dist 上传「我的网页」镜像站时会一起发出去）。
+  // 同时修掉 8 个构建期 URIError: URI malformed——fixture 文件名 `99.9% 是假的？….md`
+  // 里的裸 % 让 nolebase 的 pathToFile → decodeURIComponent 抛错。
+  '_agent_scripts/**',
   // vault 顶层「不在发布面」的目录/文件：由 buildExcludes() 动态生成
   ...buildExcludes(),
   // 追加硬排除：发布目录内若有个别不应渲染的，放这里（当前无）
@@ -265,12 +276,18 @@ export default defineConfig({
       lang: 'zh-CN',
       label: '中文',
       dir: '/vault',
-      // 注意：link 必须带尾斜杠，否则 normalizeLink 会补成 vault.html（GitHub Pages 404）；
-      // 带斜杠 → /vault/ → 目录首页，200。
-      link: '/vault/',
+      // 注意：link 必须带尾斜杠，否则 normalizeLink 会补成 …主页.html（GitHub Pages 404）。
+      // 2026-09-25：首页源文件已从 vault/index.md 迁到 vault/主页/index.md，路由随之变成
+      // /knowledge/vault/主页/ —— 此处 link（主题 logo 点击目标 / 默认语言回退）必须跟着改，
+      // 否则点 logo 会落到已不存在的 /knowledge/vault/ 上 404。
+      // dir 仍留 '/vault'：它决定 root locale 的页面归属前缀，收窄到 /vault/主页 会把
+      // 作坊/档案/Knowledge 甩到 locale 之外。
+      link: '/vault/主页/',
       themeConfig: {
         nav: [
-          { text: '主页', link: '/vault/' },
+          // 「主页」「最近」的源文件已迁入 vault/主页/、vault/最近/（2026-09-25），
+          // 路由随源路径变化；中文段在产物里被 percent-encode，写裸路径即可。
+          { text: '主页', link: '/vault/主页/' },
           // 「知识」项随 HAS_KNOWLEDGE 条件化：vault/Knowledge 缺失时整项不出，避免死链 nav。
           // （srcExclude 与 sidebar 早已条件化，唯此处遗漏）
           ...(HAS_KNOWLEDGE
@@ -278,7 +295,7 @@ export default defineConfig({
             : []),
           { text: '作坊', link: '/vault/作坊/' },
           { text: '档案', link: '/vault/档案/', activeMatch: '^/vault/档案/' },
-          { text: '最近', link: '/vault/toc' },
+          { text: '最近', link: '/vault/最近/toc' },
         ],
         lastUpdated: {
           text: '最后更新',
@@ -346,9 +363,12 @@ export default defineConfig({
     const path = await import('node:path')
     const outDir = siteConfig.outDir
     const base = SITE_BASE
-    const home = `${base}vault/`
+    // 站点首页 = vault/主页/index.md（2026-09-25 从 vault 根散文件迁入）。
+    // 中文段一律用 percent-encoded 形态，meta refresh / href / 内联脚本三处共用同一常量，
+    // 避免浏览器对裸 CJK 的编码差异影响跳转。
+    const home = `${base}vault/%E4%B8%BB%E9%A1%B5/`
 
-    // 1) 根路径 /knowledge/ 没有 index.html（内容在 /vault/），GitHub Pages 会直接回退到 404.html。
+    // 1) 根路径 /knowledge/ 没有 index.html（内容在 /vault/主页/），GitHub Pages 会直接回退到 404.html。
     //    这里写一个根 index.html 做客户端跳转，避免依赖 404 流程、也更明确。
     const rootHtml = `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -362,10 +382,10 @@ export default defineConfig({
     fs.writeFileSync(path.join(outDir, 'index.html'), rootHtml)
 
     // 2) 修复 VitePress 2.0 alpha 的内置重定向：它把“默认语言路径”算成了 lang 值
-    //    (/knowledge/zh-CN/)，而实际内容在 /knowledge/vault/。该错误跳转目标在 404 页和
-    //    每个内容页的内联脚本里都会出现，递归全部改掉（旧 /zh-CN/ 路径已不存在，无副作用）。
+    //    (/knowledge/zh-CN/)，而实际内容在站点首页 /knowledge/vault/主页/。该错误跳转目标在
+    //    404 页和每个内容页的内联脚本里都会出现，递归全部改掉（旧 /zh-CN/ 路径已不存在，无副作用）。
     const wrong = `${base}zh-CN/`
-    const right = `${base}vault/`
+    const right = home
 
     // 3) VitePress 把 locale 的 dir 选项 (/vault) 误用为 <html dir> 属性（应为 ltr/rtl）。
     //    浏览器对非法 dir 值按 ltr 处理，无功能影响，此处顺手修正所有页面（含嵌套 excalidraw 页）。

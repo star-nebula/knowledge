@@ -1,12 +1,15 @@
 // scripts/check-publish-boundary.mjs
 // 发布边界校验：保证「什么被发布」与 PUBLISHED_DIRS 清单一致，防漂移。
 //
-// 三查：
+// 三查（+1 项补充 1b）：
 //   1. git 跟踪面 ⊆ 发布面 ∪ 入库不发布面 ∪ 结构占位面：仓库里被 git 跟踪的 vault 文件，
 //      其顶层目录必须属于「发布面」（PUBLISHED_DIRS）、「入库但不发布」名单
 //      （TRACKED_ONLY_DIRS），或本身是「结构占位文件」（STRUCTURE_ONLY_FILES，仅 .gitkeep）
 //      （私人目录被误 git add 时在此报出——gitignore 只管忽略，add -f 可绕过）
+//   1b. 站点页目录（主页/ 最近/）内容 ⊆ SITE_PAGE_FILES：这两目录以目录级进发布面，
+//      本查把范围重新收紧到具体文件，防私人笔记被塞进公开页（2026-09-25 新增）
 //   2. 构建产物链接 ⊆ 发布面：.vitepress/dist 里所有 /vault/... 页面链接必须属于发布面
+//      （2026-09-25：/knowledge/vault/ 裸路径已无页面，指向它的链接会在此判为死链）
 //   3. srcExclude 与 nolebase excludesPatterns 一致性：config.ts 里两份排除规则由
 //      buildExcludes() 同源生成，此处做构建期断言兜底（读不到 AST 就跳过，不误报）
 //
@@ -18,22 +21,33 @@ import { join, relative, resolve } from 'node:path'
 
 const ROOT = process.cwd()
 // 注意：本清单必须与 .vitepress/config.ts 顶部 PUBLISHED_DIRS 保持一致（两处手工同源）。
-// 2026-09-24：`vault/🔌 知识库插件列表.md` 已迁至 `vault/Knowledge/Methods/`，
-// 随目录级白名单发布，文件级条目已同步移除。
+// 2026-09-24：`vault/🔌 知识库插件列表.md` 已迁至 `vault/Knowledge/Methods/`，随目录级白名单发布。
+// 2026-09-25：站点首页与「最近」页从 vault 根散文件迁入 `vault/主页/`、`vault/最近/`
+//   （原 `vault/index.md` / `vault/toc.md` / `vault/data/toc.data.ts` 三条文件级条目随之改为目录级，
+//   `vault/data/` 已清空删除）。目录级放行的口子由下方 SITE_PAGE_FILES 重新收紧。
 const PUBLISHED_DIRS = [
   'vault/作坊', 'vault/档案', 'vault/Knowledge', 'vault/Attachments',
-  'vault/index.md', 'vault/toc.md', 'vault/data/toc.data.ts',
+  'vault/主页', 'vault/最近',
 ]
 // 顶层目录级白名单（用于判断链接/跟踪面）
 const publishedTop = new Set(
   PUBLISHED_DIRS.filter(d => d.split('/').length === 2 && !d.split('/')[1].includes('.'))
     .map(d => d.split('/')[1]),
 )
-// 顶层文件级白名单（vault 根下的散文件）
+// 顶层文件级白名单（vault 根下的散文件）。2026-09-25 起清空：原三个站点必需文件已迁入子目录，
+// vault 根不再有发布文件。保留这段派生逻辑——将来若再往 vault 根放站点必需文件，仍能精确放行。
 const publishedRootFiles = new Set(
   PUBLISHED_DIRS.filter(d => d.split('/').length === 2 && d.split('/')[1].includes('.'))
     .map(d => d.split('/')[1]),
 )
+// 站点页目录的**文件级**白名单（2026-09-25）：`主页/`、`最近/` 只能以目录级进 PUBLISHED_DIRS
+// （本脚本的白名单不认「子目录内的文件级条目」，见检查 1 的 parts.length === 2 判定），
+// 目录级放行等于整目录公开——安全网在这里补回：这两个目录里出现清单外的文件即报错。
+// 它们不是内容目录，往里加笔记既无意义又会被渲染成公开页。
+const SITE_PAGE_FILES = {
+  'vault/主页': new Set(['index.md']),
+  'vault/最近': new Set(['toc.md', 'toc.data.ts']),
+}
 // Obsidian 工具配置：.gitignore 白名单有意放行（供 Obsidian 使用随仓库备份），
 // 非站点内容。校验时豁免，如需改为不跟踪，改 .gitignore 的白名单并 git rm --cached。
 const OBSIDIAN_CONFIG = new Set([
@@ -65,8 +79,8 @@ const STRUCTURE_ONLY_FILES = new Set([
   'vault/Templates/.gitkeep',
 ])
 
-// 特殊放行：首页自身链接 /vault/（index.md）
-const ALLOW_ROOT_LINK = new Set(['vault/'])
+// 注：2026-09-25 起 `/knowledge/vault/` 上不再有页面（首页迁到 `/knowledge/vault/主页/`），
+// 原先为它设的 ALLOW_ROOT_LINK 特判已删除——再出现指向 /vault/ 的链接就该被判成死链。
 
 let failures = 0
 const fail = (msg) => { failures++; console.error(`  ✗ ${msg}`) }
@@ -92,10 +106,8 @@ const trackedOutside = tracked
     if (STRUCTURE_ONLY_FILES.has(f)) return false
     const parts = f.split('/')
     if (publishedTop.has(parts[1])) return false
-    // vault 根散文件（index.md / toc.md / 插件列表.md）在发布面内
+    // vault 根散文件（2026-09-25 起发布面内已无此类文件，逻辑保留备用）
     if (parts.length === 2 && publishedRootFiles.has(parts[1])) return false
-    // vault/data/ 目录整体在发布面内（toc.data.ts 数据源）
-    if (parts[1] === 'data') return false
     // 入库但不发布（见 TRACKED_ONLY_DIRS）：进仓库源码，但不进站点
     if (trackedOnlyTop.has(parts[1])) return false
     return true
@@ -106,6 +118,23 @@ if (trackedOutside.length) {
 }
 else {
   pass(`git 跟踪的 ${tracked.length} 个 vault 文件全部在发布面 / 「入库不发布」/ 结构占位名单内`)
+}
+
+// ── 检查 1b：站点页目录内容 ⊆ 文件级白名单 ────────────────────
+// 主页/ 与 最近/ 在 PUBLISHED_DIRS 里是目录级条目（脚本不认子目录内的文件级条目），
+// 这里精确到文件补回安全网：塞进这两目录的多余笔记会同时被渲染成公开页、被 git 跟踪。
+console.log('\n[1b] 站点页目录（主页/ 最近/）内容 ⊆ 文件级白名单')
+const sitePageExtra = tracked.filter((f) => {
+  const parts = f.split('/')
+  if (parts.length !== 3) return false
+  const allow = SITE_PAGE_FILES[`vault/${parts[1]}`]
+  return allow ? !allow.has(parts[2]) : false
+})
+if (sitePageExtra.length) {
+  fail(`站点页目录内出现白名单外文件（${sitePageExtra.slice(0, 5).join(', ')}）——主页/、最近/ 只放站点必需文件，笔记请归入 Knowledge/ 等内容目录`)
+}
+else {
+  pass(`站点页目录内容符合白名单：${Object.entries(SITE_PAGE_FILES).map(([d, s]) => `${d}/{${[...s].join(',')}}`).join(' ')}`)
 }
 
 // ── 检查 2：构建产物链接 ⊆ 发布面 ─────────────────────────────
@@ -131,13 +160,12 @@ else {
   walk(dist)
 
   const badLinks = [...links].filter(u => {
-    const path = decodeURIComponent(u).replace(/^\//, '') // vault/...
-    if (ALLOW_ROOT_LINK.has(path)) return false
-    const parts = path.split('/')               // [vault, 作坊, ...] 或 [vault, toc.html]
+    const path = decodeURIComponent(u).replace(/^\//, '') // vault/... 或 vault/主页/
+    const parts = path.split('/')               // [vault, 作坊, ...] 或 [vault, 主页, '']
     if (parts[0] !== 'vault') return false       // 非 vault 链接（如 /assets）不算发布面
-    const top = parts[1]                          // 顶层：作坊 / Knowledge / toc.html ...
+    const top = parts[1]                          // 顶层：作坊 / Knowledge / 主页 / toc.html ...
     if (publishedTop.has(top)) return false
-    // 顶层文件（如 toc.html → toc.md、index.html → index.md）
+    // vault 根产物文件（如 toc.html → toc.md）——2026-09-25 起发布面无此类文件，逻辑保留备用
     if (parts.length === 2 && publishedRootFiles.has(top.replace(/\.html$/, '.md'))) return false
     return true
   })
