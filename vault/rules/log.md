@@ -6,6 +6,8 @@
 [22:16:00-dir] 迁移：新建 13 篇栏目 MOC（AI 9 / Engineering 1 / Methods 1 / Life 1 / 根 1）+ 复用 23 篇手写 MOC 不动；6 篇 OpenClaw 子 MOC 去 `🦀 OpenClaw · ` 前缀改名（零外部入链）；删除 `_mocs/` 13 篇
 [22:16:30-health] 验收：连续 `--write` 全量 MOC MD5 相等（幂等）；`pnpm check:boundary` 通过；`link_audit` site_dead_targets=0 平基线；`encoding_guard` 0 异常；`pnpm docs:build` 过且产物核验新路径在位、`dist` 无 `_mocs/`
 [22:17:00-index] 更新 `vault/AGENTS.md` §五、`rules/指南-目录整理.md`、`vault/_index.md`（AI 篇数既有漂移 122→131 一并订正，现 140/93/37/4 + 根 1，总 275）、站点 nav 与首页 hero 两处路径
+[22:40:00-rule] 二次调整（用户改名 6 篇 OpenClaw 子 MOC 为 `OpenClaw-<末级>-MOC.md` 前缀形态）：匹配规则扩展双形态——`<末级>-MOC.md`（精确优先）∪ `<主去emoji>-<末级>-MOC.md`（`mocNameVariants`/`stripCategoryEmoji`），KnowledgeExplorer 同步；管理型父页子栏目链接改解析为实际文件名（子页改名不破链）；生成器新建仍用末级名形态
+[22:40:30-health] 复验：dry-run 新建 0 / 更新 13 / 复用 23，`--write` 全量 MOC MD5 相等（用户改名零内容扰动），孤儿报告合法名集合扩展后仅剩既有孤儿 1 篇
 
 ## [2026-07-17] DeepSeek 剪藏提炼入 Knowledge
 [20:25:00-ingest] 处理 `Resources/Clippings/DeepSeek技术发展详细时间轴与技术核心解析.md`（CSDN 剪藏，时间轴+技术核心）；判定其时间轴与技术核心与既有 `Knowledge/AI/DeepSeek.md` 大量重叠，按反重复原则只提炼「新增且事实性」内容，剪藏原文保留不动

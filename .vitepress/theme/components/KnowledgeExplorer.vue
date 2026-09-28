@@ -29,9 +29,11 @@ const modules = import.meta.glob('/vault/Knowledge/**/*.md', {
 }) as Record<string, string>
 
 // ---- 运行时 MOC 索引：把 vault/Knowledge 下所有 *-MOC.md 按基名映射成「分支可跳转」的路由 ----
-// 命中规则与 knowledge-org.ts 的 resolveMoc 一致：末级分类名 === 文件名去 -MOC。
-// 手写页与生成页遵循同一命名约定（MOC 与普通笔记同层存放，_mocs/ 已废除），
-// 因此全库按基名索引即可；同名歧义（两个目录下同名 MOC）时取先出现者。
+// 命中规则与 knowledge-org.ts 的 resolveMoc 一致，两种合法命名形态皆可：
+//   1) 末级分类名 === 文件名去 -MOC（生成器新建形态）
+//   2) <主分类去emoji>-<末级分类名> === 文件名去 -MOC（如 OpenClaw-基础层-MOC.md）
+// 手写页与生成页遵循同一约定（MOC 与普通笔记同层存放，_mocs/ 已废除）；
+// 同名歧义（两个目录下同名 MOC）时取先出现者。
 const mocByBase = new Map<string, string>()
 for (const p of Object.keys(modules)) {
   const fileBase = p.split('/').pop()!
@@ -48,7 +50,14 @@ function resolveMoc(cats: string[]): string | null {
   if (cats.length === 0)
     return null
   const last = cats[cats.length - 1]
-  return mocByBase.get(last) ?? null
+  const hit = mocByBase.get(last)
+  if (hit)
+    return hit
+  if (cats.length >= 2) {
+    const main = cats[0].replace(/^\p{Extended_Pictographic}\uFE0F?\s*/u, '')
+    return mocByBase.get(`${main}-${last}`) ?? null
+  }
+  return null
 }
 
 function parseCategory(raw: string): string[] {

@@ -6,9 +6,11 @@
  * 设计要点：
  *  - category[0] = 主分类（emoji 体系），category[1..] = 子分类（可选，可多级）。
  *  - 每级「栏目」都需要一个 MOC 作为落地页，物理位置与普通笔记同层：
- *      · 文件名恒为 `<末级分类名>-MOC.md`，放在成员笔记多数派所在的一级目录
- *        （由 mocTargetDir 决定；`_mocs/` 目录已于 2026-09-28 废除）；
- *      · resolveMoc 全库按末级名匹配——手写页与生成页遵循同一命名约定，
+ *      · 文件名两种合法形态：`<末级分类名>-MOC.md`（生成器新建用）与
+ *        `<主分类去emoji>-<末级分类名>-MOC.md`（子分类重名/名字太泛时可自行改用，
+ *        如 `OpenClaw-基础层-MOC.md`）；领域目录取成员笔记多数派（mocTargetDir），
+ *        `_mocs/` 目录已于 2026-09-28 废除；
+ *      · resolveMoc 全库按上述两种形态匹配（精确末级名优先）——手写页与生成页
  *        放哪个领域目录都能被侧边栏/总览组件命中；
  *      · 找不到时由 scripts/generate-mocs.ts 生成带 `<!-- MOC:AUTO -->` 标记的
  *        托管页，每次运行幂等刷新；删掉标记即脱管为手写页，生成器不再触碰。
@@ -67,23 +69,43 @@ export function noteLink(rel: string): string {
   return `/${rel.replace(/\\/g, '/').replace(/\.md$/, '')}`.replace(/^\/+/, '/').replace(/%/g, '%25')
 }
 
-/** 全库扫描某「末级分类名」对应的 *-MOC.md 文件（排除历史 `_mocs/`）。 */
-export function findMocRels(lastSeg: string): string[] {
+/** 去掉分类名开头的 emoji（含变体选择符）与空白：`🦀 OpenClaw` -> `OpenClaw` */
+export function stripCategoryEmoji(name: string): string {
+  return name.replace(/^\p{Extended_Pictographic}\uFE0F?\s*/u, '')
+}
+
+/**
+ * category 路径对应的 MOC 文件名合法形态（两种皆可，精确末级名优先）：
+ *  1) `<末级分类名>-MOC.md`（生成器新建用此形态）
+ *  2) `<主分类去emoji>-<末级分类名>-MOC.md`（子分类在目录内易混淆时可自行改用）
+ */
+export function mocNameVariants(categoryPath: string[]): string[] {
+  const last = categoryPath[categoryPath.length - 1]
+  if (categoryPath.length < 2)
+    return [`${last}-MOC.md`]
+  const main = stripCategoryEmoji(categoryPath[0])
+  return [`${last}-MOC.md`, `${main}-${last}-MOC.md`]
+}
+
+/** 全库扫描某 category 路径对应的 *-MOC.md 文件（两种形态皆查，精确末级名排前；排除历史 `_mocs/`）。 */
+export function findMocRels(categoryPath: string[]): string[] {
+  const names = new Set(mocNameVariants(categoryPath))
+  const leaf = `${categoryPath[categoryPath.length - 1]}-MOC.md`
   return fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false, ignore: LEGACY_MOCS_IGNORE })
-    .filter((f) => path.basename(f, '.md').replace(/-MOC$/, '') === lastSeg)
+    .filter((f) => names.has(path.basename(f)))
+    .sort((a, b) => (path.basename(b) === leaf ? 1 : 0) - (path.basename(a) === leaf ? 1 : 0))
 }
 
 /**
  * 解析某 category 路径对应的 MOC 落地页路由：
- * 全库（排除历史 `_mocs/`）按「末级分类名 === 文件名去 -MOC」匹配。
+ * 全库（排除历史 `_mocs/`）按 mocNameVariants 两种命名形态匹配，精确末级名优先。
  * 找不到返回 null（该栏目暂无落地页，侧边栏仅作为分组、不挂链接，
  * 跑 `scripts/generate-mocs.ts --write` 可补齐）。
  */
 export function resolveMoc(categoryPath: string[]): string | null {
   if (categoryPath.length === 0)
     return null
-  const last = categoryPath[categoryPath.length - 1]
-  const hit = findMocRels(last)[0]
+  const hit = findMocRels(categoryPath)[0]
   return hit ? noteLink(hit) : null
 }
 

@@ -3,8 +3,9 @@
  * 为 vault/Knowledge 的每个「栏目」（category 路径节点）生成/刷新 MOC 落地页。
  *
  * 约定（2026-09-28 起，决策笔记：vault/Memory/Decisions/MOC迁出_mocs至分类文件夹.md）：
- *  - MOC 与普通笔记同层存放：`Knowledge/<领域>/<末级分类名>-MOC.md`，领域目录取
- *    成员笔记多数派（mocTargetDir）；历史 `_mocs/` 目录已废除，扫描一律排除。
+ *  - MOC 与普通笔记同层存放：`Knowledge/<领域>/<末级分类名>-MOC.md`（生成器新建形态；
+ *    子分类也可自行改为 `<主分类去emoji>-<末级分类名>-MOC.md`，两种形态都能被匹配），
+ *    领域目录取成员笔记多数派（mocTargetDir）；历史 `_mocs/` 目录已废除，扫描一律排除。
  *  - frontmatter 六属性：title / created / type / tags / abstract / category。
  *  - 托管标记：生成页正文含 `<!-- MOC:AUTO -->` 对。每次运行幂等重写其正文
  *    （H1 + 子栏目 + 笔记清单），frontmatter 保留 created/tags/abstract、
@@ -25,6 +26,7 @@ import {
   MOC_AUTO_END,
   MOC_AUTO_START,
   findMocRels,
+  mocNameVariants,
   mocTargetDir,
   noteLink,
   readNotes,
@@ -71,12 +73,16 @@ function noteBasename(rel: string): string {
   return rel.replace(/\\/g, '/').split('/').pop()!.replace(/\.md$/, '')
 }
 
-/** 子栏目链接：目标恒为 `<末级分类名>-MOC`（按文件名解析），展示名用完整层级路径 */
+/** 子栏目链接：指向该子栏目实际存在的 MOC 文件名（跟随用户改名），否则用默认 `<末级>-MOC`；展示名用完整层级路径 */
 function childLinks(titlePath: string[], node: TreeNode) {
-  return Object.keys(node.children).map(seg => ({
-    target: `${seg}-MOC`,
-    display: [...titlePath, seg].join(' · '),
-  }))
+  return Object.keys(node.children).map((seg) => {
+    const childPath = [...titlePath, seg]
+    const hits = findMocRels(childPath)
+    return {
+      target: hits.length > 0 ? noteBasename(hits[0]) : `${seg}-MOC`,
+      display: childPath.join(' · '),
+    }
+  })
 }
 
 /** 渲染托管 MOC 正文（标记对包裹，生成器每次整段重写） */
@@ -169,7 +175,7 @@ for (const { path: catPath, node } of nodeByPath.values()) {
   const dir = mocTargetDir(node.notes.map(n => n.rel))
   const targetRel = dir ? `${KNOWLEDGE}/${dir}/${last}-MOC.md` : `${KNOWLEDGE}/${last}-MOC.md`
 
-  const existingRels = findMocRels(last)
+  const existingRels = findMocRels(catPath)
   if (existingRels.length > 1) {
     skipped++
     plan.push(`跳过(同名MOC歧义)  ${display}  →  ${existingRels.join(' , ')}  请人工合并`)
@@ -254,12 +260,14 @@ else {
   plan.push(`新建  知识库总览  →  ${noteLink(overviewRel)}`)
 }
 
-// ---- 孤儿报告：文件名对不上任何现存分类末级名的 MOC（分类改名/删除的遗留），仅报告不删除 ----
-const leaves = new Set([...nodeByPath.values()].map(({ path: p }) => p[p.length - 1]))
+// ---- 孤儿报告：文件名对不上任何栏目的两种合法命名形态（分类改名/删除的遗留），仅报告不删除 ----
+const validNames = new Set(['知识库总览-MOC.md'])
+for (const { path: p } of nodeByPath.values())
+  for (const n of mocNameVariants(p))
+    validNames.add(n)
 for (const f of fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false, ignore: LEGACY_MOCS_IGNORE })) {
-  const base = path.basename(f, '.md').replace(/-MOC$/, '')
-  if (!leaves.has(base) && base !== '知识库总览')
-    plan.push(`孤儿  ${f}  （对不上任何分类末级名，请人工确认）`)
+  if (!validNames.has(path.basename(f)))
+    plan.push(`孤儿  ${f}  （对不上任何分类的合法命名形态，请人工确认）`)
 }
 
 console.log(plan.join('\n'))
