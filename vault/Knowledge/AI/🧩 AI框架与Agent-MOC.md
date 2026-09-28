@@ -1,17 +1,23 @@
 ---
 title: 🧩 AI框架与Agent
+created: 2026-09-28
 type: 专题聚合页
-generated: true
-category: ["🧩 AI框架与Agent"]
+tags:
+  - MOC
+abstract: 收录「🧩 AI框架与Agent」栏目的笔记导航，共 20 篇。
+category:
+  - 🧩 AI框架与Agent
 ---
+
+<!-- MOC:AUTO -->
 
 # 🧩 AI框架与Agent
 
 ## 子栏目
 
-- [[AI 应用核心范式-MOC|AI 应用核心范式]]
-- [[框架与中间件-MOC|框架与中间件]]
-- [[Jev-MOC|Jev]]
+- [[AI 应用核心范式-MOC|🧩 AI框架与Agent · AI 应用核心范式]]
+- [[框架与中间件-MOC|🧩 AI框架与Agent · 框架与中间件]]
+- [[Jev-MOC|🧩 AI框架与Agent · Jev]]
 
 ## 笔记清单
 
@@ -35,3 +41,5 @@ category: ["🧩 AI框架与Agent"]
 - [[LangChain Prompts 组件]]
 - [[n8n AI Agent 工作流]]
 - [[n8n 本地部署]]
+
+<!-- /MOC:AUTO -->

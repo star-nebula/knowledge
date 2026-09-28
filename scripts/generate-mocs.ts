@@ -1,19 +1,18 @@
 /**
  * generate-mocs.ts
- * 为 vault/Knowledge 的每个「栏目」（category 路径节点）生成/补全 MOC 落地页。
+ * 为 vault/Knowledge 的每个「栏目」（category 路径节点）生成/刷新 MOC 落地页。
  *
- * 策略（避免重复用户手写的高质量专题页）：
- *  - 先扫描所有笔记的 category，得到分类树的所有节点路径（含中间节点）。
- *  - 对每个节点路径：
- *      ① 若 vault/Knowledge 下已存在名称匹配末级分类的 `*-MOC.md`（如子分类
- *         "机器学习" → `机器学习-MOC.md`），直接复用，不生成、不覆盖。
- *      ② 否则在 `vault/Knowledge/_mocs/` 生成 `<主 · 子 · ...>-MOC.md`，
- *         带上 `generated: true` 标记；已存在且带该标记则覆盖（幂等），
- *         已存在但不带标记（用户手写）则跳过，绝不误删用户内容。
- *  - 额外生成顶层 `vault/Knowledge/_mocs/知识库总览-MOC.md` 作为 nav 落地页。
+ * 约定（2026-09-28 起，决策笔记：vault/Memory/Decisions/MOC迁出_mocs至分类文件夹.md）：
+ *  - MOC 与普通笔记同层存放：`Knowledge/<领域>/<末级分类名>-MOC.md`，领域目录取
+ *    成员笔记多数派（mocTargetDir）；历史 `_mocs/` 目录已废除，扫描一律排除。
+ *  - frontmatter 六属性：title / created / type / tags / abstract / category。
+ *  - 托管标记：生成页正文含 `<!-- MOC:AUTO -->` 对。每次运行幂等重写其正文
+ *    （H1 + 子栏目 + 笔记清单），frontmatter 保留 created/tags/abstract、
+ *    仅刷新 title/category 跟随分类改名。手写页（无标记）永不触碰；
+ *    想修改托管页内容 → 删掉标记即脱管。
  *
  * 用法：
- *  pnpm tsx scripts/generate-mocs.ts          # 预览将生成/复用的 MOC
+ *  pnpm tsx scripts/generate-mocs.ts          # 预览（新建/更新/复用/孤儿报告）
  *  pnpm tsx scripts/generate-mocs.ts --write   # 真实写入
  */
 import fs from 'node:fs'
@@ -22,10 +21,13 @@ import fg from 'fast-glob'
 import matter from 'gray-matter'
 import {
   KNOWLEDGE,
-  MOCS_DIR,
-  readNotes,
-  mocFileName,
+  LEGACY_MOCS_IGNORE,
+  MOC_AUTO_END,
+  MOC_AUTO_START,
+  findMocRels,
+  mocTargetDir,
   noteLink,
+  readNotes,
 } from './knowledge-org'
 
 interface TreeNode {
@@ -59,25 +61,6 @@ function buildTree() {
   return { root, nodeByPath }
 }
 
-/** 末级分类名 → 已存在的手写 *-MOC.md 路由（仅复用 vault/Knowledge 下非 _mocs 的手写页） */
-function existingMocRoute(lastSeg: string): string | null {
-  const hit = fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false, ignore: ['**/_mocs/**'] })
-    .find((f) => path.basename(f, '.md').replace(/-MOC$/, '') === lastSeg)
-  return hit ? noteLink(hit) : null
-}
-
-function isGeneratedMoc(file: string): boolean {
-  if (!fs.existsSync(file))
-    return false
-  try {
-    const { data } = matter(fs.readFileSync(file, 'utf-8'))
-    return data.generated === true
-  }
-  catch {
-    return false
-  }
-}
-
 /**
  * rel -> 文件名（不含扩展名，即 Obsidian/VitePress 解析 wikilink 所用的键）。
  * ⚠️ 不能用 `title` 生成 wikilink：wikilink 按**文件名**解析，而 `title` 是可任意起的
@@ -88,47 +71,35 @@ function noteBasename(rel: string): string {
   return rel.replace(/\\/g, '/').split('/').pop()!.replace(/\.md$/, '')
 }
 
-/** 渲染一个生成型 MOC 的内容（子栏目 + 直接笔记） */
-function renderMoc(titlePath: string[], node: TreeNode): string {
-  const title = titlePath.join(' · ')
-  const directNotes = node.notes
-  const subSections = Object.keys(node.children).map((seg) => {
-    const child = node.children[seg]
-    const childPath = [...titlePath, seg]
-    // 复用既有手写 MOC（按末级名匹配，filename 稳定可解析）；否则指向 _mocs 生成页。
-    const handWritten = existingMocRoute(seg)
-    const targetBasename = handWritten
-      ? `${seg}-MOC`
-      : mocFileName(childPath).replace(/\.md$/, '')
-    const display = handWritten ? seg : childPath.join(' · ')
-    return { targetBasename, display, route: handWritten ?? noteLink(`${MOCS_DIR}/${mocFileName(childPath)}`) }
-  })
+/** 子栏目链接：目标恒为 `<末级分类名>-MOC`（按文件名解析），展示名用完整层级路径 */
+function childLinks(titlePath: string[], node: TreeNode) {
+  return Object.keys(node.children).map(seg => ({
+    target: `${seg}-MOC`,
+    display: [...titlePath, seg].join(' · '),
+  }))
+}
 
+/** 渲染托管 MOC 正文（标记对包裹，生成器每次整段重写） */
+function renderMocBody(display: string, node: TreeNode): string {
   const lines: string[] = []
-  lines.push('---')
-  lines.push(`title: ${title}`)
-  lines.push('type: 专题聚合页')
-  lines.push('generated: true')
-  lines.push(`category: [${titlePath.map(c => `"${c}"`).join(', ')}]`)
-  lines.push('---')
+  lines.push(MOC_AUTO_START)
   lines.push('')
-  lines.push(`# ${title}`)
+  lines.push(`# ${display}`)
   lines.push('')
 
-  if (subSections.length) {
+  const subs = childLinks(display.split(' · '), node)
+  if (subs.length) {
     lines.push('## 子栏目')
     lines.push('')
-    for (const s of subSections) {
-      // [[target|alias]]：target 用文件名（稳定可解析），alias 用干净展示名
-      lines.push(`- [[${s.targetBasename}|${s.display}]]`)
-    }
+    for (const s of subs)
+      lines.push(`- [[${s.target}|${s.display}]]`)
     lines.push('')
   }
 
-  if (directNotes.length) {
+  if (node.notes.length) {
     lines.push('## 笔记清单')
     lines.push('')
-    for (const n of directNotes) {
+    for (const n of node.notes) {
       // target 用文件名（解析键），alias 用 title（展示名）；两者相同则省略 alias
       const base = noteBasename(n.rel)
       lines.push(base === n.title ? `- [[${base}]]` : `- [[${base}|${n.title}]]`)
@@ -136,57 +107,160 @@ function renderMoc(titlePath: string[], node: TreeNode): string {
     lines.push('')
   }
 
+  lines.push(MOC_AUTO_END)
+  lines.push('')
   return lines.join('\n')
+}
+
+function today(): string {
+  return new Date().toISOString().slice(0, 10)
+}
+
+/** gray-matter 会把 YAML 裸日期（created: 2026-09-28）解析成 Date 对象，
+ *  序列化前必须归一回 ISO 日期串，否则回写会变成 toString 的长格式。 */
+function normalizeDates(data: Record<string, unknown>): void {
+  for (const k of Object.keys(data)) {
+    const v = data[k]
+    if (v instanceof Date) {
+      data[k] = v.toISOString().slice(0, 10)
+      continue
+    }
+    if (typeof v === 'string' && k === 'created' && !/^\d{4}-\d{2}-\d{2}$/.test(v)) {
+      const d = new Date(v)
+      data[k] = Number.isNaN(d.getTime()) ? today() : d.toISOString().slice(0, 10)
+    }
+  }
+}
+
+/** 含 YAML 特殊字符的标量才加双引号；emoji/CJK/日期保持原样可读 */
+function yamlScalar(v: string): string {
+  if (/^\s|\s$|^[-?:,[\]{}#&*!|>'"%@`]/.test(v) || v.includes(': ') || v.includes(' #') || v.includes('"'))
+    return `"${v.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
+  return v
+}
+
+/** 手写式 frontmatter 序列化：gray-matter 的 js-yaml 会把 emoji 转成 \U 转义、日期加引号，不用它写 */
+function serializeFrontmatter(data: Record<string, unknown>): string {
+  const lines = Object.entries(data).map(([k, v]) => {
+    if (Array.isArray(v)) {
+      if (v.length === 0)
+        return `${k}: []`
+      return `${k}:\n${v.map(item => `  - ${yamlScalar(String(item))}`).join('\n')}`
+    }
+    return `${k}: ${yamlScalar(String(v))}`
+  })
+  return `---\n${lines.join('\n')}\n---`
 }
 
 const dryRun = !process.argv.includes('--write')
 const { nodeByPath } = buildTree()
 const plan: string[] = []
-let generated = 0
+let created = 0
+let updated = 0
 let reused = 0
 let skipped = 0
 
-fs.mkdirSync(MOCS_DIR, { recursive: true })
+/** 本次运行已声明要创建的目标 rel -> 分类路径，用于拦截「两个栏目算出同一个落点」 */
+const claimedTargets = new Map<string, string>()
 
 for (const { path: catPath, node } of nodeByPath.values()) {
   const last = catPath[catPath.length - 1]
-  const reusedRoute = existingMocRoute(last)
-  if (reusedRoute) {
-    reused++
-    plan.push(`复用  ${catPath.join(' / ')}  →  ${reusedRoute}`)
-    continue
-  }
-  const target = `${MOCS_DIR}/${mocFileName(catPath)}`
-  if (fs.existsSync(target) && !isGeneratedMoc(target)) {
+  const display = catPath.join(' · ')
+  const dir = mocTargetDir(node.notes.map(n => n.rel))
+  const targetRel = dir ? `${KNOWLEDGE}/${dir}/${last}-MOC.md` : `${KNOWLEDGE}/${last}-MOC.md`
+
+  const existingRels = findMocRels(last)
+  if (existingRels.length > 1) {
     skipped++
-    plan.push(`跳过(手写)  ${catPath.join(' / ')}  →  ${target}`)
+    plan.push(`跳过(同名MOC歧义)  ${display}  →  ${existingRels.join(' , ')}  请人工合并`)
     continue
   }
-  if (!dryRun)
-    fs.writeFileSync(target, renderMoc(catPath, node))
-  generated++
-  plan.push(`生成  ${catPath.join(' / ')}  →  ${noteLink(target)}`)
+  const hit = existingRels[0]
+  if (hit) {
+    const content = fs.readFileSync(hit, 'utf-8')
+    if (content.includes(MOC_AUTO_START)) {
+      if (!dryRun) {
+        const { data } = matter(content)
+        data.title = display
+        data.category = [...catPath]
+        delete data.generated // 旧约定残留，清除
+        normalizeDates(data)
+        fs.writeFileSync(hit, `${serializeFrontmatter(data)}\n\n${renderMocBody(display, node)}`)
+      }
+      updated++
+      plan.push(`更新  ${display}  →  ${noteLink(hit)}`)
+    }
+    else {
+      reused++
+      plan.push(`复用  ${display}  →  ${noteLink(hit)}`)
+    }
+    continue
+  }
+
+  if (claimedTargets.has(targetRel)) {
+    skipped++
+    plan.push(`跳过(目标重名)  ${display}  →  ${targetRel}（已被「${claimedTargets.get(targetRel)}」占用）`)
+    continue
+  }
+  claimedTargets.set(targetRel, display)
+
+  if (!dryRun) {
+    const data: Record<string, unknown> = {
+      title: display,
+      created: today(),
+      type: '专题聚合页',
+      tags: ['MOC'],
+      abstract: `收录「${display}」栏目的笔记导航，共 ${node.notes.length} 篇。`,
+      category: [...catPath],
+    }
+    fs.writeFileSync(targetRel, `${serializeFrontmatter(data)}\n\n${renderMocBody(display, node)}`)
+  }
+  created++
+  plan.push(`新建  ${display}  →  ${noteLink(targetRel)}`)
 }
 
-// 顶层总览页（nav 落地）
-const overviewTarget = `${MOCS_DIR}/知识库总览-MOC.md`
-const overviewContent = (() => {
-  const lines: string[] = []
-  lines.push('---')
-  lines.push('title: 知识库总览')
-  lines.push('type: 专题聚合页')
-  lines.push('generated: true')
-  lines.push('---')
-  lines.push('')
-  lines.push('# 知识库总览')
-  lines.push('')
-  lines.push('<KnowledgeExplorer />')
-  lines.push('')
-  return lines.join('\n')
-})()
-if (!dryRun)
-  fs.writeFileSync(overviewTarget, overviewContent)
-plan.push(`生成  总览  →  ${noteLink(overviewTarget)}`)
+// ---- 顶层总览页（nav 落地；不属于任何分类 → 放 Knowledge 根） ----
+const overviewRel = `${KNOWLEDGE}/知识库总览-MOC.md`
+const overviewBody = [MOC_AUTO_START, '', '# 知识库总览', '', '<KnowledgeExplorer />', '', MOC_AUTO_END, ''].join('\n')
+if (fs.existsSync(overviewRel)) {
+  const content = fs.readFileSync(overviewRel, 'utf-8')
+  if (content.includes(MOC_AUTO_START)) {
+    if (!dryRun) {
+      const data = matter(content).data
+      normalizeDates(data)
+      fs.writeFileSync(overviewRel, `${serializeFrontmatter(data)}\n\n${overviewBody}`)
+    }
+    updated++
+    plan.push(`更新  知识库总览  →  ${noteLink(overviewRel)}`)
+  }
+  else {
+    reused++
+    plan.push(`复用  知识库总览  →  ${noteLink(overviewRel)}（手写，未触碰）`)
+  }
+}
+else {
+  if (!dryRun) {
+    const data: Record<string, unknown> = {
+      title: '知识库总览',
+      created: today(),
+      type: '专题聚合页',
+      tags: ['MOC'],
+      abstract: '全站知识库入口，按分类浏览全部笔记。',
+      category: [],
+    }
+    fs.writeFileSync(overviewRel, matter.stringify(overviewBody, data))
+  }
+  created++
+  plan.push(`新建  知识库总览  →  ${noteLink(overviewRel)}`)
+}
+
+// ---- 孤儿报告：文件名对不上任何现存分类末级名的 MOC（分类改名/删除的遗留），仅报告不删除 ----
+const leaves = new Set([...nodeByPath.values()].map(({ path: p }) => p[p.length - 1]))
+for (const f of fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false, ignore: LEGACY_MOCS_IGNORE })) {
+  const base = path.basename(f, '.md').replace(/-MOC$/, '')
+  if (!leaves.has(base) && base !== '知识库总览')
+    plan.push(`孤儿  ${f}  （对不上任何分类末级名，请人工确认）`)
+}
 
 console.log(plan.join('\n'))
-console.log(`\n${dryRun ? '[DRY-RUN] ' : '[WRITE] '}复用现有 MOC ${reused} 个，生成 ${generated} 个，跳过手写 ${skipped} 个`)
+console.log(`\n${dryRun ? '[DRY-RUN] ' : '[WRITE] '}新建 ${created} / 更新 ${updated} / 复用 ${reused} / 跳过 ${skipped} / 孤儿 ${plan.filter(p => p.startsWith('孤儿')).length}`)

@@ -28,18 +28,18 @@ const modules = import.meta.glob('/vault/Knowledge/**/*.md', {
   import: 'default',
 }) as Record<string, string>
 
-// ---- 运行时 MOC 索引：把 _mocs 下的 *-MOC.md 映射成「分支可跳转」的路由 ----
-// 命中规则与 knowledge-org.ts 的 resolveMoc 一致：
-//   1) 末级分类名 === 某 *-MOC.md 的基名（如 ["🤖 AI大模型","机器学习"] → 命中 机器学习-MOC.md）
-//   2) 层级名用 " · " 连接 === 某 生成的 X · Y-MOC.md（基名即 join）
+// ---- 运行时 MOC 索引：把 vault/Knowledge 下所有 *-MOC.md 按基名映射成「分支可跳转」的路由 ----
+// 命中规则与 knowledge-org.ts 的 resolveMoc 一致：末级分类名 === 文件名去 -MOC。
+// 手写页与生成页遵循同一命名约定（MOC 与普通笔记同层存放，_mocs/ 已废除），
+// 因此全库按基名索引即可；同名歧义（两个目录下同名 MOC）时取先出现者。
 const mocByBase = new Map<string, string>()
 for (const p of Object.keys(modules)) {
-  if (!p.includes('/_mocs/'))
+  const fileBase = p.split('/').pop()!
+  if (!fileBase.endsWith('-MOC.md'))
     continue
-  const fileBase = p.split('/').pop()!.replace(/\.md$/, '')
-  if (!fileBase.endsWith('-MOC'))
+  const name = fileBase.replace(/-MOC\.md$/, '')
+  if (mocByBase.has(name))
     continue
-  const name = fileBase.slice(0, -4)
   const route = p.replace(/\.md$/, '').replace(/%/g, '%25')
   mocByBase.set(name, route)
 }
@@ -48,12 +48,7 @@ function resolveMoc(cats: string[]): string | null {
   if (cats.length === 0)
     return null
   const last = cats[cats.length - 1]
-  if (mocByBase.has(last))
-    return mocByBase.get(last)!
-  const key = cats.join(' · ')
-  if (mocByBase.has(key))
-    return mocByBase.get(key)!
-  return null
+  return mocByBase.get(last) ?? null
 }
 
 function parseCategory(raw: string): string[] {
@@ -83,7 +78,8 @@ function buildRoots(): Branch[] {
   }
 
   for (const [path, raw] of Object.entries(modules)) {
-    if (path.includes('/_mocs/'))
+    // MOC 落地页不作为普通成员参与建树（它们也可能带 category frontmatter）
+    if (path.split('/').pop()!.endsWith('-MOC.md'))
       continue
     const cats = parseCategory(raw)
     if (cats.length === 0)

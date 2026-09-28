@@ -1,24 +1,30 @@
 ---
 title: 🛠️ 工程工具
+created: 2026-09-28
 type: 专题聚合页
-generated: true
-category: ["🛠️ 工程工具"]
+tags:
+  - MOC
+abstract: 收录「🛠️ 工程工具」栏目的笔记导航，共 83 篇。
+category:
+  - 🛠️ 工程工具
 ---
+
+<!-- MOC:AUTO -->
 
 # 🛠️ 工程工具
 
 ## 子栏目
 
-- [[IDE与环境-MOC|IDE与环境]]
-- [[算法与数据结构-MOC|算法与数据结构]]
-- [[Frontend-MOC|Frontend]]
-- [[Python-MOC|Python]]
-- [[模型部署-MOC|模型部署]]
-- [[Git-MOC|Git]]
-- [[Linux-MOC|Linux]]
-- [[MySQL-MOC|MySQL]]
-- [[DataAnalysis-MOC|DataAnalysis]]
-- [[Redis-MOC|Redis]]
+- [[IDE与环境-MOC|🛠️ 工程工具 · IDE与环境]]
+- [[算法与数据结构-MOC|🛠️ 工程工具 · 算法与数据结构]]
+- [[Frontend-MOC|🛠️ 工程工具 · Frontend]]
+- [[Python-MOC|🛠️ 工程工具 · Python]]
+- [[模型部署-MOC|🛠️ 工程工具 · 模型部署]]
+- [[Git-MOC|🛠️ 工程工具 · Git]]
+- [[Linux-MOC|🛠️ 工程工具 · Linux]]
+- [[MySQL-MOC|🛠️ 工程工具 · MySQL]]
+- [[DataAnalysis-MOC|🛠️ 工程工具 · DataAnalysis]]
+- [[Redis-MOC|🛠️ 工程工具 · Redis]]
 
 ## 笔记清单
 
@@ -105,3 +111,5 @@ category: ["🛠️ 工程工具"]
 - [[栈与队列]]
 - [[观察者模式与发布-订阅模式]]
 - [[贪心算法]]
+
+<!-- /MOC:AUTO -->

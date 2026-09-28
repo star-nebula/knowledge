@@ -1,15 +1,17 @@
 /**
  * knowledge-org.ts — vault/Knowledge 基于属性（category frontmatter）组织的共享工具。
- * 被 migrate-category.ts / generate-mocs.ts / build-knowledge-sidebar.ts 共用，
+ * 被 migrate-category.ts / generate-mocs.ts 共用，
  * 也被 .vitepress/config.ts 在构建期直接调用以动态生成侧边栏。
  *
  * 设计要点：
  *  - category[0] = 主分类（emoji 体系），category[1..] = 子分类（可选，可多级）。
- *  - 每级「栏目」都需要一个 MOC 作为落地页：
- *      · 优先复用 vault/Knowledge 下已存在的 `*-MOC.md`（按末级分类名匹配，例如
- *        子分类 "机器学习" → 已存在的 `机器学习-MOC.md`），避免重复用户手写的高质量专题页；
- *      · 找不到时，由 scripts/generate-mocs.ts 在 `vault/Knowledge/_mocs/` 下生成
- *        `<主 · 子 · ...>-MOC.md`。
+ *  - 每级「栏目」都需要一个 MOC 作为落地页，物理位置与普通笔记同层：
+ *      · 文件名恒为 `<末级分类名>-MOC.md`，放在成员笔记多数派所在的一级目录
+ *        （由 mocTargetDir 决定；`_mocs/` 目录已于 2026-09-28 废除）；
+ *      · resolveMoc 全库按末级名匹配——手写页与生成页遵循同一命名约定，
+ *        放哪个领域目录都能被侧边栏/总览组件命中；
+ *      · 找不到时由 scripts/generate-mocs.ts 生成带 `<!-- MOC:AUTO -->` 标记的
+ *        托管页，每次运行幂等刷新；删掉标记即脱管为手写页，生成器不再触碰。
  *  - 侧边栏在 config 加载时实时扫描 frontmatter 生成，因此 category 变更后
  *    `docs:dev` / `docs:build` 自动反映最新归类，无需手动维护。
  */
@@ -19,7 +21,13 @@ import fg from 'fast-glob'
 import matter from 'gray-matter'
 
 export const KNOWLEDGE = 'vault/Knowledge'
-export const MOCS_DIR = `${KNOWLEDGE}/_mocs`
+
+/** 托管 MOC 标记：文件正文含 START 即视为生成器托管，正文可被 --write 幂等重写 */
+export const MOC_AUTO_START = '<!-- MOC:AUTO -->'
+export const MOC_AUTO_END = '<!-- /MOC:AUTO -->'
+
+/** 历史 `_mocs/` 目录（2026-09-28 废除）——扫描时一律排除，防止旧文件被当作有效落地页 */
+export const LEGACY_MOCS_IGNORE = ['**/_mocs/**']
 
 export interface Note {
   rel: string
@@ -54,51 +62,54 @@ export function readNotes(): Note[] {
   })
 }
 
-/** category 数组 -> MOC 文件名（层级用 ` · ` 连接，避免为栏目建物理子目录） */
-export function mocFileName(categories: string[]): string {
-  return `${categories.join(' · ').replace(/\//g, '·')}-MOC.md`
-}
-
-/**
- * category 数组 -> 站点内 link（路由路径，不含 base 前缀 /knowledge/）。
- * 文件名可能含 `%`（如 `300%法则.md`），直接拼进 link 会让 VitePress 的
- * `isActive` 在 `decodeURI` 时抛 `URIError: URI malformed`。故把 `%` 预编码为
- * `%25`，浏览器/Vue Router 解码后即还原为 `%`，路由匹配正常。
- */
-export function mocLink(categories: string[]): string {
-  return `/${MOCS_DIR}/${mocFileName(categories)}`.replace(/^\/+/, '/').replace(/%/g, '%25')
-}
-
 /** rel (vault/Knowledge/AI/Transformer.md) -> 站点路由 (/vault/Knowledge/AI/Transformer) */
 export function noteLink(rel: string): string {
   return `/${rel.replace(/\\/g, '/').replace(/\.md$/, '')}`.replace(/^\/+/, '/').replace(/%/g, '%25')
 }
 
+/** 全库扫描某「末级分类名」对应的 *-MOC.md 文件（排除历史 `_mocs/`）。 */
+export function findMocRels(lastSeg: string): string[] {
+  return fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false, ignore: LEGACY_MOCS_IGNORE })
+    .filter((f) => path.basename(f, '.md').replace(/-MOC$/, '') === lastSeg)
+}
+
 /**
  * 解析某 category 路径对应的 MOC 落地页路由：
- *  1) 优先复用已存在的 `*-MOC.md`——其去 -MOC 后的名称 === 末级分类名
- *     （例如 category ["🤖 AI大模型","机器学习"] → 命中 `.../机器学习-MOC.md`）。
- *  2) 否则若 `_mocs/` 下已生成同名 MOC，则返回其路由。
- *  3) 都没有返回 null（该栏目暂无落地页，侧边栏仅作为分组、不挂链接）。
+ * 全库（排除历史 `_mocs/`）按「末级分类名 === 文件名去 -MOC」匹配。
+ * 找不到返回 null（该栏目暂无落地页，侧边栏仅作为分组、不挂链接，
+ * 跑 `scripts/generate-mocs.ts --write` 可补齐）。
  */
 export function resolveMoc(categoryPath: string[]): string | null {
   if (categoryPath.length === 0)
     return null
   const last = categoryPath[categoryPath.length - 1]
+  const hit = findMocRels(last)[0]
+  return hit ? noteLink(hit) : null
+}
 
-  const existing = fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false })
-    .find((f) => {
-      const base = path.basename(f, '.md').replace(/-MOC$/, '')
-      return base === last
-    })
-  if (existing)
-    return noteLink(existing)
-
-  const gen = `${MOCS_DIR}/${mocFileName(categoryPath)}`
-  if (fs.existsSync(gen))
-    return noteLink(gen)
-
-  return null
+/**
+ * category 节点的 MOC 应落在哪个一级领域目录：
+ * 取成员笔记所在一级目录的多数派（并列取先出现者；成员直接在 Knowledge 根时归入根）。
+ * 返回 '' 表示 Knowledge 根。
+ */
+export function mocTargetDir(memberRels: string[]): string {
+  const counts = new Map<string, number>()
+  for (const rel of memberRels) {
+    const p = rel.replace(/\\/g, '/')
+    const under = p.startsWith(`${KNOWLEDGE}/`) ? p.slice(KNOWLEDGE.length + 1) : p
+    const dir = path.dirname(under)
+    const seg = dir === '.' ? '' : dir.split('/')[0]
+    counts.set(seg, (counts.get(seg) ?? 0) + 1)
+  }
+  let best = ''
+  let bestCount = -1
+  for (const [seg, n] of counts) {
+    if (n > bestCount) {
+      best = seg
+      bestCount = n
+    }
+  }
+  return best
 }
 
 /**

@@ -1,5 +1,12 @@
 # 知识库日志
 
+## [2026-09-28] MOC 迁出 _mocs/ 至分类文件夹
+[22:15:00-rule] 约定反转（用户指令）：废除 `Knowledge/_mocs/`，MOC 与普通笔记同层——`<领域>/<末级分类名>-MOC.md`（领域取成员笔记多数派）；frontmatter 六属性 title/created/type/tags/abstract/category，废除 generated；托管所有权改由正文标记 `<!-- MOC:AUTO -->` 表达。论证见记忆库 [[Decisions/MOC迁出_mocs至分类文件夹]]
+[22:15:30-optimize] 改 `scripts/knowledge-org.ts`（resolveMoc 全库按末级名匹配，删 MOCS_DIR/mocFileName/mocLink）+ `scripts/generate-mocs.ts`（领域目录输出、手写式 frontmatter 序列化、孤儿报告）+ `.vitepress/theme/components/KnowledgeExplorer.vue`（MOC 索引改全库按基名，顺带修复手写页不可达盲区）
+[22:16:00-dir] 迁移：新建 13 篇栏目 MOC（AI 9 / Engineering 1 / Methods 1 / Life 1 / 根 1）+ 复用 23 篇手写 MOC 不动；6 篇 OpenClaw 子 MOC 去 `🦀 OpenClaw · ` 前缀改名（零外部入链）；删除 `_mocs/` 13 篇
+[22:16:30-health] 验收：连续 `--write` 全量 MOC MD5 相等（幂等）；`pnpm check:boundary` 通过；`link_audit` site_dead_targets=0 平基线；`encoding_guard` 0 异常；`pnpm docs:build` 过且产物核验新路径在位、`dist` 无 `_mocs/`
+[22:17:00-index] 更新 `vault/AGENTS.md` §五、`rules/指南-目录整理.md`、`vault/_index.md`（AI 篇数既有漂移 122→131 一并订正，现 140/93/37/4 + 根 1，总 275）、站点 nav 与首页 hero 两处路径
+
 ## [2026-07-17] DeepSeek 剪藏提炼入 Knowledge
 [20:25:00-ingest] 处理 `Resources/Clippings/DeepSeek技术发展详细时间轴与技术核心解析.md`（CSDN 剪藏，时间轴+技术核心）；判定其时间轴与技术核心与既有 `Knowledge/AI/DeepSeek.md` 大量重叠，按反重复原则只提炼「新增且事实性」内容，剪藏原文保留不动
 [20:25:30-new] 新建 `Knowledge/AI/DeepSeek 开源周五大工具.md`（概念解释）：2025-02 开源周 FlashMLA/DeepEP/DeepGEMM/DualPipe·EPLB/3FS 五工具

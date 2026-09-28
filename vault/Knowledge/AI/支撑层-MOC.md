@@ -1,9 +1,16 @@
 ---
 title: 🦀 OpenClaw · 支撑层
+created: 2026-09-28
 type: 专题聚合页
-generated: true
-category: ["🦀 OpenClaw", "支撑层"]
+tags:
+  - MOC
+abstract: 收录「🦀 OpenClaw · 支撑层」栏目的笔记导航，共 7 篇。
+category:
+  - 🦀 OpenClaw
+  - 支撑层
 ---
+
+<!-- MOC:AUTO -->
 
 # 🦀 OpenClaw · 支撑层
 
@@ -16,3 +23,5 @@ category: ["🦀 OpenClaw", "支撑层"]
 - [[OpenClaw-Secrets]]
 - [[OpenClaw-Security]]
 - [[OpenClaw-Session-Manager]]
+
+<!-- /MOC:AUTO -->

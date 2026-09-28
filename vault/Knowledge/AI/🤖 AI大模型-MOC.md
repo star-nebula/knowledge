@@ -1,19 +1,25 @@
 ---
 title: 🤖 AI大模型
+created: 2026-09-28
 type: 专题聚合页
-generated: true
-category: ["🤖 AI大模型"]
+tags:
+  - MOC
+abstract: 收录「🤖 AI大模型」栏目的笔记导航，共 73 篇。
+category:
+  - 🤖 AI大模型
 ---
+
+<!-- MOC:AUTO -->
 
 # 🤖 AI大模型
 
 ## 子栏目
 
-- [[AI 应用核心范式-MOC|AI 应用核心范式]]
-- [[模型部署-MOC|模型部署]]
-- [[NLP基础-MOC|NLP基础]]
-- [[机器学习-MOC|机器学习]]
-- [[深度学习基础-MOC|深度学习基础]]
+- [[AI 应用核心范式-MOC|🤖 AI大模型 · AI 应用核心范式]]
+- [[模型部署-MOC|🤖 AI大模型 · 模型部署]]
+- [[NLP基础-MOC|🤖 AI大模型 · NLP基础]]
+- [[机器学习-MOC|🤖 AI大模型 · 机器学习]]
+- [[深度学习基础-MOC|🤖 AI大模型 · 深度学习基础]]
 
 ## 笔记清单
 
@@ -22,6 +28,7 @@ category: ["🤖 AI大模型"]
 - [[DeepSeek Harness 部署流程]]
 - [[DeepSeek NSA 稀疏注意力]]
 - [[DeepSeek 开源周五大工具]]
+- [[DeepSeek-Harness-桌面端安装]]
 - [[DeepSeek]]
 - [[ELMo（Embeddings from Language Models）]]
 - [[FastAPI 后端]]
@@ -89,3 +96,5 @@ category: ["🤖 AI大模型"]
 - [[迁移学习]]
 - [[隐含狄利克雷分配（LDA）]]
 - [[隐马尔可夫模型（HMM）]]
+
+<!-- /MOC:AUTO -->
