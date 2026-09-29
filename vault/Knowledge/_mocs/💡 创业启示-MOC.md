@@ -1,5 +1,5 @@
 ---
-title: 个人成长产品创业启示
+title: 💡 创业启示
 created: 2026-09-21
 tags:
   - 创业
@@ -9,7 +9,7 @@ type: 专题聚合页
 abstract: 从 MyFutureSelf（AI 个人成长 App）创始人访谈中提炼的创业与增长方法论集合。
 ---
 
-# 个人成长产品创业启示
+# 💡 创业启示
 
 从 StarterStory 对 MyFutureSelf（AI 个人成长 App）创始人的访谈中提炼的方法论笔记。
 

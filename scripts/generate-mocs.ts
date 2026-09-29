@@ -298,7 +298,8 @@ else {
 // ---- 孤儿报告：MOC 的 category 与文件名都对不上任何栏目（分类改名/删除的遗留），仅报告不删除 ----
 // 位置漂移（MOC 留在领域目录而非 _mocs/）不判孤儿——resolveMoc 按名/按 category 全库定位，功能不破；
 // 需要归位时手工 git mv 进 _mocs/ 即可。
-const validNames = new Set(['知识库总览-MOC.md'])
+// 白名单：不属于任何分类树的独立专题页（文件名带 emoji 标识、无 category），与总览页同级豁免。
+const validNames = new Set(['知识库总览-MOC.md', '💡 创业启示-MOC.md'])
 for (const { path: p } of nodeByPath.values())
   for (const n of mocNameVariants(p))
     validNames.add(n)
