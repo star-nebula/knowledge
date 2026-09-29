@@ -12,6 +12,10 @@ defineOptions({ name: 'KnowledgeExplorer' })
 interface NoteEntry {
   name: string
   path: string
+  /** 完整 category 路径，如 ["📚 个人知识管理", "00后群体特征"] */
+  cats: string[]
+  /** tags frontmatter（可缺失），参与搜索 */
+  tags: string[]
 }
 interface Branch {
   name: string
@@ -21,7 +25,7 @@ interface Branch {
   notes: NoteEntry[]
 }
 
-// 直接读原始文本（?raw），仅解析 frontmatter 中的 category 数组，避免 eager 导入整篇编译产物。
+// 直接读原始文本（?raw），仅解析 frontmatter，避免 eager 导入整篇编译产物。
 const modules = import.meta.glob('/vault/Knowledge/**/*.md', {
   eager: true,
   query: '?raw',
@@ -78,6 +82,25 @@ function parseCategory(raw: string): string[] {
     .filter(Boolean)
 }
 
+/** 解析 YAML 块式 tags 列表（tags:\n  - xxx），行内 [a, b] 与引号形式均兼容 */
+function parseTags(raw: string): string[] {
+  const m = raw.match(/tags:\s*\n((?:\s*-\s*[^\n]+\n?)+)/)
+  if (m) {
+    return m[1]
+      .split('\n')
+      .map(l => l.trim().replace(/^-\s*/, '').replace(/^["']|["']$/g, '').trim())
+      .filter(Boolean)
+  }
+  const inline = raw.match(/tags:\s*\[([^\]]*)\]/)
+  if (inline) {
+    return inline[1]
+      .split(',')
+      .map(s => s.trim().replace(/^["']|["']$/g, ''))
+      .filter(Boolean)
+  }
+  return []
+}
+
 function naturalSort(a: string, b: string): number {
   return a.localeCompare(b, 'zh-Hans-CN', { numeric: true })
 }
@@ -102,6 +125,11 @@ function buildRoots(): Branch[] {
     if (cats.length === 0)
       continue
 
+    const tags = parseTags(raw)
+    const baseName = path.split('/').pop()!.replace(/\.md$/, '')
+    const notePath = path.replace(/\.md$/, '').replace(/%/g, '%25')
+    const entry: NoteEntry = { name: baseName, path: notePath, cats, tags }
+
     // 在 roots 中找/建根分类
     let branch = roots.find(r => r.name === cats[0])
     if (!branch) {
@@ -112,11 +140,7 @@ function buildRoots(): Branch[] {
     for (let i = 1; i < cats.length; i++)
       branch = ensureChild(branch, cats[i], cats.slice(0, i + 1))
 
-    // 文件名可能含 `%`（如 `300%法则.md`）。把 `%` 预编码为 `%25`，
-    // 浏览器/Vue Router 解码后还原为 `%`，与 VitePress 路由匹配一致。
-    const baseName = path.split('/').pop()!.replace(/\.md$/, '')
-    const notePath = path.replace(/\.md$/, '').replace(/%/g, '%25')
-    branch.notes.push({ name: baseName, path: notePath })
+    branch.notes.push(entry)
   }
 
   const sortTree = (list: Branch[]) => {
@@ -140,14 +164,126 @@ const open = ref(false)
 
 // 本分支是否有对应 MOC 可跳转（有则分支名渲染为链接，点名跳 MOC；无则点名仅展开）
 const mocPath = computed(() => resolveMoc(props.node?.path ?? []))
+
+// ================= 筛选视图（入口模式专属） =================
+// 视图切换：'filter' 默认（搜索 + 分类 chips + 平铺列表），'tree' 为原递归树兜底
+const view = ref<'filter' | 'tree'>('filter')
+const query = ref('')
+/** 当前选中的根分类；null = 全部 */
+const activeCat = ref<string | null>(null)
+
+const allNotes = computed<NoteEntry[]>(() => {
+  const list: NoteEntry[] = []
+  const walk = (b: Branch) => {
+    list.push(...b.notes)
+    b.children.forEach(walk)
+  }
+  roots.forEach(walk)
+  return list
+})
+
+const rootCats = computed(() =>
+  roots.map(r => ({ name: r.name, count: countNotes(r) })),
+)
+
+function countNotes(b: Branch): number {
+  return b.notes.length + b.children.reduce((s, c) => s + countNotes(c), 0)
+}
+
+/** 去掉分类名前导 emoji，用于 chip 显示与匹配 */
+function stripEmoji(s: string): string {
+  return s.replace(/^\p{Extended_Pictographic}\uFE0F?\s*/u, '').trim()
+}
+
+const filteredNotes = computed(() => {
+  let list = allNotes.value
+  if (activeCat.value)
+    list = list.filter(n => n.cats[0] === activeCat.value)
+  const q = query.value.trim().toLowerCase()
+  if (q) {
+    list = list.filter(
+      n =>
+        n.name.toLowerCase().includes(q)
+        || n.tags.some(t => t.toLowerCase().includes(q))
+        || n.cats.some(c => c.toLowerCase().includes(q)),
+    )
+  }
+  return [...list].sort((a, b) => naturalSort(a.name, b.name))
+})
+
+function clearFilters() {
+  query.value = ''
+  activeCat.value = null
+}
 </script>
 
 <template>
-  <!-- 入口模式：<KnowledgeExplorer /> 无 node prop → 渲染全部根分类 -->
+  <!-- 入口模式：<KnowledgeExplorer /> 无 node prop → 筛选视图 + 树形兜底 -->
   <div v-if="!node" class="knowledge-explorer">
-    <KnowledgeExplorer v-for="b in roots" :key="b.name" :node="b" :depth="0" />
-    <div v-if="roots.length === 0" class="empty-hint">
-      暂无知识库分类，给笔记加上 <code>category</code> frontmatter 后即可自动显示。
+    <div class="ke-toolbar">
+      <div class="ke-viewswitch" role="tablist">
+        <button
+          class="ke-viewbtn"
+          :class="{ active: view === 'filter' }"
+          @click="view = 'filter'"
+        >筛选</button>
+        <button
+          class="ke-viewbtn"
+          :class="{ active: view === 'tree' }"
+          @click="view = 'tree'"
+        >树形</button>
+      </div>
+      <input
+        v-model="query"
+        class="ke-search"
+        type="search"
+        placeholder="搜索笔记名 / 标签 / 分类…"
+        @keydown.esc="query = ''"
+      >
+    </div>
+
+    <!-- 筛选视图 -->
+    <div v-if="view === 'filter'">
+      <div class="ke-chips">
+        <button
+          class="ke-chip"
+          :class="{ active: activeCat === null }"
+          @click="activeCat = null"
+        >
+          全部 <span class="ke-chip-count">{{ allNotes.length }}</span>
+        </button>
+        <button
+          v-for="c in rootCats"
+          :key="c.name"
+          class="ke-chip"
+          :class="{ active: activeCat === c.name }"
+          :title="c.name"
+          @click="activeCat = activeCat === c.name ? null : c.name"
+        >
+          {{ stripEmoji(c.name) }} <span class="ke-chip-count">{{ c.count }}</span>
+        </button>
+      </div>
+
+      <div v-if="filteredNotes.length === 0" class="empty-hint">
+        没有匹配「{{ query }}」的笔记，试试换个关键词或 <a href="#" @click.prevent="clearFilters">清空筛选</a>。
+      </div>
+      <div v-else class="ke-flat">
+        <a
+          v-for="n in filteredNotes"
+          :key="n.path"
+          class="ke-flat-note"
+          :href="withBase(n.path)"
+        >
+          <span class="ke-dot" />
+          <span class="ke-flat-name">{{ n.name }}</span>
+          <span class="ke-flat-cat">{{ n.cats.map(stripEmoji).join(' / ') }}</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 树形视图（原手风琴，兜底按层级浏览） -->
+    <div v-else class="knowledge-explorer">
+      <KnowledgeExplorer v-for="b in roots" :key="b.name" :node="b" :depth="0" />
     </div>
   </div>
 
@@ -189,6 +325,141 @@ const mocPath = computed(() => resolveMoc(props.node?.path ?? []))
   margin-top: 16px;
 }
 
+/* ---- 工具栏：视图切换 + 搜索 ---- */
+.ke-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.ke-viewswitch {
+  display: flex;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.ke-viewbtn {
+  padding: 6px 14px;
+  font-size: 13px;
+  border: none;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.ke-viewbtn + .ke-viewbtn {
+  border-left: 1px solid var(--vp-c-divider);
+}
+.ke-viewbtn.active {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+.ke-search {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 14px;
+  font-size: 14px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.ke-search:focus {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg);
+}
+
+/* ---- 分类 chips ---- */
+.ke-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.ke-chip {
+  padding: 5px 12px;
+  font-size: 13px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: all 0.15s;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ke-chip:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+.ke-chip.active {
+  background: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-white);
+}
+.ke-chip-count {
+  font-size: 11px;
+  opacity: 0.75;
+  margin-left: 2px;
+}
+
+/* ---- 平铺列表 ---- */
+.ke-flat {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--vp-c-bg-soft);
+}
+.ke-flat-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  font-size: 14px;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+}
+.ke-flat-note + .ke-flat-note {
+  border-top: 1px solid var(--vp-c-divider);
+}
+.ke-flat-note:hover {
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-brand-1);
+}
+.ke-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--vp-c-text-3);
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+.ke-flat-note:hover .ke-dot,
+.ke-note:hover .ke-dot {
+  background: var(--vp-c-brand-1);
+}
+.ke-flat-name {
+  line-height: 1.5;
+  min-width: 0;
+}
+.ke-flat-cat {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  flex-shrink: 0;
+  max-width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- 树形视图（原样式保留） ---- */
 .ke-branch {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
@@ -266,18 +537,6 @@ const mocPath = computed(() => resolveMoc(props.node?.path ?? []))
 .ke-note:hover {
   background: var(--vp-c-bg-mute);
   color: var(--vp-c-brand-1);
-}
-
-.ke-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--vp-c-text-3);
-  flex-shrink: 0;
-  transition: background 0.12s;
-}
-.ke-note:hover .ke-dot {
-  background: var(--vp-c-brand-1);
 }
 
 .ke-note-name {
