@@ -15,6 +15,8 @@ related:
   - "[[AI 应用核心范式-MOC]]"
   - "[[LLM 产品形态]]"
   - "[[Transformer 应用开发视角]]"
+category:
+  - "🦀 OpenClaw"
 ---
 
 # OpenClaw 知识地图

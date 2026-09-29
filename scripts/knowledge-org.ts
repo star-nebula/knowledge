@@ -72,35 +72,78 @@ export function stripCategoryEmoji(name: string): string {
   return name.replace(/^\p{Extended_Pictographic}\uFE0F?\s*/u, '')
 }
 
+/** 顶层主分类固定顺序（MOC 编号与排序的唯一依据，2026-09-28 用户定） */
+export const MAIN_CATEGORY_ORDER = [
+  '🧩 AI框架与Agent',
+  '🤖 AI大模型',
+  '🔍 RAG',
+  '🦀 OpenClaw',
+  '🛠️ 工程工具',
+  '📚 个人知识管理',
+  '🌱 生活',
+]
+
+/** 顶层主分类的序号（1~7；未知主分类返回 null）——专属子 MOC 文件名序号前缀的依据 */
+export function mocFileNameOrder(mainCategory: string): number | null {
+  const idx = MAIN_CATEGORY_ORDER.indexOf(mainCategory)
+  return idx >= 0 ? idx + 1 : null
+}
+
 /**
- * category 路径对应的 MOC 文件名合法形态（两种皆可，精确末级名优先）：
- *  1) `<末级分类名>-MOC.md`（生成器新建用此形态）
- *  2) `<主分类去emoji>-<末级分类名>-MOC.md`（子分类在目录内易混淆时可自行改用）
+ * MOC 文件名的兜底匹配形态（category 精确匹配不上时用）：
+ *  1) `<末级分类名>-MOC.md`
+ *  2) `<主分类去emoji>-<末级分类名>-MOC.md`（如 OpenClaw-基础层-MOC.md）
+ *  3) 序号前缀形态 `<顶层序号>.<末级分类名>-MOC.md`（如 1.Jev-MOC.md；专属子 MOC 用，
+ *     共享子 MOC 被多个主分类引用、无法编号，保持无前缀）
  */
 export function mocNameVariants(categoryPath: string[]): string[] {
   const last = categoryPath[categoryPath.length - 1]
   if (categoryPath.length < 2)
     return [`${last}-MOC.md`]
   const main = stripCategoryEmoji(categoryPath[0])
-  return [`${last}-MOC.md`, `${main}-${last}-MOC.md`]
+  const num = mocFileNameOrder(categoryPath[0])
+  const forms = [`${last}-MOC.md`, `${main}-${last}-MOC.md`]
+  if (num)
+    forms.push(`${num}.${last}-MOC.md`)
+  return forms
+}
+
+/** 读取 MOC 文件自身的 category frontmatter（字符串数组），解析失败返回 null */
+export function mocFileCategory(rel: string): string[] | null {
+  try {
+    const { data } = matter(fs.readFileSync(rel, 'utf-8'))
+    return Array.isArray(data.category) ? data.category.map(String) : null
+  }
+  catch {
+    return null
+  }
 }
 
 /**
- * 全库扫描某 category 路径对应的 *-MOC.md 文件（两种命名形态皆查，精确末级名排前）。
- * 约定落点为 `_mocs/`，但**不按路径过滤**——历史遗留或用户手放的领域目录位置也能命中，
- * 兜底避免「文件挪了位置侧边栏就断链」。
+ * 全库扫描某 category 路径对应的 *-MOC.md 文件，匹配优先级：
+ *  1) **MOC 自身 category frontmatter === 目标分类路径**（精确唯一，2026-09-28 起首选；
+ *     文件名可自由带序号/前缀/空格，不再受匹配约束）
+ *  2) 文件名兜底形态（mocNameVariants），精确末级名排前
+ * 位置不限（约定落点 `_mocs/`，错位仍可命中）。
  */
 export function findMocRels(categoryPath: string[]): string[] {
+  const all = fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false })
+  const byCategory = all.filter((f) => {
+    const c = mocFileCategory(f)
+    return c !== null && c.length === categoryPath.length && c.every((seg, i) => seg === categoryPath[i])
+  })
+  if (byCategory.length > 0)
+    return byCategory
   const names = new Set(mocNameVariants(categoryPath))
   const leaf = `${categoryPath[categoryPath.length - 1]}-MOC.md`
-  return fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false })
+  return all
     .filter((f) => names.has(path.basename(f)))
     .sort((a, b) => (path.basename(b) === leaf ? 1 : 0) - (path.basename(a) === leaf ? 1 : 0))
 }
 
 /**
  * 解析某 category 路径对应的 MOC 落地页路由：
- * 全库按 mocNameVariants 两种命名形态匹配，精确末级名优先（位置不限，`_mocs/` 为约定落点）。
+ * 先按 MOC 自身 category frontmatter 精确匹配，再按文件名兜底形态（位置不限）。
  * 找不到返回 null（该栏目暂无落地页，侧边栏仅作为分组、不挂链接，
  * 跑 `scripts/generate-mocs.ts --write` 可补齐）。
  */

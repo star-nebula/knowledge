@@ -15,16 +15,16 @@ category:
 
 ## 子栏目
 
-- [[IDE与环境-MOC|🛠️ 工程工具 · IDE与环境]]
-- [[算法与数据结构-MOC|🛠️ 工程工具 · 算法与数据结构]]
-- [[Frontend-MOC|🛠️ 工程工具 · Frontend]]
-- [[Python-MOC|🛠️ 工程工具 · Python]]
+- [[5.IDE与环境-MOC|🛠️ 工程工具 · IDE与环境]]
+- [[5.算法与数据结构-MOC|🛠️ 工程工具 · 算法与数据结构]]
+- [[5.Frontend-MOC|🛠️ 工程工具 · Frontend]]
+- [[5.Python-MOC|🛠️ 工程工具 · Python]]
 - [[模型部署-MOC|🛠️ 工程工具 · 模型部署]]
 - [[Git-MOC|🛠️ 工程工具 · Git]]
-- [[Linux-MOC|🛠️ 工程工具 · Linux]]
-- [[MySQL-MOC|🛠️ 工程工具 · MySQL]]
-- [[DataAnalysis-MOC|🛠️ 工程工具 · DataAnalysis]]
-- [[Redis-MOC|🛠️ 工程工具 · Redis]]
+- [[5.Linux-MOC|🛠️ 工程工具 · Linux]]
+- [[5.MySQL-MOC|🛠️ 工程工具 · MySQL]]
+- [[5.DataAnalysis-MOC|🛠️ 工程工具 · DataAnalysis]]
+- [[5.Redis-MOC|🛠️ 工程工具 · Redis]]
 
 ## 笔记清单
 

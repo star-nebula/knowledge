@@ -15,6 +15,12 @@
 [23:21:00-optimize] 代码回归：`knowledge-org.ts` 恢复 `MOCS_DIR`、删 `mocTargetDir`/`LEGACY_MOCS_IGNORE`（resolveMoc 仍按名全库定位，历史位置兜底）；`generate-mocs.ts` 新建/总览固定落 `_mocs/`；`KnowledgeExplorer.vue` 注释同步
 [23:21:30-health] 验证：dry-run 新建 0 / 更新 13 / 复用 23 / 孤儿 1；`--write` 全量 MD5 相等；`check:boundary` 通过、`link_audit` site_dead=0、`encoding_guard` 0；`docs:build` 过（245s）且产物核验 `_mocs/` 页面在位、旧根路径消失
 
+## [2026-09-28] MOC 命名改进：序号前缀 + category 精确匹配
+[23:50:00-rule] 命名改进（用户参考命名三项裁定：顶层用 emoji 标识不编号；专属子 MOC 编号 = 所属顶层序号；分类 frontmatter 全库不动只改 MOC）：21 篇专属子 MOC 改名 `N.<末级>-MOC.md`（AI框架与Agent 下 1.架构与中间件/1.Jev，AI大模型下 2.机器学习/2.深度学习基础/2.NLP 基础，OpenClaw 下 4.×6，工程工具下 5.×9，个人知识管理下 6.×2）；3 篇共享 MOC（AI 应用核心范式/模型部署/Git）不编号；title 显示名微调（架构与中间件、NLP 基础）
+[23:50:30-optimize] 匹配机制升级：`findMocRels` 首选 **MOC 自身 category frontmatter** 精确匹配（文件名可自由调整不破链），文件名三形态（末级名/主-末级/`N.`序号）降兜底；`MAIN_CATEGORY_ORDER` 固定顶层序；`canonicalMocName` 按唯一归属判专属；KnowledgeExplorer 同步 category 键索引优先；手写 MOC 补 category frontmatter（匹配前提）
+[23:51:00-fix] 修复迁移脚本自伤的两类 frontmatter 损坏（title 与下一键粘连、category 多行折叠）28 篇；修正 2 篇 category 与笔记分类不一致（架构与中间件/NLP 基础——category 须逐字用分类名，显示名只放 title）
+[23:51:30-health] 验证：dry-run 新建 0 / 更新 13 / 复用 23 / 孤儿 1；`--write` 二轮 MD5 全等；`check:boundary` 通过、`link_audit` site_dead=0、`encoding_guard` 0；`docs:build` 过（249s），产物核验序号路径页面在位、父页子栏目链接已指向 `1.Jev-MOC` 等新名
+
 ## [2026-07-17] DeepSeek 剪藏提炼入 Knowledge
 [20:25:00-ingest] 处理 `Resources/Clippings/DeepSeek技术发展详细时间轴与技术核心解析.md`（CSDN 剪藏，时间轴+技术核心）；判定其时间轴与技术核心与既有 `Knowledge/AI/DeepSeek.md` 大量重叠，按反重复原则只提炼「新增且事实性」内容，剪藏原文保留不动
 [20:25:30-new] 新建 `Knowledge/AI/DeepSeek 开源周五大工具.md`（概念解释）：2025-02 开源周 FlashMLA/DeepEP/DeepGEMM/DualPipe·EPLB/3FS 五工具

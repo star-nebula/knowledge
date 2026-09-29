@@ -27,6 +27,8 @@ import {
   MOC_AUTO_END,
   MOC_AUTO_START,
   findMocRels,
+  mocFileCategory,
+  mocFileNameOrder,
   mocNameVariants,
   noteLink,
   readNotes,
@@ -79,7 +81,7 @@ function childLinks(titlePath: string[], node: TreeNode) {
     const childPath = [...titlePath, seg]
     const hits = findMocRels(childPath)
     return {
-      target: hits.length > 0 ? noteBasename(hits[0]) : `${seg}-MOC`,
+      target: hits.length > 0 ? noteBasename(hits[0]) : canonicalMocName(childPath),
       display: childPath.join(' · '),
     }
   })
@@ -166,6 +168,37 @@ let updated = 0
 let reused = 0
 let skipped = 0
 
+/**
+ * 子分类末级名 -> MOC title 显示名（2026-09-28 用户参考命名：加空格等微调）。
+ * category 与文件匹配不受影响——只影响托管页 title 与展示。
+ */
+const DISPLAY_NAME: Record<string, string> = {
+  'AI框架与Agent': 'AI 框架与 Agent',
+  'AI大模型': 'AI 大模型',
+  '架构与中间件': '架构与中间件',
+  'NLP基础': 'NLP 基础',
+}
+const displayName = (seg: string) => DISPLAY_NAME[seg] ?? seg
+
+/** 子 MOC 的规范文件名：主分类序号 N 为 1~7 时，专属子 MOC 命名 `N.<末级>-MOC.md`；
+ *  共享子 MOC（被多个主分类引用）与顶层/无序主分类退回 `<末级>-MOC.md`。
+ *  判定「专属」依据 = 该末级名 + 主分类的组合是否唯一（扫描所有节点路径）。 */
+function canonicalMocName(catPath: string[]): string {
+  const last = catPath[catPath.length - 1]
+  if (catPath.length < 2)
+    return `${last}-MOC.md`
+  const main = catPath[0]
+  const num = mocFileNameOrder(main)
+  if (!num)
+    return `${last}-MOC.md`
+  const owners = new Set(
+    [...nodeByPath.values()]
+      .filter(({ path: p }) => p.length >= 2 && p[p.length - 1] === last)
+      .map(({ path: p }) => p[0]),
+  )
+  return owners.size === 1 ? `${num}.${last}-MOC.md` : `${last}-MOC.md`
+}
+
 /** 本次运行已声明要创建的目标 rel -> 分类路径，用于拦截「两个栏目算出同一个落点」 */
 const claimedTargets = new Map<string, string>()
 
@@ -174,8 +207,8 @@ if (!dryRun)
 
 for (const { path: catPath, node } of nodeByPath.values()) {
   const last = catPath[catPath.length - 1]
-  const display = catPath.join(' · ')
-  const targetRel = `${MOCS_DIR}/${last}-MOC.md`
+  const display = catPath.map(displayName).join(' · ')
+  const targetRel = `${MOCS_DIR}/${canonicalMocName(catPath)}`
 
   const existingRels = findMocRels(catPath)
   if (existingRels.length > 1) {
@@ -262,16 +295,21 @@ else {
   plan.push(`新建  知识库总览  →  ${noteLink(overviewRel)}`)
 }
 
-// ---- 孤儿报告：文件名对不上任何栏目的两种合法命名形态（分类改名/删除的遗留），仅报告不删除 ----
-// 位置漂移（MOC 留在领域目录而非 _mocs/）不判孤儿——resolveMoc 按名全库定位，功能不破；
+// ---- 孤儿报告：MOC 的 category 与文件名都对不上任何栏目（分类改名/删除的遗留），仅报告不删除 ----
+// 位置漂移（MOC 留在领域目录而非 _mocs/）不判孤儿——resolveMoc 按名/按 category 全库定位，功能不破；
 // 需要归位时手工 git mv 进 _mocs/ 即可。
 const validNames = new Set(['知识库总览-MOC.md'])
 for (const { path: p } of nodeByPath.values())
   for (const n of mocNameVariants(p))
     validNames.add(n)
+const validCategories = new Set(
+  [...nodeByPath.values()].map(({ path: p }) => p.join('|')),
+)
 for (const f of fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false })) {
-  if (!validNames.has(path.basename(f)))
-    plan.push(`孤儿  ${f}  （对不上任何分类的合法命名形态，请人工确认）`)
+  const cat = mocFileCategory(f)
+  const catOk = cat !== null && (cat.length === 0 ? validNames.has(path.basename(f)) : validCategories.has(cat.join('|')))
+  if (!validNames.has(path.basename(f)) && !catOk)
+    plan.push(`孤儿  ${f}  （category 与文件名都对不上任何栏目，请人工确认）`)
 }
 
 console.log(plan.join('\n'))

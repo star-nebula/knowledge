@@ -28,31 +28,39 @@ const modules = import.meta.glob('/vault/Knowledge/**/*.md', {
   import: 'default',
 }) as Record<string, string>
 
-// ---- 运行时 MOC 索引：把 vault/Knowledge 下所有 *-MOC.md 按基名映射成「分支可跳转」的路由 ----
-// 命中规则与 knowledge-org.ts 的 resolveMoc 一致，两种合法命名形态皆可：
-//   1) 末级分类名 === 文件名去 -MOC（生成器新建形态）
-//   2) <主分类去emoji>-<末级分类名> === 文件名去 -MOC（如 OpenClaw-基础层-MOC.md）
-// MOC 统一放 _mocs/（约定落点），但索引不按路径过滤——手放的领域目录位置也能命中；
-// 同名歧义（两个目录下同名 MOC）时取先出现者。
+/** category frontmatter 原始解析缓存（MOC 索引与建树共用一次解析） */
+const rawCategoryCache = new Map<string, string[]>()
+
+// ---- 运行时 MOC 索引：两种命中途径，与 knowledge-org.ts 的 findMocRels 一致 ----
+// ① category 索引（首选）：MOC 自身 frontmatter category === 分支完整路径 → 精确唯一命中，
+//    文件名可自由带序号/前缀/空格（如 1.Jev-MOC.md），不再受命名约束
+// ② 基名兜底：末级分类名或 <主去emoji>-<末级> === 文件名去 -MOC（兼容无 category 的历史页）
 const mocByBase = new Map<string, string>()
-for (const p of Object.keys(modules)) {
+const mocByCategory = new Map<string, string>()
+for (const [p, raw] of Object.entries(modules)) {
   const fileBase = p.split('/').pop()!
   if (!fileBase.endsWith('-MOC.md'))
     continue
-  const name = fileBase.replace(/-MOC\.md$/, '')
-  if (mocByBase.has(name))
-    continue
   const route = p.replace(/\.md$/, '').replace(/%/g, '%25')
-  mocByBase.set(name, route)
+  const name = fileBase.replace(/-MOC\.md$/, '')
+  if (!mocByBase.has(name))
+    mocByBase.set(name, route)
+  const cats = parseCategory(raw)
+  rawCategoryCache.set(p, cats)
+  if (cats.length > 0 && !mocByCategory.has(cats.join('|')))
+    mocByCategory.set(cats.join('|'), route)
 }
 
 function resolveMoc(cats: string[]): string | null {
   if (cats.length === 0)
     return null
-  const last = cats[cats.length - 1]
-  const hit = mocByBase.get(last)
+  const hit = mocByCategory.get(cats.join('|'))
   if (hit)
     return hit
+  const last = cats[cats.length - 1]
+  const baseHit = mocByBase.get(last)
+  if (baseHit)
+    return baseHit
   if (cats.length >= 2) {
     const main = cats[0].replace(/^\p{Extended_Pictographic}\uFE0F?\s*/u, '')
     return mocByBase.get(`${main}-${last}`) ?? null
