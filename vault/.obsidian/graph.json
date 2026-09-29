@@ -1,6 +1,6 @@
 {
   "collapse-filter": false,
-  "search": "path:\"档案\"",
+  "search": "path:\"Knowledge/AI\" OR path:\"Knowledge/Engineering\" OR path:\"Knowledge/Methods\" OR path:\"Knowledge/Life\" OR path:\"Knowledge/_mocs\"",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": true,
@@ -67,6 +67,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.7514342322277479,
+  "scale": 0.7514342322277462,
   "close": true
 }
