@@ -1,6 +1,6 @@
 {
   "collapse-filter": false,
-  "search": "",
+  "search": "path:\"Knowledge/Engineering\"",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": true,
@@ -8,17 +8,52 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "path:1-Projects  ",
+      "query": "path:\"Knowledge/AI\"",
       "color": {
         "a": 1,
         "rgb": 14701138
       }
     },
     {
-      "query": "path:2-Areas  ",
+      "query": "path:\"Knowledge/Engineering\"",
       "color": {
         "a": 1,
-        "rgb": 14069084
+        "rgb": 5417184
+      }
+    },
+    {
+      "query": "path:\"Knowledge/Life\"",
+      "color": {
+        "a": 1,
+        "rgb": 8116331
+      }
+    },
+    {
+      "query": "path:\"Knowledge/Methods\"",
+      "color": {
+        "a": 1,
+        "rgb": 14183384
+      }
+    },
+    {
+      "query": "path:\"Knowledge/_mocs\"",
+      "color": {
+        "a": 1,
+        "rgb": 14723154
+      }
+    },
+    {
+      "query": "path:\"作坊\"",
+      "color": {
+        "a": 1,
+        "rgb": 5429456
+      }
+    },
+    {
+      "query": "path:\"档案\"",
+      "color": {
+        "a": 1,
+        "rgb": 11579568
       }
     }
   ],
@@ -32,6 +67,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.122395363680947,
+  "scale": 0.7514342322277479,
   "close": true
 }
