@@ -108,6 +108,8 @@ vault/Attachments/**
 # 会话临时脚本/草稿与 ZCode 本地数据（2026-09-29）
 .tmp_*
 .zcode/
+# 百度网盘同步器运行时状态（基线版本库，随时在写，不该入库；历史上曾被误提交）
+.sync_temp_dir/
 
 # Nuxt
 
