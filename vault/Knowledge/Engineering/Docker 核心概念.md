@@ -6,7 +6,7 @@ tags:
   - 容器
   - DevOps
 type: 概念解释
-category: ["🛠️ 工程工具", "模型部署"]
+category: ["🛠️ 工程工具", "容器与部署"]
 ---
 
 

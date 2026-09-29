@@ -10,7 +10,7 @@ related:
   - "[[聊天机器人实现]]"
   - "[[Python-MOC]]"
 reference:
-category: ["🛠️ 工程工具", "模型部署"]
+category: ["🛠️ 工程工具", "容器与部署"]
 ---
 
 # Streamlit 入门

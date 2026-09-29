@@ -13,13 +13,10 @@ category:
 
 # 🔍 RAG
 
-## 子栏目
-
-- [[AI 应用核心范式-MOC|🔍 RAG · AI 应用核心范式]]
-
 ## 笔记清单
 
 - [[EduRAG 双层检索]]
+- [[Milvus 向量数据库]]
 - [[RAG Query 改写]]
 - [[RAG 核心知识点全集]]
 - [[RAG 概述]]

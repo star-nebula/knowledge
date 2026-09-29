@@ -10,7 +10,7 @@ type: 概念解释
 related:
   - "[[AI 应用核心范式-MOC]]"
 reference: ""
-category: ["🔍 RAG", "AI 应用核心范式"]
+category: ["🔍 RAG"]
 ---
 
 

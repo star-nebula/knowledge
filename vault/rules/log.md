@@ -21,6 +21,11 @@
 [23:51:00-fix] 修复迁移脚本自伤的两类 frontmatter 损坏（title 与下一键粘连、category 多行折叠）28 篇；修正 2 篇 category 与笔记分类不一致（架构与中间件/NLP 基础——category 须逐字用分类名，显示名只放 title）
 [23:51:30-health] 验证：dry-run 新建 0 / 更新 13 / 复用 23 / 孤儿 1；`--write` 二轮 MD5 全等；`check:boundary` 通过、`link_audit` site_dead=0、`encoding_guard` 0；`docs:build` 过（249s），产物核验序号路径页面在位、父页子栏目链接已指向 `1.Jev-MOC` 等新名
 
+## [2026-09-28] 分类归属修正：三个假共享子分类拆解
+[00:20:00-rule] 用户批准分析结论执行：①「AI 应用核心范式」拆解——概览/理论 7 篇（AI 产业格局/AI全景概览/LLM 产品形态/DeepSeek/大模型×3）→ 新子分类「AI 产业与概览」，Milvus → 🔍 RAG，RAG 三篇（Query 改写/概述/RAGAS）→ 🔍 RAG 顶层；②Docker 四篇（Docker/核心概念/win11 部署/Streamlit）→ 新子分类「容器与部署」；③Vercel 博客部署 → 新子分类「博客部署」。共 16 篇 category 修正，全量 YAML 解析零损坏
+[00:20:30-dir] 三个原共享 MOC 转专属改名：AI 应用核心范式→1.应用核心范式（补 category 归 🧩）、模型部署→2.模型部署（补 category 归 🤖）、Git-MOC→5.Git-MOC（补 category 归 🛠️）；生成器新建 3 个子分类 MOC：2.AI 产业与概览、5.容器与部署、6.博客部署
+[00:21:00-health] 验证：dry-run 新建 3 / 更新 13 / 复用 19 / 孤儿 1；`--write` 后全量 MD5 相等；共享子分类清零（按笔记 category 统计无跨主分类叶）；`check:boundary` 通过、`link_audit` site_dead=0、`encoding_guard` 0；`docs:build` 过（205s），产物核验 3 新页 + 3 改名页在位、父页链接更新
+
 ## [2026-07-17] DeepSeek 剪藏提炼入 Knowledge
 [20:25:00-ingest] 处理 `Resources/Clippings/DeepSeek技术发展详细时间轴与技术核心解析.md`（CSDN 剪藏，时间轴+技术核心）；判定其时间轴与技术核心与既有 `Knowledge/AI/DeepSeek.md` 大量重叠，按反重复原则只提炼「新增且事实性」内容，剪藏原文保留不动
 [20:25:30-new] 新建 `Knowledge/AI/DeepSeek 开源周五大工具.md`（概念解释）：2025-02 开源周 FlashMLA/DeepEP/DeepGEMM/DualPipe·EPLB/3FS 五工具

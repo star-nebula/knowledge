@@ -13,7 +13,7 @@ related:
   - "[[Markdown 语法]]"
   - "[[Git 基础]]"
 reference:
-category: ["📚 个人知识管理", "Git"]
+category: ["📚 个人知识管理", "博客部署"]
 ---
 1. 安装 git
 

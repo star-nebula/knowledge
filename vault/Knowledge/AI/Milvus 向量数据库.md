@@ -9,7 +9,7 @@ type: 概念解释
 related:
   - "[[框架与中间件-MOC]]"
 reference: ""
-category: ["🤖 AI大模型", "AI 应用核心范式"]
+category: ["🔍 RAG"]
 ---
 
 

@@ -10,7 +10,7 @@ related:
   - "[[🛠️ 工程工具-MOC]]"
   - "[[win11 部署 Docker]]"
 reference:
-category: ["🛠️ 工程工具", "模型部署"]
+category: ["🛠️ 工程工具", "容器与部署"]
 ---
 
 # Docker 核心概念

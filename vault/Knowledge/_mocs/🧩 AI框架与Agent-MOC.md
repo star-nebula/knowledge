@@ -15,7 +15,7 @@ category:
 
 ## 子栏目
 
-- [[AI 应用核心范式-MOC|🧩 AI框架与Agent · AI 应用核心范式]]
+- [[1.应用核心范式-MOC|🧩 AI框架与Agent · AI 应用核心范式]]
 - [[1.架构与中间件-MOC|🧩 AI框架与Agent · 框架与中间件]]
 - [[1.Jev-MOC|🧩 AI框架与Agent · Jev]]
 

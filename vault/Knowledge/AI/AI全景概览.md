@@ -9,7 +9,7 @@ type: 概念解释
 related:
   - "[[AI 应用核心范式-MOC]]"
 reference: ""
-category: ["🤖 AI大模型", "AI 应用核心范式"]
+category: ["🤖 AI大模型", "AI 产业与概览"]
 ---
 
 # AI 全景概览

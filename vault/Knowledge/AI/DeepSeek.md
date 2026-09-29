@@ -11,7 +11,7 @@ related:
   - "[[DeepSeek 开源周五大工具]]"
   - "[[DeepSeek NSA 稀疏注意力]]"
 reference: ""
-category: ["🤖 AI大模型", "AI 应用核心范式"]
+category: ["🤖 AI大模型", "AI 产业与概览"]
 ---
 
 ## 📘DeepSeek 基础知识介绍

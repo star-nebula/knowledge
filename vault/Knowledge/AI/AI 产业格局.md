@@ -6,7 +6,7 @@ tags:
   - 产业
   - 趋势
 type: 概念解释
-category: ["🤖 AI大模型", "AI 应用核心范式"]
+category: ["🤖 AI大模型", "AI 产业与概览"]
 ---
 
 

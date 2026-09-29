@@ -15,8 +15,8 @@ category:
 
 ## 子栏目
 
-- [[AI 应用核心范式-MOC|🤖 AI大模型 · AI 应用核心范式]]
-- [[模型部署-MOC|🤖 AI大模型 · 模型部署]]
+- [[2.AI 产业与概览-MOC|🤖 AI大模型 · AI 产业与概览]]
+- [[2.模型部署-MOC|🤖 AI大模型 · 模型部署]]
 - [[2.NLP 基础-MOC|🤖 AI大模型 · NLP基础]]
 - [[2.机器学习-MOC|🤖 AI大模型 · 机器学习]]
 - [[2.深度学习基础-MOC|🤖 AI大模型 · 深度学习基础]]
@@ -35,7 +35,6 @@ category:
 - [[GloVe（Global Vectors）|GloVe（Global Vectors for Word Representation）]]
 - [[LLM 产品形态]]
 - [[MapReduce 训练]]
-- [[Milvus 向量数据库]]
 - [[NLP-基础概念]]
 - [[NLP-文本预处理]]
 - [[NLP-案例]]

@@ -9,7 +9,7 @@ type: 步骤操作
 related:
   - "[[Docker 核心概念]]"
 reference:
-category: ["🛠️ 工程工具", "模型部署"]
+category: ["🛠️ 工程工具", "容器与部署"]
 ---
 
 # win11 部署 Docker
