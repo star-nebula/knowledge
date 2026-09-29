@@ -56,7 +56,7 @@ pnpm run package:desktop:win:x64:unsigned
 
 ```shell
 git pull --ff-only      # 拉到含桌面端的版本
-ls apps                 # 必须出现 desktop，否则后面脚本不存在
+ls apps                 # 必须出现 desktop，否则后面脚本不存在（CMD窗口：dir apps）
 pnpm install            # 依赖可能变了，别跳过
 pnpm run build
 pnpm run start:desktop

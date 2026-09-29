@@ -62,3 +62,28 @@ npx @deepseek-ai/dsh web
 - **PTC模式**：相当于可以一次性进行多次标准模式下的操作，前提是逻辑清晰的任务。
 - **极简模式**：速度快，但只能敲命令和改文件，别的干不了。
 - **创造模式**：继承标准模式，并可用于开发插件和创建新工具，或定制模式预设。
+
+## 启动 DeepSeek herness
+
+1. 方式一：自动拉取最新版并启动 Web 服务
+
+	```bash
+	npx @deepseek-ai/dsh web
+	```
+
+2. 方式二：只启动服务而不自动打开浏览器
+
+```bash
+npx @deepseek-ai/dsh web --no-open
+```
+
+3. 方式三：从源码启动
+
+```bash
+git clone https://github.com/deepseek-ai/deepseek-harness.git
+cd deepseek-harness
+pnpm install
+pnpm run build
+pnpm dsh web
+```
+
