@@ -25,8 +25,6 @@ const contacts = [
   { icon: '📝', value: 'CSDN', link: 'https://blog.csdn.net/qq_69608018?type=blog', external: true },
 ]
 const timeline: TimelineItem[] = [
-  { period: '2024.08 - 2026.05', title: 'AI应用开发工程师', desc: '负责电商AI产品线，主导3个核心项目落地', link: '#core-projects', linkText: '跳转查看关联项目' },
-  { period: '2021.09 - 2025.06', title: '人工智能（本科）', desc: '主修NLP、深度学习、大模型应用开发', link: '/vault/Knowledge/_mocs/知识库总览-MOC', linkText: '跳转知识库学习笔记' },
 ]
 const techTags: TechTag[] = [
   { name: 'LangGraph', group: 'llm', tooltip: '电商选品多Agent编排框架，实现8阶段Agent工作流', link: '/vault/Knowledge/AI/LangChain Agents 组件' },
