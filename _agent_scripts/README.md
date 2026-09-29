@@ -52,6 +52,16 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
 - **坑 2**：回收 ≠ 永久删除，`--trash` 一律走回收站；执行前务必先 `--dry-run` 列清单确认。
 - 运行环境：受管 venv `C:/Users/stars/.workbuddy/binaries/python/envs/default/Scripts/python.exe`（该 venv 已装 `send2trash` + `pywin32`）。
 
+### `xhs_card/build_montage.py`
+把渲染好的卡片序列**拼成「卡片总览图（图12）」**：N 张亮色卡 → 4 列 × R 行网格 PNG（deck-NO-0019 实测 1230×1220）。
+- 原理：生成 HTML 网格页 → Chromium 无头截图（与 render_deck 同款参数）。**卡背景 == 拼图背景（#F4F1EB）**，所以网格描边忠实，无需真·拼图。
+- 用法：
+  - `python build_montage.py ./png` —— 取 `./png/deck-01.png…` 拼成 `./montage.png`
+  - `python build_montage.py ./png out.png` —— 自定义输出路径
+- 几何（deck-NO-0019）：`pad=20 gap=10 cell=290×386.67`，不足整格时在右下角补透明空位。
+- 适用：deck 改版后卡片数变化 → 重渲染整套卡 → 跑本脚本重出总览，避免手工 ffmpeg 拼（本机 ffmpeg 不支持 `-pattern_type glob`）。
+- 运行环境：受管 Python 3.13（脚本自动探测 ms-playwright chromium-1234）。
+
 ### `feishu_import/` —— 飞书知识库 → Obsidian 导入
 三个脚本，详见 `feishu_import/README.md`（含 `lark-cli` 前置命令与坑）。
 **结构为「单层」**：一篇发布内容 = 一篇文稿笔记，发布元数据直接写在该笔记 frontmatter，Base 圈 `文稿/` 目录（2026-09-24 起；此前是「台账笔记 + 文稿笔记」两层，已合并）。
@@ -113,6 +123,15 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
 - **坑 2**：强信号词会命中**指针行** —— 在 Todo 里写归档指引要用「记录见 / 详情见」，别写「已归档」，否则自己把自己判成违规（本次实测踩到）。
 - 运行环境：受管 Python 3.13（仅标准库）。
 
+### `dup_check.py`
+记忆库**规则重述报告**（`Decisions/` + `Workflows/` + `rule/` 分节 + `Rule.md`）——报告版，**非门禁**。
+- 背景（2026-09-26）：Vibe coding 方案落地的季度报告项（[[Memory/Decisions/记忆库引入Vibe-coding规则|引入决策]]）。检测同一规则短语是否在多个文件重述；**恒退出码 0**，报告写 `_agent_scripts/_out/dup_check.txt`（PowerShell 吞 stdout 惯例）。
+- 用法：`python dup_check.py [--min-len 8]`（`--out` 可改落点）
+- 方法：提取 ≥ min-len 的连续中文片段，报出现在 >1 文件的短语；**排除各层 `_index.md`**——脚本生成的导航摘要与详笔记重述属设计内行为，实测占误报约 1/3（27 → 18 条）。
+- **已知误报来源（人工判断，勿机械处理）**：标题回声（决策/流程互引同名主题）、有意同文（子代理透传模板双正本：`Workflows/AI工具自定义指令` ↔ `rule/子代理与脚本`）、冻结文件（`ai-hot-article-daily流水线`）。
+- **首跑基线（2026-09-26，min-len 8）**：812 短语 / **18 重复**。**2026-09-27 更新基线 = 29**：真源 `Workflows/AI工具自定义指令-完整版.md` 恢复入库后，增量 11 条全部为真源/快照对铁律与透传模板的**有意重述**（部署副本按设计逐字一致）——季度维护只看**增量**，不逐条清零。
+- 运行环境：仅标准库（受管 Python 3.13 / 系统 3.11.9 均实测可跑）。
+
 ### `mem_git.py`（已删除，2026-09-21）
 记忆库独立本地仓工具——**仓已于同日删除**（历史仅 4 提交、无远端，价值不敌 Obsidian 自带快照），脚本随之移除。父仓 `pre-commit` 私有面守卫**仍在**（与本地仓无关，始终必要）。脚本原文可查父仓 git 历史；该脚本实测沉淀的环境教训（钩子只能用 shell 内建、守卫必须插钩子顶部、`git add -f` 嵌套仓两种形态、BOM 提交消息）已蒸馏进 `vault/Memory/Lessons/`。
 
@@ -128,7 +147,7 @@ AI 资讯文章字数校验（配合技能 `ai-hot-article-daily` 使用）。
   - `-o report.md` 写文件（**本机 PowerShell 会吞 stdout，实操建议一律带 `-o`**）
   - `--json` 机器可读；`--vault` / `--root` 覆盖默认根
 - 退出码：0 = 可安全删除；1 = 存在引用或目标不存在（可当门禁）。
-- **坑（已处理）**：① `[[...]]` 出现在**行内代码 / 代码块**里时 Obsidian **不解析**（文档举例文字），必须剥离后再统计，否则大量误报（实测 5 处举例被误判为真引用）；② 带路径的引用（含 `/`）**不得**退化到同名匹配，否则 `[[Memory/AGENTS]]` 会误命中根目录的 `AGENTS.md`。
+- **坑（已处理）**：① `[[...]]` 出现在**行内代码 / 代码块**里时 Obsidian **不解析**（文档举例文字），必须剥离后再统计，否则大量误报（实测 5 处举例被误判为真引用）；② 带路径的引用（含 `/`）**不得**退化到同名匹配，否则 `[[Memory/AGENTS]]` 会误命中根目录的 `AGENTS.md`；③ **已知的漏报盲区**：`[[Projects/…]]` 这类**省略 `Memory/` 前缀的层内相对路径链接**（Obsidian 靠后缀匹配可正常解析）扫不出来——判定表按 vault 根路径精确匹配。2026-09-27 删方案文件时实测：ref_scan 报 1 处、实际 4 处。删笔记前先按笔记名 grep 一遍兜底。
 - 运行环境：受管 Python 3.13（仅标准库）。
 
 ### `link_audit.py`
