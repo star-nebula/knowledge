@@ -32,7 +32,7 @@ const modules = import.meta.glob('/vault/Knowledge/**/*.md', {
 // 命中规则与 knowledge-org.ts 的 resolveMoc 一致，两种合法命名形态皆可：
 //   1) 末级分类名 === 文件名去 -MOC（生成器新建形态）
 //   2) <主分类去emoji>-<末级分类名> === 文件名去 -MOC（如 OpenClaw-基础层-MOC.md）
-// 手写页与生成页遵循同一约定（MOC 与普通笔记同层存放，_mocs/ 已废除）；
+// MOC 统一放 _mocs/（约定落点），但索引不按路径过滤——手放的领域目录位置也能命中；
 // 同名歧义（两个目录下同名 MOC）时取先出现者。
 const mocByBase = new Map<string, string>()
 for (const p of Object.keys(modules)) {

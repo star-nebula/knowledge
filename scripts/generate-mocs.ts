@@ -2,10 +2,11 @@
  * generate-mocs.ts
  * 为 vault/Knowledge 的每个「栏目」（category 路径节点）生成/刷新 MOC 落地页。
  *
- * 约定（2026-09-28 起，决策笔记：vault/Memory/Decisions/MOC迁出_mocs至分类文件夹.md）：
- *  - MOC 与普通笔记同层存放：`Knowledge/<领域>/<末级分类名>-MOC.md`（生成器新建形态；
- *    子分类也可自行改为 `<主分类去emoji>-<末级分类名>-MOC.md`，两种形态都能被匹配），
- *    领域目录取成员笔记多数派（mocTargetDir）；历史 `_mocs/` 目录已废除，扫描一律排除。
+ * 约定（2026-09-28 二次反转，正本 [[Decisions/MOC统一收进_mocs集中管理]]；
+ * 同日早先「与普通笔记同层」的 [[Decisions/MOC迁出_mocs至分类文件夹]] 被本决策反转）：
+ *  - **所有 MOC（含手写页）统一放 `vault/Knowledge/_mocs/` 集中管理**；生成器新建固定落此。
+ *  - 文件名两种合法形态：`<末级分类名>-MOC.md`（新建用）与
+ *    `<主分类去emoji>-<末级分类名>-MOC.md`（子分类重名/名字太泛时可自行改用）。
  *  - frontmatter 六属性：title / created / type / tags / abstract / category。
  *  - 托管标记：生成页正文含 `<!-- MOC:AUTO -->` 对。每次运行幂等重写其正文
  *    （H1 + 子栏目 + 笔记清单），frontmatter 保留 created/tags/abstract、
@@ -22,12 +23,11 @@ import fg from 'fast-glob'
 import matter from 'gray-matter'
 import {
   KNOWLEDGE,
-  LEGACY_MOCS_IGNORE,
+  MOCS_DIR,
   MOC_AUTO_END,
   MOC_AUTO_START,
   findMocRels,
   mocNameVariants,
-  mocTargetDir,
   noteLink,
   readNotes,
 } from './knowledge-org'
@@ -169,11 +169,13 @@ let skipped = 0
 /** 本次运行已声明要创建的目标 rel -> 分类路径，用于拦截「两个栏目算出同一个落点」 */
 const claimedTargets = new Map<string, string>()
 
+if (!dryRun)
+  fs.mkdirSync(MOCS_DIR, { recursive: true })
+
 for (const { path: catPath, node } of nodeByPath.values()) {
   const last = catPath[catPath.length - 1]
   const display = catPath.join(' · ')
-  const dir = mocTargetDir(node.notes.map(n => n.rel))
-  const targetRel = dir ? `${KNOWLEDGE}/${dir}/${last}-MOC.md` : `${KNOWLEDGE}/${last}-MOC.md`
+  const targetRel = `${MOCS_DIR}/${last}-MOC.md`
 
   const existingRels = findMocRels(catPath)
   if (existingRels.length > 1) {
@@ -225,8 +227,8 @@ for (const { path: catPath, node } of nodeByPath.values()) {
   plan.push(`新建  ${display}  →  ${noteLink(targetRel)}`)
 }
 
-// ---- 顶层总览页（nav 落地；不属于任何分类 → 放 Knowledge 根） ----
-const overviewRel = `${KNOWLEDGE}/知识库总览-MOC.md`
+// ---- 顶层总览页（nav 落地；不属于任何分类 → 放 _mocs/） ----
+const overviewRel = `${MOCS_DIR}/知识库总览-MOC.md`
 const overviewBody = [MOC_AUTO_START, '', '# 知识库总览', '', '<KnowledgeExplorer />', '', MOC_AUTO_END, ''].join('\n')
 if (fs.existsSync(overviewRel)) {
   const content = fs.readFileSync(overviewRel, 'utf-8')
@@ -261,11 +263,13 @@ else {
 }
 
 // ---- 孤儿报告：文件名对不上任何栏目的两种合法命名形态（分类改名/删除的遗留），仅报告不删除 ----
+// 位置漂移（MOC 留在领域目录而非 _mocs/）不判孤儿——resolveMoc 按名全库定位，功能不破；
+// 需要归位时手工 git mv 进 _mocs/ 即可。
 const validNames = new Set(['知识库总览-MOC.md'])
 for (const { path: p } of nodeByPath.values())
   for (const n of mocNameVariants(p))
     validNames.add(n)
-for (const f of fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false, ignore: LEGACY_MOCS_IGNORE })) {
+for (const f of fg.sync(`${KNOWLEDGE}/**/*-MOC.md`, { dot: false })) {
   if (!validNames.has(path.basename(f)))
     plan.push(`孤儿  ${f}  （对不上任何分类的合法命名形态，请人工确认）`)
 }

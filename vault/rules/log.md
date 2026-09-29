@@ -9,6 +9,12 @@
 [22:40:00-rule] 二次调整（用户改名 6 篇 OpenClaw 子 MOC 为 `OpenClaw-<末级>-MOC.md` 前缀形态）：匹配规则扩展双形态——`<末级>-MOC.md`（精确优先）∪ `<主去emoji>-<末级>-MOC.md`（`mocNameVariants`/`stripCategoryEmoji`），KnowledgeExplorer 同步；管理型父页子栏目链接改解析为实际文件名（子页改名不破链）；生成器新建仍用末级名形态
 [22:40:30-health] 复验：dry-run 新建 0 / 更新 13 / 复用 23，`--write` 全量 MOC MD5 相等（用户改名零内容扰动），孤儿报告合法名集合扩展后仅剩既有孤儿 1 篇
 
+## [2026-09-28] MOC 约定二次反转：统一收进 _mocs/ 集中管理
+[23:20:00-rule] 约定反转（用户指令「路径指定在 _mocs/，所有 MOC 文档都放在该文件夹中统一管理」）：早先同日「MOC 与普通笔记同层」作废；**含手写页在内**全部 MOC 统一入 `_mocs/`；双形态命名与 `MOC:AUTO` 托管标记保留。论证见 [[Decisions/MOC统一收进_mocs集中管理]]
+[23:20:30-dir] `git mv` 33 篇 MOC（托管 13 + 手写 19 + 孤儿 1）从 AI/Engineering/Methods/Life/根 迁入 `_mocs/`，零失败；站点 nav 与首页 hero 改回 `/vault/Knowledge/_mocs/知识库总览-MOC`
+[23:21:00-optimize] 代码回归：`knowledge-org.ts` 恢复 `MOCS_DIR`、删 `mocTargetDir`/`LEGACY_MOCS_IGNORE`（resolveMoc 仍按名全库定位，历史位置兜底）；`generate-mocs.ts` 新建/总览固定落 `_mocs/`；`KnowledgeExplorer.vue` 注释同步
+[23:21:30-health] 验证：dry-run 新建 0 / 更新 13 / 复用 23 / 孤儿 1；`--write` 全量 MD5 相等；`check:boundary` 通过、`link_audit` site_dead=0、`encoding_guard` 0；`docs:build` 过（245s）且产物核验 `_mocs/` 页面在位、旧根路径消失
+
 ## [2026-07-17] DeepSeek 剪藏提炼入 Knowledge
 [20:25:00-ingest] 处理 `Resources/Clippings/DeepSeek技术发展详细时间轴与技术核心解析.md`（CSDN 剪藏，时间轴+技术核心）；判定其时间轴与技术核心与既有 `Knowledge/AI/DeepSeek.md` 大量重叠，按反重复原则只提炼「新增且事实性」内容，剪藏原文保留不动
 [20:25:30-new] 新建 `Knowledge/AI/DeepSeek 开源周五大工具.md`（概念解释）：2025-02 开源周 FlashMLA/DeepEP/DeepGEMM/DualPipe·EPLB/3FS 五工具
