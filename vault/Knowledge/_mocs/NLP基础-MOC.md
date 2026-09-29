@@ -30,6 +30,10 @@ abstract: 自然语言处理从文本预处理到 Transformer 架构的完整知
 
 
 
+category: ["🤖 AI大模型", "NLP基础"]
+
+
+
 ---
 
 

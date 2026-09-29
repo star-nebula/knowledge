@@ -11,6 +11,7 @@ related:
   - "[[个人成长产品创业启示-MOC]]"
 reference:
   - "[[AI personal growth app_中文]]"
+category: ["💡 创业启示"]
 ---
 
 MyFutureSelf 是一款 **AI 驱动的个人成长移动应用**，核心理念是"帮人成为想成为的自己"。

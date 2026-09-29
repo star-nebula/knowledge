@@ -11,6 +11,7 @@ related:
   - "[[个人成长产品创业启示-MOC]]"
 reference:
   - "[[AI personal growth app_中文]]"
+category: ["💡 创业启示"]
 ---
 
 做用户生成内容（UGC）创作者计划时，**与其堆数量，不如抓质量**。

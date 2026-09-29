@@ -8,6 +8,7 @@ tags:
   - 工程技术
 type: 专题聚合页
 abstract: Anaconda、PyCharm、Jupyter、FVM——Python/AI 开发工具链配置与使用导航。
+category: ["🛠️ 工程工具", "IDE与环境"]
 ---
 
 # IDE 与开发环境知识地图
