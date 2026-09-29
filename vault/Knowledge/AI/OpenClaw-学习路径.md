@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 源码学习路径指南，按重要性分层从必须掌握的 Agent 执行引擎、回复管道到插件 SDK 等进阶扩展能力。
 type: guides
 tags:
   - AI

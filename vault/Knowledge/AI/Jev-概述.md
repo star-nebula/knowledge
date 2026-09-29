@@ -1,5 +1,6 @@
 ---
 title: Jev 概述
+abstract: Jev 概述，介绍 TypeSafe AI 推出的面向决策的 AI 模型，讲解其 Decisions not strings 核心理念及与传统 LLM 的本质差异。
 created: 2026-09-23
 tags:
   - AI

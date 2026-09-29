@@ -1,5 +1,6 @@
 ---
 title: Obsidian 配置 Claudian
+abstract: 在 Obsidian 中安装配置 Claudian 插件接入 Claude AI 助手的步骤指南，含插件下载、文件存放位置与 Obsidian Skills 能力说明。
 created: 2026-05-22
 tags:
   - Obsidian

@@ -1,5 +1,6 @@
 ---
 title: Python 数据结构
+abstract: Python 六大内置数据结构的操作方法，涵盖字符串、列表、元组、字典、集合的常用操作、深浅拷贝与推导式。
 created: 2026-05-22
 tags:
   - Python

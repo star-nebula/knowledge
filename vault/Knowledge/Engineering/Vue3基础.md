@@ -1,5 +1,6 @@
 ---
 title: Vue3基础
+abstract: Vue3 前端框架基础，涵盖声明式渲染、响应式系统、组件化开发等核心特点及 Vue3 相比 Vue2 的性能改进与新特性。
 created: 2026-05-22
 tags:
   - Vue3

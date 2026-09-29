@@ -1,5 +1,6 @@
 ---
 title: FVM 管理 Flutter
+abstract: 使用 FVM 管理 Flutter SDK 多版本的步骤，涵盖安装、查看可用版本、为项目切换指定版本等操作。
 created: 2026-05-22
 tags:
   - FVM

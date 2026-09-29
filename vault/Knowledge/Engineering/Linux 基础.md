@@ -3,6 +3,7 @@
 
 
 title: Linux 基础
+abstract: Linux 系统基础与常用命令行操作，涵盖系统管理、文件操作等日常使用要点。
 
 
 

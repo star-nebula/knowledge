@@ -1,5 +1,6 @@
 ---
 title: LangChain Models 组件
+abstract: LangChain Models 组件介绍，讲解 LLMs、Chat Models 与 Embeddings 三种模型类型的输入输出形态及各自的使用方法。
 tags: [langchain, models, llm, embeddings, framework]
 type: 概念解释
 created: 2026-07-08

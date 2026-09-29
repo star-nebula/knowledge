@@ -1,5 +1,6 @@
 ---
 title: Python NumPy
+abstract: NumPy 数值计算库的核心知识，涵盖 ndarray 多维数组、ufunc 通用函数、广播机制及线性代数等科学计算功能。
 created: 2026-05-22
 tags:
   - Python

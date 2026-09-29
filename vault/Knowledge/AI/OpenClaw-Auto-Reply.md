@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 自动回复与调度模块的源码解析，讲解 Dispatch 调度台职责、前台回复栅栏、指令提取系统与信封格式化流程。
 type: concept
 tags:
   - AI

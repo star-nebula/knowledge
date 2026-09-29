@@ -1,5 +1,6 @@
 ---
 title: GloVe（Global Vectors for Word Representation）
+abstract: GloVe 全局词向量模型，讲解其基于共现矩阵与全局统计信息的词向量训练原理、目标函数设计及与 Word2Vec 的对比。
 created: 2026-07-10
 tags:
   - NLP

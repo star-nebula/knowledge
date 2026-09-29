@@ -1,5 +1,6 @@
 ---
 title: n8n AI Agent 工作流
+abstract: 使用 n8n 低代码平台集成 AI Agent 的工作流教程，涵盖 n8n 安装、基础工作流搭建、MCP 工具配置与系统消息设置。
 created: 2026-07-08
 tags:
   - n8n

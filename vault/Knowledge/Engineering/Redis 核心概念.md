@@ -1,5 +1,6 @@
 ---
 title: Redis 核心概念
+abstract: Redis 核心概念与基础操作，涵盖 RDBMS 与 NoSQL 数据库的差异对比、Redis 的定义特点及其数据类型。
 created: 2026-05-25
 tags:
   - Redis

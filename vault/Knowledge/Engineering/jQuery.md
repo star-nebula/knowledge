@@ -1,5 +1,6 @@
 ---
 title: jQuery
+abstract: jQuery 框架介绍与使用，涵盖其设计理念、核心特性、版本差异及引入方式，用于简化 DOM 操作与 Ajax 交互。
 created: 2026-05-22
 tags:
   - jQuery

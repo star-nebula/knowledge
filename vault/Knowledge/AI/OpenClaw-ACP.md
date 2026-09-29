@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 的 ACP 多 Agent 协调器，讲解其管理子 Agent 生命周期、会话状态与消息传递的机制及 Runtime Handle 缓存等关键设计。
 type: concept
 tags:
   - AI

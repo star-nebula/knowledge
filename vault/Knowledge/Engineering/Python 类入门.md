@@ -1,5 +1,6 @@
 ---
 title: Python 类入门
+abstract: Python 面向对象入门，涵盖类的定义、类属性与实例属性、继承、封装、多态与魔术方法。
 created: 2026-05-22
 tags:
   - Python

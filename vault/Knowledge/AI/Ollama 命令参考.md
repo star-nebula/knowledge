@@ -1,5 +1,6 @@
 ---
 title: Ollama 命令参考
+abstract: Ollama 命令行参考手册，收录终端执行的 CLI 命令与交互式 REPL 对话指令的作用说明及使用示例。
 created: 2026-07-08
 tags:
   - Ollama

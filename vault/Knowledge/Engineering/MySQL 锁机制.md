@@ -1,5 +1,6 @@
 ---
 title: MySQL 锁机制
+abstract: MySQL 并发控制的锁机制，涵盖表级锁与行级锁的区别，以及 MyISAM 与 InnoDB 引擎对锁的支持差异。
 created: 2026-05-25
 tags:
   - MySQL

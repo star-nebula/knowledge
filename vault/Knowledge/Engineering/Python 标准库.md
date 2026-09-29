@@ -1,5 +1,6 @@
 ---
 title: Python 标准库
+abstract: Python 内置函数分类速查与常用标准库用法，涵盖类型转换、数值运算函数及 datetime、json、hashlib、sys 等模块。
 created: 2026-05-22
 tags:
   - Python

@@ -1,5 +1,6 @@
 ---
 title: MySQL 事务
+abstract: 数据库事务的 ACID 特性及其实现，以转账为例说明事务原子性，涵盖 InnoDB 与 MyISAM 对事务的支持差异。
 created: 2026-05-25
 tags:
   - MySQL

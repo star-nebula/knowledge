@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 配置系统的源码解析，讲解 ConfigIO 安全文件柜的架构分层、顶层配置类型、原子变更机制与自动元数据设计。
 type: concept
 tags:
   - AI

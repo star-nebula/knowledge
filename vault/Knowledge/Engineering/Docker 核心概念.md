@@ -1,5 +1,6 @@
 ---
 title: Docker 核心概念
+abstract: Docker 容器化的镜像、容器、仓库三大核心概念，涵盖与虚拟机的对比及联合文件系统、命名空间、控制组等底层机制。
 created: 2026-07-10
 tags:
   - Docker

@@ -1,5 +1,6 @@
 ---
 title: HTML
+abstract: HTML 基础笔记，涵盖标签语法、标题段落换行等基本标签及常用元素的使用方法。
 created: 2026-05-22
 tags:
   - HTML

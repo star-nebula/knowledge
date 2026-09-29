@@ -1,5 +1,6 @@
 ---
 title: Python 多进程与多线程
+abstract: Python 并发编程基础，涵盖操作系统发展背景、进程与线程概念、多任务实现及同步与资源竞争问题。
 created: 2026-05-22
 tags:
   - Python

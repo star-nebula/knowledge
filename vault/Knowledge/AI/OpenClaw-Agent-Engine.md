@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw Agent Engine 代理引擎的源码解析，讲解 AgentCommand 大脑的核心职责、命令编排流程、工具策略与模型回退机制。
 type: concept
 tags:
   - AI

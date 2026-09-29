@@ -1,5 +1,6 @@
 ---
 title: Python 操作 MySQL
+abstract: Python 通过 pymysql 操作 MySQL 数据库，涵盖连接建立、增删改查执行、SQL 注入原理与参数化查询防范。
 created: 2026-05-25
 tags:
   - MySQL

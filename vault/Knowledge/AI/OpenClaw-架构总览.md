@@ -1,5 +1,6 @@
 ---
 title: OpenClaw 架构总览
+abstract: OpenClaw 架构总览，合并三篇架构详解的独特内容，讲解项目核心能力域、分层架构与 Monorepo 的 21 个独立包结构。
 type: overviews
 tags:
   - AI

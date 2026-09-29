@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 安全模块的源码解析，讲解审计维度与发现类型、深度审计与浅层审计的差异及审计抑制机制。
 type: concept
 tags:
   - AI

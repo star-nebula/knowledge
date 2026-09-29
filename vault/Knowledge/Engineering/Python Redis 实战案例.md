@@ -1,5 +1,6 @@
 ---
 title: Python Redis 实战案例
+abstract: Redis 在 Python 项目中的实战应用，涵盖 KV 缓存、分布式锁、消息队列与发布订阅等典型场景的代码实现。
 created: 2026-05-25
 tags:
   - Redis

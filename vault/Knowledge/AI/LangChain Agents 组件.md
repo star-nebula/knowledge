@@ -1,5 +1,6 @@
 ---
 title: LangChain Agents 组件
+abstract: LangChain Agents 组件的用法，讲解 Agent 自动选择并调用第三方工具的机制、代理类型与自定义工具的代码实现。
 tags: [langchain, agents, tools, framework]
 type: 概念解释
 created: 2026-07-08

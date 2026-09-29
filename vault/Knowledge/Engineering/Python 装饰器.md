@@ -1,5 +1,6 @@
 ---
 title: Python 装饰器
+abstract: Python 装饰器的闭包本质与用法，涵盖装饰器模板、四种被装饰场景、多装饰器叠加及带参数装饰器。
 created: 2026-05-22
 tags:
   - Python

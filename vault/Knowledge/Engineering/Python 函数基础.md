@@ -1,5 +1,6 @@
 ---
 title: Python 函数基础
+abstract: Python 函数式编程核心知识，涵盖函数参数机制、作用域与闭包、lambda、递归及 map、filter、reduce 高阶函数。
 created: 2026-05-22
 tags:
   - Python

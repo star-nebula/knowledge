@@ -1,5 +1,6 @@
 ---
 title: Docker 核心概念
+abstract: Docker 容器化平台的三大核心组件与镜像拉取、容器启停等基本工作流命令，实现一次构建到处运行。
 created: 2026-07-08
 tags:
   - Docker

@@ -1,5 +1,6 @@
 ---
 title: MyFutureSelf 案例分析
+abstract: MyFutureSelf AI 个人成长应用案例分析，涵盖与未来自我对话的产品形态、零代码创业路径、自然流量增长与月营收过万美元的成绩。
 created: 2026-09-21
 tags:
   - AI应用

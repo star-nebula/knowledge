@@ -1,5 +1,6 @@
 ---
 title: Transformer
+abstract: Transformer 模型的代码实现讲解，涵盖词嵌入层、位置编码、掩码张量等核心组件及位置编码分布的可视化分析。
 created: 2026-05-23
 tags:
   - NLP

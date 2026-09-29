@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 模型目录模块的源码解析，讲解其核心职责、核心类型定义、工作流程、设计模式与依赖关系。
 type: concept
 tags:
   - AI

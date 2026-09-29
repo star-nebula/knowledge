@@ -1,5 +1,6 @@
 ---
 title: Python Pandas
+abstract: Pandas 结构化数据分析库的核心用法，涵盖 DataFrame 操作、缺失值处理、分组聚合及典型数据处理场景。
 created: 2026-05-22
 tags:
   - Python

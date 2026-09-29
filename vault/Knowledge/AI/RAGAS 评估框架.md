@@ -1,5 +1,6 @@
 ---
 title: RAGAS 评估框架
+abstract: RAGAS 评估框架介绍，讲解其自动评估 RAG 系统检索与生成质量的四项核心指标：上下文相关性、召回率、忠实度等。
 created: 2026-07-08
 tags:
   - AI

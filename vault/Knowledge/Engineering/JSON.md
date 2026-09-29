@@ -1,5 +1,6 @@
 ---
 title: JSON
+abstract: JSON 数据交换格式速记，涵盖对象与数组两种结构、值类型、语言无关性及在配置文件中的应用。
 created: 2026-05-22
 tags:
   - JSON

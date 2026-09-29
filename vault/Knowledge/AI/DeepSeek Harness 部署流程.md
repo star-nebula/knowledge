@@ -1,5 +1,6 @@
 ---
 title: DeepSeek Harness 部署流程
+abstract: DeepSeek Harness 的完整部署流程教程，涵盖环境准备、Node.js 安装、API Key 配置、服务启动与常见问题排查。
 created: 2026-08-15
 tags:
   - DeepSeek

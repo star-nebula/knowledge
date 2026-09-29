@@ -1,5 +1,6 @@
 ---
 title: FastAPI 后端
+abstract: 基于 FastAPI 构建大模型应用后端的方法，涵盖接口设计、请求处理、与模型服务对接及异步响应的实现要点。
 created: 2026-07-10
 tags:
   - 大模型

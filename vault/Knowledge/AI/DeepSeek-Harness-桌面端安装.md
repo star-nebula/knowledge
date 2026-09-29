@@ -1,5 +1,6 @@
 ---
 title: DeepSeek-Harness-桌面端安装
+abstract: DeepSeek Harness 桌面端的安装教程，涵盖 Electron 环境准备、pnpm 依赖安装、构建打包与桌面端启动验证步骤。
 created: 2026-09-25
 tags:
   - DeepSeek

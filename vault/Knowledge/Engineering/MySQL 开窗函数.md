@@ -1,5 +1,6 @@
 ---
 title: MySQL 开窗函数
+abstract: MySQL 开窗函数的语法与分类，涵盖 row_number、rank 等排序类与聚合类窗口函数在不改变行数前提下做分组排名的用法。
 created: 2026-05-25
 tags:
   - MySQL

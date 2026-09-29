@@ -1,5 +1,6 @@
 ---
 title: Anaconda 环境管理
+abstract: Anaconda 虚拟环境的常用 conda 命令操作，涵盖创建、激活、查看、备份与删除环境等环境管理步骤。
 created: 2026-05-22
 tags:
   - Anaconda

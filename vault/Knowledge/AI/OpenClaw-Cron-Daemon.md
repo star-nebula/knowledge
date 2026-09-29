@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 定时任务与守护进程模块，讲解 Cron Service 的定时调度、Daemon 的跨平台适配及其设计模式。
 type: concept
 tags:
   - AI

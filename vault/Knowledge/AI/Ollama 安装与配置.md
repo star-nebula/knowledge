@@ -1,5 +1,6 @@
 ---
 title: Ollama 安装与配置
+abstract: Ollama 的安装与配置方法，涵盖 Linux 离线包手动安装、systemd 自启服务设置及 Windows 与 Linux 下模型存储路径修改。
 created: 2026-07-08
 tags:
   - Ollama

@@ -1,5 +1,6 @@
 ---
 title: Python 面向对象编程
+abstract: Python 面向对象编程概念，涵盖 OOP 基本思想、面向过程与面向对象的对比及封装、继承、多态三大特性。
 created: 2026-05-22
 tags:
   - Python

@@ -1,5 +1,6 @@
 ---
 title: Python Matplotlib
+abstract: Matplotlib 数据可视化库的使用，涵盖 pyplot 模块、画布创建与图表绘制流程，支持静态、动态和交互式图表。
 created: 2026-05-22
 tags:
   - Python

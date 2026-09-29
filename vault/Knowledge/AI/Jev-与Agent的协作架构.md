@@ -1,5 +1,6 @@
 ---
 title: Jev 与 Agent 的协作架构
+abstract: Jev 与 AI Agent 的协作架构，讲解 Jev 作为决策组件嵌入 Agent 系统的分工方式、调用链路与整体协作模式。
 created: 2026-09-23
 tags:
   - AI

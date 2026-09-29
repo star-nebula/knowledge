@@ -1,5 +1,6 @@
 ---
 title: Python 模块与包
+abstract: Python 模块与包的导入机制，涵盖 import 导入方式、自定义模块编写、包结构组织及相对与绝对导入。
 created: 2026-05-22
 tags:
   - Python

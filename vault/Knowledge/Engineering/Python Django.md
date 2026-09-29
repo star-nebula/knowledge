@@ -1,5 +1,6 @@
 ---
 title: Python Django
+abstract: Django Web 框架从底层原理到项目部署的全流程笔记，涵盖网络通信、MVC 与 ORM、快速上手及项目规范。
 created: 2026-05-22
 tags:
   - Python

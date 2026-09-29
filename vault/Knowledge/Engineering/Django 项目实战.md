@@ -1,5 +1,6 @@
 ---
 title: Django 项目实战
+abstract: 基于 Django 的订单交易平台项目实战，涵盖用户认证、短信登录、Redis 集成与第三方平台对接等功能模块开发。
 created: 2026-05-22
 tags:
   - Python

@@ -1,5 +1,6 @@
 ---
 title: MySQL 客户端工具连接
+abstract: 使用 DataGrip 和 VSCode 连接 MySQL 数据库的配置指南，涵盖新建连接、填写连接信息与驱动配置步骤。
 created: 2026-05-25
 tags:
   - MySQL

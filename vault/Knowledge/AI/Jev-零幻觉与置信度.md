@@ -1,5 +1,6 @@
 ---
 title: Jev 的零幻觉与置信度
+abstract: Jev 的零幻觉与置信度机制，讲解 Zero Hallucinations 的正确理解方式、置信度如何暴露给程序及生产环境的必要组合。
 created: 2026-09-23
 tags:
   - AI

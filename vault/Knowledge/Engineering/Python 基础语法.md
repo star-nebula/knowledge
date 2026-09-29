@@ -1,5 +1,6 @@
 ---
 title: Python 基础语法
+abstract: Python 入门基础语法，涵盖变量命名、数据类型、编码转换、用户输入及条件与循环流程控制。
 created: 2026-05-22
 tags:
   - Python

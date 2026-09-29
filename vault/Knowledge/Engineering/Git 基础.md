@@ -1,5 +1,6 @@
 ---
 title: Git 基础
+abstract: Git 分布式版本控制的核心概念，涵盖仓库、工作区、暂存区、提交等基本组成及其协作方式。
 created: 2026-05-22
 tags:
   - Git

@@ -1,5 +1,6 @@
 ---
 title: Python 爬虫
+abstract: Python 爬虫开发，涵盖 HTTP 请求原理、requests 模块用法、正则、bs4、xpath、pyquery 四种数据解析方式及 Selenium 自动化。
 created: 2026-05-22
 tags:
   - Python

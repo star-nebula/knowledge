@@ -1,5 +1,6 @@
 ---
 title: Milvus 向量数据库
+abstract: Milvus 向量数据库介绍，讲解其面向大规模嵌入向量的存储索引能力、核心概念、Schema 设计、索引类型与安装使用。
 created: 2026-07-08
 tags:
   - AI

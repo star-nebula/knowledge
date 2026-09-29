@@ -1,5 +1,6 @@
 ---
 title: win11 部署 Docker
+abstract: Windows 11 部署 Docker Desktop 的步骤，涵盖虚拟化前置条件、Windows 功能开启、安装配置及 WSL 常见问题处理。
 created: 2026-07-08
 tags:
   - Docker

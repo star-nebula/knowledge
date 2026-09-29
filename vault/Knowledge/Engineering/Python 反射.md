@@ -1,5 +1,6 @@
 ---
 title: Python 反射
+abstract: Python 反射机制，涵盖 hasattr、getattr、setattr、delattr 四个核心函数，实现运行时按字符串名称动态操作对象属性与方法。
 created: 2026-05-22
 tags:
   - Python

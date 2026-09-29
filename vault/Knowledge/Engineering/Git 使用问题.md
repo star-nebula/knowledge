@@ -1,5 +1,6 @@
 ---
 title: Git 使用问题
+abstract: Git 常见使用问题的排查与解决，涵盖远程分支与本地状态不同步、推送冲突等场景的 fetch、merge、rebase 处理方法。
 created: 2026-05-22
 tags:
   - Git

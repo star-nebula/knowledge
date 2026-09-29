@@ -1,5 +1,6 @@
 ---
 title: RAG Query 改写
+abstract: RAG 查询改写技术，讲解历史会话改写、关键词扩写、伪答案改写与缩写词改写等信息不完整类 Query 的优化方法，提升召回精度。
 created: 2026-07-08
 tags:
   - AI

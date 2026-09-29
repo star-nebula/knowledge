@@ -1,5 +1,6 @@
 ---
 title: Python Socket 编程
+abstract: Python Socket 网络编程，涵盖 TCP 与 UDP 协议原理、服务端与客户端编程及粘包问题的产生与解决。
 created: 2026-05-22
 tags:
   - Python

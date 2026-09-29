@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 部署与配置速查，涵盖安装方式、CLI 常用命令、配置文件结构与关键环境变量的设置说明。
 type: guides
 tags:
   - AI

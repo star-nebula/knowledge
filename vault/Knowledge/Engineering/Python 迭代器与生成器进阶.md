@@ -1,5 +1,6 @@
 ---
 title: Python 迭代器与生成器进阶
+abstract: 迭代器协议与生成器进阶用法，涵盖可迭代对象判定、多 yield、send、yield from 及惰性求值节省内存的应用。
 created: 2026-05-22
 tags:
   - Python

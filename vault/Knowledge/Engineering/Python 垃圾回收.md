@@ -1,5 +1,6 @@
 ---
 title: Python 垃圾回收
+abstract: CPython 内存管理机制，涵盖引用计数为主、标记清除与分代回收为辅的垃圾回收体系，以及缓存机制对效率的优化。
 created: 2026-05-22
 tags:
   - Python

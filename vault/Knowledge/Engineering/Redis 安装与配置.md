@@ -1,5 +1,6 @@
 ---
 title: Redis 安装与配置
+abstract: Redis 在 Windows 环境下的安装与配置，涵盖下载安装、服务端启动、注册为 Windows 服务及客户端连接。
 created: 2026-05-25
 tags:
   - Redis

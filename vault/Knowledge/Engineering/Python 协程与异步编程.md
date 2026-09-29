@@ -1,5 +1,6 @@
 ---
 title: Python 协程与异步编程
+abstract: Python 并发编程进阶，涵盖进程、线程与协程的概念对比，asyncio 异步编程模型及其适用场景。
 created: 2026-05-22
 tags:
   - Python

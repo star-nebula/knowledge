@@ -1,5 +1,6 @@
 ---
 title: Ubuntu 部署 DeepSeek
+abstract: 在 Ubuntu 服务器上通过 Ollama 部署 DeepSeek 模型的教程，涵盖 Ollama 标准与手动安装、模型拉取及本地远程调用方法。
 created: 2026-07-08
 tags:
   - DeepSeek

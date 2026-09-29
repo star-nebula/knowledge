@@ -1,5 +1,6 @@
 ---
 title: MySQL 安装与配置
+abstract: MySQL 在 Windows 环境下的安装与配置指南，涵盖下载解压、环境变量设置等步骤及客户端连接准备。
 created: 2026-05-25
 tags:
   - MySQL

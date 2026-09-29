@@ -1,5 +1,6 @@
 ---
 title: DeepSeek
+abstract: DeepSeek 深度求索的核心概念与基础知识，涵盖模型背景、架构特点、训练方法与代表性成果。
 created: 2026-07-08
 tags:
   - AI

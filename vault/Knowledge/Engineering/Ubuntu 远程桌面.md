@@ -1,5 +1,6 @@
 ---
 title: Ubuntu 远程桌面
+abstract: Ubuntu 远程桌面搭建步骤，涵盖 tigervnc 的安装、密码初始化与配置连接方法。
 created: 2026-05-22
 tags:
   - Ubuntu

@@ -1,5 +1,6 @@
 ---
 title: Markdown 语法
+abstract: Markdown 常用基础语法速查，涵盖标题、段落、换行、强调、列表等写法，附语法速查表与官方文档链接。
 created: 2026-05-22
 tags:
   - Markdown

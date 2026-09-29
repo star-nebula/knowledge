@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 会话管理器的源码解析，讲解会话 ID 与标签设计、生命周期事件等核心机制。
 type: concept
 tags:
   - AI

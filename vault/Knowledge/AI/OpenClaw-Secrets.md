@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 秘密管理器的源码解析，讲解密钥引用语法、快速路径优化与原子文件写入等实现细节。
 type: concept
 tags:
   - AI

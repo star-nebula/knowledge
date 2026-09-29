@@ -1,5 +1,6 @@
 ---
 title: Jupyter 保存路径
+abstract: 修改 Jupyter Notebook 默认保存位置的步骤，涵盖生成配置文件、定位 notebook_dir 配置项并设置为自定义路径。
 created: 2026-05-22
 tags:
   - Jupyter

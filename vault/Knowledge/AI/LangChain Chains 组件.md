@@ -1,5 +1,6 @@
 ---
 title: LangChain Chains 组件
+abstract: LangChain Chains 组件的用法，讲解将 LLM 与提示模板等组件组合成链，以及 LCEL 表达式语言用管道符串联组件的方式。
 tags: [langchain, chains, lcel, framework]
 type: 概念解释
 created: 2026-07-08

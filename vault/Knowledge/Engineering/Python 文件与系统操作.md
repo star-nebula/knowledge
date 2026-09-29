@@ -1,5 +1,6 @@
 ---
 title: Python 文件与系统操作
+abstract: Python 文件读写与系统操作，涵盖文件打开模式、路径处理、os 模块及目录遍历方法。
 created: 2026-05-22
 tags:
   - Python

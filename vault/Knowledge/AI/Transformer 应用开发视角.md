@@ -1,4 +1,5 @@
 ---
+abstract: 从应用开发视角理解 Transformer 架构，讲解为什么大模型开发绕不开它、RNN 与 CNN 的困境及注意力机制的解法。
 tags: [ai, foundation-model, llm, transformer]
 category: ["🤖 AI大模型"]
 ---

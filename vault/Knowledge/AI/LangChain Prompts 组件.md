@@ -1,5 +1,6 @@
 ---
 title: LangChain Prompts 组件
+abstract: LangChain Prompts 组件的用法，讲解 zero-shot 与 few-shot 提示方式的差异及 PromptTemplate 模板化的代码实现。
 tags: [langchain, prompts, template, few-shot, framework]
 type: 概念解释
 created: 2026-07-08

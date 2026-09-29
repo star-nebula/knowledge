@@ -1,5 +1,6 @@
 ---
 title: PyCharm 配置与使用
+abstract: PyCharm 常用快捷键速记，涵盖注释、纵向选择、格式化代码、代码上下移动等提高编辑效率的操作。
 created: 2026-05-22
 tags:
   - PyCharm

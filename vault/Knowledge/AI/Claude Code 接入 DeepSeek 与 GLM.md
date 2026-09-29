@@ -1,5 +1,6 @@
 ---
 title: Claude Code 接入 DeepSeek 与 GLM
+abstract: 让 Claude Code 接入 DeepSeek 与 GLM 模型的配置教程，涵盖安装步骤、API 环境变量设置与模型切换验证方法。
 tags: [Claude Code, DeepSeek, GLM, 模型接入, LLM应用]
 type: 步骤操作
 created: 2026-07-08

@@ -1,5 +1,6 @@
 ---
 title: Jev 三大决策原语
+abstract: Jev 决策模型的三大原语概念，讲解 State 状态、Question 问题与 Typed Decision 类型化决策三要素的定义与协作关系。
 created: 2026-09-23
 tags:
   - AI

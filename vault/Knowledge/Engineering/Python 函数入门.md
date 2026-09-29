@@ -1,5 +1,6 @@
 ---
 title: Python 函数入门
+abstract: Python 函数入门知识，涵盖函数定义、各类参数类型、作用域规则与闭包的基本概念。
 created: 2026-05-22
 tags:
   - Python

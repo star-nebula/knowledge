@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 插件系统的源码解析，讲解 PluginLoader 的 App Store 类比、插件 API、十步生命周期加载流程与 SDK 架构。
 type: concept
 tags:
   - AI

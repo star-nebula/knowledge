@@ -3,6 +3,7 @@
 
 
 title: NLP-文本预处理
+abstract: NLP 文本预处理方法，讲解 jieba 分词的精确与全模式用法、命名实体识别、词性标注及 One-Hot 等文本张量表示方法。
 
 
 

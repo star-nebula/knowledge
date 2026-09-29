@@ -1,5 +1,6 @@
 ---
 title: JavaScript
+abstract: JavaScript 基础笔记，涵盖 ECMAScript 简介、引入方式、基本语法、数据类型、运算符与流程控制等入门知识。
 created: 2026-05-22
 tags:
   - JavaScript

@@ -1,5 +1,6 @@
 ---
 title: DeepSeek NSA 稀疏注意力
+abstract: DeepSeek 提出的 NSA 原生稀疏注意力机制，讲解其分层稀疏策略、硬件对齐设计与在长上下文场景下的性能优势。
 created: 2026-07-17
 tags:
   - AI

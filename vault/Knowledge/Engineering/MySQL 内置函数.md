@@ -1,5 +1,6 @@
 ---
 title: MySQL 内置函数
+abstract: MySQL 常用内置函数速查表，涵盖字符串、数值、日期等各类函数的说明与用法示例。
 created: 2026-05-25
 tags:
   - MySQL

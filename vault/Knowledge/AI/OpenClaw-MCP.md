@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 的 MCP 协议集成，讲解 Channel Bridge、Stdio Server 与独立工具服务器的核心设计及所用设计模式。
 type: concept
 tags:
   - AI

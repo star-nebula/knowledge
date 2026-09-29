@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 工具系统的源码解析，讲解工具拥有者、可用性条件布尔表达式树与工具描述符等核心类型设计。
 type: concept
 tags:
   - AI

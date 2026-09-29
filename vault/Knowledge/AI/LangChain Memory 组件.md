@@ -1,5 +1,6 @@
 ---
 title: LangChain Memory 组件
+abstract: LangChain Memory 组件的用法，讲解通过短期与长期记忆存储历史消息实现上下文对话，以及记忆的序列化落盘与恢复。
 tags: [langchain, memory, chat-history, framework]
 type: 概念解释
 created: 2026-07-08

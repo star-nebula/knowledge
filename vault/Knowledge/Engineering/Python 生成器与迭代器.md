@@ -1,5 +1,6 @@
 ---
 title: Python 生成器与迭代器
+abstract: Python 生成器与迭代器基础，涵盖生成器推导式与 yield 关键字、迭代器协议及惰性求值节省内存的原理。
 created: 2026-05-22
 tags:
   - Python

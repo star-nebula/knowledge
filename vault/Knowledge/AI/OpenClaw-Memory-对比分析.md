@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 记忆系统与传统 Agent 框架的对比分析，讲解四层混合搜索管道、双数据源与 Agent 驱动 Flush 等五项核心改进。
 type: comparison
 tags:
   - AI

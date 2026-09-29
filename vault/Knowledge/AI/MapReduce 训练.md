@@ -1,5 +1,6 @@
 ---
 title: MapReduce 训练
+abstract: 基于 MapReduce 的分布式机器学习训练范式，讲解大规模数据并行、SGD 分布式化及两种同步策略的设计取舍。
 created: 2026-07-10
 tags:
   - 机器学习

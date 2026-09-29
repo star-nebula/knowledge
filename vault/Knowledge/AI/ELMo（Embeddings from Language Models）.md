@@ -1,5 +1,6 @@
 ---
 title: ELMo（Embeddings from Language Models）
+abstract: ELMo 上下文相关词向量模型，讲解其双向 LSTM 架构、动态词向量生成机制及其对解决一词多义问题的意义。
 created: 2026-07-10
 tags:
   - NLP

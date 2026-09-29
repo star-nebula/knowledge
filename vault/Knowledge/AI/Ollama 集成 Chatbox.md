@@ -1,5 +1,6 @@
 ---
 title: Ollama 集成 Chatbox
+abstract: Chatbox 客户端集成 Ollama 本地模型的教程，讲解 Chatbox 多平台 AI 聊天客户端的特点及通过 API 接入本地模型的配置步骤。
 created: 2026-07-08
 tags:
   - Ollama

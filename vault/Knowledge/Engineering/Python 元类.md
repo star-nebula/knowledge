@@ -1,5 +1,6 @@
 ---
 title: Python 元类
+abstract: Python 元类机制，涵盖类即对象的本质、type 动态创建类的原理与 metaclass 自定义类创建过程。
 created: 2026-05-22
 tags:
   - Python

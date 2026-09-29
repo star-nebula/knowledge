@@ -1,5 +1,6 @@
 ---
 title: n8n 本地部署
+abstract: n8n 工作流平台的本地部署教程，涵盖本地部署的数据安全优势、npm 与 Docker 两种安装方法、界面汉化与关键环境变量配置。
 tags: [n8n, 工作流, 自动化, 本地部署, docker]
 type: 步骤操作
 created: 2026-07-08

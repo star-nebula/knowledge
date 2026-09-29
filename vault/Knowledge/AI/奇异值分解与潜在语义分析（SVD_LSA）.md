@@ -1,5 +1,6 @@
 ---
 title: 奇异值分解与潜在语义分析（SVD/LSA）
+abstract: 奇异值分解 SVD 与潜在语义分析 LSA 讲解，涵盖任意矩阵的 UΣVᵀ 分解形式及 SVD 在文本语义检索中的应用。
 created: 2026-07-10
 tags:
   - 机器学习

@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw LLM 客户端的源码解析，讲解流式事件协议、KnownApi 枚举、使用统计与内置模型提供者的实现方式。
 type: concept
 tags:
   - AI

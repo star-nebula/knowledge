@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 上下文引擎的源码解析，讲解 ContextCompaction 的职责、引擎契约与注册表、运行时隔离机制及设计模式。
 type: concept
 tags:
   - AI

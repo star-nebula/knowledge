@@ -1,5 +1,6 @@
 ---
 type: maps
+abstract: OpenClaw 专题导航页，聚合架构总览、基础层、扩展层、能力层等全部核心模块子笔记与记忆系统、部署指南的入口。
 tags:
   - AI
   - OpenClaw

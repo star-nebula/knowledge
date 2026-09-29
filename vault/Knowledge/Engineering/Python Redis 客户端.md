@@ -1,5 +1,6 @@
 ---
 title: Python Redis 客户端
+abstract: Python 通过 redis-py 操作 Redis 的指南，涵盖安装、直接连接与连接池两种方式及常用数据操作。
 created: 2026-05-25
 tags:
   - Redis

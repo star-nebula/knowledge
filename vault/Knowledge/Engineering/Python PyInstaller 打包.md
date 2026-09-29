@@ -1,5 +1,6 @@
 ---
 title: Python PyInstaller 打包
+abstract: 使用 PyInstaller 将 Python 脚本打包为独立可执行文件，涵盖单目录与单文件模式、spec 配置等基本用法。
 created: 2026-05-22
 tags:
   - Python

@@ -1,5 +1,6 @@
 ---
 title: Ollama 概述
+abstract: Ollama 本地大模型运行工具概述，讲解其简化 LLM 本地部署与运行的定位、对主流模型的支持及六大特点。
 created: 2026-07-08
 tags:
   - Ollama

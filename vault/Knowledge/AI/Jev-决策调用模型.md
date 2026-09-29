@@ -1,5 +1,6 @@
 ---
 title: Jev 决策调用模型
+abstract: Jev 决策调用模型的三元结构，讲解 State 现状、Question 判断目标与 Typed Decision 类型化决策的调用流程设计。
 created: 2026-09-23
 tags:
   - AI

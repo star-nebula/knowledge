@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 钩子系统的源码解析，讲解三种钩子来源、全局单例注册机制、关键源文件及所采用的设计模式。
 type: concept
 tags:
   - AI

@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw Channels 频道抽象层的源码解析，讲解 ChannelPlugin 架构、注册表操作、消息处理管线与适配器模式设计。
 type: concept
 tags:
   - AI

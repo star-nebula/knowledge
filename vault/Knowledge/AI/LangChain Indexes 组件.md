@@ -1,5 +1,6 @@
 ---
 title: LangChain Indexes 组件
+abstract: LangChain Indexes 组件的用法，讲解文档加载、文本分割、向量存储到检索的完整链路，是构建 RAG 应用的基础。
 tags: [langchain, indexes, rag, vectorstore, retrieval, framework]
 type: 概念解释
 created: 2026-07-08

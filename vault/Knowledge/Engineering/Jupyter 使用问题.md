@@ -1,5 +1,6 @@
 ---
 title: Jupyter 使用问题
+abstract: Jupyter Notebook 使用中的常见问题处理，涵盖更换主题背景颜色等个性化配置方法。
 created: 2026-05-22
 tags:
   - Jupyter

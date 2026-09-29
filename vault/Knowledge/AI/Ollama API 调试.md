@@ -1,5 +1,6 @@
 ---
 title: Ollama API 调试
+abstract: Ollama API 调试方法，讲解 Linux 远程访问开通、systemd 服务配置、API 接口一览及用 Apifox 调试聊天与向量化接口。
 created: 2026-07-08
 tags:
   - Ollama

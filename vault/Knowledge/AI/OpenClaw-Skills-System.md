@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 技能系统的源码解析，讲解技能的核心类型、安装流程、安全设计与所采用的设计模式。
 type: concept
 tags:
   - AI

@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 代码组织与技术债务分析，讲解目录结构、命名规范、编码原则、测试策略与代码质量工具的使用。
 type: concept
 tags:
   - AI

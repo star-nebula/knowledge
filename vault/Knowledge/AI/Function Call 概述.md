@@ -1,5 +1,6 @@
 ---
 title: Function Call 概述
+abstract: Function Call 函数调用机制概述，讲解大模型识别用户意图、输出结构化函数参数、由程序执行并回传结果的工作流程与应用场景。
 created: 2026-07-09
 tags:
   - AI

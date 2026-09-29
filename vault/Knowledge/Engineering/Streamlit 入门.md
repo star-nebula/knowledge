@@ -1,5 +1,6 @@
 ---
 title: Streamlit 入门
+abstract: Streamlit 框架入门，涵盖安装运行、基础组件用法，快速将 Python 脚本转为可分享的 Web 应用。
 created: 2026-07-08
 tags:
   - Streamlit

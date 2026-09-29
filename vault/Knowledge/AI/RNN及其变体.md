@@ -1,5 +1,6 @@
 ---
 title: RNN及其变体
+abstract: 循环神经网络 RNN 及其变体讲解，涵盖 RNN 基础概念、循环机制对序列关系的捕捉能力及 LSTM、GRU 等改进结构。
 created: 2026-05-23
 tags:
   - NLP

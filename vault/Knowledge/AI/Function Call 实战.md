@@ -1,5 +1,6 @@
 ---
 title: Function Call 实战
+abstract: Function Call 函数调用实战教程，以 MiMo 模型为例演示工具函数定义、参数解析与调用回传的完整代码流程。
 created: 2026-07-09
 tags:
   - AI

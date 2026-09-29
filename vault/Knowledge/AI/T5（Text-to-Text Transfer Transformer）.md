@@ -1,5 +1,6 @@
 ---
 title: T5（Text-to-Text Transfer Transformer）
+abstract: T5 迁移学习模型讲解，其将所有 NLP 任务统一为文本到文本格式，涵盖统一框架、架构设计、训练策略与主要结论。
 created: 2026-07-10
 tags:
   - NLP

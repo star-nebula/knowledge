@@ -1,5 +1,6 @@
 ---
 title: Jev 与传统 LLM 的区别
+abstract: Jev 与传统 LLM 的对比分析，从任务定位、输出形态、幻觉控制与置信度机制等维度讲解两者在解决决策问题上的差异。
 created: 2026-09-23
 tags:
   - AI

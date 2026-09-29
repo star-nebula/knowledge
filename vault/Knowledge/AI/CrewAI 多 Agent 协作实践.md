@@ -1,5 +1,6 @@
 ---
 title: CrewAI 多 Agent 协作实践
+abstract: 使用 CrewAI 框架进行多 Agent 协作的实践教程，涵盖角色定义、任务编排、工具配置与团队协作流程的代码实现。
 created: 2026-07-09
 tags:
   - AI

@@ -1,5 +1,6 @@
 ---
 title: DeepSeek 开源周五大工具
+abstract: DeepSeek 开源周发布的五大工具介绍，涵盖 FlashMLA、DeepEP、DeepGEMM 等推理与通信优化项目的用途和意义。
 created: 2026-07-17
 tags:
   - AI

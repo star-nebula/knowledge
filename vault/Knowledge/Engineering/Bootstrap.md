@@ -1,5 +1,6 @@
 ---
 title: Bootstrap
+abstract: Bootstrap 前端 CSS 框架入门，涵盖框架特点与 12 列栅格系统、列偏移等响应式布局核心用法。
 created: 2026-05-22
 tags:
   - Bootstrap

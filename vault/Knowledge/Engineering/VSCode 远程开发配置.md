@@ -1,5 +1,6 @@
 ---
 title: VSCode 远程开发配置
+abstract: VSCode 连接虚拟机 Ubuntu 的远程开发环境搭建，涵盖 SSH 服务器安装与远程连接配置步骤。
 created: 2026-05-22
 tags:
   - VSCode

@@ -1,5 +1,6 @@
 ---
 title: Python 注册表模式
+abstract: 注册表模式的演进与实现，涵盖从 if-elif 链到字典注册表再到装饰器自动注册的插件化架构改造。
 created: 2026-05-22
 tags:
   - Python

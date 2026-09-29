@@ -1,5 +1,6 @@
 ---
 title: Vercel 博客部署
+abstract: 从零将 Obsidian 笔记以 Nolebase 模板部署为 Vercel 博客的操作步骤——装 Git、建 GitHub 仓库、初始化并关联远程、发布上线。
 created: 2026-05-22
 tags:
   - Obsidian

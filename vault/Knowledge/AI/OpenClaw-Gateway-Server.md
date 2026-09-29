@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 网关服务器的源码解析，讲解其核心职责、关键源文件及懒加载、门面模式、回退上下文等设计模式。
 type: concept
 tags:
   - AI

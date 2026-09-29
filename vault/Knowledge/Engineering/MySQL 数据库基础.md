@@ -1,5 +1,6 @@
 ---
 title: MySQL 数据库基础
+abstract: MySQL 数据库基础概念与 SQL 语法，涵盖 SQL 语句分类（DDL、DML、DQL）、约束、表关联关系与多表查询。
 created: 2026-05-25
 tags:
   - MySQL

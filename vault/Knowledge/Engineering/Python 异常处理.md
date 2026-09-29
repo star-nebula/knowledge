@@ -1,5 +1,6 @@
 ---
 title: Python 异常处理
+abstract: Python 异常处理机制，涵盖 try-except 语法、标准异常体系、自定义异常与资源清理的最佳实践。
 created: 2026-05-22
 tags:
   - Python

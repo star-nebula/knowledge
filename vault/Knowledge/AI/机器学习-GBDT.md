@@ -3,6 +3,7 @@
 
 
 title: GBDT介绍
+abstract: GBDT 梯度提升决策树讲解，先介绍 Bagging 与 Boosting 两种集成学习思路，再讲解 GBDT 算法的原理与训练过程。
 
 
 

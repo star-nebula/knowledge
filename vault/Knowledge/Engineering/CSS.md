@@ -1,5 +1,6 @@
 ---
 title: CSS
+abstract: CSS 样式基础笔记，涵盖三种引入方式、选择器、常用属性与盒子模型等网页样式核心知识。
 created: 2026-05-22
 tags:
   - CSS

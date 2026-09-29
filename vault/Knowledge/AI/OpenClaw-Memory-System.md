@@ -1,4 +1,5 @@
 ---
+abstract: OpenClaw 记忆系统的源码解析，作为其最大的跨层系统，讲解架构分层、Memory Flush 持久化的触发链路、门控逻辑与九步执行引擎。
 type: concept
 tags:
   - AI

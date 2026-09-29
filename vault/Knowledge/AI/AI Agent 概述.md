@@ -1,5 +1,6 @@
 ---
 title: AI Agent 概述
+abstract: AI Agent（智能体）核心概念概述，涵盖 Agent 的定义、与大模型的关系、感知-规划-行动工作循环及其在自动化任务中的应用范式。
 created: 2026-07-09
 tags:
   - AI

@@ -1,5 +1,6 @@
 ---
 title: Ubuntu 配置
+abstract: Ubuntu 系统常用配置操作，涵盖 SSH 服务开启、IP 地址查询等远程连接服务器的基础设置。
 created: 2026-05-22
 tags:
   - Ubuntu
