@@ -469,3 +469,23 @@ body:has(.VPHome) .VPNavBar:not(.top) .content-body {
   border-color: #f0883e;
   color: #f0883e;
 }
+
+/* 隐藏 MathJax 公式的无障碍 MathML 副本（mjx-assistive-mml）。
+   markdown-it-mathjax3 v5 给每个公式输出 <span id="mjx-*"><style>隐藏CSS</style>
+   <mjx-container>SVG</mjx-container><mjx-assistive-mml>MathML副本</mjx-assistive-mml></span>，
+   但该 <style> 会被 VitePress 的 Vue 模板编译剥掉，导致 MathML 副本与 SVG 同时可见
+   （公式"渲染两次"）。这里按 MathJax 原本的意图在主题层兜底隐藏，副本保留供屏幕阅读器。 */
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0 0 0 !important;
+  border: 0 !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-user-select: none;
+  user-select: none;
+  color: rgba(0, 0, 0, 0);
+}
