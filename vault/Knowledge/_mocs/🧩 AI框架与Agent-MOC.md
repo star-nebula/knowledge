@@ -26,6 +26,7 @@ category:
 - [[CrewAI 多 Agent 协作实践]]
 - [[Function Call 实战]]
 - [[Function Call 概述]]
+- [[Hermes-智能体十大技能|Hermes 智能体十大技能]]
 - [[Jev-三大决策原语|Jev 三大决策原语]]
 - [[Jev-与Agent的协作架构|Jev 与 Agent 的协作架构]]
 - [[Jev-与传统LLM的区别|Jev 与传统 LLM 的区别]]
