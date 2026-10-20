@@ -9,13 +9,13 @@
 | 目录 | 内容 |
 |---|---|
 | `vault/Knowledge/` | 主题笔记（AI / 工程 / 方法论），按 category frontmatter 自动生成侧边栏 |
-| `vault/博客/作坊/` | 项目 Demo 与实验记录 |
-| `vault/博客/档案/` | 项目复盘笔记 |
+| `vault/blog/作坊/` | 项目 Demo 与实验记录 |
+| `vault/blog/档案/` | 项目复盘笔记 |
 
 其余目录（`Memory/`、`Resources/`、`DailyNotes/`、`Interview/` 等）为私人笔记，**内容**被 `.gitignore` 排除，不入库也不参与构建；其中 `Archive/` `Canvas/` `DailyNotes/` `Inbox/` `Resources/` `Templates/` 六个目录只在仓库里各保留一个空文件夹占位文件（`.gitkeep`），用于在 GitHub 上显出目录结构。
 `vault/rules/` 是例外：知识库操作规范，**入库**（随仓库做版本管理）但**不发布**（不渲染到站点），见下节。
 
-博客专用页面集中在 `vault/博客/`：`主页/`、`作坊/`、`档案/`、`最近/`。`Knowledge/` 仍是共享知识源；VitePress `rewrites` 保留原 `/vault/主页/`、`/vault/作坊/`、`/vault/档案/`、`/vault/最近/` 网址，移动文件不改变外部链接。
+博客专用页面集中在 `vault/blog/`：`主页/`、`作坊/`、`档案/`、`最近/`。`Knowledge/` 仍是共享知识源；VitePress `rewrites` 保留原 `/vault/主页/`、`/vault/作坊/`、`/vault/档案/`、`/vault/最近/` 网址，移动文件不改变外部链接。
 
 ## 知识库规则（`vault/rules/`）
 
@@ -48,7 +48,7 @@ pnpm check:boundary # 发布边界校验（见下方「私密与发布的边界�
 
 ## 私密与发布的边界
 
-- **发布面（唯一事实来源）**：`vault/博客/作坊`、`vault/博客/档案`、`vault/Knowledge`。这三目录是全部会进 GitHub 并渲染成站点的内容；新增/移除发布目录只改 `.vitepress/config.ts` 顶部的 `PUBLISHED_DIRS`。
+- **发布面（唯一事实来源）**：`vault/blog/作坊`、`vault/blog/档案`、`vault/Knowledge`。这三目录是全部会进 GitHub 并渲染成站点的内容；新增/移除发布目录只改 `.vitepress/config.ts` 顶部的 `PUBLISHED_DIRS`。
 - **发布判定**：三面共用同一份 `PUBLISHED_DIRS`——`srcExclude` 排除所有非发布目录（不渲染）、nolebase 双链索引同源排除（不编入 `[[ ]]`）、`scripts/check-publish-boundary.mjs` 校验 git 跟踪面与构建产物链接都 ⊆ 发布面。跑 `pnpm check:boundary` 即可发现「私人目录被误 add / 产物出现非发布链接」。
 - **附件**：`vault/Attachments/` 默认整体忽略；`pnpm sync:assets` 只把「已发布笔记引用到的图片」强制入库，私人图绝不进 GitHub。
 - **私人目录**：同时被 `.gitignore`（内容不入库）和 VitePress `srcExclude`（不渲染）双重排除，本地构建也不会把私人笔记带上站点。`Archive/` `Canvas/` `DailyNotes/` `Inbox/` `Resources/` `Templates/` 六个目录例外地在仓库里各保留一个 `.gitkeep` 占位文件（只表明目录存在，不含任何内容）。

@@ -23,16 +23,16 @@ import { resolve } from 'node:path'
 // 发布面 = 内容目录 + 站点运行必需文件（首页/目录页/数据源），
 // 文件级条目用 `vault/<文件>` 形式；目录级用 `vault/<目录>`（含子目录）。
 const PUBLISHED_DIRS = [
-  'vault/博客/作坊',
-  'vault/博客/档案',
+  'vault/blog/作坊',
+  'vault/blog/档案',
   'vault/Knowledge',
   // 附件：被 git 跟踪的图片即已发布图片（pnpm sync:assets 只 add 已发布笔记引用的图）。
   // 整目录放行，便于 ![[image]] 嵌入解析；私人图仍在 .gitignore 里不会进仓库。
   'vault/Attachments',
   // 博客专用页面集中存放；rewrites 保留原 /vault/主页/、/vault/最近/toc 网址。
   // SITE_PAGE_FILES 将这两目录进一步限制为站点必需文件。
-  'vault/博客/主页',
-  'vault/博客/最近',
+  'vault/blog/主页',
+  'vault/blog/最近',
 ]
 // 注：`vault/🔌 知识库插件列表.md` 曾以「站点必需文件」形式列在此处（vault 根散文件）。
 // 2026-09-24 已迁入 `vault/Knowledge/Methods/知识库插件列表.md` 并按原子笔记规范补 frontmatter
@@ -135,9 +135,9 @@ function fixSidebarIndexLinks(sidebar: any): any {
  */
 function buildSiteSidebar() {
   const base = calculateSidebar([
-    { folderName: 'vault/博客/作坊', separate: true },
-    { folderName: 'vault/博客/档案', separate: true },
-  ], 'vault/博客')
+    { folderName: 'vault/blog/作坊', separate: true },
+    { folderName: 'vault/blog/档案', separate: true },
+  ], 'vault/blog')
   const knowledge = HAS_KNOWLEDGE ? buildKnowledgeSidebar() : []
   if (knowledge.length > 0)
     (base as Record<string, any>)['/vault/Knowledge/'] = knowledge
@@ -145,13 +145,13 @@ function buildSiteSidebar() {
 }
 
 // 根据完整发布路径生成排除规则；枚举 vault 顶层及嵌套发布目录的祖先层。
-// 新增私人目录（包括 博客/ 下的兄弟目录）自动排除，
+// 新增私人目录（包括 blog/ 下的兄弟目录）自动排除，
 // 且与 nolebase 双链索引共用同一份数据（见顶部 PUBLISHED_DIRS 注释）。
 // 注意：vault/Attachments 的图片不在此排除（图片不参与页面渲染，且要支持图片嵌入）。
 function buildExcludes() {
   const vaultRoot = resolve(process.cwd(), 'vault')
   const excludes: string[] = []
-  // 只递归白名单的祖先目录，避免把 博客/ 下新加的私人文件一起放行。
+  // 只递归白名单的祖先目录，避免把 blog/ 下新加的私人文件一起放行。
   function visit(dir: string, prefix: string) {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const source = `${prefix}/${entry.name}`
@@ -194,7 +194,7 @@ export default defineConfig({
   // 会让 @nolebase/thumbnail-hash 在构建期崩溃（Failed to make image from encoded data）。
   // srcExclude 相对 srcDir（即仓库根 E:\knowledge）匹配，故用 **/ 前缀兜底。
   srcExclude,
-  // 仅构建「站点内容」文件夹（vault/博客/作坊、vault/博客/档案；Knowledge 由 buildKnowledgeSidebar 接入），
+  // 仅构建「站点内容」文件夹（vault/blog/作坊、vault/blog/档案；Knowledge 由 buildKnowledgeSidebar 接入），
   // 排除 Obsidian 私人库。好处：① 构建更快、产物更干净；② 私人笔记不会被发布。
   // 发布面清单见顶部 PUBLISHED_DIRS。
   lastUpdated: true,
@@ -295,7 +295,7 @@ export default defineConfig({
       link: '/vault/主页/',
       themeConfig: {
         nav: [
-          // 2026-10-20：源文件收进 vault/博客/；rewrites 保留这里的旧 URL。
+          // 2026-10-20：源文件收进 vault/blog/；rewrites 保留这里的旧 URL。
           { text: '主页', link: '/vault/主页/' },
           // 「知识」项随 HAS_KNOWLEDGE 条件化：vault/Knowledge 缺失时整项不出，避免死链 nav。
           // （srcExclude 与 sidebar 早已条件化，唯此处遗漏）
@@ -376,7 +376,7 @@ export default defineConfig({
     const path = await import('node:path')
     const outDir = siteConfig.outDir
     const base = SITE_BASE
-    // 站点首页源文件 = vault/博客/主页/index.md；rewrites 保留原公开 URL。
+    // 站点首页源文件 = vault/blog/主页/index.md；rewrites 保留原公开 URL。
     // 中文段一律用 percent-encoded 形态，meta refresh / href / 内联脚本三处共用同一常量，
     // 避免浏览器对裸 CJK 的编码差异影响跳转。
     const home = `${base}vault/%E4%B8%BB%E9%A1%B5/`

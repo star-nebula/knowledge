@@ -14,7 +14,7 @@ function markdownFiles(dir) {
 }
 
 test('every moved blog page is built at its previous public URL', () => {
-  for (const source of markdownFiles('vault/博客')) {
+  for (const source of markdownFiles('vault/blog')) {
     const output = blogSourceToRoute(source).replace(/\.md$/, '.html')
     assert.ok(existsSync(join(dist, output)), `Missing output: ${output}`)
   }

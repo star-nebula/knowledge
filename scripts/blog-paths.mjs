@@ -1,8 +1,8 @@
-// Obsidian sources live under 博客/; public URLs retain their existing paths.
+// Obsidian sources live under blog/; public URLs retain their existing paths.
 export const SITE_BASE = '/knowledge/'
 
 const sections = '(主页|最近|作坊|档案)'
-const sourcePrefix = new RegExp(`^(\/?)vault/博客/${sections}(?=/|$)`)
+const sourcePrefix = new RegExp(`^(\/?)vault/blog/${sections}(?=/|$)`)
 const routePrefix = new RegExp(`^(\/?)vault/${sections}(?=/|$)`)
 
 export function blogSourceToRoute(path) {
@@ -10,7 +10,7 @@ export function blogSourceToRoute(path) {
 }
 
 export function blogRouteToSource(path) {
-  return path.replaceAll('\\', '/').replace(routePrefix, '$1vault/博客/$2')
+  return path.replaceAll('\\', '/').replace(routePrefix, '$1vault/blog/$2')
 }
 
 export function isWithinPublished(path, publishedDirs) {

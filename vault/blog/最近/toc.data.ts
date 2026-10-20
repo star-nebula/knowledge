@@ -15,7 +15,7 @@ const knowledgeLoader = createRecentUpdatesLoader({
 })
 
 const workshopLoader = createRecentUpdatesLoader({
-  dir: 'vault/博客/作坊',
+  dir: 'vault/blog/作坊',
   rewrites: [
     {
       from: /^vault\/作坊/,
