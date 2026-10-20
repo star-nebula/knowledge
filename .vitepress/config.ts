@@ -8,11 +8,10 @@ import { defineConfig } from 'vitepress'
 import { obsidianImageEmbed } from './markdown/obsidian-image-embed'
 import { sanitizeWikiPercent } from './markdown/sanitize-wikilink-percent'
 import { buildKnowledgeSidebar } from '../scripts/knowledge-org'
+import { blogSourceToRoute, SITE_BASE } from '../scripts/blog-paths.mjs'
 
 import { existsSync, readdirSync } from 'node:fs'
 import { resolve } from 'node:path'
-
-const SITE_BASE = '/knowledge/'
 
 // 站点发布面：唯一事实来源。新增/移除发布目录只改这里。
 // 三处派生共用同一份清单，保证「git 跟踪 / 构建渲染 / 双链索引」三面始终对齐：
@@ -24,21 +23,16 @@ const SITE_BASE = '/knowledge/'
 // 发布面 = 内容目录 + 站点运行必需文件（首页/目录页/数据源），
 // 文件级条目用 `vault/<文件>` 形式；目录级用 `vault/<目录>`（含子目录）。
 const PUBLISHED_DIRS = [
-  'vault/作坊',
-  'vault/档案',
+  'vault/博客/作坊',
+  'vault/博客/档案',
   'vault/Knowledge',
   // 附件：被 git 跟踪的图片即已发布图片（pnpm sync:assets 只 add 已发布笔记引用的图）。
   // 整目录放行，便于 ![[image]] 嵌入解析；私人图仍在 .gitignore 里不会进仓库。
   'vault/Attachments',
-  // 站点运行必需页（2026-09-25：原 vault 根散文件 index.md / toc.md / data/toc.data.ts
-  // 迁入两个独立目录，vault 根不再留站点文件）。
-  //   vault/主页/index.md  VitePress `layout: home` 首页 → /knowledge/vault/主页/
-  //   vault/最近/toc.md    「最近」页，数据源同目录 toc.data.ts → /knowledge/vault/最近/toc
-  // ⚠ 只能按**目录级**放行：check-publish-boundary.mjs 的白名单只认「顶层目录」与「vault 根散文件」
-  //   两种形态，子目录内的文件级条目会被判成误 add。目录级放行的代价（整目录公开）由该脚本的
-  //   SITE_PAGE_FILES 精确文件清单兜底——往这两个目录塞白名单外的笔记，`pnpm check:boundary` 会拦。
-  'vault/主页',
-  'vault/最近',
+  // 博客专用页面集中存放；rewrites 保留原 /vault/主页/、/vault/最近/toc 网址。
+  // SITE_PAGE_FILES 将这两目录进一步限制为站点必需文件。
+  'vault/博客/主页',
+  'vault/博客/最近',
 ]
 // 注：`vault/🔌 知识库插件列表.md` 曾以「站点必需文件」形式列在此处（vault 根散文件）。
 // 2026-09-24 已迁入 `vault/Knowledge/Methods/知识库插件列表.md` 并按原子笔记规范补 frontmatter
@@ -82,6 +76,9 @@ const nolebase = presetMarkdownIt({
       // 避免两处各自维护导致漂移（见顶部 PUBLISHED_DIRS 注释）。
       excludesPatterns: [
         ...buildExcludes(),
+        // 诊断快照/备份不可参与同名匹配，否则会抢占真实博客笔记的双链。
+        '_agent_scripts/**',
+        'backup/**',
         // Archive 备份目录含与 Attachments 同名的图片/附件副本，同名冲突会误报；
         // 同时排除 Attachments 内的 .md（Excalidraw 画图文件用 [[Pasted Image]] 引用粘贴图，会产生噪声），
         // 但保留 .png 等图片扫描以确保 ![[image]] 嵌入可解析。
@@ -106,6 +103,8 @@ function fixSidebarIndexLinks(sidebar: any): any {
     for (const item of items) {
       if (typeof item.link === 'string' && item.link.endsWith('/index'))
         item.link = item.link.replace(/\/index$/, '/')
+      if (typeof item.link === 'string')
+        item.link = blogSourceToRoute(item.link)
       if (item.items)
         walk(item.items)
     }
@@ -118,6 +117,11 @@ function fixSidebarIndexLinks(sidebar: any): any {
     for (const key of Object.keys(sidebar)) {
       if (Array.isArray(sidebar[key]))
         walk(sidebar[key])
+      const route = blogSourceToRoute(key)
+      if (route !== key) {
+        sidebar[route] = sidebar[key]
+        delete sidebar[key]
+      }
     }
   }
 
@@ -131,31 +135,35 @@ function fixSidebarIndexLinks(sidebar: any): any {
  */
 function buildSiteSidebar() {
   const base = calculateSidebar([
-    { folderName: 'vault/作坊', separate: true },
-    { folderName: 'vault/档案', separate: true },
-  ], 'vault')
+    { folderName: 'vault/博客/作坊', separate: true },
+    { folderName: 'vault/博客/档案', separate: true },
+  ], 'vault/博客')
   const knowledge = HAS_KNOWLEDGE ? buildKnowledgeSidebar() : []
   if (knowledge.length > 0)
     (base as Record<string, any>)['/vault/Knowledge/'] = knowledge
   return fixSidebarIndexLinks(base)
 }
 
-// 生成「排除所有不在发布面的 vault 顶层条目」的 glob 规则。
-// 原理：枚举 vault/ 下真实存在的顶层条目（目录/文件），凡不在 PUBLISHED_DIRS 清单内的
-// 一律排除（目录 → **/<name>/**，文件 → **/<name>）。这样新增私人目录无需手写任何规则，
+// 根据完整发布路径生成排除规则；枚举 vault 顶层及嵌套发布目录的祖先层。
+// 新增私人目录（包括 博客/ 下的兄弟目录）自动排除，
 // 且与 nolebase 双链索引共用同一份数据（见顶部 PUBLISHED_DIRS 注释）。
 // 注意：vault/Attachments 的图片不在此排除（图片不参与页面渲染，且要支持图片嵌入）。
 function buildExcludes() {
   const vaultRoot = resolve(process.cwd(), 'vault')
-  // PUBLISHED_DIRS 里既有目录也有文件：取顶层名作为白名单
-  const published = new Set(PUBLISHED_DIRS.map(d => d.replace(/^vault\//, '').split('/')[0]))
   const excludes: string[] = []
-  for (const entry of readdirSync(vaultRoot, { withFileTypes: true })) {
-    const name = entry.name
-    if (published.has(name))
-      continue
-    excludes.push(entry.isDirectory() ? `**/${name}/**` : `**/${name}`)
+  // 只递归白名单的祖先目录，避免把 博客/ 下新加的私人文件一起放行。
+  function visit(dir: string, prefix: string) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const source = `${prefix}/${entry.name}`
+      if (PUBLISHED_DIRS.includes(source))
+        continue
+      if (entry.isDirectory() && PUBLISHED_DIRS.some(p => p.startsWith(`${source}/`)))
+        visit(resolve(dir, entry.name), source)
+      else
+        excludes.push(entry.isDirectory() ? `${source}/**` : source)
+    }
   }
+  visit(vaultRoot, 'vault')
   return excludes
 }
 
@@ -179,12 +187,14 @@ if (!HAS_KNOWLEDGE)
 
 export default defineConfig({
   base: SITE_BASE,
+  // 2026-10-20：仅移动 Obsidian 源文件，现有公开 URL、导航与外链保持可用。
+  rewrites: blogSourceToRoute,
   // 仅构建「站点内容」文件夹，排除 Obsidian 私人库（Resources/Inbox/DailyNotes/...
   // 等）。这些私人笔记引用了 vault/Attachments 中无法被 Skia 解码的损坏图，
   // 会让 @nolebase/thumbnail-hash 在构建期崩溃（Failed to make image from encoded data）。
   // srcExclude 相对 srcDir（即仓库根 E:\knowledge）匹配，故用 **/ 前缀兜底。
   srcExclude,
-  // 仅构建「站点内容」文件夹（vault/作坊、vault/档案；Knowledge 由 buildKnowledgeSidebar 接入），
+  // 仅构建「站点内容」文件夹（vault/博客/作坊、vault/博客/档案；Knowledge 由 buildKnowledgeSidebar 接入），
   // 排除 Obsidian 私人库。好处：① 构建更快、产物更干净；② 私人笔记不会被发布。
   // 发布面清单见顶部 PUBLISHED_DIRS。
   lastUpdated: true,
@@ -285,8 +295,7 @@ export default defineConfig({
       link: '/vault/主页/',
       themeConfig: {
         nav: [
-          // 「主页」「最近」的源文件已迁入 vault/主页/、vault/最近/（2026-09-25），
-          // 路由随源路径变化；中文段在产物里被 percent-encode，写裸路径即可。
+          // 2026-10-20：源文件收进 vault/博客/；rewrites 保留这里的旧 URL。
           { text: '主页', link: '/vault/主页/' },
           // 「知识」项随 HAS_KNOWLEDGE 条件化：vault/Knowledge 缺失时整项不出，避免死链 nav。
           // （srcExclude 与 sidebar 早已条件化，唯此处遗漏）
@@ -336,8 +345,12 @@ export default defineConfig({
       md.renderer.rules.link_open = (tokens: any, idx: any, options: any, env: any, self: any) => {
         const token = tokens[idx]
         const href = token.attrGet('href') || ''
-        if (href && /%(?![0-9A-Fa-f]{2})/.test(href))
-          token.attrSet('href', href.replace(/%(?![0-9A-Fa-f]{2})/g, '%25'))
+        if (href) {
+          const safeHref = href.replace(/%(?![0-9A-Fa-f]{2})/g, '%25')
+          // nolebase 输出源文件的绝对路径，不经过 VitePress 的相对链接重写。
+          // 中文路径可能已编码；统一映射到保留的公开 URL。
+          token.attrSet('href', blogSourceToRoute(decodeURI(safeHref)))
+        }
         return origLinkOpen(tokens, idx, options, env, self)
       }
       // 用项目根目录作为图片索引的 cwd。obsidianImageEmbed 内部会动态探测并抢在 nolebase 的
@@ -363,7 +376,7 @@ export default defineConfig({
     const path = await import('node:path')
     const outDir = siteConfig.outDir
     const base = SITE_BASE
-    // 站点首页 = vault/主页/index.md（2026-09-25 从 vault 根散文件迁入）。
+    // 站点首页源文件 = vault/博客/主页/index.md；rewrites 保留原公开 URL。
     // 中文段一律用 percent-encoded 形态，meta refresh / href / 内联脚本三处共用同一常量，
     // 避免浏览器对裸 CJK 的编码差异影响跳转。
     const home = `${base}vault/%E4%B8%BB%E9%A1%B5/`

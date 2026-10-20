@@ -48,7 +48,7 @@ CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 
 def load_published():
-    """返回发布面顶层名集合；读不到配置则返回 None（此时跳过站点视角检查）。"""
+    """返回相对 vault 的发布路径集合，保留博客子目录边界。"""
     if not os.path.isfile(CONFIG_PATH):
         return None
     try:
@@ -58,8 +58,13 @@ def load_published():
     m = re.search(r"const PUBLISHED_DIRS = \[(.*?)\n\]", txt, re.S)
     if not m:
         return None
-    names = {p.split("/")[0] for p in re.findall(r"'vault/([^']+)'", m.group(1))}
+    names = set(re.findall(r"^\s*'vault/([^']+)'", m.group(1), re.M))
     return names or None
+
+
+def is_published(rel, published):
+    path = rel.replace("\\", "/")
+    return any(path == p or path.startswith(p + "/") for p in published)
 
 
 def walk_all(root):
@@ -145,8 +150,8 @@ def main():
                 # （那两页都不渲染，无 404 可言）；frontmatter 行同样不渲染，也不计。
                 if (published
                         and (ln + 1) > fm_end
-                        and re.split(r"[\\/]", rel)[0] in published
-                        and not ({re.split(r"[\\/]", h)[0] for h in hits} & published)):
+                        and is_published(rel, published)
+                        and not any(is_published(h, published) for h in hits)):
                     pubmiss[tgt].append((rel, ln + 1, ctx[:170]))
                 continue
             broken[tgt].append((rel, ln + 1, ctx[:170]))
@@ -183,7 +188,7 @@ def main():
     out.append("# root=%s" % args.root)
     out.append("md=%d  wikilinks=%d  broken_targets=%d  hit_rows=%d"
                % (len(mds), total, len(broken), sum(len(v) for v in broken.values())))
-    out.append("published_top=%s" % (",".join(sorted(published)) if published else "(未读到 config，跳过站点视角)"))
+    out.append("published_paths=%s" % (",".join(sorted(published)) if published else "(未读到 config，跳过站点视角)"))
     out.append("site_dead_targets=%d  site_dead_rows=%d" % (pub_n, pub_rows))
     out.append("")
     main_rows, shown = render("## 一、真断链（全库无同名文件）", broken)
