@@ -24,7 +24,6 @@ import { resolve } from 'node:path'
 // 文件级条目用 `vault/<文件>` 形式；目录级用 `vault/<目录>`（含子目录）。
 const PUBLISHED_DIRS = [
   'vault/blog/作坊',
-  'vault/blog/档案',
   'vault/Knowledge',
   // 附件：被 git 跟踪的图片即已发布图片（pnpm sync:assets 只 add 已发布笔记引用的图）。
   // 整目录放行，便于 ![[image]] 嵌入解析；私人图仍在 .gitignore 里不会进仓库。
@@ -136,7 +135,6 @@ function fixSidebarIndexLinks(sidebar: any): any {
 function buildSiteSidebar() {
   const base = calculateSidebar([
     { folderName: 'vault/blog/作坊', separate: true },
-    { folderName: 'vault/blog/档案', separate: true },
   ], 'vault/blog')
   const knowledge = HAS_KNOWLEDGE ? buildKnowledgeSidebar() : []
   if (knowledge.length > 0)
@@ -303,7 +301,6 @@ export default defineConfig({
             ? [{ text: '知识', link: '/vault/Knowledge/_mocs/知识库总览-MOC', activeMatch: '^/vault/Knowledge/' }]
             : []),
           { text: '作坊', link: '/vault/作坊/' },
-          { text: '档案', link: '/vault/档案/', activeMatch: '^/vault/档案/' },
           { text: '最近', link: '/vault/最近/toc' },
         ],
         lastUpdated: {

@@ -20,6 +20,12 @@ test('every moved blog page is built at its previous public URL', () => {
   }
 })
 
+test('archived blog pages are not published', () => {
+  assert.equal(existsSync(join(dist, 'vault/档案')), false)
+  const home = decodeURI(readFileSync(join(dist, 'vault/主页/index.html'), 'utf8'))
+  assert.doesNotMatch(home, /href="[^"]*\/档案\//)
+})
+
 test('workshop project links resolve after migration instead of becoming hash placeholders', () => {
   const html = decodeURI(readFileSync(join(dist, 'vault/作坊/index.html'), 'utf8'))
   for (const name of ['feedlens-project', 'glowlink-demo', 'ai-tryon-video-demo', '网页笔记四步工作流']) {
