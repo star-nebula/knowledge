@@ -133,13 +133,25 @@ function fixSidebarIndexLinks(sidebar: any): any {
  * 按各笔记的 category frontmatter 实时生成，以 `/vault/Knowledge/` 为 key 注入。
  */
 function buildSiteSidebar() {
-  const base = calculateSidebar([
+  const raw = calculateSidebar([
     { folderName: 'vault/blog/作坊', separate: true },
   ], 'vault/blog')
+
+  // nolebase 在「只有一个 target 且命中」时会做单目录优化，直接返回**数组**而不是 { key: items }
+  // （见 @nolebase/vitepress-plugin-sidebar 的 mergeSidebar 末尾）。
+  // 而 VitePress 的 getSidebar 见到数组就整体返回、忽略一切属性
+  // （vitepress/dist/client/theme-default/support/sidebar.js:10），
+  // 所以往数组上挂 '/vault/Knowledge/' 是不生效的——曾导致全站始终共用作坊目录。
+  // 这里显式包成对象：作坊页用它，'/vault/' 作兜底（主页已 sidebar:false，最近等页沿用作坊目录）。
+  const sidebar: Record<string, any> = Array.isArray(raw)
+    ? { '/vault/作坊/': raw, '/vault/': raw }
+    : raw
+
   const knowledge = HAS_KNOWLEDGE ? buildKnowledgeSidebar() : []
   if (knowledge.length > 0)
-    (base as Record<string, any>)['/vault/Knowledge/'] = knowledge
-  return fixSidebarIndexLinks(base)
+    sidebar['/vault/Knowledge/'] = knowledge
+
+  return fixSidebarIndexLinks(sidebar)
 }
 
 // 根据完整发布路径生成排除规则；枚举 vault 顶层及嵌套发布目录的祖先层。
