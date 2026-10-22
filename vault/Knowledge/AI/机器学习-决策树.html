@@ -9,11 +9,11 @@
     <link rel="preload stylesheet" href="/knowledge/assets/style.Bg9enbeh.css" as="style">
     <link rel="preload stylesheet" href="/knowledge/vp-icons.css" as="style">
     
-    <script type="module" src="/knowledge/assets/app.CtsJbTX7.js"></script>
+    <script type="module" src="/knowledge/assets/app.BlvFfhnJ.js"></script>
     <link rel="preload" href="/knowledge/assets/inter-roman-latin.Cy4MYw_J.woff2" as="font" type="font/woff2" crossorigin="">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.Bk7NKVJI.js">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.B6K6yMdg.js">
-    <link rel="modulepreload" href="/knowledge/assets/vault_Knowledge_AI_机器学习-决策树.md.CwTX3HYQ.lean.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.3gRw8WBD.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.skpMa4s9.js">
+    <link rel="modulepreload" href="/knowledge/assets/vault_Knowledge_AI_机器学习-决策树.md.DmTylH_Z.lean.js">
     <script>typeof window<"u"&&(window.location.pathname==="/knowledge/"||window.location.pathname==="/knowledge")&&!window.location.pathname.startsWith("/knowledge/zh-CN")&&(window.location.href="/knowledge/vault/%E4%B8%BB%E9%A1%B5/"+window.location.hash);</script>
     <script>(function(){var t="";if(t){var e=document.createElement("script");e.src="https://js.51.la/v6/"+t+".js",e.async=!0,document.head.appendChild(e)}})();</script>
     <meta name="theme-color" content="#ffffff">
@@ -35,9 +35,9 @@
     <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
     <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
     <link rel="preload" href="/knowledge/assets/inter-roman-latin.Cy4MYw_J.woff2" as="font" type="font/woff2" crossorigin="">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.Bk7NKVJI.js">
-    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.B6K6yMdg.js">
-    <link rel="modulepreload" href="/knowledge/assets/vault_Knowledge_AI_机器学习-决策树.md.CwTX3HYQ.lean.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/theme.3gRw8WBD.js">
+    <link rel="modulepreload" href="/knowledge/assets/chunks/framework.skpMa4s9.js">
+    <link rel="modulepreload" href="/knowledge/assets/vault_Knowledge_AI_机器学习-决策树.md.DmTylH_Z.lean.js">
     <script>typeof window<"u"&&(window.location.pathname==="/knowledge/"||window.location.pathname==="/knowledge")&&!window.location.pathname.startsWith("/knowledge/zh-CN")&&(window.location.href="/knowledge/vault/%E4%B8%BB%E9%A1%B5/"+window.location.hash);</script>
     <script>(function(){var t="";if(t){var e=document.createElement("script");e.src="https://js.51.la/v6/"+t+".js",e.async=!0,document.head.appendChild(e)}})();</script>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
@@ -51,8 +51,8 @@
     <meta property="twitter:description" content="决策树（Decision Tree）是一种基于树形结构的监督学习算法，用于解决分类（Classification）或回归（Regression）问题。 核心定义：决策树通过递归地将样本集按照特征取值进行划分，构建一棵树，其中每个内部节点表示一个特征上的判断条件，每个分支代表该判断的一个可能结果，每个叶节点代表一个预测输出（类别标签或连续数值）。 直观理解：决策树模拟人类做决策的过程，一系列“if-...">
   </head>
   <body>
-    <div id="app"><div class="Layout" data-v-994256a4><!--[--><!--]--><!--[--><span tabindex="-1" data-v-44186d84></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-44186d84>Skip to content</a><!--]--><!----><header class="VPNav" data-v-994256a4 data-v-112da5f4><div class="VPNavBar has-sidebar top" data-v-112da5f4 data-v-8b73aa59><div class="wrapper" data-v-8b73aa59><div class="container" data-v-8b73aa59><div class="title" data-v-8b73aa59><div class="VPNavBarTitle has-sidebar" data-v-8b73aa59 data-v-3eb2c196><a class="title" href="/knowledge/vault/主页/" data-v-3eb2c196><!--[--><!--]--><!----><span data-v-3eb2c196>Star Nebula Knowledge</span><!--[--><!--]--></a></div></div><div class="content" data-v-8b73aa59><div class="content-body" data-v-8b73aa59><!--[--><!--]--><div class="VPNavBarSearch search" data-v-8b73aa59 data-v-8451b050><!--[--><button type="button" class="VPNavBarSearchButton" aria-label="搜索文档" aria-keyshortcuts="/ control+k meta+k" data-v-8451b050 data-v-087184be><span class="vpi-search" aria-hidden="true" data-v-087184be></span><span class="text" data-v-087184be>搜索文档</span><span class="keys" aria-hidden="true" data-v-087184be><kbd class="key-cmd" data-v-087184be>⌘</kbd><kbd class="key-ctrl" data-v-087184be>Ctrl</kbd><kbd data-v-087184be>K</kbd></span></button><!----><!--]--></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-8b73aa59 data-v-fd035c31><span id="main-nav-aria-label" class="visually-hidden" data-v-fd035c31> Main Navigation </span><!--[--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/knowledge/vault/主页/" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>主页</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink active" href="/knowledge/vault/Knowledge/_mocs/%E7%9F%A5%E8%AF%86%E5%BA%93%E6%80%BB%E8%A7%88-MOC.html" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>知识</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/knowledge/vault/作坊/" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>作坊</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/knowledge/vault/%E6%9C%80%E8%BF%91/toc.html" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>最近</span><!--]--></a><!--]--><!--]--></nav><!----><div class="VPNavBarAppearance appearance" data-v-8b73aa59 data-v-63621818><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-63621818 data-v-b486fc0d data-v-b0311176><span class="check" data-v-b0311176><span class="icon" data-v-b0311176><!--[--><span class="vpi-sun sun" data-v-b486fc0d></span><span class="vpi-moon moon" data-v-b486fc0d></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-8b73aa59 data-v-ec009eae data-v-1261333f><!--[--><a class="VPSocialLink no-icon" href="https://github.com/star-nebula/knowledge" aria-label="github" target="_blank" rel="me noopener" data-v-1261333f data-v-c996bdea><span class="vpi-social-github"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-8b73aa59 data-v-5637faf3 data-v-504c106c><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-504c106c><span class="vpi-more-horizontal icon" data-v-504c106c></span></button><div class="menu" data-v-504c106c><div class="VPMenu" data-v-504c106c data-v-82ea75f6><!----><!--[--><!--[--><!----><div class="group" data-v-5637faf3><div class="item appearance" data-v-5637faf3><p class="label" data-v-5637faf3>切换主题</p><div class="appearance-action" data-v-5637faf3><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-5637faf3 data-v-b486fc0d data-v-b0311176><span class="check" data-v-b0311176><span class="icon" data-v-b0311176><!--[--><span class="vpi-sun sun" data-v-b486fc0d></span><span class="vpi-moon moon" data-v-b486fc0d></span><!--]--></span></span></button></div></div></div><div class="group" data-v-5637faf3><div class="item social-links" data-v-5637faf3><div class="VPSocialLinks social-links-list" data-v-5637faf3 data-v-1261333f><!--[--><a class="VPSocialLink no-icon" href="https://github.com/star-nebula/knowledge" aria-label="github" target="_blank" rel="me noopener" data-v-1261333f data-v-c996bdea><span class="vpi-social-github"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--[--><!--[--><!--[--><button h-full ws-nowrap px3 text-sm font-medium text="$vp-c-text-1" class="!cursor-wait" disabled><span flex items-center space-x-1><span class="i-octicon:share-16"></span><span>分享此页</span></span></button><div class="bg-$vp-c-divider-light" mx2 block h-24px w-1px md:hidden></div><!--]--><div class="VPFlyout VPNolebaseEnhancedReadabilitiesMenu VPNolebaseEnhancedReadabilitiesMenuFlyout" aria-label="阅读增强" role="menuitem" data-v-504c106c><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-504c106c><span class="text" data-v-504c106c><span class="i-icon-park-outline:book-open option-icon" data-v-504c106c></span><!----><span class="vpi-chevron-down text-icon" data-v-504c106c></span></span></button><div class="menu" data-v-504c106c><div class="VPMenu" data-v-504c106c data-v-82ea75f6><!----><!--[--><!--]--></div></div></div><!--]--><!--]--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-8b73aa59 data-v-9d783cd6><span class="container" data-v-9d783cd6><span class="top" data-v-9d783cd6></span><span class="middle" data-v-9d783cd6></span><span class="bottom" data-v-9d783cd6></span></span></button></div></div></div></div><div class="divider" data-v-8b73aa59><div class="divider-line" data-v-8b73aa59></div></div></div><!----></header><div class="VPLocalNav has-sidebar empty" data-v-994256a4 data-v-3a1c70a6><div class="container" data-v-3a1c70a6><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-3a1c70a6><span class="vpi-align-left menu-icon" data-v-3a1c70a6></span><span class="menu-text" data-v-3a1c70a6>Menu</span></button><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-3a1c70a6 data-v-56e744b3><button data-v-56e744b3>Return to top</button><!----></div></div></div><aside class="VPSidebar" data-v-994256a4 data-v-960b9cec><div class="curtain" data-v-960b9cec></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-960b9cec><span class="visually-hidden" id="sidebar-aria-label" data-v-960b9cec> Sidebar Navigation </span><!--[--><!--]--><!--[--><div class="no-transition group" data-v-e23d9c0c><section class="VPSidebarItem level-0 collapsible collapsed is-link" data-v-e23d9c0c data-v-f024db03><div class="item" tabindex="0" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/作坊/网站部署/" data-v-f024db03><!--[--><h2 class="text" data-v-f024db03>网站部署</h2><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-f024db03><span class="vpi-chevron-right caret-icon" data-v-f024db03></span></div></div><div class="items" data-v-f024db03><!--[--><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/00-%E5%88%86%E7%B1%BB%E5%9B%BE%E6%A0%87%E5%8F%82%E8%80%83.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>00 分类图标参考</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/01-%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>01 本地环境搭建</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/02-%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>02 本地预览</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/03-GitHub%20Pages%20%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>03 GitHub Pages 自动部署</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/04-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%20FAQ.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>04 常见问题 FAQ</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="no-transition group" data-v-e23d9c0c><section class="VPSidebarItem level-0" data-v-e23d9c0c data-v-f024db03><!----><div class="items" data-v-f024db03><!--[--><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/ai-tryon-video-demo.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>AI电商换装视频生成系统</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/feedlens-project.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/glowlink-demo.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>GlowLink：多 Agent 社媒获客系统</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E9%A1%B5%E7%AC%94%E8%AE%B0%E5%9B%9B%E6%AD%A5%E5%B7%A5%E4%BD%9C%E6%B5%81.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>网页笔记四步工作流</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E9%A1%B5%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81-%E4%BB%8E5%E4%B8%AAAgent%E5%88%B03%E4%B8%AA.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>网页笔记工作流</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><!--]--><!--[--><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-994256a4 data-v-c5424f0c><div class="VPDoc has-sidebar has-aside" data-v-c5424f0c data-v-7e86aba9><!--[--><!--[--><!--[--><div class="page-meta" text="sm zinc-400 dark:zinc-500" mb-4 flex="~ wrap" items-center gap-3 data-v-ccbcf0b6><span class="meta-item" flex items-center gap-1 data-v-ccbcf0b6><span i-icon-park-outline:time data-v-ccbcf0b6></span><span data-v-ccbcf0b6>2026-09-29 04:20</span></span><span class="meta-item" flex items-center gap-1 data-v-ccbcf0b6><span i-icon-park-outline:add-text data-v-ccbcf0b6></span><span data-v-ccbcf0b6>5538 字</span></span><!--[--><span class="meta-item" flex items-center gap-1 data-v-ccbcf0b6><span i-icon-park-outline:tag-one data-v-ccbcf0b6></span></span><!--[--><span class="meta-tag" bg="zinc-100 dark:zinc-800" px-1.5 py-0.5 rounded text="xs" data-v-ccbcf0b6>机器学习</span><span class="meta-tag" bg="zinc-100 dark:zinc-800" px-1.5 py-0.5 rounded text="xs" data-v-ccbcf0b6>决策树</span><span class="meta-tag" bg="zinc-100 dark:zinc-800" px-1.5 py-0.5 rounded text="xs" data-v-ccbcf0b6>算法</span><!--]--><!--]--></div><!--[--><!--]--><!--]--><!--]--><!--]--><div class="container" data-v-7e86aba9><div class="aside" data-v-7e86aba9><div class="aside-curtain" data-v-7e86aba9></div><div class="aside-container" data-v-7e86aba9><div class="aside-content" data-v-7e86aba9><div class="VPDocAside" data-v-7e86aba9 data-v-93f5f164><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-93f5f164 data-v-a2a9ea64><div class="content" data-v-a2a9ea64><div class="outline-marker" data-v-a2a9ea64></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-a2a9ea64>页面大纲</div><ul class="VPDocOutlineItem root" data-v-a2a9ea64 data-v-250a649b><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-93f5f164></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-7e86aba9><div class="content-container" data-v-7e86aba9><!--[--><!--]--><main class="main" data-v-7e86aba9><div style="position:relative;" class="vp-doc _knowledge_vault_Knowledge_AI_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91" data-v-7e86aba9><div><h1 id="决策树" tabindex="-1">决策树 <a class="header-anchor" href="#决策树" aria-label="Permalink to “决策树”">​</a></h1><h1 id="基本概念" tabindex="-1">基本概念 <a class="header-anchor" href="#基本概念" aria-label="Permalink to “基本概念”">​</a></h1><p>决策树（Decision Tree）是一种<strong>基于树形结构的监督学习算法</strong>，用于解决<strong>分类</strong>（Classification）或<strong>回归</strong>（Regression）问题。</p><ul><li><p><strong>核心定义</strong>：决策树通过递归地将样本集按照特征取值进行划分，构建一棵树，其中每个内部节点表示一个特征上的判断条件，每个分支代表该判断的一个可能结果，每个叶节点代表一个预测输出（类别标签或连续数值）。</p></li><li><p>直观理解：决策树模拟人类做决策的过程，<strong>一系列“if-else”规则的组合</strong>。</p></li><li><p><strong>核心组成</strong>：</p><ul><li><p><strong>根节点</strong>（Root Node）：包含全部训练样本，是分裂的起点。</p></li><li><p><strong>内部节点</strong>（Internal/Decision Node）：对某个特征进行判断（如“年龄 &gt; 30?”），并根据结果导向不同子节点。</p></li><li><p><strong>分支</strong>（Branch）：代表一个分类结果（或判断结果，如“是”或“否”）。</p></li><li><p><strong>叶节点</strong>（Leaf/Terminal Node）：不再分裂，直接给出预测结果（如“见”或“不见”，或“房价 = 250 万元”）。</p></li></ul></li><li><p><strong>适用任务</strong>：分类树（Classification Tree） vs 回归树（Regression Tree）</p><ul><li><p><strong>分类树</strong>：输出离散类别（如垃圾邮件识别、客户流失预测）。</p></li><li><p><strong>回归树</strong>：输出连续数值（如房价预测、销量估计）。</p></li></ul></li><li><p><strong>优点与缺点</strong>：</p><ul><li><p>优点：可解释性强、无需特征缩放、能处理数值/类别特征等</p></li><li><p>缺点：易过拟合、对数据扰动敏感、不稳定等</p></li></ul></li></ul><h1 id="决策树构建流程-通用步骤" tabindex="-1">决策树构建流程（通用步骤） <a class="header-anchor" href="#决策树构建流程-通用步骤" aria-label="Permalink to “决策树构建流程（通用步骤）”">​</a></h1><ol><li><p><strong>特征选择</strong>：选择最优划分特征（依据不同准则，如有较强分类能力的特征）</p></li><li><p><strong>决策树生成</strong>：根据选择的特征生成决策树。</p><ol><li><p><strong>节点分裂</strong>：按选定特征将数据划分为子集</p></li><li><p><strong>递归建树</strong>：对每个子集重复上述过程</p></li><li><p><strong>停止条件</strong>：</p><ul><li><p>所有样本属于同一类</p></li><li><p>没有更多特征可用</p></li><li><p>样本数低于阈值</p></li><li><p>树深度达到上限</p></li></ul></li></ol></li><li><p><strong>剪枝（Pruning）</strong> ：防止过拟合（预剪枝 / 后剪枝）</p></li></ol><h1 id="特征选择准则-核心指标" tabindex="-1">特征选择准则（核心指标） <a class="header-anchor" href="#特征选择准则-核心指标" aria-label="Permalink to “特征选择准则（核心指标）”">​</a></h1><h3 id="信息熵" tabindex="-1">信息熵 <a class="header-anchor" href="#信息熵" aria-label="Permalink to “信息熵”">​</a></h3><ul><li><p>对象：整个样本集合 <span id="mjx-fc5434d"><style>
-      #mjx-fc5434d{
+    <div id="app"><div class="Layout" data-v-994256a4><!--[--><!--]--><!--[--><span tabindex="-1" data-v-44186d84></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-44186d84>Skip to content</a><!--]--><!----><header class="VPNav" data-v-994256a4 data-v-112da5f4><div class="VPNavBar has-sidebar top" data-v-112da5f4 data-v-8b73aa59><div class="wrapper" data-v-8b73aa59><div class="container" data-v-8b73aa59><div class="title" data-v-8b73aa59><div class="VPNavBarTitle has-sidebar" data-v-8b73aa59 data-v-3eb2c196><a class="title" href="/knowledge/vault/主页/" data-v-3eb2c196><!--[--><!--]--><!----><span data-v-3eb2c196>Star Nebula Knowledge</span><!--[--><!--]--></a></div></div><div class="content" data-v-8b73aa59><div class="content-body" data-v-8b73aa59><!--[--><!--]--><div class="VPNavBarSearch search" data-v-8b73aa59 data-v-8451b050><!--[--><button type="button" class="VPNavBarSearchButton" aria-label="搜索文档" aria-keyshortcuts="/ control+k meta+k" data-v-8451b050 data-v-087184be><span class="vpi-search" aria-hidden="true" data-v-087184be></span><span class="text" data-v-087184be>搜索文档</span><span class="keys" aria-hidden="true" data-v-087184be><kbd class="key-cmd" data-v-087184be>⌘</kbd><kbd class="key-ctrl" data-v-087184be>Ctrl</kbd><kbd data-v-087184be>K</kbd></span></button><!----><!--]--></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-8b73aa59 data-v-fd035c31><span id="main-nav-aria-label" class="visually-hidden" data-v-fd035c31> Main Navigation </span><!--[--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/knowledge/vault/主页/" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>主页</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink active" href="/knowledge/vault/Knowledge/_mocs/%E7%9F%A5%E8%AF%86%E5%BA%93%E6%80%BB%E8%A7%88-MOC.html" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>知识</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/knowledge/vault/作坊/" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>作坊</span><!--]--></a><!--]--><!--[--><a class="VPLink link VPNavBarMenuLink" href="/knowledge/vault/%E6%9C%80%E8%BF%91/toc.html" tabindex="0" data-v-fd035c31 data-v-f6adec43><!--[--><span data-v-f6adec43>最近</span><!--]--></a><!--]--><!--]--></nav><!----><div class="VPNavBarAppearance appearance" data-v-8b73aa59 data-v-63621818><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-63621818 data-v-b486fc0d data-v-b0311176><span class="check" data-v-b0311176><span class="icon" data-v-b0311176><!--[--><span class="vpi-sun sun" data-v-b486fc0d></span><span class="vpi-moon moon" data-v-b486fc0d></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-8b73aa59 data-v-ec009eae data-v-1261333f><!--[--><a class="VPSocialLink no-icon" href="https://github.com/star-nebula/knowledge" aria-label="github" target="_blank" rel="me noopener" data-v-1261333f data-v-c996bdea><span class="vpi-social-github"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-8b73aa59 data-v-5637faf3 data-v-504c106c><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-504c106c><span class="vpi-more-horizontal icon" data-v-504c106c></span></button><div class="menu" data-v-504c106c><div class="VPMenu" data-v-504c106c data-v-82ea75f6><!----><!--[--><!--[--><!----><div class="group" data-v-5637faf3><div class="item appearance" data-v-5637faf3><p class="label" data-v-5637faf3>切换主题</p><div class="appearance-action" data-v-5637faf3><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-5637faf3 data-v-b486fc0d data-v-b0311176><span class="check" data-v-b0311176><span class="icon" data-v-b0311176><!--[--><span class="vpi-sun sun" data-v-b486fc0d></span><span class="vpi-moon moon" data-v-b486fc0d></span><!--]--></span></span></button></div></div></div><div class="group" data-v-5637faf3><div class="item social-links" data-v-5637faf3><div class="VPSocialLinks social-links-list" data-v-5637faf3 data-v-1261333f><!--[--><a class="VPSocialLink no-icon" href="https://github.com/star-nebula/knowledge" aria-label="github" target="_blank" rel="me noopener" data-v-1261333f data-v-c996bdea><span class="vpi-social-github"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--[--><!--[--><!--[--><button h-full ws-nowrap px3 text-sm font-medium text="$vp-c-text-1" class="!cursor-wait" disabled><span flex items-center space-x-1><span class="i-octicon:share-16"></span><span>分享此页</span></span></button><div class="bg-$vp-c-divider-light" mx2 block h-24px w-1px md:hidden></div><!--]--><div class="VPFlyout VPNolebaseEnhancedReadabilitiesMenu VPNolebaseEnhancedReadabilitiesMenuFlyout" aria-label="阅读增强" role="menuitem" data-v-504c106c><button type="button" class="button" aria-haspopup="true" aria-expanded="false" data-v-504c106c><span class="text" data-v-504c106c><span class="i-icon-park-outline:book-open option-icon" data-v-504c106c></span><!----><span class="vpi-chevron-down text-icon" data-v-504c106c></span></span></button><div class="menu" data-v-504c106c><div class="VPMenu" data-v-504c106c data-v-82ea75f6><!----><!--[--><!--]--></div></div></div><!--]--><!--]--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-8b73aa59 data-v-9d783cd6><span class="container" data-v-9d783cd6><span class="top" data-v-9d783cd6></span><span class="middle" data-v-9d783cd6></span><span class="bottom" data-v-9d783cd6></span></span></button></div></div></div></div><div class="divider" data-v-8b73aa59><div class="divider-line" data-v-8b73aa59></div></div></div><!----></header><div class="VPLocalNav has-sidebar empty" data-v-994256a4 data-v-3a1c70a6><div class="container" data-v-3a1c70a6><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-3a1c70a6><span class="vpi-align-left menu-icon" data-v-3a1c70a6></span><span class="menu-text" data-v-3a1c70a6>Menu</span></button><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-3a1c70a6 data-v-56e744b3><button data-v-56e744b3>Return to top</button><!----></div></div></div><aside class="VPSidebar" data-v-994256a4 data-v-960b9cec><div class="curtain" data-v-960b9cec></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-960b9cec><span class="visually-hidden" id="sidebar-aria-label" data-v-960b9cec> Sidebar Navigation </span><!--[--><!--]--><!--[--><div class="no-transition group" data-v-e23d9c0c><section class="VPSidebarItem level-0 collapsible collapsed is-link" data-v-e23d9c0c data-v-f024db03><div class="item" tabindex="0" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/作坊/网站部署/" data-v-f024db03><!--[--><h2 class="text" data-v-f024db03>网站部署</h2><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-f024db03><span class="vpi-chevron-right caret-icon" data-v-f024db03></span></div></div><div class="items" data-v-f024db03><!--[--><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/00-%E5%88%86%E7%B1%BB%E5%9B%BE%E6%A0%87%E5%8F%82%E8%80%83.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>00 分类图标参考</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/01-%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>01 本地环境搭建</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/02-%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>02 本地预览</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/03-GitHub%20Pages%20%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>03 GitHub Pages 自动部署</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/04-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%20FAQ.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>04 常见问题 FAQ</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="no-transition group" data-v-e23d9c0c><section class="VPSidebarItem level-0" data-v-e23d9c0c data-v-f024db03><!----><div class="items" data-v-f024db03><!--[--><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/ai-tryon-video-demo.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>AI电商换装视频生成系统</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/feedlens-project.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/glowlink-demo.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>GlowLink：多 Agent 社媒获客系统</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E9%A1%B5%E7%AC%94%E8%AE%B0%E5%9B%9B%E6%AD%A5%E5%B7%A5%E4%BD%9C%E6%B5%81.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>网页笔记四步工作流</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-f024db03 data-v-f024db03><div class="item" data-v-f024db03><div class="indicator" data-v-f024db03></div><a class="VPLink link link" href="/knowledge/vault/%E4%BD%9C%E5%9D%8A/%E7%BD%91%E9%A1%B5%E7%AC%94%E8%AE%B0%E5%B7%A5%E4%BD%9C%E6%B5%81-%E4%BB%8E5%E4%B8%AAAgent%E5%88%B03%E4%B8%AA.html" data-v-f024db03><!--[--><p class="text" data-v-f024db03>网页笔记工作流</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><!--]--><!--[--><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-994256a4 data-v-c5424f0c><div class="VPDoc has-sidebar has-aside" data-v-c5424f0c data-v-7e86aba9><!--[--><!--[--><!--[--><div class="page-meta" text="sm zinc-400 dark:zinc-500" mb-4 flex="~ wrap" items-center gap-3 data-v-ccbcf0b6><span class="meta-item" flex items-center gap-1 data-v-ccbcf0b6><span i-icon-park-outline:time data-v-ccbcf0b6></span><span data-v-ccbcf0b6>2026-09-29 04:20</span></span><span class="meta-item" flex items-center gap-1 data-v-ccbcf0b6><span i-icon-park-outline:add-text data-v-ccbcf0b6></span><span data-v-ccbcf0b6>5538 字</span></span><!--[--><span class="meta-item" flex items-center gap-1 data-v-ccbcf0b6><span i-icon-park-outline:tag-one data-v-ccbcf0b6></span></span><!--[--><span class="meta-tag" bg="zinc-100 dark:zinc-800" px-1.5 py-0.5 rounded text="xs" data-v-ccbcf0b6>机器学习</span><span class="meta-tag" bg="zinc-100 dark:zinc-800" px-1.5 py-0.5 rounded text="xs" data-v-ccbcf0b6>决策树</span><span class="meta-tag" bg="zinc-100 dark:zinc-800" px-1.5 py-0.5 rounded text="xs" data-v-ccbcf0b6>算法</span><!--]--><!--]--></div><!--[--><!--]--><!--]--><!--]--><!--]--><div class="container" data-v-7e86aba9><div class="aside" data-v-7e86aba9><div class="aside-curtain" data-v-7e86aba9></div><div class="aside-container" data-v-7e86aba9><div class="aside-content" data-v-7e86aba9><div class="VPDocAside" data-v-7e86aba9 data-v-93f5f164><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-93f5f164 data-v-a2a9ea64><div class="content" data-v-a2a9ea64><div class="outline-marker" data-v-a2a9ea64></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-a2a9ea64>页面大纲</div><ul class="VPDocOutlineItem root" data-v-a2a9ea64 data-v-250a649b><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-93f5f164></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-7e86aba9><div class="content-container" data-v-7e86aba9><!--[--><!--]--><main class="main" data-v-7e86aba9><div style="position:relative;" class="vp-doc _knowledge_vault_Knowledge_AI_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91" data-v-7e86aba9><div><h1 id="决策树" tabindex="-1">决策树 <a class="header-anchor" href="#决策树" aria-label="Permalink to “决策树”">​</a></h1><h1 id="基本概念" tabindex="-1">基本概念 <a class="header-anchor" href="#基本概念" aria-label="Permalink to “基本概念”">​</a></h1><p>决策树（Decision Tree）是一种<strong>基于树形结构的监督学习算法</strong>，用于解决<strong>分类</strong>（Classification）或<strong>回归</strong>（Regression）问题。</p><ul><li><p><strong>核心定义</strong>：决策树通过递归地将样本集按照特征取值进行划分，构建一棵树，其中每个内部节点表示一个特征上的判断条件，每个分支代表该判断的一个可能结果，每个叶节点代表一个预测输出（类别标签或连续数值）。</p></li><li><p>直观理解：决策树模拟人类做决策的过程，<strong>一系列“if-else”规则的组合</strong>。</p></li><li><p><strong>核心组成</strong>：</p><ul><li><p><strong>根节点</strong>（Root Node）：包含全部训练样本，是分裂的起点。</p></li><li><p><strong>内部节点</strong>（Internal/Decision Node）：对某个特征进行判断（如“年龄 &gt; 30?”），并根据结果导向不同子节点。</p></li><li><p><strong>分支</strong>（Branch）：代表一个分类结果（或判断结果，如“是”或“否”）。</p></li><li><p><strong>叶节点</strong>（Leaf/Terminal Node）：不再分裂，直接给出预测结果（如“见”或“不见”，或“房价 = 250 万元”）。</p></li></ul></li><li><p><strong>适用任务</strong>：分类树（Classification Tree） vs 回归树（Regression Tree）</p><ul><li><p><strong>分类树</strong>：输出离散类别（如垃圾邮件识别、客户流失预测）。</p></li><li><p><strong>回归树</strong>：输出连续数值（如房价预测、销量估计）。</p></li></ul></li><li><p><strong>优点与缺点</strong>：</p><ul><li><p>优点：可解释性强、无需特征缩放、能处理数值/类别特征等</p></li><li><p>缺点：易过拟合、对数据扰动敏感、不稳定等</p></li></ul></li></ul><h1 id="决策树构建流程-通用步骤" tabindex="-1">决策树构建流程（通用步骤） <a class="header-anchor" href="#决策树构建流程-通用步骤" aria-label="Permalink to “决策树构建流程（通用步骤）”">​</a></h1><ol><li><p><strong>特征选择</strong>：选择最优划分特征（依据不同准则，如有较强分类能力的特征）</p></li><li><p><strong>决策树生成</strong>：根据选择的特征生成决策树。</p><ol><li><p><strong>节点分裂</strong>：按选定特征将数据划分为子集</p></li><li><p><strong>递归建树</strong>：对每个子集重复上述过程</p></li><li><p><strong>停止条件</strong>：</p><ul><li><p>所有样本属于同一类</p></li><li><p>没有更多特征可用</p></li><li><p>样本数低于阈值</p></li><li><p>树深度达到上限</p></li></ul></li></ol></li><li><p><strong>剪枝（Pruning）</strong> ：防止过拟合（预剪枝 / 后剪枝）</p></li></ol><h1 id="特征选择准则-核心指标" tabindex="-1">特征选择准则（核心指标） <a class="header-anchor" href="#特征选择准则-核心指标" aria-label="Permalink to “特征选择准则（核心指标）”">​</a></h1><h3 id="信息熵" tabindex="-1">信息熵 <a class="header-anchor" href="#信息熵" aria-label="Permalink to “信息熵”">​</a></h3><ul><li><p>对象：整个样本集合 <span id="mjx-98053e"><style>
+      #mjx-98053e{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -207,8 +207,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p>作用：<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">度量 </span><span id="mjx-64d77e1"><style>
-      #mjx-64d77e1{
+      </style><!----></span></p><p>作用：<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">度量 </span><span id="mjx-691efa7"><style>
+      #mjx-691efa7{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -363,8 +363,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);"> 的“混乱度”</span>，熵（Entropy）在信息论中代表随机变量<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">不确定度的度量</span>​</p><ul><li><p>熵越大，数据的不确定性越高，信息就越多，整个系统不确定性越大</p></li><li><p>熵越小，数据的不确定性越低，整个系统确定性越大</p></li><li><p>分类越均匀，熵越大；如果只有一个类，熵为 0。</p></li></ul></li><li><p>公式：</p><span id="mjx-190a437"><style>
-      #mjx-190a437{
+      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);"> 的“混乱度”</span>，熵（Entropy）在信息论中代表随机变量<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">不确定度的度量</span>​</p><ul><li><p>熵越大，数据的不确定性越高，信息就越多，整个系统不确定性越大</p></li><li><p>熵越小，数据的不确定性越低，整个系统确定性越大</p></li><li><p>分类越均匀，熵越大；如果只有一个类，熵为 0。</p></li></ul></li><li><p>公式：</p><span id="mjx-945ddae"><style>
+      #mjx-945ddae{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -519,8 +519,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><ul><li><p><span id="mjx-96b263b"><style>
-      #mjx-96b263b{
+      </style><!----></span><ul><li><p><span id="mjx-4579182"><style>
+      #mjx-4579182{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -675,8 +675,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：信息的信息熵值</p></li><li><p><span id="mjx-90ad75d"><style>
-      #mjx-90ad75d{
+      </style><!----></span> ：信息的信息熵值</p></li><li><p><span id="mjx-1d441c2"><style>
+      #mjx-1d441c2{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -831,8 +831,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：某一类样本占总样本的比例（标签列）</p></li></ul></li></ul><h3 id="条件熵" tabindex="-1">条件熵 <a class="header-anchor" href="#条件熵" aria-label="Permalink to “条件熵”">​</a></h3><ul><li><p>对象：在某个特征 <span id="mjx-0acc00f"><style>
-      #mjx-0acc00f{
+      </style><!----></span> ：某一类样本占总样本的比例（标签列）</p></li></ul></li></ul><h3 id="条件熵" tabindex="-1">条件熵 <a class="header-anchor" href="#条件熵" aria-label="Permalink to “条件熵”">​</a></h3><ul><li><p>对象：在某个特征 <span id="mjx-101bd82"><style>
+      #mjx-101bd82{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -987,8 +987,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的条件下，样本集合 <span id="mjx-439ef58"><style>
-      #mjx-439ef58{
+      </style><!----></span> 的条件下，样本集合 <span id="mjx-90b9409"><style>
+      #mjx-90b9409{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1143,8 +1143,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的熵</p></li><li><p>公式：</p><p><span id="mjx-9a4275c"><style>
-      #mjx-9a4275c{
+      </style><!----></span> 的熵</p></li><li><p>公式：</p><p><span id="mjx-9a5d8f5"><style>
+      #mjx-9a5d8f5{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1299,8 +1299,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p>其中， <span id="mjx-4290f7a"><style>
-      #mjx-4290f7a{
+      </style><!----></span></p><p>其中， <span id="mjx-8be9769"><style>
+      #mjx-8be9769{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1455,8 +1455,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p>​<code>条件熵 = 分类占比*信息熵 + 分类占比*信息熵 ...</code>​</p><ul><li><p>对任意特征 <span id="mjx-fdc0dec"><style>
-      #mjx-fdc0dec{
+      </style><!----></span></p><p>​<code>条件熵 = 分类占比*信息熵 + 分类占比*信息熵 ...</code>​</p><ul><li><p>对任意特征 <span id="mjx-933b074"><style>
+      #mjx-933b074{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1611,8 +1611,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ，设其有 <span id="mjx-955f2fd"><style>
-      #mjx-955f2fd{
+      </style><!----></span> ，设其有 <span id="mjx-7402d5"><style>
+      #mjx-7402d5{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1767,8 +1767,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 个可能取值。</p></li><li><p>对第 <span id="mjx-0a6c5ba"><style>
-      #mjx-0a6c5ba{
+      </style><!----></span> 个可能取值。</p></li><li><p>对第 <span id="mjx-cb05c8"><style>
+      #mjx-cb05c8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -1923,8 +1923,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 个取值，记 <span id="mjx-c3b5038"><style>
-      #mjx-c3b5038{
+      </style><!----></span> 个取值，记 <span id="mjx-b950547"><style>
+      #mjx-b950547{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2079,8 +2079,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 为 <span id="mjx-c0a71e9"><style>
-      #mjx-c0a71e9{
+      </style><!----></span> 为 <span id="mjx-473a85"><style>
+      #mjx-473a85{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2235,8 +2235,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 取该值的样本子集</p></li><li><p><span id="mjx-1e31863"><style>
-      #mjx-1e31863{
+      </style><!----></span> 取该值的样本子集</p></li><li><p><span id="mjx-c516904"><style>
+      #mjx-c516904{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2391,8 +2391,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 表示 <span id="mjx-2a19226"><style>
-      #mjx-2a19226{
+      </style><!----></span> 表示 <span id="mjx-732ecbd"><style>
+      #mjx-732ecbd{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2547,8 +2547,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 中属于第 <span id="mjx-a6d9ccf"><style>
-      #mjx-a6d9ccf{
+      </style><!----></span> 中属于第 <span id="mjx-9eda3b5"><style>
+      #mjx-9eda3b5{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2703,8 +2703,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 类的样本子集。</p></li></ul></li></ul><h3 id="信息增益" tabindex="-1">信息增益 <a class="header-anchor" href="#信息增益" aria-label="Permalink to “信息增益”">​</a></h3><ul><li><p>概念：特征 <span id="mjx-4ba2379"><style>
-      #mjx-4ba2379{
+      </style><!----></span> 类的样本子集。</p></li></ul></li></ul><h3 id="信息增益" tabindex="-1">信息增益 <a class="header-anchor" href="#信息增益" aria-label="Permalink to “信息增益”">​</a></h3><ul><li><p>概念：特征 <span id="mjx-17a3505"><style>
+      #mjx-17a3505{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -2859,8 +2859,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 对训练数据集 <span id="mjx-4c24082"><style>
-      #mjx-4c24082{
+      </style><!----></span> 对训练数据集 <span id="mjx-7bfa99b"><style>
+      #mjx-7bfa99b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3015,8 +3015,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的信息增益 <span id="mjx-4c3ad21"><style>
-      #mjx-4c3ad21{
+      </style><!----></span> 的信息增益 <span id="mjx-b7e977f"><style>
+      #mjx-b7e977f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3171,8 +3171,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ，定义为<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">集合</span><span id="mjx-be97781"><style>
-      #mjx-be97781{
+      </style><!----></span> ，定义为<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">集合</span><span id="mjx-0010969"><style>
+      #mjx-0010969{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3327,8 +3327,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);"> 的熵</span><span id="mjx-1a21848"><style>
-      #mjx-1a21848{
+      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);"> 的熵</span><span id="mjx-0d6142a"><style>
+      #mjx-0d6142a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3483,8 +3483,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 与 <span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">特征</span><span id="mjx-b006e9f"><style>
-      #mjx-b006e9f{
+      </style><!----></span> 与 <span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">特征</span><span id="mjx-9eec823"><style>
+      #mjx-9eec823{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3639,8 +3639,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);"> 给定条件下 </span><span id="mjx-a64825e"><style>
-      #mjx-a64825e{
+      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);"> 给定条件下 </span><span id="mjx-b182512"><style>
+      #mjx-b182512{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3795,8 +3795,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">的熵</span><span id="mjx-bbccca3"><style>
-      #mjx-bbccca3{
+      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">的熵</span><span id="mjx-2a8f77a"><style>
+      #mjx-2a8f77a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -3951,8 +3951,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">之差</span>。</p></li><li><p>公式：</p><span id="mjx-e65b5d8"><style>
-      #mjx-e65b5d8{
+      </style><!----></span><span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">之差</span>。</p></li><li><p>公式：</p><span id="mjx-444990b"><style>
+      #mjx-444990b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4107,8 +4107,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><ul><li>​<code>信息增益 = 信息熵 - 条件熵</code>​</li></ul></li></ul><p>【示例】</p><p><img src="/knowledge/assets/image-20260124204109-f970kd0.BKzjI2oJ.png">​</p><ol><li><p>计算<strong>熵</strong>：</p><p><span id="mjx-ed72d0c"><style>
-      #mjx-ed72d0c{
+      </style><!----></span><ul><li>​<code>信息增益 = 信息熵 - 条件熵</code>​</li></ul></li></ul><p>【示例】</p><p><img src="/knowledge/assets/image-20260124204109-f970kd0.BKzjI2oJ.png">​</p><ol><li><p>计算<strong>熵</strong>：</p><p><span id="mjx-7897f5f"><style>
+      #mjx-7897f5f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4263,8 +4263,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算<strong>条件熵</strong>：</p><p><span id="mjx-425878a"><style>
-      #mjx-425878a{
+      </style><!----></span></p></li><li><p>计算<strong>条件熵</strong>：</p><p><span id="mjx-af755f8"><style>
+      #mjx-af755f8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4419,8 +4419,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p><span id="mjx-089a135"><style>
-      #mjx-089a135{
+      </style><!----></span></p><p><span id="mjx-5bed15f"><style>
+      #mjx-5bed15f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4575,8 +4575,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p><span id="mjx-1f5b5da"><style>
-      #mjx-1f5b5da{
+      </style><!----></span></p><p><span id="mjx-2684f9f"><style>
+      #mjx-2684f9f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4731,8 +4731,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算<strong>信息增益</strong>：</p><p><span id="mjx-61ee221"><style>
-      #mjx-61ee221{
+      </style><!----></span></p></li><li><p>计算<strong>信息增益</strong>：</p><p><span id="mjx-c599e53"><style>
+      #mjx-c599e53{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -4887,8 +4887,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li></ol><h3 id="信息增益率" tabindex="-1">信息增益率 <a class="header-anchor" href="#信息增益率" aria-label="Permalink to “信息增益率”">​</a></h3><ul><li><p><strong>动机</strong>：</p><p>信息增益倾向于选择<strong>取值较多的特征</strong>（例如用户 ID），因为这类特征容易将数据划分为纯度很高的子集（条件熵接近 0），从而获得较大的信息增益。但这种划分通常<strong>缺乏泛化能力</strong>，对新样本无效。为克服这一偏差，引入<strong>信息增益率</strong>。</p></li><li><p>公式：</p><span id="mjx-7b10aef"><style>
-      #mjx-7b10aef{
+      </style><!----></span></p></li></ol><h3 id="信息增益率" tabindex="-1">信息增益率 <a class="header-anchor" href="#信息增益率" aria-label="Permalink to “信息增益率”">​</a></h3><ul><li><p><strong>动机</strong>：</p><p>信息增益倾向于选择<strong>取值较多的特征</strong>（例如用户 ID），因为这类特征容易将数据划分为纯度很高的子集（条件熵接近 0），从而获得较大的信息增益。但这种划分通常<strong>缺乏泛化能力</strong>，对新样本无效。为克服这一偏差，引入<strong>信息增益率</strong>。</p></li><li><p>公式：</p><span id="mjx-5deb50d"><style>
+      #mjx-5deb50d{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5043,8 +5043,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><p>其中，</p><span id="mjx-f57bd6f"><style>
-      #mjx-f57bd6f{
+      </style><!----></span><p>其中，</p><span id="mjx-266796b"><style>
+      #mjx-266796b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5199,8 +5199,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><ul><li><p><span id="mjx-c9d6321"><style>
-      #mjx-c9d6321{
+      </style><!----></span><ul><li><p><span id="mjx-676e359"><style>
+      #mjx-676e359{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5355,8 +5355,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：特征 <span id="mjx-f18378"><style>
-      #mjx-f18378{
+      </style><!----></span> ：特征 <span id="mjx-e50f5db"><style>
+      #mjx-e50f5db{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5511,8 +5511,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的信息增益率</p></li><li><p><span id="mjx-6c872bf"><style>
-      #mjx-6c872bf{
+      </style><!----></span> 的信息增益率</p></li><li><p><span id="mjx-5e5d07a"><style>
+      #mjx-5e5d07a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5667,8 +5667,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：信息增益</p></li><li><p><span id="mjx-5878bdd"><style>
-      #mjx-5878bdd{
+      </style><!----></span> ：信息增益</p></li><li><p><span id="mjx-f08e298"><style>
+      #mjx-f08e298{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5823,8 +5823,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：特征熵，表示分裂信息（Split Information，内在信息）或<strong>固有值</strong>（Intrinsic Value），即：惩罚参数，作为归一化惩罚项</p></li><li><p><span id="mjx-1404512"><style>
-      #mjx-1404512{
+      </style><!----></span> ：特征熵，表示分裂信息（Split Information，内在信息）或<strong>固有值</strong>（Intrinsic Value），即：惩罚参数，作为归一化惩罚项</p></li><li><p><span id="mjx-d3ade4a"><style>
+      #mjx-d3ade4a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -5979,8 +5979,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：特征 <span id="mjx-2f5a318"><style>
-      #mjx-2f5a318{
+      </style><!----></span> ：特征 <span id="mjx-29ef3cb"><style>
+      #mjx-29ef3cb{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -6135,8 +6135,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的不同取值个数</p></li><li><p><span id="mjx-56d1ff5"><style>
-      #mjx-56d1ff5{
+      </style><!----></span> 的不同取值个数</p></li><li><p><span id="mjx-71bcec8"><style>
+      #mjx-71bcec8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -6291,8 +6291,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：在特征 <span id="mjx-569f0a4"><style>
-      #mjx-569f0a4{
+      </style><!----></span> ：在特征 <span id="mjx-2f9855e"><style>
+      #mjx-2f9855e{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -6447,8 +6447,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 上取第 <span id="mjx-90e8648"><style>
-      #mjx-90e8648{
+      </style><!----></span> 上取第 <span id="mjx-db6426c"><style>
+      #mjx-db6426c{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -6603,8 +6603,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 个值的样本子集</p></li></ul></li><li><p><strong>核心机制</strong>：</p><p>信息增益率通过除以 <span id="mjx-70bfb38"><style>
-      #mjx-70bfb38{
+      </style><!----></span> 个值的样本子集</p></li></ul></li><li><p><strong>核心机制</strong>：</p><p>信息增益率通过除以 <span id="mjx-50f81f8"><style>
+      #mjx-50f81f8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -6759,8 +6759,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 对信息增益进行归一化。</p><p>​** <span id="mjx-aff975a"><style>
-      #mjx-aff975a{
+      </style><!----></span> 对信息增益进行归一化。</p><p>​** <span id="mjx-048c358"><style>
+      #mjx-048c358{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -6915,8 +6915,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ** <strong>衡量的是特征</strong> <strong><span id="mjx-1a881dd"><style>
-      #mjx-1a881dd{
+      </style><!----></span> ** <strong>衡量的是特征</strong> <strong><span id="mjx-6330cc4"><style>
+      #mjx-6330cc4{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -7071,8 +7071,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></strong> <strong>对数据集</strong> <strong><span id="mjx-e0b6773"><style>
-      #mjx-e0b6773{
+      </style><!----></span></strong> <strong>对数据集</strong> <strong><span id="mjx-374ca3d"><style>
+      #mjx-374ca3d{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -7227,8 +7227,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></strong> <strong>的划分“均匀程度”</strong> ：</p><ul><li><p>当各子集 <span id="mjx-2a54e1"><style>
-      #mjx-2a54e1{
+      </style><!----></span></strong> <strong>的划分“均匀程度”</strong> ：</p><ul><li><p>当各子集 <span id="mjx-37dae1a"><style>
+      #mjx-37dae1a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -7383,8 +7383,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的样本数量<strong>越接近</strong>（划分越均匀）， <span id="mjx-e556125"><style>
-      #mjx-e556125{
+      </style><!----></span> 的样本数量<strong>越接近</strong>（划分越均匀）， <span id="mjx-4d414a8"><style>
+      #mjx-4d414a8{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -7539,8 +7539,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><strong>越大</strong>；</p></li><li><p>当某个子集占据<strong>绝大多数样本</strong>（划分极不均匀）， <span id="mjx-d728a36"><style>
-      #mjx-d728a36{
+      </style><!----></span><strong>越大</strong>；</p></li><li><p>当某个子集占据<strong>绝大多数样本</strong>（划分极不均匀）， <span id="mjx-b98cc5e"><style>
+      #mjx-b98cc5e{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -7695,8 +7695,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><strong>趋近于 0</strong>。</p></li></ul><p>因此：</p><ul><li><p>对于<strong>取值多且划分均匀</strong>的特征（如 ID）， <span id="mjx-1dd8284"><style>
-      #mjx-1dd8284{
+      </style><!----></span><strong>趋近于 0</strong>。</p></li></ul><p>因此：</p><ul><li><p>对于<strong>取值多且划分均匀</strong>的特征（如 ID）， <span id="mjx-fd44aa2"><style>
+      #mjx-fd44aa2{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -7851,8 +7851,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 很大，导致 Gain_Ratio 被显著压低，<strong>有效抑制了对高基数无意义特征的偏好</strong>。</p></li><li><p>对于<strong>真正有判别力且划分合理</strong>的特征，即使取值不多，也能获得较高的增益率。</p></li></ul></li><li><p><strong>本质理解</strong>：</p><p>信息增益率 = <strong>信息增益 / 分裂代价</strong></p><p>→ 它衡量的是<strong>每单位划分复杂度所带来的信息收益</strong>，使特征选择更加鲁棒。</p></li></ul><h3 id="基尼值" tabindex="-1">基尼值 <a class="header-anchor" href="#基尼值" aria-label="Permalink to “基尼值”">​</a></h3><ul><li><p>从数据集中随机抽取两个样本，其类别标记不一致的概率。故， <span id="mjx-e53a8c6"><style>
-      #mjx-e53a8c6{
+      </style><!----></span> 很大，导致 Gain_Ratio 被显著压低，<strong>有效抑制了对高基数无意义特征的偏好</strong>。</p></li><li><p>对于<strong>真正有判别力且划分合理</strong>的特征，即使取值不多，也能获得较高的增益率。</p></li></ul></li><li><p><strong>本质理解</strong>：</p><p>信息增益率 = <strong>信息增益 / 分裂代价</strong></p><p>→ 它衡量的是<strong>每单位划分复杂度所带来的信息收益</strong>，使特征选择更加鲁棒。</p></li></ul><h3 id="基尼值" tabindex="-1">基尼值 <a class="header-anchor" href="#基尼值" aria-label="Permalink to “基尼值”">​</a></h3><ul><li><p>从数据集中随机抽取两个样本，其类别标记不一致的概率。故， <span id="mjx-0dc8c29"><style>
+      #mjx-0dc8c29{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -8007,8 +8007,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 值越小，数据集 <span id="mjx-f2dbea3"><style>
-      #mjx-f2dbea3{
+      </style><!----></span> 值越小，数据集 <span id="mjx-5ee4c32"><style>
+      #mjx-5ee4c32{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -8163,8 +8163,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的纯度越高</p></li><li><p>公式：</p><span id="mjx-a06020b"><style>
-      #mjx-a06020b{
+      </style><!----></span> 的纯度越高</p></li><li><p>公式：</p><span id="mjx-2b1209"><style>
+      #mjx-2b1209{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -8319,8 +8319,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li><li><p>​<code>基尼值 = 两个样本（所有组合）的概率乘积和 = 1 - 每个类别概率的平方和</code>​</p></li></ul><h3 id="基尼指数" tabindex="-1">基尼指数 <a class="header-anchor" href="#基尼指数" aria-label="Permalink to “基尼指数”">​</a></h3><ul><li><p>特征筛选，选择使划分后基尼系数最小的属性作为最优化属性</p></li><li><p>公式：</p><span id="mjx-036fc42"><style>
-      #mjx-036fc42{
+      </style><!----></span></li><li><p>​<code>基尼值 = 两个样本（所有组合）的概率乘积和 = 1 - 每个类别概率的平方和</code>​</p></li></ul><h3 id="基尼指数" tabindex="-1">基尼指数 <a class="header-anchor" href="#基尼指数" aria-label="Permalink to “基尼指数”">​</a></h3><ul><li><p>特征筛选，选择使划分后基尼系数最小的属性作为最优化属性</p></li><li><p>公式：</p><span id="mjx-627ef55"><style>
+      #mjx-627ef55{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -8475,8 +8475,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li></ul><h3 id="小结" tabindex="-1">小结 <a class="header-anchor" href="#小结" aria-label="Permalink to “小结”">​</a></h3><ul><li><p>信息熵： <span id="mjx-584bc16"><style>
-      #mjx-584bc16{
+      </style><!----></span></li></ul><h3 id="小结" tabindex="-1">小结 <a class="header-anchor" href="#小结" aria-label="Permalink to “小结”">​</a></h3><ul><li><p>信息熵： <span id="mjx-a76981f"><style>
+      #mjx-a76981f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -8631,8 +8631,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>条件熵： <span id="mjx-8df67e7"><style>
-      #mjx-8df67e7{
+      </style><!----></span></p></li><li><p>条件熵： <span id="mjx-3197d41"><style>
+      #mjx-3197d41{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -8787,8 +8787,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>特征熵： <span id="mjx-ea9c19c"><style>
-      #mjx-ea9c19c{
+      </style><!----></span></p></li><li><p>特征熵： <span id="mjx-67d9b1"><style>
+      #mjx-67d9b1{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -8943,8 +8943,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>信息增益： <span id="mjx-1142314"><style>
-      #mjx-1142314{
+      </style><!----></span></p></li><li><p>信息增益： <span id="mjx-a0d1d78"><style>
+      #mjx-a0d1d78{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -9099,8 +9099,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>信息增益率： <span id="mjx-d4e757e"><style>
-      #mjx-d4e757e{
+      </style><!----></span></p></li><li><p>信息增益率： <span id="mjx-1d2468d"><style>
+      #mjx-1d2468d{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -9255,8 +9255,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>惩罚项： <span id="mjx-127da71"><style>
-      #mjx-127da71{
+      </style><!----></span></p></li><li><p>惩罚项： <span id="mjx-4032bc4"><style>
+      #mjx-4032bc4{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -9411,8 +9411,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li></ul><blockquote><p>💡：</p></blockquote><blockquote></blockquote><blockquote><p>信息增益（ID3）越小、信息增益率（C4.5）越大，则说明优先选择该特征</p></blockquote><blockquote></blockquote><blockquote><p>基尼指数越小（CRAT），则说明优先选择该特征</p></blockquote><p><img src="/knowledge/assets/image-20260201221832-aikrjqp.C1nvJZgV.png"></p><h1 id="决策树算法" tabindex="-1">决策树算法 <a class="header-anchor" href="#决策树算法" aria-label="Permalink to “决策树算法”">​</a></h1><h3 id="id3-决策树" tabindex="-1">ID3 决策树 <a class="header-anchor" href="#id3-决策树" aria-label="Permalink to “ID3 决策树”">​</a></h3><ul><li><p><strong>定义</strong>：ID3 树是基于<strong>信息增益</strong>构建的决策树</p></li><li><p><strong>核心思想</strong>：优先参考<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">信息增益大的特征列</span>，充当节点</p></li><li><p><strong>ID3 决策树</strong>​<strong>构建流程</strong></p><ol><li><p>计算每个特征的<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">信息增益</span></p></li><li><p>使用<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">信息增益最大的特征</span>将数据集 S <span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">拆分为子集</span></p></li><li><p>使用该特征（信息增益最大的特征）作为决策树的一个节点</p></li><li><p>使用剩余特征对子集重复上述（1，2，3）过程</p></li></ol></li><li><p><strong>不足</strong>：偏向于选择<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">种类多的特征</span>作为分裂依据</p></li><li><p>【案例】</p><p>已知：某一个论坛客户流失率数据</p><p>需求：考察性别、活跃度特征哪一个特征对流失率的影响更大</p><p><img src="/knowledge/assets/image-20230905142136958-20260114164342-6uah27g.WmPUz1qZ.png">​</p><p>分析：</p><p>15条样本：5正样本、10个负样本</p><ul><li><p>计算熵</p></li><li><p>计算性别信息增益</p></li><li><p>计算活跃度信息增益</p></li><li><p>比较两个特征的信息增益</p></li></ul><p>计算信息熵，最大谁就充当根节点</p><ol><li><p>计算熵：</p><p><span id="mjx-e1df58"><style>
-      #mjx-e1df58{
+      </style><!----></span></p></li></ul><blockquote><p>💡：</p></blockquote><blockquote></blockquote><blockquote><p>信息增益（ID3）越小、信息增益率（C4.5）越大，则说明优先选择该特征</p></blockquote><blockquote></blockquote><blockquote><p>基尼指数越小（CRAT），则说明优先选择该特征</p></blockquote><p><img src="/knowledge/assets/image-20260201221832-aikrjqp.C1nvJZgV.png"></p><h1 id="决策树算法" tabindex="-1">决策树算法 <a class="header-anchor" href="#决策树算法" aria-label="Permalink to “决策树算法”">​</a></h1><h3 id="id3-决策树" tabindex="-1">ID3 决策树 <a class="header-anchor" href="#id3-决策树" aria-label="Permalink to “ID3 决策树”">​</a></h3><ul><li><p><strong>定义</strong>：ID3 树是基于<strong>信息增益</strong>构建的决策树</p></li><li><p><strong>核心思想</strong>：优先参考<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">信息增益大的特征列</span>，充当节点</p></li><li><p><strong>ID3 决策树</strong>​<strong>构建流程</strong></p><ol><li><p>计算每个特征的<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">信息增益</span></p></li><li><p>使用<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">信息增益最大的特征</span>将数据集 S <span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">拆分为子集</span></p></li><li><p>使用该特征（信息增益最大的特征）作为决策树的一个节点</p></li><li><p>使用剩余特征对子集重复上述（1，2，3）过程</p></li></ol></li><li><p><strong>不足</strong>：偏向于选择<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">种类多的特征</span>作为分裂依据</p></li><li><p>【案例】</p><p>已知：某一个论坛客户流失率数据</p><p>需求：考察性别、活跃度特征哪一个特征对流失率的影响更大</p><p><img src="/knowledge/assets/image-20230905142136958-20260114164342-6uah27g.WmPUz1qZ.png">​</p><p>分析：</p><p>15条样本：5正样本、10个负样本</p><ul><li><p>计算熵</p></li><li><p>计算性别信息增益</p></li><li><p>计算活跃度信息增益</p></li><li><p>比较两个特征的信息增益</p></li></ul><p>计算信息熵，最大谁就充当根节点</p><ol><li><p>计算熵：</p><p><span id="mjx-d8e8a14"><style>
+      #mjx-d8e8a14{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -9567,8 +9567,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>gender 的信息增益</p><p><span id="mjx-7117f85"><style>
-      #mjx-7117f85{
+      </style><!----></span></p></li><li><p>gender 的信息增益</p><p><span id="mjx-f6fb413"><style>
+      #mjx-f6fb413{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -9723,8 +9723,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p><span id="mjx-5f4bb8f"><style>
-      #mjx-5f4bb8f{
+      </style><!----></span></p><p><span id="mjx-38b58ef"><style>
+      #mjx-38b58ef{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -9879,8 +9879,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>act_info 的信息增益</p><p><span id="mjx-83114a5"><style>
-      #mjx-83114a5{
+      </style><!----></span></p></li><li><p>act_info 的信息增益</p><p><span id="mjx-39c0bbf"><style>
+      #mjx-39c0bbf{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -10035,8 +10035,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p><span id="mjx-46c2775"><style>
-      #mjx-46c2775{
+      </style><!----></span></p><p><span id="mjx-82d97f7"><style>
+      #mjx-82d97f7{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -10191,8 +10191,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p><span id="mjx-6a4bd2c"><style>
-      #mjx-6a4bd2c{
+      </style><!----></span></p></li><li><p><span id="mjx-ed589f6"><style>
+      #mjx-ed589f6{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -10347,8 +10347,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ，故 采用 act_info（活跃度） 充当根节点</p></li></ol><p><img src="/knowledge/assets/image-20260124220101-dbr56ve.QY_OkTY4.png">​</p></li></ul><h3 id="c4-5-决策树" tabindex="-1">C4.5 决策树 <a class="header-anchor" href="#c4-5-决策树" aria-label="Permalink to “C4.5 决策树”">​</a></h3><p>在 <strong>C4.5 决策树</strong>算法中，为避免信息增益率偏向取值过少的特征，通常先筛选出<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">信息增益高于平均水平</span>的<span data-type="text" style="background-color:var(--b3-card-warning-background);color:var(--b3-card-warning-color);">候选特征</span>，再从中选择<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">信息增益率最高</span>的<span data-type="text" style="background-color:var(--b3-card-warning-background);color:var(--b3-card-warning-color);">特征</span>进行分裂。</p><p><span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">信息增益率</span>越大越好</p><ul><li><p>【案例】计算 C4.5树 的信息增益率</p><p><img src="/knowledge/assets/image-20230905150001475-20260114164342-yhdmbia.B6vcj23K.png"></p><ol><li><p>计算 特征a 的信息增益(信息增益 = 熵 - 条件熵)</p><p><span id="mjx-30a8b39"><style>
-      #mjx-30a8b39{
+      </style><!----></span> ，故 采用 act_info（活跃度） 充当根节点</p></li></ol><p><img src="/knowledge/assets/image-20260124220101-dbr56ve.QY_OkTY4.png">​</p></li></ul><h3 id="c4-5-决策树" tabindex="-1">C4.5 决策树 <a class="header-anchor" href="#c4-5-决策树" aria-label="Permalink to “C4.5 决策树”">​</a></h3><p>在 <strong>C4.5 决策树</strong>算法中，为避免信息增益率偏向取值过少的特征，通常先筛选出<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">信息增益高于平均水平</span>的<span data-type="text" style="background-color:var(--b3-card-warning-background);color:var(--b3-card-warning-color);">候选特征</span>，再从中选择<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">信息增益率最高</span>的<span data-type="text" style="background-color:var(--b3-card-warning-background);color:var(--b3-card-warning-color);">特征</span>进行分裂。</p><p><span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">信息增益率</span>越大越好</p><ul><li><p>【案例】计算 C4.5树 的信息增益率</p><p><img src="/knowledge/assets/image-20230905150001475-20260114164342-yhdmbia.B6vcj23K.png"></p><ol><li><p>计算 特征a 的信息增益(信息增益 = 熵 - 条件熵)</p><p><span id="mjx-05e57c9"><style>
+      #mjx-05e57c9{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -10503,8 +10503,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算 特征a 的特征熵</p><p><span id="mjx-ed390a2"><style>
-      #mjx-ed390a2{
+      </style><!----></span></p></li><li><p>计算 特征a 的特征熵</p><p><span id="mjx-f9c785b"><style>
+      #mjx-f9c785b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -10659,8 +10659,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算 特征a 的信息增益率(信息增益率 = 信息增益 / 特征熵)</p><p><span id="mjx-e0c6902"><style>
-      #mjx-e0c6902{
+      </style><!----></span></p></li><li><p>计算 特征a 的信息增益率(信息增益率 = 信息增益 / 特征熵)</p><p><span id="mjx-3980d63"><style>
+      #mjx-3980d63{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -10815,8 +10815,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算 特征b 的 信息增益</p><p><span id="mjx-6595fd4"><style>
-      #mjx-6595fd4{
+      </style><!----></span></p></li><li><p>计算 特征b 的 信息增益</p><p><span id="mjx-b4186aa"><style>
+      #mjx-b4186aa{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -10971,8 +10971,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算 特征b 的特征熵</p><p><span id="mjx-fc5815c"><style>
-      #mjx-fc5815c{
+      </style><!----></span></p></li><li><p>计算 特征b 的特征熵</p><p><span id="mjx-cab5c3d"><style>
+      #mjx-cab5c3d{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -11127,8 +11127,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算 特征b 的信息增益率</p><p><span id="mjx-3b60cf3"><style>
-      #mjx-3b60cf3{
+      </style><!----></span></p></li><li><p>计算 特征b 的信息增益率</p><p><span id="mjx-56d8902"><style>
+      #mjx-56d8902{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -11283,8 +11283,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li></ol></li></ul><h3 id="cart-决策树-classification-and-regression-tree" tabindex="-1">CART 决策树（Classification and Regression Tree） <a class="header-anchor" href="#cart-决策树-classification-and-regression-tree" aria-label="Permalink to “CART 决策树（Classification and Regression Tree）”">​</a></h3><ul><li><p>Cart模型是一种决策树模型，它即可以用于分类，也可以用于回归。</p></li><li><p>分类和回归树模型采用不同的最优化策略</p><ul><li><p>Cart回归树 使用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">平方误差最小化</span>策略</p></li><li><p>Cart分类树 采用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">基尼指数最小化</span>策略</p></li></ul></li><li><p>CART 回归树和 CART 分类树的<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">不同之处</span>在于:</p><ol><li><p>CART 分类树预测输出的是一个<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">离散值</span>，CART 回归树预测输出的是一个<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">连续值</span>。</p></li><li><p>CART 分类树使用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">基尼指数</span>作为划分、构建树的依据，CART 回归树使用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">平方损失</span>。</p></li><li><p>分类树使用叶子节点里出现<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">更多次数的类别作为预测类别</span>，回归树则采用叶子节点里<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">均值作为预测输出</span></p></li></ol></li><li><p>CART 回归树的平方损失（总误差）：</p><span id="mjx-58bc87a"><style>
-      #mjx-58bc87a{
+      </style><!----></span></p></li></ol></li></ul><h3 id="cart-决策树-classification-and-regression-tree" tabindex="-1">CART 决策树（Classification and Regression Tree） <a class="header-anchor" href="#cart-决策树-classification-and-regression-tree" aria-label="Permalink to “CART 决策树（Classification and Regression Tree）”">​</a></h3><ul><li><p>Cart模型是一种决策树模型，它即可以用于分类，也可以用于回归。</p></li><li><p>分类和回归树模型采用不同的最优化策略</p><ul><li><p>Cart回归树 使用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">平方误差最小化</span>策略</p></li><li><p>Cart分类树 采用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">基尼指数最小化</span>策略</p></li></ul></li><li><p>CART 回归树和 CART 分类树的<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">不同之处</span>在于:</p><ol><li><p>CART 分类树预测输出的是一个<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">离散值</span>，CART 回归树预测输出的是一个<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">连续值</span>。</p></li><li><p>CART 分类树使用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">基尼指数</span>作为划分、构建树的依据，CART 回归树使用<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">平方损失</span>。</p></li><li><p>分类树使用叶子节点里出现<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">更多次数的类别作为预测类别</span>，回归树则采用叶子节点里<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">均值作为预测输出</span></p></li></ol></li><li><p>CART 回归树的平方损失（总误差）：</p><span id="mjx-307fac1"><style>
+      #mjx-307fac1{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -11439,8 +11439,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span><ul><li><p><span id="mjx-af6dd88"><style>
-      #mjx-af6dd88{
+      </style><!----></span><ul><li><p><span id="mjx-469b106"><style>
+      #mjx-469b106{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -11595,8 +11595,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：切分后形成的两个子区域（左子树和右子树对应的样本集合）</p></li><li><p><span id="mjx-f21bfe4"><style>
-      #mjx-f21bfe4{
+      </style><!----></span> ：切分后形成的两个子区域（左子树和右子树对应的样本集合）</p></li><li><p><span id="mjx-e0089b6"><style>
+      #mjx-e0089b6{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -11751,8 +11751,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：第 <span id="mjx-c1ed26a"><style>
-      #mjx-c1ed26a{
+      </style><!----></span> ：第 <span id="mjx-ddee01a"><style>
+      #mjx-ddee01a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -11907,8 +11907,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 个样本的真实目标值</p></li><li><p><span id="mjx-8f38e36"><style>
-      #mjx-8f38e36{
+      </style><!----></span> 个样本的真实目标值</p></li><li><p><span id="mjx-411ba72"><style>
+      #mjx-411ba72{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -12063,8 +12063,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ：分别是在区域 <span id="mjx-7d4328a"><style>
-      #mjx-7d4328a{
+      </style><!----></span> ：分别是在区域 <span id="mjx-12f8edb"><style>
+      #mjx-12f8edb{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -12219,8 +12219,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 和 <span id="mjx-901ceb7"><style>
-      #mjx-901ceb7{
+      </style><!----></span> 和 <span id="mjx-1f39ba5"><style>
+      #mjx-1f39ba5{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -12375,8 +12375,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 中对输出的<strong>最优常数预测值</strong></p><p><strong>最优常数预测值：</strong> 该区域内所有目标值的<strong>均值</strong>（<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">子区域中 y的均值</span>）</p><span id="mjx-7228928"><style>
-      #mjx-7228928{
+      </style><!----></span> 中对输出的<strong>最优常数预测值</strong></p><p><strong>最优常数预测值：</strong> 该区域内所有目标值的<strong>均值</strong>（<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">子区域中 y的均值</span>）</p><span id="mjx-1e2908a"><style>
+      #mjx-1e2908a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -12531,8 +12531,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li></ul><p>​<code>平方损失 = (预测值 - 真实值)^2</code>​</p></li><li><p>【案例】根据基尼值，构建 CART 分类树</p><p><img src="/knowledge/assets/image-20230905155453855-20260114164342-er9oi3x.BwbL1DDo.png"></p><ul><li><p>已知：是否拖欠货代数据</p></li><li><p>需求：计算各种特征的基尼指数，选择<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">最优分裂点</span></p></li></ul><ol><li><p>计算<strong>是否有房</strong>的基尼指数</p><p>3-有房：3-no，0-yes；7-无房：3-yes，4-no</p><ul><li><p>有房的基尼值 <span id="mjx-642c3c"><style>
-      #mjx-642c3c{
+      </style><!----></span></li></ul><p>​<code>平方损失 = (预测值 - 真实值)^2</code>​</p></li><li><p>【案例】根据基尼值，构建 CART 分类树</p><p><img src="/knowledge/assets/image-20230905155453855-20260114164342-er9oi3x.BwbL1DDo.png"></p><ul><li><p>已知：是否拖欠货代数据</p></li><li><p>需求：计算各种特征的基尼指数，选择<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">最优分裂点</span></p></li></ul><ol><li><p>计算<strong>是否有房</strong>的基尼指数</p><p>3-有房：3-no，0-yes；7-无房：3-yes，4-no</p><ul><li><p>有房的基尼值 <span id="mjx-4cdd341"><style>
+      #mjx-4cdd341{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -12687,8 +12687,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>无房的基尼值 <span id="mjx-5b17fb7"><style>
-      #mjx-5b17fb7{
+      </style><!----></span></p></li><li><p>无房的基尼值 <span id="mjx-2d2c399"><style>
+      #mjx-2d2c399{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -12843,8 +12843,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p><span id="mjx-72583bf"><style>
-      #mjx-72583bf{
+      </style><!----></span></p></li><li><p><span id="mjx-9ac122e"><style>
+      #mjx-9ac122e{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -12999,8 +12999,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li></ul></li><li><p>计算<strong>婚姻状况</strong>的基尼指数</p><ul><li><p>计算 {married} 和 {single, divorced} 情况下的基尼指数</p><p>4-married：4-no，0-yes；6-{single, divorced}：3-no，3-yes</p><ul><li><p>已婚的基尼值 <span id="mjx-a5b047"><style>
-      #mjx-a5b047{
+      </style><!----></span></p></li></ul></li><li><p>计算<strong>婚姻状况</strong>的基尼指数</p><ul><li><p>计算 {married} 和 {single, divorced} 情况下的基尼指数</p><p>4-married：4-no，0-yes；6-{single, divorced}：3-no，3-yes</p><ul><li><p>已婚的基尼值 <span id="mjx-b98640f"><style>
+      #mjx-b98640f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -13155,8 +13155,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>未婚的基尼值 <span id="mjx-05f9a0a"><style>
-      #mjx-05f9a0a{
+      </style><!----></span></p></li><li><p>未婚的基尼值 <span id="mjx-5aaf338"><style>
+      #mjx-5aaf338{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -13311,8 +13311,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p><span id="mjx-fb9443b"><style>
-      #mjx-fb9443b{
+      </style><!----></span></p></li><li><p><span id="mjx-e11cf1c"><style>
+      #mjx-e11cf1c{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -13467,8 +13467,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li></ul></li><li><p>计算 {single} 和 {married, divorced} 情况下的基尼指数</p><p><span id="mjx-12e3618"><style>
-      #mjx-12e3618{
+      </style><!----></span></p></li></ul></li><li><p>计算 {single} 和 {married, divorced} 情况下的基尼指数</p><p><span id="mjx-aaf0825"><style>
+      #mjx-aaf0825{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -13623,8 +13623,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>计算 {divorced} 和 {single,married} 情况下的基尼指数</p><p><span id="mjx-c13d05b"><style>
-      #mjx-c13d05b{
+      </style><!----></span></p></li><li><p>计算 {divorced} 和 {single,married} 情况下的基尼指数</p><p><span id="mjx-e527cf3"><style>
+      #mjx-e527cf3{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -13779,8 +13779,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li single,="" divorced=""><p>故，<strong>婚姻状况</strong>的基尼指数为 0.3，且 预选分裂点为：{married} 和</p></li></ul></li><li><p>计算<strong>年收入</strong>的基尼指数</p><ul><li><p>先将数值型属性升序排列，以相邻中间值作为待确定分裂点：</p><p>|是否拖欠贷款|年收入|相邻值中点|Gini_index|</p><p>| --------------| --------| ------------| ------------|</p><p>|no|60|65|0.4|</p><p>|no|70|72.5|0.375|</p><p>|no|75|80|0.343|</p><p>|yes|85|87.7|0.417|</p><p>|yes|90|92.5|0.4|</p><p>|yes|95|97.5|0.3|</p><p>|no|100|110|0.343|</p><p>|no|120|122.5|0.375|</p><p>|no|125|172.5|0.4|</p><p>|no|220|—|—|</p></li><li><p>以年收入 65 将样本分为两部分，计算基尼值</p><p>节点为 65 时： <span id="mjx-c9e0ec5"><style>
-      #mjx-c9e0ec5{
+      </style><!----></span></p></li><li single,="" divorced=""><p>故，<strong>婚姻状况</strong>的基尼指数为 0.3，且 预选分裂点为：{married} 和</p></li></ul></li><li><p>计算<strong>年收入</strong>的基尼指数</p><ul><li><p>先将数值型属性升序排列，以相邻中间值作为待确定分裂点：</p><p>|是否拖欠贷款|年收入|相邻值中点|Gini_index|</p><p>| --------------| --------| ------------| ------------|</p><p>|no|60|65|0.4|</p><p>|no|70|72.5|0.375|</p><p>|no|75|80|0.343|</p><p>|yes|85|87.7|0.417|</p><p>|yes|90|92.5|0.4|</p><p>|yes|95|97.5|0.3|</p><p>|no|100|110|0.343|</p><p>|no|120|122.5|0.375|</p><p>|no|125|172.5|0.4|</p><p>|no|220|—|—|</p></li><li><p>以年收入 65 将样本分为两部分，计算基尼值</p><p>节点为 65 时： <span id="mjx-a78c6a5"><style>
+      #mjx-a78c6a5{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -13935,8 +13935,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li><li><p>同理，计算多有分割点的基尼指数，最小的基尼指数为 0.3</p></li></ul></li></ol><p>最小基尼指数有两个分裂点，我们随机选择一个即可<img src="/knowledge/assets/image-20260126214544-z24ug14.DUz3YK_1.png"></p></li></ul><h6 id="cart-回归树构建过程" tabindex="-1">CART 回归树构建过程 <a class="header-anchor" href="#cart-回归树构建过程" aria-label="Permalink to “CART 回归树构建过程”">​</a></h6><ol><li><p>选择第一个<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">特征</span>，将该特征的值进行排序，取<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">相邻点计算均值作为待划分点</span></p></li><li><p>根据所有划分点，将数据集分成<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">两部分：R1、R2</span></p></li><li><p>R1 和 R2 两部分的平方损失相加作为该<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">切分点平方损失</span></p></li><li><p>取<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">最小的平方损失</span>的划分点，作为当前特征的划分点</p></li><li><p>以此计算<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">其他特征的最优划分点</span>、以及该划分点对应的损失值</p></li><li><p>在所有的特征的划分点中，选择出最小平方损失的划分点，<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">作为当前树的分裂点</span></p></li></ol><p><img src="/knowledge/assets/image-20260129181313-pd4zjkn.D6qahIVh.png"></p><ul><li><p>【案例】根据平方损失，构建 CART 回归树</p><ul><li><p>已知：数据集只有1个特征x，目标值为y</p><p>|x|1|2|3|4|5|6|7|8|9|10|</p><p>| ---| ------| -----| ------| -----| -----| ------| -----| -----| ---| ------|</p><p>|y|5.56|5.7|5.91|6.4|6.8|7.05|8.9|8.7|9|9.05|</p></li><li><p>分析：因只有1个特征，所以只需选择该特征的最优划分点，并不需要计算其他特征。</p></li></ul><ol><li><p>先将特征 <span id="mjx-20acd98"><style>
-      #mjx-20acd98{
+      </style><!----></span></p></li><li><p>同理，计算多有分割点的基尼指数，最小的基尼指数为 0.3</p></li></ul></li></ol><p>最小基尼指数有两个分裂点，我们随机选择一个即可<img src="/knowledge/assets/image-20260126214544-z24ug14.DUz3YK_1.png"></p></li></ul><h6 id="cart-回归树构建过程" tabindex="-1">CART 回归树构建过程 <a class="header-anchor" href="#cart-回归树构建过程" aria-label="Permalink to “CART 回归树构建过程”">​</a></h6><ol><li><p>选择第一个<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">特征</span>，将该特征的值进行排序，取<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">相邻点计算均值作为待划分点</span></p></li><li><p>根据所有划分点，将数据集分成<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">两部分：R1、R2</span></p></li><li><p>R1 和 R2 两部分的平方损失相加作为该<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">切分点平方损失</span></p></li><li><p>取<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">最小的平方损失</span>的划分点，作为当前特征的划分点</p></li><li><p>以此计算<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">其他特征的最优划分点</span>、以及该划分点对应的损失值</p></li><li><p>在所有的特征的划分点中，选择出最小平方损失的划分点，<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">作为当前树的分裂点</span></p></li></ol><p><img src="/knowledge/assets/image-20260129181313-pd4zjkn.D6qahIVh.png"></p><ul><li><p>【案例】根据平方损失，构建 CART 回归树</p><ul><li><p>已知：数据集只有1个特征x，目标值为y</p><p>|x|1|2|3|4|5|6|7|8|9|10|</p><p>| ---| ------| -----| ------| -----| -----| ------| -----| -----| ---| ------|</p><p>|y|5.56|5.7|5.91|6.4|6.8|7.05|8.9|8.7|9|9.05|</p></li><li><p>分析：因只有1个特征，所以只需选择该特征的最优划分点，并不需要计算其他特征。</p></li></ul><ol><li><p>先将特征 <span id="mjx-6046d2d"><style>
+      #mjx-6046d2d{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -14091,8 +14091,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 的值排序，并取<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">相邻元素均值</span>作为<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">待划分点</span>，如下所示：</p><p>|s|1.5|2.5|3.5|4.5|5.5|6.5|7.5|8.5|9.5|</p><p>| ---| -----| -----| -----| -----| -----| -----| -----| -----| -----|</p></li><li><p>计算<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">每一个划分点的平方损失</span></p><p>例如：1.5 的平方损失计算过程为</p><ul><li><p>R1 为 小于 1.5 的样本个数，样本数量为：1，其输出值为：</p><span id="mjx-1aca20b"><style>
-      #mjx-1aca20b{
+      </style><!----></span> 的值排序，并取<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">相邻元素均值</span>作为<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">待划分点</span>，如下所示：</p><p>|s|1.5|2.5|3.5|4.5|5.5|6.5|7.5|8.5|9.5|</p><p>| ---| -----| -----| -----| -----| -----| -----| -----| -----| -----|</p></li><li><p>计算<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">每一个划分点的平方损失</span></p><p>例如：1.5 的平方损失计算过程为</p><ul><li><p>R1 为 小于 1.5 的样本个数，样本数量为：1，其输出值为：</p><span id="mjx-97de384"><style>
+      #mjx-97de384{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -14247,8 +14247,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li><li><p>R2 为 大于 1.5 的样本个数，样本数量为：9 ，其输出值为：</p><span id="mjx-83223ec"><style>
-      #mjx-83223ec{
+      </style><!----></span></li><li><p>R2 为 大于 1.5 的样本个数，样本数量为：9 ，其输出值为：</p><span id="mjx-4cc588a"><style>
+      #mjx-4cc588a{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -14403,8 +14403,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></li><li><p>该划分点的平方损失：<code>误差 = 预测值 - 真实值</code>​</p><p><span id="mjx-afd61a5"><style>
-      #mjx-afd61a5{
+      </style><!----></span></li><li><p>该划分点的平方损失：<code>误差 = 预测值 - 真实值</code>​</p><p><span id="mjx-3f006f2"><style>
+      #mjx-3f006f2{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -14559,8 +14559,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p></li></ul><p>以此方式计算 2.5、3.5... 等划分点的平方损失，结果如下所示：</p><p>|s|1.5|2.5|3.5|4.5|5.5|6.5|7.5|8.5|9.5|</p><p>| ------| -------| -------| ------| ------| ------| -------------------------------------------------------------------------------------------------| ------| -------| -------|</p><p>|m(s)|15.72|12.07|8.36|5.78|3.91|<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">1.93</span>|8.01|11.73|15.74|</p></li><li><p>当划分点 <span id="mjx-47a3f9"><style>
-      #mjx-47a3f9{
+      </style><!----></span></p></li></ul><p>以此方式计算 2.5、3.5... 等划分点的平方损失，结果如下所示：</p><p>|s|1.5|2.5|3.5|4.5|5.5|6.5|7.5|8.5|9.5|</p><p>| ------| -------| -------| ------| ------| ------| -------------------------------------------------------------------------------------------------| ------| -------| -------|</p><p>|m(s)|15.72|12.07|8.36|5.78|3.91|<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">1.93</span>|8.01|11.73|15.74|</p></li><li><p>当划分点 <span id="mjx-c1cd01b"><style>
+      #mjx-c1cd01b{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -14715,8 +14715,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 时， <span id="mjx-48456c8"><style>
-      #mjx-48456c8{
+      </style><!----></span> 时， <span id="mjx-592c922"><style>
+      #mjx-592c922{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -14871,8 +14871,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 最小。</p><p>因此，<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">第一个划分变量</span>：特征为 <span id="mjx-beff6ad"><style>
-      #mjx-beff6ad{
+      </style><!----></span> 最小。</p><p>因此，<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">第一个划分变量</span>：特征为 <span id="mjx-03a29ee"><style>
+      #mjx-03a29ee{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -15027,8 +15027,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> , 切分点为 <span id="mjx-f6405f"><style>
-      #mjx-f6405f{
+      </style><!----></span> , 切分点为 <span id="mjx-677d75c"><style>
+      #mjx-677d75c{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -15183,8 +15183,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> ，即： <span id="mjx-58ea5af"><style>
-      #mjx-58ea5af{
+      </style><!----></span> ，即： <span id="mjx-026178d"><style>
+      #mjx-026178d{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -15339,8 +15339,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p><img src="/knowledge/assets/cart1-20260114164342-wjrdyvd.D-XQ3Ot1.png"></p></li><li><p>对<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">左子树</span>的 6 个结点计算<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">每个划分点的平方式损失</span>，找出最优划分点：</p><p>|x|1|2|3|4|5|6|</p><p>| ---| ------| -----| ------| -----| -----| ------|</p><p>|y|5.56|5.7|5.91|6.4|6.8|7.05|</p><p>|s|1.5|2.5|3.5|4.5|5.5|</p><p>| ----| ------| ------| ------| ------| ------|</p><p>|c1|5.56|5.63|5.72|5.89|6.07|</p><p>|c2|6.37|6.54|6.75|6.93|7.05|</p><p>以 <span id="mjx-ae3026d"><style>
-      #mjx-ae3026d{
+      </style><!----></span></p><p><img src="/knowledge/assets/cart1-20260114164342-wjrdyvd.D-XQ3Ot1.png"></p></li><li><p>对<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">左子树</span>的 6 个结点计算<span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">每个划分点的平方式损失</span>，找出最优划分点：</p><p>|x|1|2|3|4|5|6|</p><p>| ---| ------| -----| ------| -----| -----| ------|</p><p>|y|5.56|5.7|5.91|6.4|6.8|7.05|</p><p>|s|1.5|2.5|3.5|4.5|5.5|</p><p>| ----| ------| ------| ------| ------| ------|</p><p>|c1|5.56|5.63|5.72|5.89|6.07|</p><p>|c2|6.37|6.54|6.75|6.93|7.05|</p><p>以 <span id="mjx-2eab43f"><style>
+      #mjx-2eab43f{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -15495,8 +15495,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 作为切分点，左子树c1 输出为5.56，右子树c2输出 <span id="mjx-8a58f3f"><style>
-      #mjx-8a58f3f{
+      </style><!----></span> 作为切分点，左子树c1 输出为5.56，右子树c2输出 <span id="mjx-464a07c"><style>
+      #mjx-464a07c{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -15651,8 +15651,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span></p><p>|s|1.5|2.5|3.5|4.5|5.5|</p><p>| ------| --------| -------| -------------------------------------------------------------------------------------------------| --------| --------|</p><p>|m(s)|1.3087|0.754|<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">0.2771</span>|0.4368|1.0644|</p><p><span id="mjx-7644db2"><style>
-      #mjx-7644db2{
+      </style><!----></span></p><p>|s|1.5|2.5|3.5|4.5|5.5|</p><p>| ------| --------| -------| -------------------------------------------------------------------------------------------------| --------| --------|</p><p>|m(s)|1.3087|0.754|<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">0.2771</span>|0.4368|1.0644|</p><p><span id="mjx-f03eed6"><style>
+      #mjx-f03eed6{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -15807,8 +15807,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 时 <span id="mjx-a1d4aa6"><style>
-      #mjx-a1d4aa6{
+      </style><!----></span> 时 <span id="mjx-31818b4"><style>
+      #mjx-31818b4{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -15963,8 +15963,8 @@ g[data-mml-node=&quot;xypic&quot;] path {
 }
 
       }
-      </style><!----></span> 最小，所以左子树继续以 <span id="mjx-8e6694"><style>
-      #mjx-8e6694{
+      </style><!----></span> 最小，所以左子树继续以 <span id="mjx-6a8b3dd"><style>
+      #mjx-6a8b3dd{
         display:contents;
         mjx-assistive-mml {
           user-select: text !important;
@@ -16120,7 +16120,7 @@ g[data-mml-node=&quot;xypic&quot;] path {
 
       }
       </style><!----></span> 进行分裂:</p><p><img src="/knowledge/assets/cart2-20260114164342-us18t4z.DsltjpH1.png"></p></li><li><p>假设在生成3个区域 之后停止划分（最大深度为3），以上就是回归树。</p><p>每一个叶子结点的输出为：挂在该结点上的<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">所有样本均值</span>。</p><p>|x|1|2|3|4|5|6|7|8|9|10|</p><p>| ---| ------| -----| ------| -----| -----| ------| -----| -----| ---| ------|</p><p>|y|5.56|5.7|5.91|6.4|6.8|7.05|8.9|8.7|9|9.05|</p><p>1/2/3 号样本预测结果都为：5.72</p><p>4/5/6 号样本预测结果都为：6.75</p><p>7/8/9/10 号样本预测结果都为：8.9125</p></li></ol></li></ul><p>【案例】泰坦尼克号乘客生存预测</p><h3 id="小结-1" tabindex="-1">小结 <a class="header-anchor" href="#小结-1" aria-label="Permalink to “小结”">​</a></h3><p>|名称|提出时间|分支方式|特点|</p><p>| ------| ----------| ------------| --------------------------------------------------------------------------------------------------------------------------------------------------------------|</p><p>|ID3|1975|信息增益|1.ID3只能对离散属性的数据集构成决策树 <br>2.倾向于选择取值较多的属性<br>|</p><p>|C4.5|1993|信息增益率|1.缓解了ID3分支过程中总喜欢偏向选择值较多的属性 <br>2.可处理连续数值型属性，也增加了对缺失值的处理方法 <br>3.只适合于能够驻留于内存的数据集,大数据集无能为力<br>|</p><p>|CART|1984|基尼指数|1.可以进行分类和回归，可处理离散属性，也可以处理连续属性 <br>2.采用基尼指数，计算量减小 <br>3.一定是二叉树<br>|</p><h1 id="决策树剪枝" tabindex="-1">决策树剪枝 <a class="header-anchor" href="#决策树剪枝" aria-label="Permalink to “决策树剪枝”">​</a></h1><ul><li><p>为什么要剪枝？</p><p><span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">防止决策树过拟合</span>的一种<span data-type="text" style="background-color:var(--b3-card-info-background);color:var(--b3-card-info-color);">正则化方法</span>，可提高其泛化能力</p></li><li><p>如何剪枝？</p><p>将一颗子树的子节点全部删掉，利用叶子节点替换子树(实质上是后剪枝技术)，也可以（假定当前对以root为根的子树进行剪枝）只保留根节点本身而删除所有的叶子</p><p><img src="/knowledge/assets/wpsarP0jT-20260114164342-t8j225n.DXBtMhEM.png">​</p></li><li><p><span data-type="text" style="background-color:var(--b3-card-success-background);color:var(--b3-card-success-color);">剪枝的方式</span>：</p><ul><li><p><span data-type="text" style="background-color:var(--b3-card-warning-background);color:var(--b3-card-warning-color);">预剪枝</span>：指在决策树生成过程中，对每个结点在划分前先进行估计，若当前结点的划分不能带来决策树泛化性能提升，则停止划分并将当前结点标记为叶结点;</p></li><li><p><span data-type="text" style="background-color:var(--b3-card-warning-background);color:var(--b3-card-warning-color);">后剪枝</span>：先从训练集生成一棵完整的决策树，然后自底向上地对非叶结点进行考察，若将该结点对应的子树替换为叶结点能带来决策树泛化性能提升，则将该子树替换为叶结点。</p></li></ul><p>【区别】预剪枝，在节点划分前就先判断是否要剪枝；后剪枝，对一颗完整的树进行剪枝。</p></li><li><p>预剪枝 VS 后剪枝</p><p>||预剪枝|后剪枝|</p><p>| ------| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|</p><p>|优点|预剪枝使决策树的很多分支没有展开，不单降低了过拟合风险，还显著减少了决策树的训练、测试时间开销|比预剪枝保留了更多的分支。一般情况下，后剪枝决策树的欠拟合风险很小，<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">泛化性能往往优于预剪枝</span>|</p><p>|缺点|有些分支的当前划分虽不能提升泛化性能，但在其基础上进行的后续划分却有可能导致性能的显著提高<br>预剪枝决策树也<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">带来了欠拟合的风险</span><br>|但后剪枝过程是在生成完全决策树之后进行的，并且要自底向上地对树中所有非叶子节点进行逐一考察，因此在训练时间开销比未剪枝的决策树和预剪枝的决策树都要大得多。（<span data-type="text" style="background-color:var(--b3-card-error-background);color:var(--b3-card-error-color);">资源开销大</span>）|</p></li></ul><p>【例子】预剪枝和后剪枝</p><p>‍</p><hr><!----><!----></div></div></main><footer class="VPDocFooter" data-v-7e86aba9 data-v-0cbbdf1c><!--[--><!--[--><!--[--><!--[--><div class="doc-before-footer-cc-block mt-10 text-sm font-medium" data-v-6bf59db9> 使用 <a class="footer-cc-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/" data-v-6bf59db9>CC BY-SA 4.0</a> 许可协议进行共享 </div><div class="site-stats" aria-label="站点访问统计" data-v-8616f530><span class="stat-item" data-v-8616f530>👁 本站总访问 <span id="busuanzi_value_site_pv" class="stat-num" data-v-8616f530></span> 次</span><span class="stat-sep" data-v-8616f530>·</span><span class="stat-item" data-v-8616f530>访客 <span id="busuanzi_value_site_uv" class="stat-num" data-v-8616f530></span> 人</span></div><!--]--><!--]--><!--]--><!--]--><div class="edit-info" data-v-0cbbdf1c><div class="edit-link" data-v-0cbbdf1c><a class="VPLink link vp-external-link-icon no-icon edit-link-button" href="https://github.com/star-nebula/knowledge/tree/main/vault/Knowledge/AI/机器学习-决策树.md" target="_blank" rel="noreferrer" data-v-0cbbdf1c><!--[--><span class="vpi-square-pen edit-link-icon" data-v-0cbbdf1c></span> 编辑本页面<!--]--></a></div><div class="last-updated" data-v-0cbbdf1c><p class="VPLastUpdated" data-v-0cbbdf1c data-v-0105f91c>最后更新: <time datetime="2026-09-29T04:20:45.000Z" data-v-0105f91c></time></p></div></div><nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-0cbbdf1c><span class="visually-hidden" id="doc-footer-aria-label" data-v-0cbbdf1c>Pager</span><div class="pager" data-v-0cbbdf1c><!----></div><div class="pager" data-v-0cbbdf1c><a class="VPLink link pager-link next" href="/knowledge/vault/作坊/网站部署/" data-v-0cbbdf1c><!--[--><span class="desc" data-v-0cbbdf1c>Next page</span><span class="title" data-v-0cbbdf1c>网站部署</span><!--]--></a></div></nav></footer><!--[--><!--]--></div></div></div><!--[--><!--]--></div></div><footer class="VPFooter has-sidebar" data-v-994256a4 data-v-49de54db><div class="container" data-v-49de54db><p class="message" data-v-49de54db>每一篇文章，都是时间的标本</p><!----></div></footer><!--[--><!--]--></div></div>
-    <script>window.__VP_HASH_MAP__=JSON.parse("{\"readme.md\":\"BHponKqe\",\"vault_knowledge__mocs_1.jev-moc.md\":\"DbwxiFCT\",\"vault_knowledge__mocs_1.应用核心范式-moc.md\":\"DvTVQCp_\",\"vault_knowledge__mocs_1.架构与中间件-moc.md\":\"CKOk2DRK\",\"vault_knowledge__mocs_2.ai 产业与概览-moc.md\":\"CLFpzv_W\",\"vault_knowledge__mocs_2.nlp 基础-moc.md\":\"CoGuVwxu\",\"vault_knowledge__mocs_2.机器学习-moc.md\":\"O2jn1H_v\",\"vault_knowledge__mocs_2.模型部署-moc.md\":\"BOLqFuhq\",\"vault_knowledge__mocs_2.深度学习基础-moc.md\":\"CvhonEjo\",\"vault_knowledge__mocs_4.专题分析-moc.md\":\"jLzxyD-N\",\"vault_knowledge__mocs_4.基础层-moc.md\":\"BsY3UG4u\",\"vault_knowledge__mocs_4.扩展层-moc.md\":\"BQIQbEof\",\"vault_knowledge__mocs_4.操作指南-moc.md\":\"BRbntpaj\",\"vault_knowledge__mocs_4.支撑层-moc.md\":\"DmEggBZz\",\"vault_knowledge__mocs_4.能力层-moc.md\":\"sBgExoqR\",\"vault_knowledge__mocs_5.dataanalysis-moc.md\":\"B5PKaQN-\",\"vault_knowledge__mocs_5.frontend-moc.md\":\"CSQXue-r\",\"vault_knowledge__mocs_5.git-moc.md\":\"C48zGslx\",\"vault_knowledge__mocs_5.ide与环境-moc.md\":\"B3yKcTkC\",\"vault_knowledge__mocs_5.linux-moc.md\":\"kLJSLAoy\",\"vault_knowledge__mocs_5.mysql-moc.md\":\"KcnU0lE9\",\"vault_knowledge__mocs_5.python-moc.md\":\"DhEfIRz7\",\"vault_knowledge__mocs_5.redis-moc.md\":\"CyE_AVlq\",\"vault_knowledge__mocs_5.容器与部署-moc.md\":\"B0mDo2La\",\"vault_knowledge__mocs_5.算法与数据结构-moc.md\":\"DE-LXRUZ\",\"vault_knowledge__mocs_6.00后群体特征-moc.md\":\"-5lkAdKf\",\"vault_knowledge__mocs_6.个人能力-moc.md\":\"DKEIvByS\",\"vault_knowledge__mocs_6.博客部署-moc.md\":\"Bzg5cgjY\",\"vault_knowledge__mocs_ide与环境-moc.md\":\"DxicZkAS\",\"vault_knowledge__mocs_nlp基础-moc.md\":\"oNjkUfW1\",\"vault_knowledge__mocs_知识库总览-moc.md\":\"CE3xDP2U\",\"vault_knowledge__mocs_🌱 生活-moc.md\":\"DoWiLB3R\",\"vault_knowledge__mocs_💡 创业启示-moc.md\":\"Bdi8TZ1W\",\"vault_knowledge__mocs_📚 个人知识管理-moc.md\":\"Cgmk35eH\",\"vault_knowledge__mocs_🔍 rag-moc.md\":\"BnlU6ISD\",\"vault_knowledge__mocs_🛠️ 工程工具-moc.md\":\"BQYmMcBR\",\"vault_knowledge__mocs_🤖 ai大模型-moc.md\":\"d0XFNynw\",\"vault_knowledge__mocs_🦀 openclaw-moc.md\":\"B_6ctEiL\",\"vault_knowledge__mocs_🧩 ai框架与agent-moc.md\":\"DLWokjH5\",\"vault_knowledge_ai_ai agent 概述.md\":\"RRwkMehG\",\"vault_knowledge_ai_ai 产业格局.md\":\"UoBsbG9-\",\"vault_knowledge_ai_ai全景概览.md\":\"3aJ517fN\",\"vault_knowledge_ai_claude code 接入 deepseek 与 glm.md\":\"DG5hd4X4\",\"vault_knowledge_ai_crewai 多 agent 协作实践.md\":\"DS_8gNTV\",\"vault_knowledge_ai_deepseek harness 部署流程.md\":\"C_yzy7S5\",\"vault_knowledge_ai_deepseek nsa 稀疏注意力.md\":\"G63SpHR1\",\"vault_knowledge_ai_deepseek 开源周五大工具.md\":\"CsrrVi_I\",\"vault_knowledge_ai_deepseek-harness-桌面端安装.md\":\"B3plu7-e\",\"vault_knowledge_ai_deepseek.md\":\"U-LHqmul\",\"vault_knowledge_ai_edurag 双层检索.md\":\"BS8m1dBL\",\"vault_knowledge_ai_elmo（embeddings from language models）.md\":\"VmmN7165\",\"vault_knowledge_ai_fastapi 后端.md\":\"Dpr1Im35\",\"vault_knowledge_ai_function call 实战.md\":\"1sPvhtzt\",\"vault_knowledge_ai_function call 概述.md\":\"sPuqrdEt\",\"vault_knowledge_ai_glove（global vectors）.md\":\"D0VLt4PV\",\"vault_knowledge_ai_hermes-智能体十大技能.md\":\"DZelwPEu\",\"vault_knowledge_ai_jev-三大决策原语.md\":\"DKOW0s8G\",\"vault_knowledge_ai_jev-与agent的协作架构.md\":\"DIWuhrJh\",\"vault_knowledge_ai_jev-与传统llm的区别.md\":\"DTYn7RiE\",\"vault_knowledge_ai_jev-决策调用模型.md\":\"C-9C2ZnI\",\"vault_knowledge_ai_jev-概述.md\":\"CfgeHCGk\",\"vault_knowledge_ai_jev-适用场景与局限.md\":\"CSUutfnL\",\"vault_knowledge_ai_jev-零幻觉与置信度.md\":\"KD7ooBBF\",\"vault_knowledge_ai_langchain agents 组件.md\":\"CvjbQDIN\",\"vault_knowledge_ai_langchain chains 组件.md\":\"7Y7bhNdH\",\"vault_knowledge_ai_langchain indexes 组件.md\":\"Avpx2JYU\",\"vault_knowledge_ai_langchain memory 组件.md\":\"DYvoHa_v\",\"vault_knowledge_ai_langchain models 组件.md\":\"CY56J2Bz\",\"vault_knowledge_ai_langchain prompts 组件.md\":\"Ds8-f1b4\",\"vault_knowledge_ai_llm 产品形态.md\":\"Dhx8uVs2\",\"vault_knowledge_ai_mapreduce 训练.md\":\"C1VcoenZ\",\"vault_knowledge_ai_milvus 向量数据库.md\":\"BWeUfm_Y\",\"vault_knowledge_ai_myfutureself案例分析.md\":\"tVxm_BLi\",\"vault_knowledge_ai_n8n ai agent 工作流.md\":\"CEwhj8im\",\"vault_knowledge_ai_n8n 本地部署.md\":\"CS6b7tE8\",\"vault_knowledge_ai_nlp-基础概念.md\":\"CpPmrp58\",\"vault_knowledge_ai_nlp-文本预处理.md\":\"D0AIbwps\",\"vault_knowledge_ai_nlp-案例.md\":\"6cd25_Cd\",\"vault_knowledge_ai_ollama api 调试.md\":\"D-3nFLHz\",\"vault_knowledge_ai_ollama 命令参考.md\":\"DzNwmNbZ\",\"vault_knowledge_ai_ollama 安装与配置.md\":\"Br5mkHQs\",\"vault_knowledge_ai_ollama 概述.md\":\"BeaKYoVB\",\"vault_knowledge_ai_ollama 集成 chatbox.md\":\"DmIMlcvn\",\"vault_knowledge_ai_openclaw-acp.md\":\"D90PJOzH\",\"vault_knowledge_ai_openclaw-agent-engine.md\":\"CPAEp2bv\",\"vault_knowledge_ai_openclaw-auto-reply.md\":\"Dy4dK8Dd\",\"vault_knowledge_ai_openclaw-channels.md\":\"kNtFx97H\",\"vault_knowledge_ai_openclaw-config-system.md\":\"D_CStKSR\",\"vault_knowledge_ai_openclaw-context-engine.md\":\"CiUQ9N55\",\"vault_knowledge_ai_openclaw-cron-daemon.md\":\"cH7uxrUO\",\"vault_knowledge_ai_openclaw-gateway-server.md\":\"Cbu1OoA_\",\"vault_knowledge_ai_openclaw-hook-system.md\":\"CotY71mM\",\"vault_knowledge_ai_openclaw-llm-client.md\":\"B1tbfzrP\",\"vault_knowledge_ai_openclaw-mcp.md\":\"BDXuesJH\",\"vault_knowledge_ai_openclaw-memory-system.md\":\"DfLwiLf0\",\"vault_knowledge_ai_openclaw-memory-对比分析.md\":\"zg6atuiH\",\"vault_knowledge_ai_openclaw-model-catalog.md\":\"otCpeQNT\",\"vault_knowledge_ai_openclaw-plugin-system.md\":\"CQgWWeaj\",\"vault_knowledge_ai_openclaw-secrets.md\":\"C_tgfmbv\",\"vault_knowledge_ai_openclaw-security.md\":\"BYVMeaeR\",\"vault_knowledge_ai_openclaw-session-manager.md\":\"DKdJ9Jz4\",\"vault_knowledge_ai_openclaw-skills-system.md\":\"Caz5Az_h\",\"vault_knowledge_ai_openclaw-tools-system.md\":\"Lrl-dC4P\",\"vault_knowledge_ai_openclaw-代码组织与技术债务.md\":\"hMVB9Mtr\",\"vault_knowledge_ai_openclaw-学习路径.md\":\"FaRe3vmC\",\"vault_knowledge_ai_openclaw-架构总览.md\":\"B1R49Pua\",\"vault_knowledge_ai_openclaw-部署与配置.md\":\"sJ0LwSM7\",\"vault_knowledge_ai_rag query 改写.md\":\"B8cRXsR3\",\"vault_knowledge_ai_rag 核心知识点全集.md\":\"CQoaYQOo\",\"vault_knowledge_ai_rag 概述.md\":\"CTzvJf--\",\"vault_knowledge_ai_ragas 评估框架.md\":\"WxW0iqaE\",\"vault_knowledge_ai_rnn及其变体.md\":\"BI3apgsJ\",\"vault_knowledge_ai_rope（旋转位置编码）详解.md\":\"8NIHC7Tv\",\"vault_knowledge_ai_t5（text-to-text transfer transformer）.md\":\"CgynMU_v\",\"vault_knowledge_ai_transformer 应用开发视角.md\":\"DgPaY3yT\",\"vault_knowledge_ai_transformer.md\":\"CWWQECCF\",\"vault_knowledge_ai_ubuntu 部署 deepseek.md\":\"kCAU_oc_\",\"vault_knowledge_ai_上限分析.md\":\"D6E_mbfn\",\"vault_knowledge_ai_人工数据合成.md\":\"UNraLaDh\",\"vault_knowledge_ai_命名实体识别（ner）.md\":\"aRgxeSeF\",\"vault_knowledge_ai_大模型-基础.md\":\"BNicQ6hv\",\"vault_knowledge_ai_大模型-强化学习.md\":\"D23ZzwKm\",\"vault_knowledge_ai_大模型-知识扩展.md\":\"-4h0CBRs\",\"vault_knowledge_ai_奇异值分解与潜在语义分析（svd_lsa）.md\":\"CzQtR2DH\",\"vault_knowledge_ai_强化学习.md\":\"B7c72bU3\",\"vault_knowledge_ai_推荐系统与协同过滤.md\":\"CqbFYaca\",\"vault_knowledge_ai_无监督学习.md\":\"B0NgDF5t\",\"vault_knowledge_ai_时间序列预测.md\":\"Ur9xIUyp\",\"vault_knowledge_ai_期望最大化算法（em）.md\":\"DZnwJt2P\",\"vault_knowledge_ai_机器学习-gbdt.md\":\"B6D6zaaU\",\"vault_knowledge_ai_机器学习-knn算法.md\":\"U2WlBODh\",\"vault_knowledge_ai_机器学习-人工智能博弈.md\":\"BMOC7s4w\",\"vault_knowledge_ai_机器学习-决策树.md\":\"CwTX3HYQ\",\"vault_knowledge_ai_机器学习-基础代码.md\":\"CAYhqxP4\",\"vault_knowledge_ai_机器学习-搜索求解.md\":\"EU1BrtGU\",\"vault_knowledge_ai_机器学习-核心概念.md\":\"bZvxhi5H\",\"vault_knowledge_ai_机器学习-案例.md\":\"Cq3sOZts\",\"vault_knowledge_ai_机器学习-概览.md\":\"DMRdsTAI\",\"vault_knowledge_ai_机器学习-模型评估.md\":\"CSx-0iag\",\"vault_knowledge_ai_机器学习-模型调优.md\":\"6P_LPEs7\",\"vault_knowledge_ai_机器学习-特征工程.md\":\"Blhx5UiO\",\"vault_knowledge_ai_机器学习-聚类.md\":\"B2p0ttvw\",\"vault_knowledge_ai_机器学习-逻辑与推理.md\":\"9Immb4GQ\",\"vault_knowledge_ai_机器学习-逻辑回归.md\":\"D0VARFdY\",\"vault_knowledge_ai_机器学习-集成学习.md\":\"CvY0oZ5N\",\"vault_knowledge_ai_梯度检验.md\":\"sRbku2Bn\",\"vault_knowledge_ai_注意力机制.md\":\"BrdC7TxJ\",\"vault_knowledge_ai_深度学习-公式速查.md\":\"Bgfzt6jo\",\"vault_knowledge_ai_深度学习-卷积神经网络cnn.md\":\"MZ56A4X3\",\"vault_knowledge_ai_深度学习-基础.md\":\"CVbPAdTY\",\"vault_knowledge_ai_深度学习-基础概念.md\":\"CvdcLFpw\",\"vault_knowledge_ai_深度学习-循环神经网络rnn.md\":\"uomY1jQi\",\"vault_knowledge_ai_深度学习-核心工具.md\":\"BAlS0n9v\",\"vault_knowledge_ai_深度学习-案例.md\":\"CN_7lqD9\",\"vault_knowledge_ai_深度学习-神经网络基础.md\":\"T9zYU4cY\",\"vault_knowledge_ai_深度学习-训练与优化.md\":\"BhWLhM-S\",\"vault_knowledge_ai_生成对抗网络（gan）.md\":\"CIpg4OdJ\",\"vault_knowledge_ai_监督学习.md\":\"Dip9pO5x\",\"vault_knowledge_ai_线性回归.md\":\"DyWQnnUR\",\"vault_knowledge_ai_聊天机器人实现.md\":\"f1EhE-SR\",\"vault_knowledge_ai_迁移学习.md\":\"DdgkCOL2\",\"vault_knowledge_ai_隐含狄利克雷分配（lda）.md\":\"CMvohXg9\",\"vault_knowledge_ai_隐马尔可夫模型（hmm）.md\":\"B_tZQB6T\",\"vault_knowledge_engineering_anaconda 环境管理.md\":\"JIWj7ldg\",\"vault_knowledge_engineering_avl 平衡树.md\":\"CyY5zWuZ\",\"vault_knowledge_engineering_bootstrap.md\":\"C0PFqXFE\",\"vault_knowledge_engineering_css.md\":\"tx6glfBn\",\"vault_knowledge_engineering_django 项目实战.md\":\"CL9KqjFP\",\"vault_knowledge_engineering_docker 核心概念.md\":\"DkimXtWf\",\"vault_knowledge_engineering_docker.md\":\"BEX5Iyea\",\"vault_knowledge_engineering_fvm 管理 flutter.md\":\"BAzbYRqz\",\"vault_knowledge_engineering_git 使用问题.md\":\"DMUAwGQX\",\"vault_knowledge_engineering_git 反悔操作.md\":\"PvR7Z9l9\",\"vault_knowledge_engineering_git 命令速查.md\":\"VGx0tosa\",\"vault_knowledge_engineering_git 基础.md\":\"DYbRzzYc\",\"vault_knowledge_engineering_html.md\":\"DU_7oW-d\",\"vault_knowledge_engineering_javascript.md\":\"DznGjvCE\",\"vault_knowledge_engineering_jquery.md\":\"CWrJqrfb\",\"vault_knowledge_engineering_json.md\":\"CnzqZpdW\",\"vault_knowledge_engineering_jupyter 使用问题.md\":\"CNZPlxy9\",\"vault_knowledge_engineering_jupyter 保存路径.md\":\"ByzjLyWH\",\"vault_knowledge_engineering_linux 基础.md\":\"CjEj6xTH\",\"vault_knowledge_engineering_mysql 事务.md\":\"CBZryggx\",\"vault_knowledge_engineering_mysql 内置函数.md\":\"BoVx2vzT\",\"vault_knowledge_engineering_mysql 安装与配置.md\":\"Dw-lq6Mc\",\"vault_knowledge_engineering_mysql 客户端工具连接.md\":\"DruEcT7-\",\"vault_knowledge_engineering_mysql 开窗函数.md\":\"DDwh6gHf\",\"vault_knowledge_engineering_mysql 数据库基础.md\":\"Dba56nZe\",\"vault_knowledge_engineering_mysql 电商案例.md\":\"0R2k33rT\",\"vault_knowledge_engineering_mysql 锁机制.md\":\"CCdxK2C8\",\"vault_knowledge_engineering_pycharm 配置与使用.md\":\"Dw2CYGc1\",\"vault_knowledge_engineering_python django.md\":\"B7kl_Qnx\",\"vault_knowledge_engineering_python matplotlib.md\":\"DHAmOSdM\",\"vault_knowledge_engineering_python numpy.md\":\"C0T8cXpJ\",\"vault_knowledge_engineering_python pandas.md\":\"DUgThkVh\",\"vault_knowledge_engineering_python pyinstaller 打包.md\":\"Dp4F4GQk\",\"vault_knowledge_engineering_python redis 实战案例.md\":\"D6-l96Z2\",\"vault_knowledge_engineering_python redis 客户端.md\":\"BI2tlmXA\",\"vault_knowledge_engineering_python socket 编程.md\":\"B9WjAyT9\",\"vault_knowledge_engineering_python 元类.md\":\"CUFtSuPS\",\"vault_knowledge_engineering_python 函数入门.md\":\"B_5DySuB\",\"vault_knowledge_engineering_python 函数基础.md\":\"BAaPrFIo\",\"vault_knowledge_engineering_python 协程与异步编程.md\":\"4etLOXzH\",\"vault_knowledge_engineering_python 反射.md\":\"CkDUeA1-\",\"vault_knowledge_engineering_python 垃圾回收.md\":\"cnUUg2Dv\",\"vault_knowledge_engineering_python 基础语法.md\":\"Dl8vRWpc\",\"vault_knowledge_engineering_python 多进程与多线程.md\":\"vdQcU2xP\",\"vault_knowledge_engineering_python 异常处理.md\":\"CLPuv_ro\",\"vault_knowledge_engineering_python 操作 mysql.md\":\"BQlMjGXo\",\"vault_knowledge_engineering_python 数据结构.md\":\"C-L8IcYZ\",\"vault_knowledge_engineering_python 文件与系统操作.md\":\"DcK4gGSi\",\"vault_knowledge_engineering_python 标准库.md\":\"_ja6DilX\",\"vault_knowledge_engineering_python 模块与包.md\":\"BXKDLJ1R\",\"vault_knowledge_engineering_python 注册表模式.md\":\"ID3P8X77\",\"vault_knowledge_engineering_python 爬虫.md\":\"D_cH6g6w\",\"vault_knowledge_engineering_python 生成器与迭代器.md\":\"7tGPzUDo\",\"vault_knowledge_engineering_python 类入门.md\":\"DAU14dDV\",\"vault_knowledge_engineering_python 装饰器.md\":\"BdhvuUSa\",\"vault_knowledge_engineering_python 迭代器与生成器进阶.md\":\"CUZmPL5v\",\"vault_knowledge_engineering_python 面向对象编程.md\":\"CKLikXov\",\"vault_knowledge_engineering_redis 安装与配置.md\":\"BqOV3ysf\",\"vault_knowledge_engineering_redis 核心概念.md\":\"DFz8-nwP\",\"vault_knowledge_engineering_streamlit 入门.md\":\"Ciqqchvj\",\"vault_knowledge_engineering_ubuntu 远程桌面.md\":\"CNU5TrwS\",\"vault_knowledge_engineering_ubuntu 配置.md\":\"Cnjq8Zjn\",\"vault_knowledge_engineering_vscode 远程开发配置.md\":\"C0ZwK3Li\",\"vault_knowledge_engineering_vue3基础.md\":\"B0jPykpB\",\"vault_knowledge_engineering_win11 部署 docker.md\":\"CWWmx9bG\",\"vault_knowledge_engineering_二分查找.md\":\"iD0eUUp8\",\"vault_knowledge_engineering_二叉树与二叉搜索树.md\":\"CIqoBejA\",\"vault_knowledge_engineering_分治算法.md\":\"5y00NxCj\",\"vault_knowledge_engineering_前端安全.md\":\"Wvz2NPjA\",\"vault_knowledge_engineering_动态规划.md\":\"C5by_wKP\",\"vault_knowledge_engineering_哈希表原理.md\":\"DLn_x6tF\",\"vault_knowledge_engineering_回溯算法.md\":\"MwR7zcTG\",\"vault_knowledge_engineering_图结构.md\":\"DKz0sqSW\",\"vault_knowledge_engineering_堆与优先队列.md\":\"BM3_aHSH\",\"vault_knowledge_engineering_复杂度分析.md\":\"CX2_De4j\",\"vault_knowledge_engineering_性能优化之首屏加载.md\":\"pZz_wnrO\",\"vault_knowledge_engineering_排序算法.md\":\"CUWThT13\",\"vault_knowledge_engineering_数据分析概览.md\":\"D7Gs5gtB\",\"vault_knowledge_engineering_数据库开发概览.md\":\"eW9HPmSx\",\"vault_knowledge_engineering_数组与链表.md\":\"kdA3dGWJ\",\"vault_knowledge_engineering_栈与队列.md\":\"nji0Rsx3\",\"vault_knowledge_engineering_观察者模式与发布-订阅模式.md\":\"730T3KqL\",\"vault_knowledge_engineering_贪心算法.md\":\"D5c_XPN1\",\"vault_knowledge_life_乒乓球技术精华文章汇编.md\":\"GG9luYaF\",\"vault_knowledge_life_房屋设计-灯光.md\":\"Bu_X3BLU\",\"vault_knowledge_life_摄影.md\":\"BRuLpjIb\",\"vault_knowledge_methods_00后「观念分层」：传统社会分层理论解释力弱化.md\":\"DoGQpWVA\",\"vault_knowledge_methods_00后传统文化认同与理性爱国.md\":\"B8HyjpVk\",\"vault_knowledge_methods_00后公私有别的双重道德标准.md\":\"ukGOPUx7\",\"vault_knowledge_methods_00后权威意识淡化与偶像崇拜替代.md\":\"DVmgVJo5\",\"vault_knowledge_methods_00后热血奋斗与躺平佛系的二元并存.md\":\"BGbDaVfk\",\"vault_knowledge_methods_00后物质主义与后物质主义的混和价值取向.md\":\"_F6hvIhI\",\"vault_knowledge_methods_00后群体特征概述.md\":\"88nY8xDl\",\"vault_knowledge_methods_01-基础概念.md\":\"pgIK7BlI\",\"vault_knowledge_methods_02-信息获取与筛选.md\":\"uOMcbP9R\",\"vault_knowledge_methods_03-笔记方法论.md\":\"TbOifYqo\",\"vault_knowledge_methods_04-组织与链接.md\":\"CJu-IYPa\",\"vault_knowledge_methods_05-输出与创作.md\":\"BpOaepUk\",\"vault_knowledge_methods_06-工具与技术.md\":\"CUBmMHUx\",\"vault_knowledge_methods_07-思维模型与习惯.md\":\"D_SoImdQ\",\"vault_knowledge_methods_300法则.md\":\"DBlM1xTo\",\"vault_knowledge_methods_markdown 语法.md\":\"CDxsi9dS\",\"vault_knowledge_methods_nlp理解层次：深度思考框架.md\":\"B4AXbAhp\",\"vault_knowledge_methods_obsidian 配置 claudian.md\":\"DQEh9Tyq\",\"vault_knowledge_methods_ugc质量重于数量.md\":\"5BcworP9\",\"vault_knowledge_methods_vercel 博客部署.md\":\"4s5_vT9q\",\"vault_knowledge_methods_主动回忆法.md\":\"BuE9zOdy\",\"vault_knowledge_methods_分发优先原则.md\":\"Ce3qDVdW\",\"vault_knowledge_methods_增长的不体面真相.md\":\"BxUCFo2_\",\"vault_knowledge_methods_子弹笔记.md\":\"CqmiiJUL\",\"vault_knowledge_methods_学习外语方法.md\":\"DbmOYLhm\",\"vault_knowledge_methods_强工作能力的19个习惯.md\":\"BFXV9s3F\",\"vault_knowledge_methods_搭建知识体系：七大学习模型.md\":\"F25L5MFy\",\"vault_knowledge_methods_环境塑造与个人改变.md\":\"USl-wUeM\",\"vault_knowledge_methods_用ai入门一个新领域.md\":\"ChlTWujF\",\"vault_knowledge_methods_知识库插件列表.md\":\"BtSShQrI\",\"vault_knowledge_methods_笔记方法七合一.md\":\"MRBqZ-JA\",\"vault_knowledge_methods_身份认同驱动改变.md\":\"BmwAIWrr\",\"vault_knowledge_methods_速度优于完美.md\":\"DV_hRwA-\",\"vault_knowledge_methods_马斯克五部工作法.md\":\"DP3kYIHi\",\"vault_主页_index.md\":\"Dv6NoUZD\",\"vault_作坊_ai-tryon-video-demo.md\":\"ByTpW4u0\",\"vault_作坊_feedlens-project.md\":\"GCqIicEk\",\"vault_作坊_glowlink-demo.md\":\"ra1Y0O9D\",\"vault_作坊_index.md\":\"LuFnwe8I\",\"vault_作坊_网站部署_00-分类图标参考.md\":\"CDsJkegK\",\"vault_作坊_网站部署_01-本地环境搭建.md\":\"PMI7LiyY\",\"vault_作坊_网站部署_02-本地预览.md\":\"-9V7yVlh\",\"vault_作坊_网站部署_03-github pages 自动部署.md\":\"Dt5aJTfG\",\"vault_作坊_网站部署_04-常见问题 faq.md\":\"OklB2jf2\",\"vault_作坊_网站部署_index.md\":\"QG_-Np5m\",\"vault_作坊_网页笔记四步工作流.md\":\"D2dGX_Xd\",\"vault_作坊_网页笔记工作流-从5个agent到3个.md\":\"CUoRF5xr\",\"vault_最近_toc.md\":\"DZGH_bGc\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"Star Nebula Knowledge\",\"description\":\"记录回忆，知识和畅想的地方\",\"base\":\"/knowledge/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"search\":{\"provider\":\"local\",\"options\":{\"locales\":{\"root\":{\"translations\":{\"button\":{\"buttonText\":\"搜索文档\",\"buttonAriaLabel\":\"搜索文档\"},\"modal\":{\"noResultsText\":\"无法找到相关结果\",\"resetButtonTitle\":\"清除查询条件\",\"footer\":{\"selectText\":\"选择\",\"navigateText\":\"切换\"}}}}}}}},\"locales\":{\"root\":{\"lang\":\"zh-CN\",\"label\":\"中文\",\"dir\":\"/vault\",\"link\":\"/vault/主页/\",\"themeConfig\":{\"nav\":[{\"text\":\"主页\",\"link\":\"/vault/主页/\"},{\"text\":\"知识\",\"link\":\"/vault/Knowledge/_mocs/知识库总览-MOC\",\"activeMatch\":\"^/vault/Knowledge/\"},{\"text\":\"作坊\",\"link\":\"/vault/作坊/\"},{\"text\":\"最近\",\"link\":\"/vault/最近/toc\"}],\"lastUpdated\":{\"text\":\"最后更新\"},\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/star-nebula/knowledge\"}],\"darkModeSwitchLabel\":\"切换主题\",\"outline\":{\"label\":\"页面大纲\",\"level\":\"deep\"},\"editLink\":{\"pattern\":\"https://github.com/star-nebula/knowledge/tree/main/:path\",\"text\":\"编辑本页面\"},\"sidebar\":[{\"index\":\"网站部署\",\"text\":\"网站部署\",\"collapsed\":true,\"items\":[{\"index\":\"00 分类图标参考\",\"text\":\"00 分类图标参考\",\"link\":\"/vault/作坊/网站部署/00-分类图标参考\"},{\"index\":\"01 本地环境搭建\",\"text\":\"01 本地环境搭建\",\"link\":\"/vault/作坊/网站部署/01-本地环境搭建\"},{\"index\":\"02 本地预览\",\"text\":\"02 本地预览\",\"link\":\"/vault/作坊/网站部署/02-本地预览\"},{\"index\":\"03 GitHub Pages 自动部署\",\"text\":\"03 GitHub Pages 自动部署\",\"link\":\"/vault/作坊/网站部署/03-GitHub Pages 自动部署\"},{\"index\":\"04 常见问题 FAQ\",\"text\":\"04 常见问题 FAQ\",\"link\":\"/vault/作坊/网站部署/04-常见问题 FAQ\"}],\"link\":\"/vault/作坊/网站部署/\"},{\"index\":\"AI电商换装视频生成系统\",\"text\":\"AI电商换装视频生成系统\",\"link\":\"/vault/作坊/ai-tryon-video-demo\"},{\"index\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"text\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"link\":\"/vault/作坊/feedlens-project\"},{\"index\":\"GlowLink：多 Agent 社媒获客系统\",\"text\":\"GlowLink：多 Agent 社媒获客系统\",\"link\":\"/vault/作坊/glowlink-demo\"},{\"index\":\"网页笔记四步工作流\",\"text\":\"网页笔记四步工作流\",\"link\":\"/vault/作坊/网页笔记四步工作流\"},{\"index\":\"网页笔记工作流\",\"text\":\"网页笔记工作流\",\"link\":\"/vault/作坊/网页笔记工作流-从5个Agent到3个\"}],\"footer\":{\"message\":\"每一篇文章，都是时间的标本\"}}}},\"scrollOffset\":134,\"cleanUrls\":false,\"additionalConfig\":{}}");</script>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"readme.md\":\"C9ZrqLiP\",\"vault_knowledge__mocs_1.jev-moc.md\":\"JAm1uodv\",\"vault_knowledge__mocs_1.应用核心范式-moc.md\":\"Psc9dzwZ\",\"vault_knowledge__mocs_1.架构与中间件-moc.md\":\"DAlxaqbw\",\"vault_knowledge__mocs_2.ai 产业与概览-moc.md\":\"DGCK5uDE\",\"vault_knowledge__mocs_2.nlp 基础-moc.md\":\"BkOr1aj5\",\"vault_knowledge__mocs_2.机器学习-moc.md\":\"B0sGJRdc\",\"vault_knowledge__mocs_2.模型部署-moc.md\":\"CXAOSECX\",\"vault_knowledge__mocs_2.深度学习基础-moc.md\":\"CrB_P98n\",\"vault_knowledge__mocs_4.专题分析-moc.md\":\"DR0Y-Nn8\",\"vault_knowledge__mocs_4.基础层-moc.md\":\"yqJgWuTI\",\"vault_knowledge__mocs_4.扩展层-moc.md\":\"76eBmk2F\",\"vault_knowledge__mocs_4.操作指南-moc.md\":\"DsoUrK9z\",\"vault_knowledge__mocs_4.支撑层-moc.md\":\"kfCJqZ2M\",\"vault_knowledge__mocs_4.能力层-moc.md\":\"zglWKNVy\",\"vault_knowledge__mocs_5.dataanalysis-moc.md\":\"IEThbFJ0\",\"vault_knowledge__mocs_5.frontend-moc.md\":\"DbvQbx17\",\"vault_knowledge__mocs_5.git-moc.md\":\"CuO42p9G\",\"vault_knowledge__mocs_5.ide与环境-moc.md\":\"DwiyK7qZ\",\"vault_knowledge__mocs_5.linux-moc.md\":\"C-S3D9ep\",\"vault_knowledge__mocs_5.mysql-moc.md\":\"6KueGeMy\",\"vault_knowledge__mocs_5.python-moc.md\":\"5CMaS_NP\",\"vault_knowledge__mocs_5.redis-moc.md\":\"zKS4fcUB\",\"vault_knowledge__mocs_5.容器与部署-moc.md\":\"DmxoCQgR\",\"vault_knowledge__mocs_5.算法与数据结构-moc.md\":\"BKuLpTB1\",\"vault_knowledge__mocs_6.00后群体特征-moc.md\":\"D6r-jC_C\",\"vault_knowledge__mocs_6.个人能力-moc.md\":\"CbTySJFn\",\"vault_knowledge__mocs_6.博客部署-moc.md\":\"C0Q0F-AT\",\"vault_knowledge__mocs_ide与环境-moc.md\":\"CEie3OgI\",\"vault_knowledge__mocs_nlp基础-moc.md\":\"Dq9KXiAg\",\"vault_knowledge__mocs_知识库总览-moc.md\":\"BhkJsdeC\",\"vault_knowledge__mocs_🌱 生活-moc.md\":\"OOfdLqeH\",\"vault_knowledge__mocs_💡 创业启示-moc.md\":\"DUDVhi9C\",\"vault_knowledge__mocs_📚 个人知识管理-moc.md\":\"BtVKHCXR\",\"vault_knowledge__mocs_🔍 rag-moc.md\":\"PuTEIyQj\",\"vault_knowledge__mocs_🛠️ 工程工具-moc.md\":\"29C_NLX_\",\"vault_knowledge__mocs_🤖 ai大模型-moc.md\":\"3ulDqSnb\",\"vault_knowledge__mocs_🦀 openclaw-moc.md\":\"Ba9jShIj\",\"vault_knowledge__mocs_🧩 ai框架与agent-moc.md\":\"DbK45BDh\",\"vault_knowledge_ai_ai agent 概述.md\":\"D2GV_AGI\",\"vault_knowledge_ai_ai 产业格局.md\":\"xk2seKGn\",\"vault_knowledge_ai_ai全景概览.md\":\"BEt9qORm\",\"vault_knowledge_ai_claude code 接入 deepseek 与 glm.md\":\"BFgKND51\",\"vault_knowledge_ai_crewai 多 agent 协作实践.md\":\"B5Ctv4tS\",\"vault_knowledge_ai_deepseek harness 部署流程.md\":\"C-hJAzsp\",\"vault_knowledge_ai_deepseek nsa 稀疏注意力.md\":\"CiqH0pwD\",\"vault_knowledge_ai_deepseek 开源周五大工具.md\":\"zghRcSGd\",\"vault_knowledge_ai_deepseek-harness-桌面端安装.md\":\"-8Lc7sc-\",\"vault_knowledge_ai_deepseek.md\":\"B-h5qZeW\",\"vault_knowledge_ai_edurag 双层检索.md\":\"J28UwHFA\",\"vault_knowledge_ai_elmo（embeddings from language models）.md\":\"D3UISrpw\",\"vault_knowledge_ai_fastapi 后端.md\":\"B5hMTztP\",\"vault_knowledge_ai_function call 实战.md\":\"gtY-kDRx\",\"vault_knowledge_ai_function call 概述.md\":\"DtbJ0y3D\",\"vault_knowledge_ai_glove（global vectors）.md\":\"L8s3kl6x\",\"vault_knowledge_ai_hermes-智能体十大技能.md\":\"aMZ_AdNi\",\"vault_knowledge_ai_jev-三大决策原语.md\":\"D_CgI5KD\",\"vault_knowledge_ai_jev-与agent的协作架构.md\":\"B_rLF6Rh\",\"vault_knowledge_ai_jev-与传统llm的区别.md\":\"BNusU2Gn\",\"vault_knowledge_ai_jev-决策调用模型.md\":\"0Ge9iuXh\",\"vault_knowledge_ai_jev-概述.md\":\"Bja1yZXm\",\"vault_knowledge_ai_jev-适用场景与局限.md\":\"D6J1Lws8\",\"vault_knowledge_ai_jev-零幻觉与置信度.md\":\"DjvXz8dd\",\"vault_knowledge_ai_langchain agents 组件.md\":\"C7XO1hnM\",\"vault_knowledge_ai_langchain chains 组件.md\":\"CJd7JB3n\",\"vault_knowledge_ai_langchain indexes 组件.md\":\"8MoEwq_Z\",\"vault_knowledge_ai_langchain memory 组件.md\":\"pyvT3eck\",\"vault_knowledge_ai_langchain models 组件.md\":\"ClLp5yHn\",\"vault_knowledge_ai_langchain prompts 组件.md\":\"DDV8eM0K\",\"vault_knowledge_ai_llm 产品形态.md\":\"jZa4kRlS\",\"vault_knowledge_ai_mapreduce 训练.md\":\"sOVWSWqp\",\"vault_knowledge_ai_milvus 向量数据库.md\":\"d1RXh49_\",\"vault_knowledge_ai_myfutureself案例分析.md\":\"DAc-HrfL\",\"vault_knowledge_ai_n8n ai agent 工作流.md\":\"BBP1Lybv\",\"vault_knowledge_ai_n8n 本地部署.md\":\"BJQ7ijGA\",\"vault_knowledge_ai_nlp-基础概念.md\":\"C_CWI55c\",\"vault_knowledge_ai_nlp-文本预处理.md\":\"DkjmaIsJ\",\"vault_knowledge_ai_nlp-案例.md\":\"8XgoRPvR\",\"vault_knowledge_ai_ollama api 调试.md\":\"CXUZ8BQL\",\"vault_knowledge_ai_ollama 命令参考.md\":\"B3dijPrB\",\"vault_knowledge_ai_ollama 安装与配置.md\":\"eehVrBcO\",\"vault_knowledge_ai_ollama 概述.md\":\"BiHTXvV4\",\"vault_knowledge_ai_ollama 集成 chatbox.md\":\"DQR5yftt\",\"vault_knowledge_ai_openclaw-acp.md\":\"CGXZRdPi\",\"vault_knowledge_ai_openclaw-agent-engine.md\":\"B9IB3U-u\",\"vault_knowledge_ai_openclaw-auto-reply.md\":\"Di54ggpA\",\"vault_knowledge_ai_openclaw-channels.md\":\"BQp4zOGg\",\"vault_knowledge_ai_openclaw-config-system.md\":\"pivEGnk7\",\"vault_knowledge_ai_openclaw-context-engine.md\":\"DtQ2G-Vg\",\"vault_knowledge_ai_openclaw-cron-daemon.md\":\"DQpnRKdz\",\"vault_knowledge_ai_openclaw-gateway-server.md\":\"BUInU8ZM\",\"vault_knowledge_ai_openclaw-hook-system.md\":\"DDJfSy--\",\"vault_knowledge_ai_openclaw-llm-client.md\":\"COSsP9tU\",\"vault_knowledge_ai_openclaw-mcp.md\":\"D0W6Yr5-\",\"vault_knowledge_ai_openclaw-memory-system.md\":\"Y2urD7-8\",\"vault_knowledge_ai_openclaw-memory-对比分析.md\":\"DfQN-cG-\",\"vault_knowledge_ai_openclaw-model-catalog.md\":\"BiqvsOFf\",\"vault_knowledge_ai_openclaw-plugin-system.md\":\"C3tvyjiV\",\"vault_knowledge_ai_openclaw-secrets.md\":\"DlMBXIzf\",\"vault_knowledge_ai_openclaw-security.md\":\"BamcHwjV\",\"vault_knowledge_ai_openclaw-session-manager.md\":\"D02kEkLA\",\"vault_knowledge_ai_openclaw-skills-system.md\":\"7QIJlyrH\",\"vault_knowledge_ai_openclaw-tools-system.md\":\"BvV9OfQk\",\"vault_knowledge_ai_openclaw-代码组织与技术债务.md\":\"RQBh598-\",\"vault_knowledge_ai_openclaw-学习路径.md\":\"2IH48Oxq\",\"vault_knowledge_ai_openclaw-架构总览.md\":\"Bv9hLbcT\",\"vault_knowledge_ai_openclaw-部署与配置.md\":\"HpPaE_zJ\",\"vault_knowledge_ai_rag query 改写.md\":\"DtEEu773\",\"vault_knowledge_ai_rag 核心知识点全集.md\":\"CrXMmGg6\",\"vault_knowledge_ai_rag 概述.md\":\"Du3OuzWV\",\"vault_knowledge_ai_ragas 评估框架.md\":\"CQ-G8MqC\",\"vault_knowledge_ai_rnn及其变体.md\":\"CMvbG0B_\",\"vault_knowledge_ai_rope（旋转位置编码）详解.md\":\"jdS26XNC\",\"vault_knowledge_ai_t5（text-to-text transfer transformer）.md\":\"DSPkc25p\",\"vault_knowledge_ai_transformer 应用开发视角.md\":\"BeTzV_Ky\",\"vault_knowledge_ai_transformer.md\":\"09A050MG\",\"vault_knowledge_ai_ubuntu 部署 deepseek.md\":\"XgTXIJuX\",\"vault_knowledge_ai_上限分析.md\":\"D1JJxGje\",\"vault_knowledge_ai_人工数据合成.md\":\"BvdQHZ91\",\"vault_knowledge_ai_命名实体识别（ner）.md\":\"DUJc2X9V\",\"vault_knowledge_ai_大模型-基础.md\":\"B859613G\",\"vault_knowledge_ai_大模型-强化学习.md\":\"Beo6VowF\",\"vault_knowledge_ai_大模型-知识扩展.md\":\"BQjXevGv\",\"vault_knowledge_ai_奇异值分解与潜在语义分析（svd_lsa）.md\":\"DZPKGHWt\",\"vault_knowledge_ai_强化学习.md\":\"XL5fZ-cH\",\"vault_knowledge_ai_推荐系统与协同过滤.md\":\"BAIc34mY\",\"vault_knowledge_ai_无监督学习.md\":\"DQykpRhk\",\"vault_knowledge_ai_时间序列预测.md\":\"7uO6WFQC\",\"vault_knowledge_ai_期望最大化算法（em）.md\":\"CTjeiAJG\",\"vault_knowledge_ai_机器学习-gbdt.md\":\"BS0M0gH6\",\"vault_knowledge_ai_机器学习-knn算法.md\":\"kwN9PGFx\",\"vault_knowledge_ai_机器学习-人工智能博弈.md\":\"BKvNXnhT\",\"vault_knowledge_ai_机器学习-决策树.md\":\"DmTylH_Z\",\"vault_knowledge_ai_机器学习-基础代码.md\":\"DNvCzGD0\",\"vault_knowledge_ai_机器学习-搜索求解.md\":\"C59x3h5c\",\"vault_knowledge_ai_机器学习-核心概念.md\":\"D4r37lwg\",\"vault_knowledge_ai_机器学习-案例.md\":\"BPuSLNd4\",\"vault_knowledge_ai_机器学习-概览.md\":\"DetHpgbj\",\"vault_knowledge_ai_机器学习-模型评估.md\":\"BBgx31AQ\",\"vault_knowledge_ai_机器学习-模型调优.md\":\"CLIV6RMO\",\"vault_knowledge_ai_机器学习-特征工程.md\":\"BFh39sTp\",\"vault_knowledge_ai_机器学习-聚类.md\":\"BAfUxqC7\",\"vault_knowledge_ai_机器学习-逻辑与推理.md\":\"viyizpCF\",\"vault_knowledge_ai_机器学习-逻辑回归.md\":\"Djom1SeG\",\"vault_knowledge_ai_机器学习-集成学习.md\":\"DTBPZB2h\",\"vault_knowledge_ai_梯度检验.md\":\"CKCxMIUv\",\"vault_knowledge_ai_注意力机制.md\":\"CL0KnMWB\",\"vault_knowledge_ai_深度学习-公式速查.md\":\"DNTsDr_8\",\"vault_knowledge_ai_深度学习-卷积神经网络cnn.md\":\"C_WEBeWG\",\"vault_knowledge_ai_深度学习-基础.md\":\"D1m9nXsu\",\"vault_knowledge_ai_深度学习-基础概念.md\":\"DePQhvCz\",\"vault_knowledge_ai_深度学习-循环神经网络rnn.md\":\"DnEDe4Z3\",\"vault_knowledge_ai_深度学习-核心工具.md\":\"DpAldhHX\",\"vault_knowledge_ai_深度学习-案例.md\":\"DIKR9iLO\",\"vault_knowledge_ai_深度学习-神经网络基础.md\":\"DqF2ITaC\",\"vault_knowledge_ai_深度学习-训练与优化.md\":\"DD4_qADt\",\"vault_knowledge_ai_生成对抗网络（gan）.md\":\"7BrvQWy9\",\"vault_knowledge_ai_监督学习.md\":\"Aq8rBcCP\",\"vault_knowledge_ai_线性回归.md\":\"DoZjFTLi\",\"vault_knowledge_ai_聊天机器人实现.md\":\"BwdlQjV1\",\"vault_knowledge_ai_迁移学习.md\":\"CNlyUUIy\",\"vault_knowledge_ai_隐含狄利克雷分配（lda）.md\":\"DOWDUNIF\",\"vault_knowledge_ai_隐马尔可夫模型（hmm）.md\":\"CKh1VOqI\",\"vault_knowledge_engineering_anaconda 环境管理.md\":\"DoCi7Bgq\",\"vault_knowledge_engineering_avl 平衡树.md\":\"Bh4oU3FC\",\"vault_knowledge_engineering_bootstrap.md\":\"DZH4WYqo\",\"vault_knowledge_engineering_css.md\":\"hjgDW4ll\",\"vault_knowledge_engineering_django 项目实战.md\":\"dJ0Sjc3D\",\"vault_knowledge_engineering_docker 核心概念.md\":\"BZrVBTUc\",\"vault_knowledge_engineering_docker.md\":\"nTP_Gshc\",\"vault_knowledge_engineering_fvm 管理 flutter.md\":\"D7zQeelL\",\"vault_knowledge_engineering_git 使用问题.md\":\"CXv6j-Qe\",\"vault_knowledge_engineering_git 反悔操作.md\":\"BW_fBrkr\",\"vault_knowledge_engineering_git 命令速查.md\":\"iJrv10ws\",\"vault_knowledge_engineering_git 基础.md\":\"BBPBm5fk\",\"vault_knowledge_engineering_html.md\":\"C86KdvN1\",\"vault_knowledge_engineering_javascript.md\":\"CWaXGvrl\",\"vault_knowledge_engineering_jquery.md\":\"DSEtNf9f\",\"vault_knowledge_engineering_json.md\":\"CxQdunZV\",\"vault_knowledge_engineering_jupyter 使用问题.md\":\"US1TCXh1\",\"vault_knowledge_engineering_jupyter 保存路径.md\":\"DvqVRl-i\",\"vault_knowledge_engineering_linux 基础.md\":\"Ck99xARV\",\"vault_knowledge_engineering_mysql 事务.md\":\"dzxjlWt6\",\"vault_knowledge_engineering_mysql 内置函数.md\":\"CrkalLWo\",\"vault_knowledge_engineering_mysql 安装与配置.md\":\"DF065WDW\",\"vault_knowledge_engineering_mysql 客户端工具连接.md\":\"CmUcBsAS\",\"vault_knowledge_engineering_mysql 开窗函数.md\":\"BbDH7HeE\",\"vault_knowledge_engineering_mysql 数据库基础.md\":\"xXL8xWQ5\",\"vault_knowledge_engineering_mysql 电商案例.md\":\"ixHEAIOo\",\"vault_knowledge_engineering_mysql 锁机制.md\":\"CxpNOob5\",\"vault_knowledge_engineering_pycharm 配置与使用.md\":\"CjwzQ9Q0\",\"vault_knowledge_engineering_python django.md\":\"C-YXcWmN\",\"vault_knowledge_engineering_python matplotlib.md\":\"vAxKLDVl\",\"vault_knowledge_engineering_python numpy.md\":\"CgS4dUFf\",\"vault_knowledge_engineering_python pandas.md\":\"D1UDLa5k\",\"vault_knowledge_engineering_python pyinstaller 打包.md\":\"CTFfvp-g\",\"vault_knowledge_engineering_python redis 实战案例.md\":\"DqJPYAKp\",\"vault_knowledge_engineering_python redis 客户端.md\":\"DDWYi2Nh\",\"vault_knowledge_engineering_python socket 编程.md\":\"CYKpticj\",\"vault_knowledge_engineering_python 元类.md\":\"xWx6Z5iv\",\"vault_knowledge_engineering_python 函数入门.md\":\"BEkRc0Qa\",\"vault_knowledge_engineering_python 函数基础.md\":\"CZUjnmTu\",\"vault_knowledge_engineering_python 协程与异步编程.md\":\"37uuQ4aa\",\"vault_knowledge_engineering_python 反射.md\":\"n1VhDNSZ\",\"vault_knowledge_engineering_python 垃圾回收.md\":\"BNmZF7dq\",\"vault_knowledge_engineering_python 基础语法.md\":\"CRvboZFh\",\"vault_knowledge_engineering_python 多进程与多线程.md\":\"Cylat9zc\",\"vault_knowledge_engineering_python 异常处理.md\":\"CObnqn9n\",\"vault_knowledge_engineering_python 操作 mysql.md\":\"CuNtfJOm\",\"vault_knowledge_engineering_python 数据结构.md\":\"CMpWl5er\",\"vault_knowledge_engineering_python 文件与系统操作.md\":\"Ccmr3et7\",\"vault_knowledge_engineering_python 标准库.md\":\"B8wBUZhg\",\"vault_knowledge_engineering_python 模块与包.md\":\"BrwO2kwJ\",\"vault_knowledge_engineering_python 注册表模式.md\":\"BmilbJ_k\",\"vault_knowledge_engineering_python 爬虫.md\":\"CFi0prkV\",\"vault_knowledge_engineering_python 生成器与迭代器.md\":\"BbDtHYyo\",\"vault_knowledge_engineering_python 类入门.md\":\"Du57Pl-I\",\"vault_knowledge_engineering_python 装饰器.md\":\"SRALXrC0\",\"vault_knowledge_engineering_python 迭代器与生成器进阶.md\":\"DMfB4gvZ\",\"vault_knowledge_engineering_python 面向对象编程.md\":\"C8ZrU1cA\",\"vault_knowledge_engineering_redis 安装与配置.md\":\"BlfLq0xo\",\"vault_knowledge_engineering_redis 核心概念.md\":\"BcDq8dAQ\",\"vault_knowledge_engineering_streamlit 入门.md\":\"w-MtBylo\",\"vault_knowledge_engineering_ubuntu 远程桌面.md\":\"DZ_Dxi8q\",\"vault_knowledge_engineering_ubuntu 配置.md\":\"Z9yA6TP4\",\"vault_knowledge_engineering_vscode 远程开发配置.md\":\"DlJmCWzu\",\"vault_knowledge_engineering_vue3基础.md\":\"49UjL41a\",\"vault_knowledge_engineering_win11 部署 docker.md\":\"CPLO8HV9\",\"vault_knowledge_engineering_二分查找.md\":\"CPq47vdX\",\"vault_knowledge_engineering_二叉树与二叉搜索树.md\":\"CW7HlTVu\",\"vault_knowledge_engineering_分治算法.md\":\"BULck58b\",\"vault_knowledge_engineering_前端安全.md\":\"DjNXFFlP\",\"vault_knowledge_engineering_动态规划.md\":\"Dvj6jfpe\",\"vault_knowledge_engineering_哈希表原理.md\":\"CXnoDkqs\",\"vault_knowledge_engineering_回溯算法.md\":\"PydrrYqn\",\"vault_knowledge_engineering_图结构.md\":\"D3w5-_vv\",\"vault_knowledge_engineering_堆与优先队列.md\":\"DxSeaa4B\",\"vault_knowledge_engineering_复杂度分析.md\":\"BZE5PklP\",\"vault_knowledge_engineering_性能优化之首屏加载.md\":\"n1T1veMs\",\"vault_knowledge_engineering_排序算法.md\":\"D71_ZBLe\",\"vault_knowledge_engineering_数据分析概览.md\":\"ge94gTDl\",\"vault_knowledge_engineering_数据库开发概览.md\":\"CvGlgW4N\",\"vault_knowledge_engineering_数组与链表.md\":\"CiuEVEto\",\"vault_knowledge_engineering_栈与队列.md\":\"DRtGmjBc\",\"vault_knowledge_engineering_观察者模式与发布-订阅模式.md\":\"Bci-4WB3\",\"vault_knowledge_engineering_贪心算法.md\":\"byWxZR_3\",\"vault_knowledge_life_乒乓球技术精华文章汇编.md\":\"iZwyHZJr\",\"vault_knowledge_life_房屋设计-灯光.md\":\"DyOp8c0F\",\"vault_knowledge_life_摄影.md\":\"C8JsEm-T\",\"vault_knowledge_methods_00后「观念分层」：传统社会分层理论解释力弱化.md\":\"CcF3kJi0\",\"vault_knowledge_methods_00后传统文化认同与理性爱国.md\":\"CjVPUanJ\",\"vault_knowledge_methods_00后公私有别的双重道德标准.md\":\"2sj8ocSx\",\"vault_knowledge_methods_00后权威意识淡化与偶像崇拜替代.md\":\"C2QGbnah\",\"vault_knowledge_methods_00后热血奋斗与躺平佛系的二元并存.md\":\"bfBVHEaG\",\"vault_knowledge_methods_00后物质主义与后物质主义的混和价值取向.md\":\"Dn0NjaDh\",\"vault_knowledge_methods_00后群体特征概述.md\":\"B_E-exGQ\",\"vault_knowledge_methods_01-基础概念.md\":\"COH5buZm\",\"vault_knowledge_methods_02-信息获取与筛选.md\":\"BqYyIS4m\",\"vault_knowledge_methods_03-笔记方法论.md\":\"DuGBD9qd\",\"vault_knowledge_methods_04-组织与链接.md\":\"DNg6qovN\",\"vault_knowledge_methods_05-输出与创作.md\":\"CIEwAyH_\",\"vault_knowledge_methods_06-工具与技术.md\":\"D13kI7_x\",\"vault_knowledge_methods_07-思维模型与习惯.md\":\"Xxnzbyq1\",\"vault_knowledge_methods_300法则.md\":\"Cf_jJHng\",\"vault_knowledge_methods_markdown 语法.md\":\"Dw8pQRgH\",\"vault_knowledge_methods_nlp理解层次：深度思考框架.md\":\"_Zv01fKV\",\"vault_knowledge_methods_obsidian 配置 claudian.md\":\"CnQucKUK\",\"vault_knowledge_methods_ugc质量重于数量.md\":\"DtoZSyqV\",\"vault_knowledge_methods_vercel 博客部署.md\":\"CIFh64sT\",\"vault_knowledge_methods_主动回忆法.md\":\"DcM6lc4k\",\"vault_knowledge_methods_分发优先原则.md\":\"CdGc2WhI\",\"vault_knowledge_methods_增长的不体面真相.md\":\"DIntw-c9\",\"vault_knowledge_methods_子弹笔记.md\":\"DDx6CJl-\",\"vault_knowledge_methods_学习外语方法.md\":\"BRcYsGSq\",\"vault_knowledge_methods_强工作能力的19个习惯.md\":\"CeOzYj9D\",\"vault_knowledge_methods_搭建知识体系：七大学习模型.md\":\"Y40jaWTw\",\"vault_knowledge_methods_环境塑造与个人改变.md\":\"D4Bx30lX\",\"vault_knowledge_methods_用ai入门一个新领域.md\":\"Bb36Prk_\",\"vault_knowledge_methods_知识库插件列表.md\":\"CsiRp4xc\",\"vault_knowledge_methods_笔记方法七合一.md\":\"Db1TX8xR\",\"vault_knowledge_methods_身份认同驱动改变.md\":\"DNAbj1wX\",\"vault_knowledge_methods_速度优于完美.md\":\"BPfPZvmT\",\"vault_knowledge_methods_马斯克五部工作法.md\":\"B5szUqwr\",\"vault_主页_index.md\":\"BuY80zlf\",\"vault_作坊_ai-tryon-video-demo.md\":\"Ddubnkz_\",\"vault_作坊_feedlens-project.md\":\"DWQKxqR0\",\"vault_作坊_glowlink-demo.md\":\"DBKVUtB4\",\"vault_作坊_index.md\":\"CvOTznPg\",\"vault_作坊_网站部署_00-分类图标参考.md\":\"BTD9LtM1\",\"vault_作坊_网站部署_01-本地环境搭建.md\":\"yUr4MNeI\",\"vault_作坊_网站部署_02-本地预览.md\":\"CmNl-f9n\",\"vault_作坊_网站部署_03-github pages 自动部署.md\":\"DYj2gEOy\",\"vault_作坊_网站部署_04-常见问题 faq.md\":\"ClC4JmZI\",\"vault_作坊_网站部署_index.md\":\"uAOLCb1s\",\"vault_作坊_网页笔记四步工作流.md\":\"7_7yz-fG\",\"vault_作坊_网页笔记工作流-从5个agent到3个.md\":\"CM36WVv5\",\"vault_最近_toc.md\":\"CIJouNlz\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"Star Nebula Knowledge\",\"description\":\"记录回忆，知识和畅想的地方\",\"base\":\"/knowledge/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":true,\"themeConfig\":{\"search\":{\"provider\":\"local\",\"options\":{\"locales\":{\"root\":{\"translations\":{\"button\":{\"buttonText\":\"搜索文档\",\"buttonAriaLabel\":\"搜索文档\"},\"modal\":{\"noResultsText\":\"无法找到相关结果\",\"resetButtonTitle\":\"清除查询条件\",\"footer\":{\"selectText\":\"选择\",\"navigateText\":\"切换\"}}}}}}}},\"locales\":{\"root\":{\"lang\":\"zh-CN\",\"label\":\"中文\",\"dir\":\"/vault\",\"link\":\"/vault/主页/\",\"themeConfig\":{\"nav\":[{\"text\":\"主页\",\"link\":\"/vault/主页/\"},{\"text\":\"知识\",\"link\":\"/vault/Knowledge/_mocs/知识库总览-MOC\",\"activeMatch\":\"^/vault/Knowledge/\"},{\"text\":\"作坊\",\"link\":\"/vault/作坊/\"},{\"text\":\"最近\",\"link\":\"/vault/最近/toc\"}],\"lastUpdated\":{\"text\":\"最后更新\"},\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/star-nebula/knowledge\"}],\"darkModeSwitchLabel\":\"切换主题\",\"outline\":{\"label\":\"页面大纲\",\"level\":\"deep\"},\"editLink\":{\"pattern\":\"https://github.com/star-nebula/knowledge/tree/main/:path\",\"text\":\"编辑本页面\"},\"sidebar\":[{\"index\":\"网站部署\",\"text\":\"网站部署\",\"collapsed\":true,\"items\":[{\"index\":\"00 分类图标参考\",\"text\":\"00 分类图标参考\",\"link\":\"/vault/作坊/网站部署/00-分类图标参考\"},{\"index\":\"01 本地环境搭建\",\"text\":\"01 本地环境搭建\",\"link\":\"/vault/作坊/网站部署/01-本地环境搭建\"},{\"index\":\"02 本地预览\",\"text\":\"02 本地预览\",\"link\":\"/vault/作坊/网站部署/02-本地预览\"},{\"index\":\"03 GitHub Pages 自动部署\",\"text\":\"03 GitHub Pages 自动部署\",\"link\":\"/vault/作坊/网站部署/03-GitHub Pages 自动部署\"},{\"index\":\"04 常见问题 FAQ\",\"text\":\"04 常见问题 FAQ\",\"link\":\"/vault/作坊/网站部署/04-常见问题 FAQ\"}],\"link\":\"/vault/作坊/网站部署/\"},{\"index\":\"AI电商换装视频生成系统\",\"text\":\"AI电商换装视频生成系统\",\"link\":\"/vault/作坊/ai-tryon-video-demo\"},{\"index\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"text\":\"FeedLens：基于 LangGraph + DeepSeek 的多 Agent 智能信息简报系统\",\"link\":\"/vault/作坊/feedlens-project\"},{\"index\":\"GlowLink：多 Agent 社媒获客系统\",\"text\":\"GlowLink：多 Agent 社媒获客系统\",\"link\":\"/vault/作坊/glowlink-demo\"},{\"index\":\"网页笔记四步工作流\",\"text\":\"网页笔记四步工作流\",\"link\":\"/vault/作坊/网页笔记四步工作流\"},{\"index\":\"网页笔记工作流\",\"text\":\"网页笔记工作流\",\"link\":\"/vault/作坊/网页笔记工作流-从5个Agent到3个\"}],\"footer\":{\"message\":\"每一篇文章，都是时间的标本\"}}}},\"scrollOffset\":134,\"cleanUrls\":false,\"additionalConfig\":{}}");</script>
     
   </body>
 </html>
