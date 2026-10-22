@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import { computed } from 'vue'
-import pagePropertiesData from 'virtual:nolebase-page-properties'
 
 const { page, frontmatter } = useData()
 
@@ -13,12 +12,12 @@ const tags = computed(() => {
   return []
 })
 
-// Word count from page properties virtual module
+// 字数：由 config.ts 的 transformPageData 在构建期写入 frontmatter。
+// 早先这里 import 'virtual:nolebase-page-properties' 只为取 wordsCount，
+// 却把全部页面原文（2.9MB）打进了首屏 theme chunk，故改为读 frontmatter。
 const wordsCount = computed(() => {
-  const filePath = page.value.filePath?.toLowerCase()
-  if (!filePath) return 0
-  const data = (pagePropertiesData as Record<string, { wordsCount?: number }>)[filePath]
-  return data?.wordsCount ?? 0
+  const n = frontmatter.value.wordsCount
+  return typeof n === 'number' ? n : 0
 })
 
 // Last updated

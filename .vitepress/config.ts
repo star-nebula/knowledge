@@ -10,8 +10,8 @@ import { sanitizeWikiPercent } from './markdown/sanitize-wikilink-percent'
 import { buildKnowledgeSidebar } from '../scripts/knowledge-org'
 import { blogSourceToRoute, SITE_BASE } from '../scripts/blog-paths.mjs'
 
-import { existsSync, readdirSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { relative, resolve } from 'node:path'
 
 // 站点发布面：唯一事实来源。新增/移除发布目录只改这里。
 // 三处派生共用同一份清单，保证「git 跟踪 / 构建渲染 / 双链索引」三面始终对齐：
@@ -195,6 +195,75 @@ const srcExclude = [
 if (!HAS_KNOWLEDGE)
   srcExclude.push('**/Knowledge/**')
 
+/**
+ * 虚拟模块 `virtual:knowledge-notes`：构建期扫描 vault/Knowledge 下所有 .md，
+ * 只提取 frontmatter 里的 category / tags，供 KnowledgeExplorer 建分类树。
+ *
+ * 为什么需要它：组件原先用 `import.meta.glob('/vault/Knowledge/**​/*.md', { eager: true, query: '?raw' })`，
+ * 把 289 篇笔记**全文**同步打包进首屏 theme chunk（2.9MB，gzip 后 877KB，占首屏传输 84%），
+ * 而组件实际只用到 category 和 tags 两个字段。改为只输出这两个字段（约 30KB）。
+ */
+const KNOWLEDGE_NOTES_ID = 'virtual:knowledge-notes'
+
+/** 解析 frontmatter 里的行内数组 `key: [a, b]` 或块式列表 `key:\n  - a\n  - b` */
+function parseFrontmatterList(fm: string, key: string): string[] {
+  const inline = fm.match(new RegExp(`${key}:\\s*\\[([^\\]]*)\\]`))
+  if (inline) {
+    return inline[1]
+      .split(',')
+      .map(s => s.trim().replace(/^["']|["']$/g, ''))
+      .filter(Boolean)
+  }
+  const block = fm.match(new RegExp(`${key}:\\s*\\n((?:\\s*-\\s*[^\\n]+\\n?)+)`))
+  if (block) {
+    return block[1]
+      .split('\n')
+      .map(l => l.trim().replace(/^-\s*/, '').replace(/^["']|["']$/g, '').trim())
+      .filter(Boolean)
+  }
+  return []
+}
+
+function knowledgeNotesPlugin() {
+  return {
+    name: 'knowledge-notes-index',
+    resolveId(id: string) {
+      if (id === KNOWLEDGE_NOTES_ID)
+        return `\0${KNOWLEDGE_NOTES_ID}`
+    },
+    load(id: string) {
+      if (id !== `\0${KNOWLEDGE_NOTES_ID}`)
+        return
+      const root = process.cwd()
+      const dir = resolve(root, 'vault/Knowledge')
+      if (!existsSync(dir))
+        return 'export default []'
+
+      const out: { path: string, cats: string[], tags: string[] }[] = []
+      const walk = (d: string) => {
+        for (const entry of readdirSync(d, { withFileTypes: true })) {
+          const abs = resolve(d, entry.name)
+          if (entry.isDirectory()) {
+            walk(abs)
+            continue
+          }
+          if (!entry.name.endsWith('.md'))
+            continue
+          const raw = readFileSync(abs, 'utf8')
+          const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? ''
+          out.push({
+            path: `/${relative(root, abs).replaceAll('\\', '/')}`,
+            cats: parseFrontmatterList(fm, 'category'),
+            tags: parseFrontmatterList(fm, 'tags'),
+          })
+        }
+      }
+      walk(dir)
+      return `export default ${JSON.stringify(out)}`
+    },
+  }
+}
+
 export default defineConfig({
   base: SITE_BASE,
   // 2026-10-20：仅移动 Obsidian 源文件，现有公开 URL、导航与外链保持可用。
@@ -208,6 +277,34 @@ export default defineConfig({
   // 排除 Obsidian 私人库。好处：① 构建更快、产物更干净；② 私人笔记不会被发布。
   // 发布面清单见顶部 PUBLISHED_DIRS。
   lastUpdated: true,
+  /**
+   * 构建期计算每页字数，写进 frontmatter。
+   *
+   * 为什么不用 `virtual:nolebase-page-properties`：那个虚拟模块包含**全部页面原文**，
+   * 被 PageMeta.vue 一 import 就把 2.9MB 正文打进首屏 theme chunk（gzip 后仍有 877KB，
+   * 占首屏传输量 84%）。改成构建期算好、每页只带自己的数字（几十字节）。
+   */
+  async transformPageData(pageData, ctx) {
+    try {
+      const abs = resolve(ctx.siteConfig.srcDir, pageData.relativePath)
+      const raw = readFileSync(abs, 'utf8')
+      const body = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '')
+      const text = body
+        .replace(/```[\s\S]*?```/g, ' ')
+        .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+        .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+        .replace(/<[^>]+>/g, ' ')
+      const cjk = (text.match(/[\u4E00-\u9FA5]/g) || []).length
+      const latin = (text.match(/[a-z]+/gi) || []).length
+      pageData.frontmatter.wordsCount = cjk + latin
+    }
+    catch {
+      // 读不到源文件（虚拟页等）就不写，页面只是不显示字数
+    }
+  },
+  vite: {
+    plugins: [knowledgeNotesPlugin()],
+  },
   vue: {
     template: {
       transformAssetUrls: {

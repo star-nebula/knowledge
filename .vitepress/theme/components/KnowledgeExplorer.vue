@@ -25,15 +25,20 @@ interface Branch {
   notes: NoteEntry[]
 }
 
-// 直接读原始文本（?raw），仅解析 frontmatter，避免 eager 导入整篇编译产物。
-const modules = import.meta.glob('/vault/Knowledge/**/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-}) as Record<string, string>
+// 笔记索引由 config.ts 的 virtual:knowledge-notes 插件在构建期生成，
+// 只含 path / cats / tags，不含正文。
+// 早先用 `import.meta.glob('/vault/Knowledge/**/*.md', { eager: true, query: '?raw' })`
+// 会把 289 篇笔记全文同步打进首屏 theme chunk（2.9MB / gzip 877KB），而这里只用得到两个字段。
+// @ts-expect-error 虚拟模块由 .vitepress/config.ts 的 vite 插件提供
+import noteIndex from 'virtual:knowledge-notes'
 
-/** category frontmatter 原始解析缓存（MOC 索引与建树共用一次解析） */
-const rawCategoryCache = new Map<string, string[]>()
+interface NoteIndexEntry {
+  path: string
+  cats: string[]
+  tags: string[]
+}
+
+const notes = (noteIndex as NoteIndexEntry[]) ?? []
 
 // ---- 运行时 MOC 索引：两种命中途径，与 knowledge-org.ts 的 findMocRels 一致 ----
 // ① category 索引（首选）：MOC 自身 frontmatter category === 分支完整路径 → 精确唯一命中，
@@ -41,18 +46,16 @@ const rawCategoryCache = new Map<string, string[]>()
 // ② 基名兜底：末级分类名或 <主去emoji>-<末级> === 文件名去 -MOC（兼容无 category 的历史页）
 const mocByBase = new Map<string, string>()
 const mocByCategory = new Map<string, string>()
-for (const [p, raw] of Object.entries(modules)) {
-  const fileBase = p.split('/').pop()!
+for (const n of notes) {
+  const fileBase = n.path.split('/').pop()!
   if (!fileBase.endsWith('-MOC.md'))
     continue
-  const route = p.replace(/\.md$/, '').replace(/%/g, '%25')
+  const route = n.path.replace(/\.md$/, '').replace(/%/g, '%25')
   const name = fileBase.replace(/-MOC\.md$/, '')
   if (!mocByBase.has(name))
     mocByBase.set(name, route)
-  const cats = parseCategory(raw)
-  rawCategoryCache.set(p, cats)
-  if (cats.length > 0 && !mocByCategory.has(cats.join('|')))
-    mocByCategory.set(cats.join('|'), route)
+  if (n.cats.length > 0 && !mocByCategory.has(n.cats.join('|')))
+    mocByCategory.set(n.cats.join('|'), route)
 }
 
 function resolveMoc(cats: string[]): string | null {
@@ -72,35 +75,6 @@ function resolveMoc(cats: string[]): string | null {
   return null
 }
 
-function parseCategory(raw: string): string[] {
-  const m = raw.match(/category:\s*\[([^\]]*)\]/)
-  if (!m)
-    return []
-  return m[1]
-    .split(',')
-    .map(s => s.trim().replace(/^["']|["']$/g, ''))
-    .filter(Boolean)
-}
-
-/** 解析 YAML 块式 tags 列表（tags:\n  - xxx），行内 [a, b] 与引号形式均兼容 */
-function parseTags(raw: string): string[] {
-  const m = raw.match(/tags:\s*\n((?:\s*-\s*[^\n]+\n?)+)/)
-  if (m) {
-    return m[1]
-      .split('\n')
-      .map(l => l.trim().replace(/^-\s*/, '').replace(/^["']|["']$/g, '').trim())
-      .filter(Boolean)
-  }
-  const inline = raw.match(/tags:\s*\[([^\]]*)\]/)
-  if (inline) {
-    return inline[1]
-      .split(',')
-      .map(s => s.trim().replace(/^["']|["']$/g, ''))
-      .filter(Boolean)
-  }
-  return []
-}
-
 function naturalSort(a: string, b: string): number {
   return a.localeCompare(b, 'zh-Hans-CN', { numeric: true })
 }
@@ -117,17 +91,17 @@ function buildRoots(): Branch[] {
     return child
   }
 
-  for (const [path, raw] of Object.entries(modules)) {
+  for (const n of notes) {
     // MOC 落地页不作为普通成员参与建树（它们也可能带 category frontmatter）
-    if (path.split('/').pop()!.endsWith('-MOC.md'))
+    if (n.path.split('/').pop()!.endsWith('-MOC.md'))
       continue
-    const cats = parseCategory(raw)
+    const cats = n.cats
     if (cats.length === 0)
       continue
 
-    const tags = parseTags(raw)
-    const baseName = path.split('/').pop()!.replace(/\.md$/, '')
-    const notePath = path.replace(/\.md$/, '').replace(/%/g, '%25')
+    const tags = n.tags
+    const baseName = n.path.split('/').pop()!.replace(/\.md$/, '')
+    const notePath = n.path.replace(/\.md$/, '').replace(/%/g, '%25')
     const entry: NoteEntry = { name: baseName, path: notePath, cats, tags }
 
     // 在 roots 中找/建根分类
