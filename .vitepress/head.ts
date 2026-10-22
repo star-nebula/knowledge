@@ -1,9 +1,17 @@
 import type { HeadConfig } from 'vitepress'
 import { creatorNames, creatorUsernames, siteDescription, siteName, targetDomain } from '../metadata'
+import { SITE_BASE } from '../scripts/blog-paths.mjs'
+
+// 根路径 → 默认语言路径的兜底跳转。
+// base 跟随 SITE_BASE（GitHub Pages 为 '/knowledge/'，根域名部署为 '/'），避免换平台后硬编码失效。
+// 注意：真正的根 index.html 由 config.ts 的 buildEnd 重写成 meta refresh → /vault/主页/，
+// 本脚本只在未被覆盖的页面（如 404）里生效，属兜底性质。
+const BASE_ROOT = SITE_BASE.replace(/\/$/, '')
+const ROOT_REDIRECT = `if (typeof window !== 'undefined' && (window.location.pathname === '${SITE_BASE}' || window.location.pathname === '${BASE_ROOT}') && !window.location.pathname.startsWith('${SITE_BASE}zh-CN')) { window.location.href = '${SITE_BASE}zh-CN/' + window.location.hash; }`
 
 export default [
   // Redirect root path to zh-CN locale
-  ['script', {}, `if (typeof window !== 'undefined' && (window.location.pathname === '/knowledge/' || window.location.pathname === '/knowledge') && !window.location.pathname.startsWith('/knowledge/zh-CN')) { window.location.href = '/knowledge/zh-CN/' + window.location.hash; }`],
+  ['script', {}, ROOT_REDIRECT],
   // 51LA v6 访问统计（后台 https://v6.51.la ）：注册站点后把 ck 值填到下面 LA_CK。
   // ck 为空字符串时脚本不注入，零副作用。注意 ${"LA_CK"} 是刻意转义，运行时由浏览器侧模板拼接。
   ['script', {}, `(function(){var LA_CK="";if(!LA_CK)return;var s=document.createElement("script");s.src="https://js.51.la/v6/"+LA_CK+".js";s.async=true;document.head.appendChild(s)})()`],
