@@ -11,7 +11,6 @@ import KnowledgeExplorer from './components/KnowledgeExplorer.vue'
 import PageMeta from './components/PageMeta.vue'
 import PortfolioProfile from './components/PortfolioProfile.vue'
 import Share from './components/Share.vue'
-import SiteStats from './components/SiteStats.vue'
 
 import 'virtual:uno.css'
 import '../styles/main.css'
@@ -46,7 +45,6 @@ const ExtendedTheme: Theme = {
       ],
       'doc-footer-before': () => [
         h(DocFooter),
-        h(SiteStats),
       ],
       'nav-bar-content-after': () => [
         h(Share),
@@ -75,7 +73,6 @@ const ExtendedTheme: Theme = {
     app.component('PageMeta', PageMeta)
     app.component('PortfolioProfile', PortfolioProfile)
     app.component('Share', Share)
-    app.component('SiteStats', SiteStats)
     app.component('AppContainer', AppContainer)
   },
 }
