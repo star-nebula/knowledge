@@ -47,7 +47,7 @@ jobs:
           mkdir -p ~/.local/share/fonts
           cp .vitepress/fonts/source-han-sans.ttf ~/.local/share/fonts/source-han-sans.ttf
 
-      - name: 构建（GitHub Pages，base=/knowledge/）
+      - name: 构建
         env:
           NODE_OPTIONS: --max-old-space-size=6144
         run: pnpm docs:build
@@ -60,26 +60,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: .vitepress/dist
-
-      # 以下两步是 EdgeOne 部署。EdgeOne 站点挂在域名根路径，需要 SITE_BASE=/ 重新构建一次，
-      # 不能复用上面 base=/knowledge/ 的产物（否则所有站内链接都会带 /knowledge/ 前缀而 404）。
-      # 未配置 EDGEONE_TOKEN 时自动跳过，保证 GitHub Pages 链路不受影响。
-      - name: 构建（EdgeOne，base=/）
-        env:
-          NODE_OPTIONS: --max-old-space-size=6144
-          SITE_BASE: /
-        run: pnpm docs:build
-
-      - name: 部署到 EdgeOne
-        env:
-          EDGEONE_TOKEN: ${{ secrets.EDGEONE_TOKEN }}
-          PAGES_SOURCE: skills
-        run: |
-          if [ -z "$EDGEONE_TOKEN" ]; then
-            echo "::warning::未配置 EDGEONE_TOKEN，跳过 EdgeOne 部署（GitHub Pages 已正常发布）"
-            exit 0
-          fi
-          npx --yes edgeone@latest makers deploy .vitepress/dist \
-            -n star-nebula-knowledge \
-            -t "$EDGEONE_TOKEN" \
-            --json
