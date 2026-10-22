@@ -205,6 +205,62 @@ if (!HAS_KNOWLEDGE)
  */
 const KNOWLEDGE_NOTES_ID = 'virtual:knowledge-notes'
 
+/**
+ * 虚拟模块 `virtual:words-count`：构建期算好「相对路径 → 字数」映射（约 10KB），
+ * 供 PageMeta.vue 显示字数。
+ *
+ * 为什么不用 transformPageData：实测在 VitePress 2.0 alpha 下返回值不并入 pageData
+ * （lean chunk 里的 frontmatter 始终只有原文内容），钩子执行了但结果被丢弃。
+ * 虚拟模块是编译期确定的，dev/build 都生效，行为可预期。
+ */
+const WORDS_COUNT_ID = 'virtual:words-count'
+
+/** 去掉 frontmatter / 代码块 / 图片 / 链接语法后统计中文字 + 英文词 */
+function countWords(raw: string): number {
+  const body = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '')
+  const text = body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, ' ')
+  const cjk = (text.match(/[\u4E00-\u9FA5]/g) || []).length
+  const latin = (text.match(/[a-z]+/gi) || []).length
+  return cjk + latin
+}
+
+function wordsCountPlugin() {
+  return {
+    name: 'words-count-index',
+    resolveId(id: string) {
+      if (id === WORDS_COUNT_ID)
+        return `\0${WORDS_COUNT_ID}`
+    },
+    load(id: string) {
+      if (id !== `\0${WORDS_COUNT_ID}`)
+        return
+      const root = process.cwd()
+      const map: Record<string, number> = {}
+      const scan = (dir: string) => {
+        if (!existsSync(dir))
+          return
+        for (const entry of readdirSync(dir, { withFileTypes: true })) {
+          const abs = resolve(dir, entry.name)
+          if (entry.isDirectory()) {
+            scan(abs)
+            continue
+          }
+          if (!entry.name.endsWith('.md'))
+            continue
+          map[`/${relative(root, abs).replaceAll('\\', '/')}`] = countWords(readFileSync(abs, 'utf8'))
+        }
+      }
+      scan(resolve(root, 'vault/blog'))
+      scan(resolve(root, 'vault/Knowledge'))
+      return `export default ${JSON.stringify(map)}`
+    },
+  }
+}
+
 /** 解析 frontmatter 里的行内数组 `key: [a, b]` 或块式列表 `key:\n  - a\n  - b` */
 function parseFrontmatterList(fm: string, key: string): string[] {
   const inline = fm.match(new RegExp(`${key}:\\s*\\[([^\\]]*)\\]`))
@@ -277,33 +333,8 @@ export default defineConfig({
   // 排除 Obsidian 私人库。好处：① 构建更快、产物更干净；② 私人笔记不会被发布。
   // 发布面清单见顶部 PUBLISHED_DIRS。
   lastUpdated: true,
-  /**
-   * 构建期计算每页字数，写进 frontmatter。
-   *
-   * 为什么不用 `virtual:nolebase-page-properties`：那个虚拟模块包含**全部页面原文**，
-   * 被 PageMeta.vue 一 import 就把 2.9MB 正文打进首屏 theme chunk（gzip 后仍有 877KB，
-   * 占首屏传输量 84%）。改成构建期算好、每页只带自己的数字（几十字节）。
-   */
-  async transformPageData(pageData, ctx) {
-    try {
-      const abs = resolve(ctx.siteConfig.srcDir, pageData.relativePath)
-      const raw = readFileSync(abs, 'utf8')
-      const body = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '')
-      const text = body
-        .replace(/```[\s\S]*?```/g, ' ')
-        .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
-        .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-        .replace(/<[^>]+>/g, ' ')
-      const cjk = (text.match(/[\u4E00-\u9FA5]/g) || []).length
-      const latin = (text.match(/[a-z]+/gi) || []).length
-      pageData.frontmatter.wordsCount = cjk + latin
-    }
-    catch {
-      // 读不到源文件（虚拟页等）就不写，页面只是不显示字数
-    }
-  },
   vite: {
-    plugins: [knowledgeNotesPlugin()],
+    plugins: [knowledgeNotesPlugin(), wordsCountPlugin()],
   },
   vue: {
     template: {
