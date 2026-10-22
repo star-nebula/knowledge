@@ -1789,8 +1789,6 @@ def index(request):
 </html>
 ```
 
-![[../../Python/Python Web框架/assets/image-20250908221640-q9x73da.png]]
-
 ### 5.4 内置函数
 
 ```python
@@ -2110,8 +2108,6 @@ def index(request):
   渲染步骤：将母版整体替换 → 替换上下文变量 → 把模板的内容直接插入并替换变量 → HTML 字符串
 
 ## 6 中间件
-
-![[../../Python/Python Web框架/assets/屏幕截图 2025-09-09 182234 - 副本-20250909182901-lena2rv.png]]
 
 - 类
 
@@ -2773,8 +2769,6 @@ python manage.py makemigrations
 python manage.py migrate app01 --database=default
 python manage.py migrate app02 --database=db_day05
 ```
-
-![[../../Python/Python Web框架/assets/image-20250912155827-5i066n4.png]]![[../../Python/Python Web框架/assets/image-20250912155838-630f06g.png]]
 
 - 读写操作
 

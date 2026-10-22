@@ -33,7 +33,7 @@ category: ["🛠️ 工程工具", "Python"]
 >   	https://pythonav.com/wiki/detail/10/81/
 >   ```
 
-![[../../../Python/Python Web框架/assets/image-20220710184409818-20250830193146-0fnc7c4.png]]
+![[Attachments/90de2c9162b54c11bbe488165ae4b5fa_MD5.jpg]]
 
 ## 1 核心功能
 
@@ -398,7 +398,7 @@ category: ["🛠️ 工程工具", "Python"]
 - `kafka`，Linux命令+服务构建+python代码。
 - `redis` 的列表
 
-![[../../../Python/Python Web框架/assets/image-20220717114057232-20250830193214-gc7rbq1.png]]
+![[Attachments/9dcc55493808090ace665768307470c8_MD5.jpg]]
 
 基于`redis`实现上述的过程和代码示例：
 
@@ -822,8 +822,6 @@ form = LoginForm(initial={"username":"xxx","password":"xx"}) # 显示默认值
 
 主要用于在**请求之间传递****临时的****用户反馈信息**，本质是基于会话（`session`）存储的短期消息，会在**下次请求时显示给用户，之后自动清除**。
 
-![[../../../Python/Python Web框架/assets/image-20251104174352-mygc1f0.png]]
-
 #### 快速使用
 
 - 配置 `settings.py`
@@ -1043,8 +1041,6 @@ class BaseStorage:
   added_new = True，老的数据源加载的+新增的都重新保存到数据源。
   ```
 
-![[../../../Python/Python Web框架/assets/whiteboard_exported_image-20251105205329-lcmja15.png]]
-
 ## 项目
 
 ### 1 项目雏形
@@ -1250,8 +1246,6 @@ class BaseStorage:
       return render(request, "sms_login.html")
   ```
 
-  ![[../../../Python/Python Web框架/assets/image-20250919170135-ls873j2.png]]
-
   ```html
   <!-- templates/login.html -->
   {% load static %}
@@ -1302,8 +1296,6 @@ class BaseStorage:
   </body>
   </html>
   ```
-
-  ![[../../../Python/Python Web框架/assets/image-20250919170109-x5lvscj.png]]
 
   ```html
   <!-- sms_login.html -->
@@ -6497,7 +6489,7 @@ class BaseStorage:
 >   ```
 > - 组合搜索
 >
->   ![[../../../Python/Python Web框架/assets/image-20220821080329441-20250830193451-in42ooq.png]]
+>   ![[Attachments/d76dfa8b7b229435f7e7f196a7a9c88b_MD5.jpg]]
 >
 >   - 组件源码 `utils/group.py`
 >
@@ -7175,7 +7167,7 @@ class BaseStorage:
 
 ### 17 Worker
 
-![[../../../Python/Python Web框架/assets/image-20220710184409818-20250830193450-in8boe4.png]]
+![[Attachments/90de2c9162b54c11bbe488165ae4b5fa_MD5.jpg]]
 
 执行worker去执行订单的执行。
 
@@ -7632,7 +7624,7 @@ class BaseStorage:
 - git 代码托管仓库，创建仓库
 - 远端服务器，安装git + git命令 获取代码
 
-通过 ssh 工具连接服务器 + 秘钥![[../../Python Web框架/assets/image-20251116205645-41x9rvc.png]]
+通过 ssh 工具连接服务器 + 秘钥
 
 #### 本地-上传代码
 
@@ -7649,7 +7641,7 @@ class BaseStorage:
   https://gitee.com/xxx
   ```
 - 创建项目  
-  ![[../../../Python/Python Web框架/assets/image-20220821182939134-20250830193451-vlys98p.png]]
+  ![[Attachments/2368d2728573c39cac2822db77dfaed3_MD5.jpg]]
 
   ```
   https://gitee.com/xxx/project.git
@@ -8371,8 +8363,6 @@ except Exception:
   【注】若静态文件有变动，则需要重新收集
 
 ##### Nginx + uWSGI
-
-![[../../Python Web框架/assets/image-20251118111016-99zsdcj.png]]
 
 ```
 # 激活虚拟环境并安装 uwsgi + nginx

@@ -1,6 +1,6 @@
 ---
 title: Markdown 语法
-abstract: Markdown 常用基础语法速查，涵盖标题、段落、换行、强调、列表等写法，附语法速查表与官方文档链接。
+abstract: Markdown 常用基础语法速查，涵盖标题、段落、换行、强调、列表、代码、链接、图片、表格等写法，附速查表与官方文档链接。
 created: 2026-05-22
 tags:
   - Markdown
@@ -16,347 +16,342 @@ reference:
 category: ["📚 个人知识管理", "个人能力"]
 ---
 
-## Markdown基本语法
+> 速查表：[Markdown 语法速查表](https://markdown.com.cn/cheat-sheet.html)（访问于 2026-10-22）
+> 官方文档：[Markdown 基本语法](https://markdown.com.cn/basic-syntax/)（访问于 2026-10-22）
 
-[Markdown 语法速查表](https://markdown.com.cn/cheat-sheet.html#%E6%80%BB%E8%A7%88)
+本文以标准 Markdown（CommonMark + GFM）为主；涉及 Obsidian 专有写法时会单独标注。
 
-[参考官方文档](https://markdown.com.cn/basic-syntax/)
+## 速查表
 
-## 1 标题
+| 需求 | 写法 |
+| --- | --- |
+| 标题 | `# 一级标题` … `###### 六级标题` |
+| 粗体 | `**粗体**` |
+| 斜体 | `*斜体*` |
+| 粗斜体 | `***粗斜体***` |
+| 删除线 | `~~删除线~~` |
+| 引用 | `> 引用内容` |
+| 无序列表 | `- 列表项` |
+| 有序列表 | `1. 列表项` |
+| 行内代码 | 用反引号包裹 |
+| 链接 | `[显示文字](https://example.com)` |
+| 图片 | `![替代文字](图片路径)` |
+| 分隔线 | `---` |
+| 任务列表 | `- [ ] 待办` |
 
-在文字最前面添加（ ## ），# 的数量代表标题的级别（符号和文字之间需要用一个空格分隔）
+## 1. 标题
 
-或在文本下面添加任意数量的（==）标识一级标题，（--）标识二级标题
+在行首使用 1～6 个 `#`，`#` 与标题文字之间必须有空格，数量对应标题级别：
 
-## 2 段落
+````markdown
+# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+````
 
-创建段落只需用空白行进行分隔
+也可以用下划线形式标记一级、二级标题：
 
-不要用空格（spaces）或制表符（ tabs）缩进段落。
+````markdown
+一级标题
+========
 
-## 3 换行
+二级标题
+--------
+````
 
-在一行的末尾添加两个或多个空格，然后按回车Enter，即可创建一个换行（
-）
+建议按 1→2→3 的顺序组织文档，不要为了字号跳级。
 
-或在结尾使用HTML的 
-标签
+## 2. 段落与换行
 
-## 4 强调
+段落之间用**空行**分隔。不要用空格或制表符缩进段落。
 
-1. 加粗（Bold）
+单个换行通常会被渲染成空格；需要强制换行时，在行尾加**两个空格**再回车，或使用 HTML 的 `<br>`：
 
-   在文本前后添加 ** 或 _ _
-2. 斜体（ltalic）
+````markdown
+第一行  
+第二行（上一行末尾有两个空格）
 
-   在文本前后添加 * 或 _
-3. 同时用粗体和斜体
+这是另一个段落。
+````
 
-   前后添加 *** 或 _ _ _
+## 3. 强调
 
-> 若是要突出显示单词的中间部分，要使用 * ，如 `A*cat*meow`
+````markdown
+**粗体** 或 __粗体__
+*斜体* 或 _斜体_
+***粗斜体*** 或 ___粗斜体___
+~~删除线~~
+A*cat*meow
+````
 
-## 5 引用
+注意事项：
 
-1. 单个引用块
+- 单词中间的强调用 `*`，用 `_` 可能不生效。
+- 粗体、斜体符号与文字之间不要留空格。
+- 删除线属于 GFM 扩展，Obsidian、GitHub、VitePress 均支持。
 
-   在段落前添加一个 > 符号
+## 4. 引用
 
-   ```Plain
-   > 单个引用块
-   ```
+在段落前加 `>`。多段引用用空 `>` 行分隔，嵌套引用叠加 `>`：
 
-   效果如下：
+````markdown
+> 单个引用块
 
-   > 单个引用块
-   >
-2. 多个段落
+> 第一段
+>
+> 第二段
 
-   ```Plain
-   > 第一段
-   >
-   > 第二段
-   ```
+> 第一段
+>
+> > 嵌套引用
+````
 
-   效果如下：
+引用块内可以放列表、代码等 Markdown 元素。引用上下建议留空行，避免和相邻段落粘连。
 
-   > 第一段
-   >
+## 5. 列表
 
-   第二段
-3. 嵌套块
+### 5.1 无序列表
 
-   ```Plain
-   > 第一段
-   >
-   >> 第二段
-   ```
+使用 `-`、`*` 或 `+` 开头。同一篇笔记里最好统一用一种符号：
 
-   > 第一段
-   >
+````markdown
+- 第一项
+- 第二项
+  - 嵌套项
+````
 
-   > 第二段
+### 5.2 有序列表
 
-块引用可以包含其他 Markdown 格式的元素，但并非所有元素都可以使用
+使用数字加英文句点。数字不必连续，渲染时会自动编号，但建议按顺序书写便于阅读：
 
-## 6 列表
+````markdown
+1. 第一项
+2. 第二项
+   1. 嵌套项
+````
 
-1. 有序列表
+### 5.3 列表中的多段内容
 
-   在文本最前面添加数字并紧跟一个英文句点（以1为起始）
-2. 无序列表
+列表项内要放多个段落时，第二段需要缩进，与列表项正文对齐：
 
-   在每个列表项前面添加破折号 - 、星号 * 或加号 +
+````markdown
+1. 第一段
 
-   ```Plain
-   - First item
-   * Second item
-   + Third item
-   ```
+   第二段，与列表项正文对齐缩进。
 
-   效果如下：
+2. 下一项
+````
 
-   - First item
-   - Second item
-   - Third item
+### 5.4 列表中的代码块
 
-   创建无序列表时，最好用同一个符号
-3. 嵌套其它元素
+代码块需要比列表内容再缩进 4 个空格（或用围栏代码块）：
 
-   1) 段落
+````markdown
+1. 打开文件。
+2. 找到下面的代码块：
 
-      ```Plain
-      *   This is the first list item.
-      *   Here's the second list item.
+       <html>
+         <head><title>Test</title></head>
+       </html>
 
-          I need to add another paragraph below the second list item.
+3. 修改标题。
+````
 
-      *   And here's the third list item.
-      ```
+### 5.5 任务列表
 
-      效果如下：
+GFM 与 Obsidian 支持任务列表：
 
-      - This is the first list item.
-      - Here's the second list item.
+````markdown
+- [ ] 未完成
+- [x] 已完成
+````
 
-        I need to add another paragraph below the second list item.
-      - And here's the third list item.
-   2) 引用块
+## 6. 代码
 
-      ```Plain
-      *   This is the first list item.
-      *   Here's the second list item.
+行内代码用反引号包裹：
 
-          > A blockquote would look great below the second list item.
+````markdown
+使用 `print()` 输出内容。
+````
 
-      *   And here's the third list item.
-      ```
+如果代码本身包含反引号，用双反引号包裹：
 
-      效果如下：
+````markdown
+``包含 ` 反引号的代码``
+````
 
-      - This is the first list item.
-      - Here's the second list item.
+多行代码用三个反引号围起来，并在开头标注语言以获得高亮：
 
-        > A blockquote would look great below the second list item.
-        >
-      - And here's the third list item.
-   3) 代码块
-
-      ```Plain
-      1.  Open the file.
-      2.  Find the following code block on line 21:
-
-              <html>
-                <head>
-                  <title>Test</title>
-                </head>
-
-      3.  Update the title to match the name of your website.
-      ```
-
-      1. Open the file.
-4. Find the following code block on line 21:
-
-   `Plain Text <html> <head> <title>Test</title> </head> `
-
-   3.  Update the title to match the name of your website.
-
-   4) 图片
-
-      ```Shell
-      1.  Open the file containing the Linux mascot.
-      2.  Marvel at its beauty.
-
-          ! [Tux, the Linux mascot](/assets/images/tux.png)
-
-      3.  Close the file.
-      ```
-
-      1. Open the file containing the Linux mascot.
-      2. Marvel at its beauty.
-
-      ![[assets/image-20250107221634-i1v7cy3.png]]
-
-      3. Close the file.
-   5) 列表
-
-      ```Plain
-      1. First item
-      2. Second item
-      3. Third item
-          - Indented item
-          - Indented item
-      4. Fourth item
-      ```
-
-      1. First item
-5. Second item
-6. Third item
-
-   - Indented item
-
-   - Indented item
-
-   4. Fourth item
-
-## 7 代码
-
-1. 将某个字或短句表示为代码，在其前后添加 反引号 `
-
-2. 要表示为代码的短句中包含反引号( ` )  ，则在短句前后使用双反引号 （``)
-
-3. 代码块，用`···`或`````,或者每行缩进至少四个空格或一个制表符（现在似乎很少编辑器支持）
-
-## 8 分隔线
-
-在单独一行上使用三个或多个星号 (`***`)、破折号 (`---`) 或下划线 (`___`) ，并且不能包含其他内容。
-
-## 9 链接
-
-1. 添加链接
-
-   超链接Markdown语法代码：`[超链接显示名](超链接地址 "超链接title")`
-
-   ```Shell
-   这是一个链接 [Markdown语法](https://markdown.com.cn)
-   ```
-
-   效果如下：
-
-   这是一个链接 [Markdown语法](https://markdown.com.cn/)
-2. 给链接增加 Title
-
-   当鼠标悬停在链接上时会出现的文字
-
-   ```Shell
-   这是一个链接 [Markdown语法](https://markdown.com.cn "最好的markdown教程")。
-   ```
-
-   效果如下：
-
-   这是一个链接 [Markdown语法](https://markdown.com.cn)。
-3. 网址和Email地址
-
-   ```Plain
-   <https://markdown.com.cn>
-   <fake@example.com>
-   ```
-
-   效果如下：
-
-   [https://markdown.com.cn](https://markdown.com.cn)
-   [fake@example.com](mailto:fake@example.com)
-4. 带格式化的链接
-
-   ```Plain
-   I love supporting the **[EFF](https://eff.org)**.
-   This is the *[Markdown Guide](https://www.markdownguide.org)*.
-   See the section on [`code`](#code).
-   ```
-
-   I love supporting the **[EFF](https://eff.org)**.
-   This is the *[Markdown Guide](https://www.markdownguide.org)*.
-   See the section on [[Markdown基本语法#code|`code`]].
-5. 引用类型链接
-
-   - 第一部分
-
-     `[hobbit-hole][1]`
-
-     第一个方括号包含显示为链接的文本，第二个括号为标签（不区分大小写，可以包含字母，数字，空格或标点符号）
-   - 第二部分
-
-     放在括号中的标签，紧跟一个冒号和至少一个空格（例如`[label]:`）
-
-     `[1]: https://en.wikipedia.org/wiki/Hobbit#Lifestyle`
-
-     Title 可以将其括在双引号，单引号或括号中（效果一致）
-
-     `[1]: https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles"`
-
-URL中间的空格需要使用`%20`代替
-
-## 10 图片
-
-1. 添加图片
-
-   插入图片Markdown语法代码：`![[图片链接 "图片title"]]`
-2. 链接图片
-
-   给图片增加链接
-
-   - 将图像的Markdown 括在方括号中
-   - 链接添加在圆括号中
-
-     `[![图片描述](/assets/img/shiprock.jpg)](链接)`
-
-## 11 转义字符
-
-显示原本用于格式化 Markdown 文档的字符，请在字符前面添加反斜杠字符 `\`
-
-- 特殊字符自动转义
-
-在 HTML 文件中，有两个字符需要特殊处理： `<` 和 `&` 。 `<` 符号用于起始标签，`&` 符号则用于标记 HTML 实体，如果你只是想要使用这些符号，你必须要使用实体的形式，像是 `&lt;` 和 `&amp;`。
-
-## 12 内嵌 HTML 标签
-
-使用 HTML，不需要额外标注这是 HTML 或是 Markdown，只需 HTML 标签添加到 Markdown 文本中即可。
-
-1. 行级内联标签
-
-`Plain Text This **word** is bold. This <em>word</em> is italic. `
-
-This **word** is bold. This *word* is italic.
-
-![[assets/image 1-20250107221634-aqgwfu1.png]]
-
-1. 区块标签
-
-```Shell
-This is a regular paragraph.
-
-<table>
-<tr>
-<td>Foo</td>
-</tr>
-</table>
-
-This is another regular paragraph.
+````markdown
+```python
+def hello():
+    print("Hello")
 ```
+````
 
-This is a regular paragraph.
+也可以用缩进 4 个空格表示代码块：
 
-```html
+````markdown
+    def hello():
+        print("Hello")
+````
+
+## 7. 分隔线
+
+在单独一行使用三个或更多的 `---`、`***`、`___`，行内不能有其他内容：
+
+````markdown
+---
+
+***
+
+___
+````
+
+分隔线上下留空行。注意：`---` 紧跟在文字下方时会被解析为二级标题的下划线，而不是分隔线。
+
+## 8. 链接
+
+基本写法：
+
+````markdown
+[Markdown 语法](https://markdown.com.cn "Markdown 教程")
+````
+
+自动链接：
+
+````markdown
+<https://markdown.com.cn>
+<fake@example.com>
+````
+
+带格式的链接：
+
+````markdown
+**[EFF](https://eff.org)**
+````
+
+引用式链接：
+
+````markdown
+[引用式链接][1]
+
+[1]: https://example.com "链接标题"
+````
+
+其他规则：
+
+- 链接地址中的空格要写成 `%20`。
+- 站内跳转可用相对路径，如 `[另一篇笔记](./另一篇笔记.md)`。
+- 跳转到当前页面的标题：`[代码](#6-代码)`。锚点由标题文字生成，中文标点通常会被去掉。
+- 发布到站点时，正文内部链接优先用标准 Markdown 链接，不要用指向非发布目录的 wikilink。
+
+## 9. 图片
+
+标准 Markdown 图片语法：
+
+````markdown
+![替代文字](images/example.png "图片标题")
+````
+
+图片也可以包在链接里，点击后跳转：
+
+````markdown
+[![替代文字](images/example.png)](https://example.com)
+````
+
+Obsidian 专有写法（不是标准 Markdown）：
+
+````markdown
+![[example.png]]
+![[example.png|替代文字]]
+````
+
+说明：
+
+- `![[...]]` 只在 Obsidian 或本知识库的 VitePress 插件中生效，其他 Markdown 工具请用 `![alt](path)`。
+- 本地图片要放在发布面内的附件目录，否则站点构建时会显示「图片缺失」。
+- 图片路径建议使用相对路径，避免换机器后失效。
+
+## 10. 转义字符
+
+在特殊字符前加反斜杠 `\`，让它按字面显示：
+
+````markdown
+\*不是斜体\*
+\_不是斜体\_
+\# 不是标题
+\[不是链接\]
+\\ 表示一个反斜杠
+\` 表示一个反引号
+````
+
+HTML 中的 `<` 和 `&` 需要写成实体：
+
+| 实体 | 显示 |
+| --- | --- |
+| `&lt;` | &lt; |
+| `&amp;` | &amp; |
+| `&gt;` | &gt; |
+
+代码块和行内代码中的字符不需要转义。
+
+## 11. 内嵌 HTML
+
+Markdown 可以直接写 HTML。行内标签：
+
+````markdown
+这是 <em>斜体</em>，按 <kbd>Ctrl</kbd> + <kbd>C</kbd> 复制。
+````
+
+块级标签：
+
+````markdown
 <table>
-<tr>
-<td>Foo</td>
-</tr>
-
-<div>
+  <tr>
+    <td>Foo</td>
+  </tr>
 </table>
-</div>
-```
+````
 
-This is another regular paragraph.
+块级 HTML 上下建议留空行。部分 Markdown 语法在原始 HTML 块内部不会被解析，需要写成对应的 HTML 标签。
 
-![[assets/image 2-20250107221634-elq7cx3.png]]
+## 12. 表格（GFM）
+
+````markdown
+| 左对齐 | 居中 | 右对齐 |
+| :--- | :---: | ---: |
+| A | B | C |
+````
+
+规则：
+
+- 表头下面必须有分隔行，用 `---` 表示，冒号控制对齐。
+- 单元格里的竖线要转义成 `\|`。
+- 表格属于 GFM 扩展，Obsidian、GitHub、VitePress 均支持。
+
+## 13. 脚注（GFM / Obsidian）
+
+````markdown
+正文中的脚注[^1]。
+
+[^1]: 脚注的具体内容。
+````
+
+## 14. 常见易错点
+
+- `#`、`>`、`-` 等标记与正文之间要有空格。
+- 段落之间要空行；只敲一次回车通常不会换行。
+- 列表嵌套要缩进，建议统一 4 个空格。
+- `---` 上下留空行，否则可能变成标题下划线。
+- 行内代码用反引号包裹；内容含反引号时改用双反引号。
+- 标准图片语法是 `![alt](path)`；`![[...]]` 是 Obsidian 专有写法。
+- 发布笔记里避免指向非发布目录的 wikilink，站点上会变成死链。
+
+## 参考
+
+- [Markdown 语法速查表](https://markdown.com.cn/cheat-sheet.html)（访问于 2026-10-22）
+- [Markdown 基本语法](https://markdown.com.cn/basic-syntax/)（访问于 2026-10-22）
